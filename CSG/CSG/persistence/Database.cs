@@ -13,7 +13,7 @@ namespace CSG.persistence
 
         public static void Connect()
         {
-            string cc = "Driver={SQL Server};Server=IT;Database=CSG;";
+            string cc = "Driver={SQL Server};Server=DESKTOP-0FO6JF8\\SQLEXPRESS;Database=CSG;";
             conn.ConnectionString = cc;
             conn.Open();
         }

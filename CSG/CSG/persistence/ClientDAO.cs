@@ -23,19 +23,19 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.CreateClient(?,?,?,?,?,?,?,?,?,?,?)}",
+                    CommandText = "{call csg.Client_Create(?,?,?,?,?,?,?,?,?,?,?)}"
                 };
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Id").Value = client.Client_id;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Name").Value = client.Client_name;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Lastname1").Value = client.Client_lastname1;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Lastname2").Value = client.Client_lastname2;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Address").Value = client.Client_address;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Location").Value = client.Client_location;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "City").Value = client.Client_city;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Department").Value = client.Client_department;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Tel1").Value = client.Client_tel1;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Tel2").Value = client.Client_tel2;
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Email").Value = client.Client_email;
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = client.Client_id;
+                command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = client.Client_name;
+                command.Parameters.Add("Lastname1", OdbcType.VarChar, 50).Value = client.Client_lastname1;
+                command.Parameters.Add("Lastname2", OdbcType.VarChar, 50).Value = client.Client_lastname2;
+                command.Parameters.Add("Address", OdbcType.VarChar, 50).Value = client.Client_address;
+                command.Parameters.Add("Location", OdbcType.VarChar, 50).Value = client.Client_location;
+                command.Parameters.Add("City", OdbcType.VarChar, 50).Value = client.Client_city;
+                command.Parameters.Add("Department", OdbcType.VarChar, 50).Value = client.Client_department;
+                command.Parameters.Add("Tel1", OdbcType.VarChar, 50).Value = client.Client_tel1;
+                command.Parameters.Add("Tel2", OdbcType.VarChar, 50).Value = client.Client_tel2;
+                command.Parameters.Add("Email", OdbcType.VarChar, 50).Value = client.Client_email;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Cliente creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -58,12 +58,76 @@ namespace CSG.persistence
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Client_Delete(?)}"
+                };
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = id;
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Cliente eliminado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha eliminado el cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ClientDAO->Delete: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
         }
 
         public List<Client> Read_all()
         {
-            throw new NotImplementedException();
+            List<Client> clients = new List<Client>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Client_ReadAll}"
+                };
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Client client = new Client
+                    {
+                        Client_id = dataReader.GetString(0),
+                        Client_name = dataReader.GetString(1),
+                        Client_lastname1 = dataReader.GetString(2),
+                        Client_lastname2 = dataReader.GetString(3),
+                        Client_address = dataReader.GetString(4),
+                        Client_location = dataReader.GetString(5),
+                        Client_city = dataReader.GetString(6),
+                        Client_department = dataReader.GetString(7),
+                        Client_tel1 = dataReader.GetString(8),
+                        Client_tel2 = dataReader.GetString(9),
+                        Client_email = dataReader.GetString(10)
+                    };
+                    clients.Add(client);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ClientDAO->Read_all: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return clients;
         }
 
         public Client Read_once(string id)
@@ -76,9 +140,9 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.ReadClientById(?)}",
+                    CommandText = "{call csg.Client_ReadOnce(?)}"
                 };
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Id").Value = id;
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = id;
                 dataReader = command.ExecuteReader();
                 if (dataReader.Read())
                 {
@@ -105,7 +169,7 @@ namespace CSG.persistence
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Excepción controlada en ClientDAO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Excepción controlada en ClientDAO->Read_once: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -124,9 +188,9 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.ReadClientById(?)}",
+                    CommandText = "{call csg.Client_ReadOnceExist(?)}",
                 };
-                command.Parameters.Add("", OdbcType.VarChar, 50, "Id").Value = id;
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = id;
                 dataReader = command.ExecuteReader();
                 if (dataReader.Read())
                 {
@@ -146,7 +210,44 @@ namespace CSG.persistence
 
         public void Update(Client client)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Client_Update(?,?,?,?,?,?,?,?,?,?,?)}"
+                };
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = client.Client_id;
+                command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = client.Client_name;
+                command.Parameters.Add("Lastname1", OdbcType.VarChar, 50).Value = client.Client_lastname1;
+                command.Parameters.Add("Lastname2", OdbcType.VarChar, 50).Value = client.Client_lastname2;
+                command.Parameters.Add("Address", OdbcType.VarChar, 50).Value = client.Client_address;
+                command.Parameters.Add("Location", OdbcType.VarChar, 50).Value = client.Client_location;
+                command.Parameters.Add("City", OdbcType.VarChar, 50).Value = client.Client_city;
+                command.Parameters.Add("Department", OdbcType.VarChar, 50).Value = client.Client_department;
+                command.Parameters.Add("Tel1", OdbcType.VarChar, 50).Value = client.Client_tel1;
+                command.Parameters.Add("Tel2", OdbcType.VarChar, 50).Value = client.Client_tel2;
+                command.Parameters.Add("Email", OdbcType.VarChar, 50).Value = client.Client_email;
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Cliente actualizado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha actualizado el cliente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ClientDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
         }
     }
 }

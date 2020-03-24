@@ -68,12 +68,21 @@ namespace CSG
                 {
                     Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
                     txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
+                    CleanFields();
                     clientLog.Create(client);
+                    BtnReadAll_Click(sender, e);
                 }
                 else if (btnCreate.Text.Equals("Guardar"))
                 {
-                    MessageBox.Show("Guardamos");
-                    //Ejecutamos el Update
+                    //Guardamos
+                    Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+                     txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
+                    CleanFields();
+                    clientLog.Update(client);
+                    BtnReadAll_Click(sender, e);
+                    //cambiamos botones
+                    btnCreate.Text = "Crear";
+                    BtnDelete.Enabled = false;
                 }
                 
             }
@@ -83,6 +92,80 @@ namespace CSG
         {
             Servicio_Tecnico servicio_Tecnico = new Servicio_Tecnico();
             servicio_Tecnico.Show();
+        }
+
+        private void BtnReadAll_Click(object sender, EventArgs e)
+        {
+            DgvClient.DataSource = clientLog.ReadAll();
+            DgvClient.Columns[0].HeaderText = "Identidad";
+            DgvClient.Columns[1].HeaderText = "Nombres";
+            DgvClient.Columns[2].HeaderText = "P. apellido";
+            DgvClient.Columns[3].HeaderText = "S. apellido";
+            DgvClient.Columns[4].HeaderText = "Dirección";
+            DgvClient.Columns[5].HeaderText = "Barrio";
+            DgvClient.Columns[6].HeaderText = "Ciudad";
+            DgvClient.Columns[7].HeaderText = "Departamento";
+            DgvClient.Columns[8].HeaderText = "Teléfono 1";
+            DgvClient.Columns[9].HeaderText = "Teléfono 2";
+            DgvClient.Columns[10].HeaderText = "Correo";
+        }
+
+        private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtId.ReadOnly = true;
+            btnCreate.Text = "Guardar";
+            BtnDelete.Enabled = true;
+            txtId.Text = DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtName.Text = DgvClient.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtLastname1.Text = DgvClient.Rows[e.RowIndex].Cells[2].Value.ToString();
+            txtLastname2.Text = DgvClient.Rows[e.RowIndex].Cells[3].Value.ToString();
+            txtAddress.Text = DgvClient.Rows[e.RowIndex].Cells[4].Value.ToString();
+            txtLocation.Text = DgvClient.Rows[e.RowIndex].Cells[5].Value.ToString();
+            txtCity.Text = DgvClient.Rows[e.RowIndex].Cells[6].Value.ToString();
+            txtDepartment.Text = DgvClient.Rows[e.RowIndex].Cells[7].Value.ToString();
+            txtTel1.Text = DgvClient.Rows[e.RowIndex].Cells[8].Value.ToString();
+            txtTel2.Text = DgvClient.Rows[e.RowIndex].Cells[9].Value.ToString();
+            txtEmail.Text = DgvClient.Rows[e.RowIndex].Cells[10].Value.ToString();
+            //Console.WriteLine("COLUMN: " + e.ColumnIndex);
+            //MessageBox.Show("Id: " + DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (txtId.Text != "")
+            {
+                DialogResult dr = MessageBox.Show("¿Desea eliminar el cliente " + txtId.Text+"?", "Mensaje",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    //Eliminamos
+                    clientLog.Delete(txtId.Text);
+                    //habilita botones
+                    BtnDelete.Enabled = false;
+                    btnCreate.Text = "Crear";
+                    //Limpiamos campos
+                    CleanFields();
+                    //Actualizamos tabla
+                    BtnReadAll_Click(sender, e);
+                }
+            }
+        }
+        //métodos locales
+        private void CleanFields()
+        {
+            txtId.Clear();
+            txtName.Clear();
+            txtLastname1.Clear();
+            txtLastname2.Clear();
+            txtAddress.Clear();
+            txtLocation.Clear();
+            txtCity.Clear();
+            txtDepartment.Clear();
+            txtTel1.Clear();
+            txtTel2.Clear();
+            txtEmail.Clear();
+            txtId.Focus();
+            txtId.ReadOnly = false;
         }
     }
 }

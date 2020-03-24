@@ -24,8 +24,13 @@ namespace CSG.logic
             }
             finally
             {
-
+                //ReadAll();
             }
+        }
+
+        public List<Client> ReadAll()
+        {
+            return DAOFactory.GetClientDAO().Read_all();
         }
 
         public bool Read_once_exist(string id)
@@ -40,7 +45,12 @@ namespace CSG.logic
 
         public void Update(Client client)
         {
-            
+            DAOFactory.GetClientDAO().Update(client);
+        }
+
+        public void Delete(string id)
+        {
+            DAOFactory.GetClientDAO().Delete(id);
         }
     }
 }

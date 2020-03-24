@@ -10,11 +10,11 @@ namespace CSG.persistence
 {
     interface IClientDAO
     {
-        void Create(Client client);
-        List<Client> Read_all();
-        Client Read_once(string id);
-        bool Read_once_exist(string id);
-        void Update(Client client);
-        void Delete(string id);
+        void Create(Client client);//ok
+        List<Client> Read_all();//ok
+        Client Read_once(string id);//ok
+        bool Read_once_exist(string id);//ok
+        void Update(Client client);//ok
+        void Delete(string id);//ok
     }
 }

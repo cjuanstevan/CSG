@@ -16,7 +16,7 @@ namespace CSG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Servicio_Tecnico());
+            Application.Run(new Form1());
         }
     }
 }
