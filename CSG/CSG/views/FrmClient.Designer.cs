@@ -1,6 +1,6 @@
-﻿namespace CSG
+﻿namespace CSG.views
 {
-    partial class Form1
+    partial class FrmClient
     {
         /// <summary>
         /// Required designer variable.
@@ -54,14 +54,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.DgvClient = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvClient)).BeginInit();
             this.SuspendLayout();
@@ -94,15 +89,17 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtId);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(18, 21);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1268, 264);
-            this.panel1.TabIndex = 0;
+            this.panel1.Size = new System.Drawing.Size(982, 296);
+            this.panel1.TabIndex = 1;
             // 
             // BtnDelete
             // 
+            this.BtnDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BtnDelete.Enabled = false;
-            this.BtnDelete.Location = new System.Drawing.Point(218, 212);
+            this.BtnDelete.Location = new System.Drawing.Point(220, 226);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(74, 32);
             this.BtnDelete.TabIndex = 23;
@@ -112,7 +109,8 @@
             // 
             // BtnReadAll
             // 
-            this.BtnReadAll.Location = new System.Drawing.Point(397, 212);
+            this.BtnReadAll.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnReadAll.Location = new System.Drawing.Point(459, 226);
             this.BtnReadAll.Name = "BtnReadAll";
             this.BtnReadAll.Size = new System.Drawing.Size(191, 32);
             this.BtnReadAll.TabIndex = 22;
@@ -122,16 +120,18 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.txtEmail.Location = new System.Drawing.Point(101, 179);
+            this.txtEmail.Location = new System.Drawing.Point(103, 193);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(191, 20);
+            this.txtEmail.Size = new System.Drawing.Size(253, 20);
             this.txtEmail.TabIndex = 11;
             // 
             // label11
             // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(29, 186);
+            this.label11.Location = new System.Drawing.Point(31, 200);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(38, 13);
             this.label11.TabIndex = 21;
@@ -139,7 +139,8 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(101, 212);
+            this.btnCreate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnCreate.Location = new System.Drawing.Point(103, 226);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(111, 32);
             this.btnCreate.TabIndex = 12;
@@ -149,16 +150,18 @@
             // 
             // txtTel2
             // 
+            this.txtTel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtTel2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtTel2.Location = new System.Drawing.Point(397, 144);
+            this.txtTel2.Location = new System.Drawing.Point(459, 158);
             this.txtTel2.Name = "txtTel2";
-            this.txtTel2.Size = new System.Drawing.Size(191, 20);
+            this.txtTel2.Size = new System.Drawing.Size(253, 20);
             this.txtTel2.TabIndex = 10;
             // 
             // label10
             // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(325, 151);
+            this.label10.Location = new System.Drawing.Point(387, 165);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(58, 13);
             this.label10.TabIndex = 18;
@@ -166,16 +169,18 @@
             // 
             // txtDepartment
             // 
+            this.txtDepartment.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtDepartment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDepartment.Location = new System.Drawing.Point(397, 113);
+            this.txtDepartment.Location = new System.Drawing.Point(459, 127);
             this.txtDepartment.Name = "txtDepartment";
-            this.txtDepartment.Size = new System.Drawing.Size(191, 20);
+            this.txtDepartment.Size = new System.Drawing.Size(253, 20);
             this.txtDepartment.TabIndex = 8;
             // 
             // label9
             // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(325, 120);
+            this.label9.Location = new System.Drawing.Point(387, 134);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 13);
             this.label9.TabIndex = 16;
@@ -183,16 +188,18 @@
             // 
             // txtLocation
             // 
+            this.txtLocation.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtLocation.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLocation.Location = new System.Drawing.Point(397, 81);
+            this.txtLocation.Location = new System.Drawing.Point(459, 95);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(191, 20);
+            this.txtLocation.Size = new System.Drawing.Size(253, 20);
             this.txtLocation.TabIndex = 6;
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(325, 88);
+            this.label8.Location = new System.Drawing.Point(387, 102);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 14;
@@ -200,16 +207,18 @@
             // 
             // txtLastname2
             // 
+            this.txtLastname2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtLastname2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLastname2.Location = new System.Drawing.Point(397, 50);
+            this.txtLastname2.Location = new System.Drawing.Point(459, 64);
             this.txtLastname2.Name = "txtLastname2";
-            this.txtLastname2.Size = new System.Drawing.Size(191, 20);
+            this.txtLastname2.Size = new System.Drawing.Size(253, 20);
             this.txtLastname2.TabIndex = 4;
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(325, 57);
+            this.label7.Location = new System.Drawing.Point(387, 71);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 13);
             this.label7.TabIndex = 12;
@@ -217,16 +226,18 @@
             // 
             // txtName
             // 
+            this.txtName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtName.Location = new System.Drawing.Point(397, 20);
+            this.txtName.Location = new System.Drawing.Point(459, 34);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(191, 20);
+            this.txtName.Size = new System.Drawing.Size(253, 20);
             this.txtName.TabIndex = 2;
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(325, 27);
+            this.label6.Location = new System.Drawing.Point(387, 41);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 10;
@@ -234,16 +245,18 @@
             // 
             // txtTel1
             // 
+            this.txtTel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtTel1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtTel1.Location = new System.Drawing.Point(101, 148);
+            this.txtTel1.Location = new System.Drawing.Point(103, 162);
             this.txtTel1.Name = "txtTel1";
-            this.txtTel1.Size = new System.Drawing.Size(191, 20);
+            this.txtTel1.Size = new System.Drawing.Size(253, 20);
             this.txtTel1.TabIndex = 9;
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 151);
+            this.label5.Location = new System.Drawing.Point(27, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 8;
@@ -251,16 +264,18 @@
             // 
             // txtCity
             // 
+            this.txtCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtCity.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCity.Location = new System.Drawing.Point(101, 117);
+            this.txtCity.Location = new System.Drawing.Point(103, 131);
             this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(191, 20);
+            this.txtCity.Size = new System.Drawing.Size(253, 20);
             this.txtCity.TabIndex = 7;
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 120);
+            this.label4.Location = new System.Drawing.Point(27, 134);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 6;
@@ -268,16 +283,18 @@
             // 
             // txtAddress
             // 
+            this.txtAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtAddress.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtAddress.Location = new System.Drawing.Point(101, 85);
+            this.txtAddress.Location = new System.Drawing.Point(103, 99);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(191, 20);
+            this.txtAddress.Size = new System.Drawing.Size(253, 20);
             this.txtAddress.TabIndex = 5;
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 88);
+            this.label3.Location = new System.Drawing.Point(27, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 4;
@@ -285,16 +302,18 @@
             // 
             // txtLastname1
             // 
+            this.txtLastname1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtLastname1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLastname1.Location = new System.Drawing.Point(101, 54);
+            this.txtLastname1.Location = new System.Drawing.Point(103, 68);
             this.txtLastname1.Name = "txtLastname1";
-            this.txtLastname1.Size = new System.Drawing.Size(191, 20);
+            this.txtLastname1.Size = new System.Drawing.Size(253, 20);
             this.txtLastname1.TabIndex = 3;
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 57);
+            this.label2.Location = new System.Drawing.Point(27, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 2;
@@ -302,86 +321,57 @@
             // 
             // txtId
             // 
+            this.txtId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtId.Location = new System.Drawing.Point(101, 24);
+            this.txtId.Location = new System.Drawing.Point(103, 38);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(191, 20);
+            this.txtId.Size = new System.Drawing.Size(253, 20);
             this.txtId.TabIndex = 1;
             this.txtId.Leave += new System.EventHandler(this.TxtId_Leave);
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 27);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID";
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1343, 630);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1335, 604);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Cliente";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.DgvClient);
-            this.panel2.Location = new System.Drawing.Point(18, 300);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 482);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1268, 274);
-            this.panel2.TabIndex = 1;
+            this.panel2.Size = new System.Drawing.Size(982, 339);
+            this.panel2.TabIndex = 2;
             // 
             // DgvClient
             // 
+            this.DgvClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvClient.Location = new System.Drawing.Point(19, 22);
+            this.DgvClient.Location = new System.Drawing.Point(12, 26);
             this.DgvClient.Name = "DgvClient";
-            this.DgvClient.Size = new System.Drawing.Size(1230, 236);
-            this.DgvClient.TabIndex = 2;
+            this.DgvClient.Size = new System.Drawing.Size(958, 286);
+            this.DgvClient.TabIndex = 0;
             this.DgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1311, 580);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // FrmClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1343, 630);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(982, 821);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Name = "FrmClient";
+            this.Text = "FrmClient";
+            this.Load += new System.EventHandler(this.FrmClient_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvClient)).EndInit();
             this.ResumeLayout(false);
@@ -391,6 +381,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnReadAll;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.TextBox txtTel2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtDepartment;
@@ -411,15 +406,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCreate;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DgvClient;
-        private System.Windows.Forms.Button BtnReadAll;
-        private System.Windows.Forms.Button BtnDelete;
     }
 }

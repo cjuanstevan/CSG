@@ -8,12 +8,14 @@ namespace CSG.model
 {
     class Article
     {
+        //VARIABLES DE CLASE
         private string _article_code;
         private string _article_description;
         private string _article_model;
         private string _article_serial;
         private ushort _article_warranty;
 
+        //CONSTRUCTORES
         public Article()
         {
 
@@ -28,6 +30,8 @@ namespace CSG.model
             Article_warranty = article_warranty;
         }
 
+
+        //METODOS DE ACCESO PUBLICO DE LAS VARIABLES
         public string Article_code { get => _article_code; set => _article_code = value; }
         public string Article_description { get => _article_description; set => _article_description = value; }
         public string Article_model { get => _article_model; set => _article_model = value; }

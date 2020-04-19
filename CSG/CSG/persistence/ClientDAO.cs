@@ -14,6 +14,7 @@ namespace CSG.persistence
     {
         OdbcCommand command;
         OdbcDataReader dataReader;
+
         public void Create(Client client)
         {
             try
