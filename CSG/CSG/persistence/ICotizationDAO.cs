@@ -9,10 +9,11 @@ namespace CSG.persistence
 {
     interface ICotizationDAO
     {
-        void Create(Cotization cotization);
-        List<Cotization> Read_all();
-        Cotization Read_once(string id);
-        void Update(Cotization cotization);
-        void Delete(string id);
+        void Create(Cotization cotization);//ok
+        List<Cotization> Read_all();//ok
+        Cotization Read_once(string id);//ok
+        bool Read_once_exist(string id);//ok
+        void Update(Cotization cotization);//ok
+        void Delete(string id);//ok
     }
 }

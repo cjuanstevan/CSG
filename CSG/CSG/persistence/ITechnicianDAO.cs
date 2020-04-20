@@ -9,10 +9,11 @@ namespace CSG.persistence
 {
     interface ITechnicianDAO
     {
-        void Create(Technician technician);
-        List<Technician> Read_all();
-        Technician Read_once(string id);
-        void Update(Technician technician);
-        void Delete(string id);
+        void Create(Technician technician);//ok
+        List<Technician> Read_all();//ok
+        Technician Read_once(string id);//ok
+        bool Read_once_exist(string id);//ok
+        void Update(Technician technician);//ok
+        void Delete(string id);//ok
     }
 }

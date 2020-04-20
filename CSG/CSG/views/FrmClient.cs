@@ -39,7 +39,7 @@ namespace CSG.views
 
         private void FrmClient_Load(object sender, EventArgs e)
         {
-            BtnReadAll_Click(sender, e);
+            //BtnReadAll_Click(sender, e);
         }
 
         private void TxtId_Leave(object sender, EventArgs e)
