@@ -9,10 +9,11 @@ namespace CSG.persistence
 {
     interface IServiceDAO
     {
-        void Create(Service service);
-        List<Service> Read_all();
-        Service Read_once(string code);
-        void Update(Service service);
-        void Delete(string code);
+        void Create(Service service);//ok
+        List<Service> Read_all();//ok
+        Service Read_once(string code);//ok
+        bool Read_once_exist(string code);//ok
+        void Update(Service service);//ok
+        void Delete(string code);//ok
     }
 }

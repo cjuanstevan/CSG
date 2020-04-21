@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
@@ -46,7 +46,7 @@ namespace CSG.persistence
                     }
                     else
                     {
-                        //registro quién se creó
+                        //registro quién no se creó
                         reportF += "CODE: " + a.Article_code + " | ARTICLE: " + a.Article_description + Environment.NewLine;
                         //aumento el contador
                         counterF += 1;

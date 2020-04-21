@@ -9,13 +9,13 @@ namespace CSG.persistence
 {
     interface IArticleDAO
     {
-        void Create(Article article);
-        string BulkLoad(List<Article> articles);
-        List<Article> Read_all();
-        Article Read_once(string code);
-        bool Read_once_exist(string code);
-        void Update(Article article);
-        void Delete(string code);
+        void Create(Article article);//ok
+        string BulkLoad(List<Article> articles);//ok
+        List<Article> Read_all();//ok
+        Article Read_once(string code);//ok
+        bool Read_once_exist(string code);//ok
+        void Update(Article article);//ok
+        void Delete(string code);//ok
 
     }
 }

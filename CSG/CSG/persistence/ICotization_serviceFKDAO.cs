@@ -9,10 +9,8 @@ namespace CSG.persistence
 {
     interface ICotization_serviceFKDAO
     {
-        void Create(Cotization_serviceFK cotization_serviceFK);
-        List<Cotization_serviceFK> Read_all();
-        Cotization_serviceFK Read_once(string id, string code);
-        void Update(Cotization_serviceFK cotization_serviceFK);
-        void Delete(string id, string code);
+        void Create(Cotization_serviceFK cotization_serviceFK);//ok
+        List<Cotization_serviceFK> Read_ServicesOfCotization(string cotization_id);//ok
+        void Delete(string id, string code);//ok
     }
 }

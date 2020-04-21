@@ -9,10 +9,8 @@ namespace CSG.persistence
 {
     interface ICotization_refactionFKDAO
     {
-        void Create(Cotization_refactionFK cotization_refactionFK);
-        List<Cotization_refactionFK> Read_all();
-        Cotization_refactionFK Read_once(string id, string code);
-        void Update(Cotization_refactionFK cotization_refactionFK);
-        void Delete(string id, string code);
+        void Create(Cotization_refactionFK cotization_refactionFK);//ok
+        List<Cotization_refactionFK> Read_RefactionsOfCotization(string cotization_id);//ok
+        void Delete(string id, string code);//ok
     }
 }

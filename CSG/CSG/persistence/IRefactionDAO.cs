@@ -9,10 +9,11 @@ namespace CSG.persistence
 {
     interface IRefactionDAO
     {
-        void Create(Refaction refaction);
-        List<Refaction> Read_all();
-        Refaction Read_once(string code);
-        void Update(Refaction refaction);
-        void Delete(string code);
+        void Create(Refaction refaction);//ok
+        List<Refaction> Read_all();//ok
+        Refaction Read_once(string code);//ok
+        bool Read_once_exist(string code);//ok
+        void Update(Refaction refaction);//ok
+        void Delete(string code);//ok
     }
 }
