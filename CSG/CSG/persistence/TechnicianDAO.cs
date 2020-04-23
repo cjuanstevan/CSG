@@ -14,6 +14,64 @@ namespace CSG.persistence
     {
         OdbcCommand command;
         OdbcDataReader dataReader;
+
+        public string BulkLoad(List<Technician> technicians)
+        {
+            string reportT = "";
+            string reportF = "";
+            int counterT = 0;
+            int counterF = 0;
+
+            try
+            {
+                Database.Connect();
+                foreach (var t in technicians)
+                {
+                    command = new OdbcCommand
+                    {
+                        Connection = Database.GetConn(),
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "{call csg.Technician_Create(?,?,?,?,?,?)}"
+                    };
+                    command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = t.Technician_id;
+                    command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = t.Technician_name;
+                    command.Parameters.Add("Contact", OdbcType.VarChar, 50).Value = t.Technician_contact;
+                    command.Parameters.Add("Alias", OdbcType.VarChar, 50).Value = t.Technician_alias;
+                    command.Parameters.Add("Telephone", OdbcType.VarChar, 50).Value = t.Technician_telephone;
+                    command.Parameters.Add("Position", OdbcType.VarChar, 50).Value = t.Technician_position;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        //registro quién se creó
+                        reportT += "ID: " + t.Technician_id + " | NOMBRE: " + t.Technician_name + Environment.NewLine;
+                        //aumento el contador
+                        counterT += 1;
+                    }
+                    else
+                    {
+                        //registro quién no se creó
+                        reportF += "ID: " + t.Technician_id + " | NOMBRE: " + t.Technician_name + Environment.NewLine;
+                        //aumento el contador
+                        counterF += 1;
+                    }
+                    //limpiamos el command (Probamos sin esto y veremos qué sucede)
+                    //command.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en TechnicianDAO->BulkLoad: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return "RESULTADO:" + Environment.NewLine +
+                "Exitosos(" + counterT + "): " + Environment.NewLine +
+                reportT + Environment.NewLine +
+                "Fallidos(" + counterF + "): " + Environment.NewLine +
+                reportF;
+        }
+
         public void Create(Technician technician)
         {
             try

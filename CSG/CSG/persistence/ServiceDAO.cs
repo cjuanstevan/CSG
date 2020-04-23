@@ -14,6 +14,63 @@ namespace CSG.persistence
     {
         OdbcCommand command;
         OdbcDataReader dataReader;
+
+        public string BulkLoad(List<Service> services)
+        {
+            string reportT = "";
+            string reportF = "";
+            int counterT = 0;
+            int counterF = 0;
+
+            try
+            {
+                Database.Connect();
+                foreach (var s in services)
+                {
+                    command = new OdbcCommand
+                    {
+                        Connection = Database.GetConn(),
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "{call csg.Service_Create(?,?,?,?,?)}"
+                    };
+                    command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = s.Service_code;
+                    command.Parameters.Add("Activity", OdbcType.VarChar, 50).Value = s.Service_activity;
+                    command.Parameters.Add("Duration", OdbcType.VarChar, 50).Value = s.Service_duration;
+                    command.Parameters.Add("Cost", OdbcType.VarChar, 50).Value = s.Service_cost;
+                    command.Parameters.Add("Type", OdbcType.Char, 1).Value = s.Service_type;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        //registro quién se creó
+                        reportT += "CODE: " + s.Service_code + " | ACTIVITY: " + s.Service_activity + Environment.NewLine;
+                        //aumento el contador
+                        counterT += 1;
+                    }
+                    else
+                    {
+                        //registro quién no se creó
+                        reportF += "CODE: " + s.Service_code + " | ACTIVITY: " + s.Service_activity + Environment.NewLine;
+                        //aumento el contador
+                        counterF += 1;
+                    }
+                    //limpiamos el command (Probamos sin esto y veremos qué sucede)
+                    //command.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ServiceDAO->BulkLoad: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return "RESULTADO:" + Environment.NewLine +
+                "Exitosos(" + counterT + "): " + Environment.NewLine +
+                reportT + Environment.NewLine +
+                "Fallidos(" + counterF + "): " + Environment.NewLine +
+                reportF;
+        }
+
         public void Create(Service service)
         {
             try

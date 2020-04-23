@@ -15,6 +15,68 @@ namespace CSG.persistence
         OdbcCommand command;
         OdbcDataReader dataReader;
 
+        public string BulkLoad(List<Client> clients)
+        {
+            string reportT = "";
+            string reportF = "";
+            int counterT = 0;
+            int counterF = 0;
+
+            try
+            {
+                Database.Connect();
+                foreach (var c in clients)
+                {
+                    command = new OdbcCommand
+                    {
+                        Connection = Database.GetConn(),
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "{call csg.Client_Create(?,?,?,?,?,?,?,?,?,?,?)}"
+                    };
+                    command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = c.Client_id;
+                    command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = c.Client_name;
+                    command.Parameters.Add("Lastname1", OdbcType.VarChar, 50).Value = c.Client_lastname1;
+                    command.Parameters.Add("Lastname2", OdbcType.VarChar, 50).Value = c.Client_lastname2;
+                    command.Parameters.Add("Address", OdbcType.VarChar, 50).Value = c.Client_address;
+                    command.Parameters.Add("Location", OdbcType.VarChar, 50).Value = c.Client_location;
+                    command.Parameters.Add("City", OdbcType.VarChar, 50).Value = c.Client_city;
+                    command.Parameters.Add("Department", OdbcType.VarChar, 50).Value = c.Client_department;
+                    command.Parameters.Add("Tel1", OdbcType.VarChar, 50).Value = c.Client_tel1;
+                    command.Parameters.Add("Tel2", OdbcType.VarChar, 50).Value = c.Client_tel2;
+                    command.Parameters.Add("Email", OdbcType.VarChar, 50).Value = c.Client_email;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        //registro quién se creó
+                        reportT += "ID: " + c.Client_id + " | NOMBRE: " + c.Client_name + " " + c.Client_lastname1 + " " + c.Client_lastname2 + Environment.NewLine;
+                        //aumento el contador
+                        counterT += 1;
+                    }
+                    else
+                    {
+                        //registro quién no se creó
+                        reportF += "ID: " + c.Client_id + " | NOMBRE: " + c.Client_name + " " + c.Client_lastname1 + " " + c.Client_lastname2 + Environment.NewLine;
+                        //aumento el contador
+                        counterF += 1;
+                    }
+                    //limpiamos el command (Probamos sin esto y veremos qué sucede)
+                    //command.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ClientDAO->BulkLoad: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return "RESULTADO:" + Environment.NewLine +
+                "Exitosos(" + counterT + "): " + Environment.NewLine +
+                reportT + Environment.NewLine +
+                "Fallidos(" + counterF + "): " + Environment.NewLine +
+                reportF;
+        }
+
         public void Create(Client client)
         {
             try

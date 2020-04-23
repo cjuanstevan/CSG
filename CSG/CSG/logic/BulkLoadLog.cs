@@ -14,5 +14,24 @@ namespace CSG.logic
         {
            return DAOFactory.GetArticleDAO().BulkLoad(articles);
         }
+        public string BulkLoadClient(List<Client> clients)
+        {
+            return DAOFactory.GetClientDAO().BulkLoad(clients);
+        }
+
+        public string BulkLoadRefaction(List<Refaction> refactions)
+        {
+            return DAOFactory.GetRefactionDAO().BulkLoad(refactions);
+        }
+
+        public string BulkLoadService(List<Service> services)
+        {
+            return DAOFactory.GetServiceDAO().BulkLoad(services);
+        }
+
+        public string BulkLoadTechnician(List<Technician> technicians)
+        {
+            return DAOFactory.GetTechnicianDAO().BulkLoad(technicians);
+        }
     }
 }

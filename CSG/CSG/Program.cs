@@ -17,7 +17,7 @@ namespace CSG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmBulkLoad());
+            Application.Run(new FrmDashboard());
         }
     }
 }

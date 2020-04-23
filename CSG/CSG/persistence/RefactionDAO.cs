@@ -14,6 +14,61 @@ namespace CSG.persistence
     {
         OdbcCommand command;
         OdbcDataReader dataReader;
+
+        public string BulkLoad(List<Refaction> refactions)
+        {
+            string reportT = "";
+            string reportF = "";
+            int counterT = 0;
+            int counterF = 0;
+
+            try
+            {
+                Database.Connect();
+                foreach (var r in refactions)
+                {
+                    command = new OdbcCommand
+                    {
+                        Connection = Database.GetConn(),
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "{call csg.Refaction_Create(?,?,?)}"
+                    };
+                    command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = r.Refaction_code;
+                    command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = r.Refaction_description;
+                    command.Parameters.Add("UnitPrice", OdbcType.Decimal).Value = r.Refaction_unit_price;
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        //registro quién se creó
+                        reportT += "CODE: " + r.Refaction_code + " | DESCRIPTION: " + r.Refaction_description + Environment.NewLine;
+                        //aumento el contador
+                        counterT += 1;
+                    }
+                    else
+                    {
+                        //registro quién no se creó
+                        reportF += "CODE: " + r.Refaction_code + " | DESCRIPTION: " + r.Refaction_description + Environment.NewLine;
+                        //aumento el contador
+                        counterF += 1;
+                    }
+                    //limpiamos el command (Probamos sin esto y veremos qué sucede)
+                    //command.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en RefactionDAO->BulkLoad: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return "RESULTADO:" + Environment.NewLine +
+                "Exitosos(" + counterT + "): " + Environment.NewLine +
+                reportT + Environment.NewLine +
+                "Fallidos(" + counterF + "): " + Environment.NewLine +
+                reportF;
+        }
+
         public void Create(Refaction refaction)
         {
             try

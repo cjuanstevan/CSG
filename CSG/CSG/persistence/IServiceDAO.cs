@@ -10,6 +10,7 @@ namespace CSG.persistence
     interface IServiceDAO
     {
         void Create(Service service);//ok
+        string BulkLoad(List<Service> services);
         List<Service> Read_all();//ok
         Service Read_once(string code);//ok
         bool Read_once_exist(string code);//ok

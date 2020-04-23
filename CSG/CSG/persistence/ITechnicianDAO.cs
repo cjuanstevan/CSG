@@ -10,6 +10,7 @@ namespace CSG.persistence
     interface ITechnicianDAO
     {
         void Create(Technician technician);//ok
+        string BulkLoad(List<Technician> technicians);//ok
         List<Technician> Read_all();//ok
         Technician Read_once(string id);//ok
         bool Read_once_exist(string id);//ok

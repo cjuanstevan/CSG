@@ -85,21 +85,97 @@ namespace CSG.views
             }
             else if (entity.Equals("CLIENTES"))
             {
-
+                //creamos la lista de Clientes
+                List<Client> clients = new List<Client>();
+                //recorremos el DataGridView y agregamos cada fila a la lista
+                int rows = DgvVisor.RowCount;
+                MessageBox.Show("Cantidad de filas: " + rows);
+                for (int i = 0; i < rows; i++)
+                {
+                    Client c = new Client
+                    {
+                        Client_id = DgvVisor.Rows[i].Cells[0].Value.ToString(),
+                        Client_name = DgvVisor.Rows[i].Cells[1].Value.ToString(),
+                        Client_lastname1 = DgvVisor.Rows[i].Cells[2].Value.ToString(),
+                        Client_lastname2 = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Client_address = DgvVisor.Rows[i].Cells[4].Value.ToString(),
+                        Client_location = DgvVisor.Rows[i].Cells[5].Value.ToString(),
+                        Client_city = DgvVisor.Rows[i].Cells[6].Value.ToString(),
+                        Client_department = DgvVisor.Rows[i].Cells[7].Value.ToString(),
+                        Client_tel1 = DgvVisor.Rows[i].Cells[8].Value.ToString(),
+                        Client_tel2 = DgvVisor.Rows[i].Cells[9].Value.ToString(),
+                        Client_email = DgvVisor.Rows[i].Cells[10].Value.ToString()
+                    };
+                    clients.Add(c);
+                }
+                //Enviamos a la logica para que haga cada uno de los insert
+                txtResult.Text = bulkLoadLog.BulkLoadClient(clients);
             }
             else if (entity.Equals("REFACCIONES"))
             {
-
+                //creamos la lista de Refactions
+                List<Refaction> refactions = new List<Refaction>();
+                //recorremos el DataGridView y agregamos cada fila a la lista
+                int rows = DgvVisor.RowCount;
+                MessageBox.Show("Cantidad de filas: " + rows);
+                for (int i = 0; i < rows; i++)
+                {
+                    Refaction r = new Refaction
+                    {
+                        Refaction_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
+                        Refaction_description = DgvVisor.Rows[i].Cells[1].Value.ToString(),
+                        Refaction_unit_price = decimal.Parse(DgvVisor.Rows[i].Cells[2].Value.ToString())
+                    };
+                    refactions.Add(r);
+                }
+                //Enviamos a la logica para que haga cada uno de los insert
+                txtResult.Text = bulkLoadLog.BulkLoadRefaction(refactions);
             }
             else if (entity.Equals("SERVICIOS"))
             {
-
+                //creamos la lista de Services
+                List<Service> services = new List<Service>();
+                //recorremos el DataGridView y agregamos cada fila a la lista
+                int rows = DgvVisor.RowCount;
+                MessageBox.Show("Cantidad de filas: " + rows);
+                for (int i = 0; i < rows; i++)
+                {
+                    Service s = new Service
+                    {
+                        Service_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
+                        Service_activity = DgvVisor.Rows[i].Cells[1].Value.ToString(),
+                        Service_duration = DgvVisor.Rows[i].Cells[2].Value.ToString(),
+                        Service_cost = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Service_type = char.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString())
+                    };
+                    services.Add(s);
+                }
+                //Enviamos a la logica para que haga cada uno de los insert
+                txtResult.Text = bulkLoadLog.BulkLoadService(services);
             }
             else if (entity.Equals("TECNICOS"))
             {
-
+                //creamos la lista de Technicians
+                List<Technician> technicians = new List<Technician>();
+                //recorremos el DataGridView y agregamos cada fila a la lista
+                int rows = DgvVisor.RowCount;
+                MessageBox.Show("Cantidad de filas: " + rows);
+                for (int i = 0; i < rows; i++)
+                {
+                    Technician t = new Technician
+                    {
+                        Technician_id = DgvVisor.Rows[i].Cells[0].Value.ToString(),
+                        Technician_name = DgvVisor.Rows[i].Cells[1].Value.ToString(),
+                        Technician_contact = DgvVisor.Rows[i].Cells[2].Value.ToString(),
+                        Technician_alias = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Technician_telephone = DgvVisor.Rows[i].Cells[4].Value.ToString(),
+                        Technician_position = DgvVisor.Rows[i].Cells[5].Value.ToString()
+                    };
+                    technicians.Add(t);
+                }
+                //Enviamos a la logica para que haga cada uno de los insert
+                txtResult.Text = bulkLoadLog.BulkLoadTechnician(technicians);
             }
-            //agregamos a la lista elegida
         }
     }
 }
