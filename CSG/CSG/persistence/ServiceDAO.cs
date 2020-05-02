@@ -174,6 +174,44 @@ namespace CSG.persistence
             return services;
         }
 
+        public List<Service> Read_all_like(string search)
+        {
+            List<Service> services = new List<Service>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Service_ReadAllLike(?)}"
+                };
+                command.Parameters.Add("Search", OdbcType.VarChar, 50).Value = search;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Service service = new Service
+                    {
+                        Service_code = dataReader.GetString(0),
+                        Service_activity = dataReader.GetString(1),
+                        Service_duration = dataReader.GetString(2),
+                        Service_cost = dataReader.GetString(3),
+                        Service_type = dataReader.GetChar(4)
+                    };
+                    services.Add(service);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ServiceDAO->Read_all_like: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return services;
+        }
+
         public Service Read_once(string code)
         {
             Service service = new Service();

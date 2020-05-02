@@ -60,8 +60,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="logic\ArticleLog.cs" />
     <Compile Include="logic\BulkLoadLog.cs" />
     <Compile Include="logic\ClientLog.cs" />
+    <Compile Include="logic\RefactionLog.cs" />
+    <Compile Include="logic\ServiceLog.cs" />
+    <Compile Include="logic\TechnicianLog.cs" />
     <Compile Include="model\Article.cs" />
     <Compile Include="model\Client.cs" />
     <Compile Include="model\Cotization.cs" />
@@ -102,6 +106,12 @@
     <Compile Include="Servicio_Tecnico.Designer.cs">
       <DependentUpon>Servicio_Tecnico.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmArticle.Designer.cs">
+      <DependentUpon>FrmArticle.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmBulkLoad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +129,24 @@
     </Compile>
     <Compile Include="views\FrmDashboard.Designer.cs">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\FrmIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmIndex.Designer.cs">
+      <DependentUpon>FrmIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\FrmRefactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmRefactions.Designer.cs">
+      <DependentUpon>FrmRefactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\FrmService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmService.Designer.cs">
+      <DependentUpon>FrmService.cs</DependentUpon>
     </Compile>
     <Compile Include="views\FrmTechnician.cs">
       <SubType>Form</SubType>
@@ -148,6 +176,9 @@
     <EmbeddedResource Include="Servicio_Tecnico.resx">
       <DependentUpon>Servicio_Tecnico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmArticle.resx">
+      <DependentUpon>FrmArticle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FrmBulkLoad.resx">
       <DependentUpon>FrmBulkLoad.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +187,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmIndex.resx">
+      <DependentUpon>FrmIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmRefactions.resx">
+      <DependentUpon>FrmRefactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmService.resx">
+      <DependentUpon>FrmService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmTechnician.resx">
       <DependentUpon>FrmTechnician.cs</DependentUpon>
@@ -194,6 +234,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

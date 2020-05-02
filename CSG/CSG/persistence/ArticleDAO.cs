@@ -175,6 +175,44 @@ namespace CSG.persistence
             return articles;
         }
 
+        public List<Article> Read_all_like(string search)
+        {
+            List<Article> articles = new List<Article>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Article_ReadAllLike(?)}"
+                };
+                command.Parameters.Add("Search", OdbcType.VarChar, 50).Value = search;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Article article = new Article
+                    {
+                        Article_code = dataReader.GetString(0),
+                        Article_description = dataReader.GetString(1),
+                        Article_model = dataReader.GetString(2),
+                        Article_serial = dataReader.GetString(3),
+                        Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
+                    };
+                    articles.Add(article);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ArticleDAO->Read_all_like: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return articles;
+        }
+
         public Article Read_once(string code)
         {
             Article article = new Article();

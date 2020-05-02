@@ -41,14 +41,33 @@ namespace CSG.views
             else
                 subMenu.Visible = false;
         }
-
+        private void BtnIndex_Click(object sender, EventArgs e)
+        {
+            HideSubmenu();
+            LblNameMain.Text = "TABLERO";
+            BtnIndex.BackColor = Color.FromArgb(109, 119, 129);
+            BtnOrders.BackColor = Color.FromArgb(39, 40, 36);
+            BtnMaintenance.BackColor = Color.FromArgb(39, 40, 36);
+            BtnClients.BackColor = Color.FromArgb(111, 111, 109);
+            BtnArticles.BackColor = Color.FromArgb(111, 111, 109);
+            BtnRefactions.BackColor = Color.FromArgb(111, 111, 109);
+            BtnServices.BackColor = Color.FromArgb(111, 111, 109);
+            BtnTechnicians.BackColor = Color.FromArgb(111, 111, 109);
+            OpenChildForm(new FrmIndex());
+        }
         private void BtnOrders_Click(object sender, EventArgs e)
         {
+            BtnIndex.BackColor = Color.FromArgb(39, 40, 36);
+            BtnOrders.BackColor = Color.FromArgb(109, 119, 129);
+            BtnMaintenance.BackColor = Color.FromArgb(39, 40, 36);
             ShowSubmenu(PlOrdersSubmenu);
         }
 
         private void BtnMaintenance_Click(object sender, EventArgs e)
         {
+            BtnIndex.BackColor = Color.FromArgb(39, 40, 36);
+            BtnOrders.BackColor = Color.FromArgb(39, 40, 36);
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
             ShowSubmenu(PlMaintenaceSubmenu);
         }
 
@@ -74,7 +93,9 @@ namespace CSG.views
 
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
-            
+            //Formulario predeterminado
+            //OpenChildForm(new FrmIndex());
+            BtnIndex_Click(sender, e);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -82,19 +103,72 @@ namespace CSG.views
             //ShowPropertiesOfSlateBlue(e);
         }
 
+        
+
         private void BtnClients_Click(object sender, EventArgs e)
         {
-            BtnClients.BackColor = Color.Red;
-            BtnTechnician.BackColor = Color.FromArgb(111, 111, 109);
+            LblNameMain.Text = "CLIENTES";
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
+            BtnClients.BackColor = Color.FromArgb(127, 127, 127);
+            BtnArticles.BackColor = Color.FromArgb(111, 111, 109);
+            BtnRefactions.BackColor = Color.FromArgb(111, 111, 109);
+            BtnServices.BackColor = Color.FromArgb(111, 111, 109);
+            BtnTechnicians.BackColor = Color.FromArgb(111, 111, 109);
             OpenChildForm(new FrmClient());
         }
 
+        private void BtnArticles_Click(object sender, EventArgs e)
+        {
+            LblNameMain.Text = "ARTICULOS";
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
+            BtnClients.BackColor = Color.FromArgb(111, 111, 109);
+            BtnArticles.BackColor = Color.FromArgb(127, 127, 127);
+            BtnRefactions.BackColor = Color.FromArgb(111, 111, 109);
+            BtnServices.BackColor = Color.FromArgb(111, 111, 109);
+            BtnTechnicians.BackColor = Color.FromArgb(111, 111, 109);
+            OpenChildForm(new FrmArticle());
+        }
+        private void BtnRefactions_Click(object sender, EventArgs e)
+        {
+            LblNameMain.Text = "REPUESTOS";
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
+            BtnClients.BackColor = Color.FromArgb(111, 111, 109);
+            BtnArticles.BackColor = Color.FromArgb(111, 111, 109);
+            BtnRefactions.BackColor = Color.FromArgb(127, 127, 127);
+            BtnServices.BackColor = Color.FromArgb(111, 111, 109);
+            BtnTechnicians.BackColor = Color.FromArgb(111, 111, 109);
+            OpenChildForm(new FrmRefactions());
+        }
+        private void BtnServices_Click(object sender, EventArgs e)
+        {
+            LblNameMain.Text = "SERVICIOS";
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
+            BtnClients.BackColor = Color.FromArgb(111, 111, 109);
+            BtnArticles.BackColor = Color.FromArgb(111, 111, 109);
+            BtnRefactions.BackColor = Color.FromArgb(111, 111, 109);
+            BtnServices.BackColor = Color.FromArgb(127, 127, 127);
+            BtnTechnicians.BackColor = Color.FromArgb(111, 111, 109);
+            OpenChildForm(new FrmService());
+        }
         private void BtnTechnician_Click(object sender, EventArgs e)
         {
+            LblNameMain.Text = "TECNICOS";
+            BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
             BtnClients.BackColor = Color.FromArgb(111, 111, 109);
-            BtnTechnician.BackColor = Color.Red;
+            BtnArticles.BackColor = Color.FromArgb(111, 111, 109);
+            BtnRefactions.BackColor = Color.FromArgb(111, 111, 109);
+            BtnServices.BackColor = Color.FromArgb(111, 111, 109);
+            BtnTechnicians.BackColor = Color.FromArgb(127,127,127);
             OpenChildForm(new FrmTechnician());
         }
+
+        
+
+        
+
+        
+
+
 
 
         //private void ShowPropertiesOfSlateBlue(PaintEventArgs e)

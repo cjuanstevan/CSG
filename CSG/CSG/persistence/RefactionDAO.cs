@@ -168,6 +168,42 @@ namespace CSG.persistence
             return refactions;
         }
 
+        public List<Refaction> Read_all_like(string search)
+        {
+            List<Refaction> refactions = new List<Refaction>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Refaction_ReadAllLike(?)}"
+                };
+                command.Parameters.Add("Search", OdbcType.VarChar, 50).Value = search;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Refaction refaction = new Refaction
+                    {
+                        Refaction_code = dataReader.GetString(0),
+                        Refaction_description = dataReader.GetString(1),
+                        Refaction_unit_price = dataReader.GetDecimal(2)
+                    };
+                    refactions.Add(refaction);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en RefactionDAO->Read_all_like: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return refactions;
+        }
+
         public Refaction Read_once(string code)
         {
             Refaction refaction = new Refaction();

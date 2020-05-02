@@ -12,6 +12,7 @@ namespace CSG.persistence
         void Create(Refaction refaction);//ok
         string BulkLoad(List<Refaction> refactions);
         List<Refaction> Read_all();//ok
+        List<Refaction> Read_all_like(string search);
         Refaction Read_once(string code);//ok
         bool Read_once_exist(string code);//ok
         void Update(Refaction refaction);//ok

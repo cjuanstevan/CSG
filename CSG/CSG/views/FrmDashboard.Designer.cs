@@ -29,30 +29,38 @@
         private void InitializeComponent()
         {
             this.Plmain = new System.Windows.Forms.Panel();
-            this.BtnLogout = new System.Windows.Forms.Button();
             this.PlMaintenaceSubmenu = new System.Windows.Forms.Panel();
-            this.BtnTechnician = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.BtnTechnicians = new System.Windows.Forms.Button();
+            this.BtnServices = new System.Windows.Forms.Button();
+            this.BtnRefactions = new System.Windows.Forms.Button();
+            this.BtnArticles = new System.Windows.Forms.Button();
             this.BtnClients = new System.Windows.Forms.Button();
-            this.BtnMaintenance = new System.Windows.Forms.Button();
             this.PlOrdersSubmenu = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.PlTop = new System.Windows.Forms.Panel();
+            this.PnlUserDates = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LblNameMain = new System.Windows.Forms.Label();
+            this.PlChildForm = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.BtnLogout = new System.Windows.Forms.Button();
+            this.BtnMaintenance = new System.Windows.Forms.Button();
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.PlLogo = new System.Windows.Forms.Panel();
-            this.PlTop = new System.Windows.Forms.Panel();
-            this.PlChildForm = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Plmain.SuspendLayout();
             this.PlMaintenaceSubmenu.SuspendLayout();
             this.PlOrdersSubmenu.SuspendLayout();
+            this.PlTop.SuspendLayout();
+            this.PnlUserDates.SuspendLayout();
             this.PlChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // Plmain
@@ -72,103 +80,87 @@
             this.Plmain.Size = new System.Drawing.Size(282, 921);
             this.Plmain.TabIndex = 0;
             // 
-            // BtnLogout
-            // 
-            this.BtnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLogout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnLogout.FlatAppearance.BorderSize = 0;
-            this.BtnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
-            this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
-            this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.Location = new System.Drawing.Point(0, 668);
-            this.BtnLogout.Name = "BtnLogout";
-            this.BtnLogout.Size = new System.Drawing.Size(282, 46);
-            this.BtnLogout.TabIndex = 7;
-            this.BtnLogout.Text = "Cerrar sesión";
-            this.BtnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnLogout.UseVisualStyleBackColor = true;
-            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
-            // 
             // PlMaintenaceSubmenu
             // 
             this.PlMaintenaceSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
-            this.PlMaintenaceSubmenu.Controls.Add(this.BtnTechnician);
-            this.PlMaintenaceSubmenu.Controls.Add(this.button11);
-            this.PlMaintenaceSubmenu.Controls.Add(this.button12);
-            this.PlMaintenaceSubmenu.Controls.Add(this.button13);
+            this.PlMaintenaceSubmenu.Controls.Add(this.BtnTechnicians);
+            this.PlMaintenaceSubmenu.Controls.Add(this.BtnServices);
+            this.PlMaintenaceSubmenu.Controls.Add(this.BtnRefactions);
+            this.PlMaintenaceSubmenu.Controls.Add(this.BtnArticles);
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnClients);
             this.PlMaintenaceSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 432);
             this.PlMaintenaceSubmenu.Name = "PlMaintenaceSubmenu";
-            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(282, 236);
+            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(282, 224);
             this.PlMaintenaceSubmenu.TabIndex = 6;
             // 
-            // BtnTechnician
+            // BtnTechnicians
             // 
-            this.BtnTechnician.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnTechnician.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnTechnician.FlatAppearance.BorderSize = 0;
-            this.BtnTechnician.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnTechnician.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnTechnician.Location = new System.Drawing.Point(0, 180);
-            this.BtnTechnician.Name = "BtnTechnician";
-            this.BtnTechnician.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnTechnician.Size = new System.Drawing.Size(282, 45);
-            this.BtnTechnician.TabIndex = 4;
-            this.BtnTechnician.Text = "Técnicos";
-            this.BtnTechnician.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnTechnician.UseVisualStyleBackColor = true;
-            this.BtnTechnician.Click += new System.EventHandler(this.BtnTechnician_Click);
+            this.BtnTechnicians.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnTechnicians.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnTechnicians.FlatAppearance.BorderSize = 0;
+            this.BtnTechnicians.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTechnicians.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnTechnicians.Location = new System.Drawing.Point(0, 180);
+            this.BtnTechnicians.Name = "BtnTechnicians";
+            this.BtnTechnicians.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnTechnicians.Size = new System.Drawing.Size(282, 45);
+            this.BtnTechnicians.TabIndex = 4;
+            this.BtnTechnicians.Text = "Técnicos";
+            this.BtnTechnicians.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnTechnicians.UseVisualStyleBackColor = true;
+            this.BtnTechnicians.Click += new System.EventHandler(this.BtnTechnician_Click);
             // 
-            // button11
+            // BtnServices
             // 
-            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button11.Location = new System.Drawing.Point(0, 135);
-            this.button11.Name = "button11";
-            this.button11.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button11.Size = new System.Drawing.Size(282, 45);
-            this.button11.TabIndex = 3;
-            this.button11.Text = "Servicios";
-            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button11.UseVisualStyleBackColor = true;
+            this.BtnServices.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnServices.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnServices.FlatAppearance.BorderSize = 0;
+            this.BtnServices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnServices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnServices.Location = new System.Drawing.Point(0, 135);
+            this.BtnServices.Name = "BtnServices";
+            this.BtnServices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnServices.Size = new System.Drawing.Size(282, 45);
+            this.BtnServices.TabIndex = 3;
+            this.BtnServices.Text = "Servicios";
+            this.BtnServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnServices.UseVisualStyleBackColor = true;
+            this.BtnServices.Click += new System.EventHandler(this.BtnServices_Click);
             // 
-            // button12
+            // BtnRefactions
             // 
-            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button12.FlatAppearance.BorderSize = 0;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button12.Location = new System.Drawing.Point(0, 90);
-            this.button12.Name = "button12";
-            this.button12.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button12.Size = new System.Drawing.Size(282, 45);
-            this.button12.TabIndex = 2;
-            this.button12.Text = "Repuestos";
-            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button12.UseVisualStyleBackColor = true;
+            this.BtnRefactions.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnRefactions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnRefactions.FlatAppearance.BorderSize = 0;
+            this.BtnRefactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRefactions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnRefactions.Location = new System.Drawing.Point(0, 90);
+            this.BtnRefactions.Name = "BtnRefactions";
+            this.BtnRefactions.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnRefactions.Size = new System.Drawing.Size(282, 45);
+            this.BtnRefactions.TabIndex = 2;
+            this.BtnRefactions.Text = "Repuestos";
+            this.BtnRefactions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnRefactions.UseVisualStyleBackColor = true;
+            this.BtnRefactions.Click += new System.EventHandler(this.BtnRefactions_Click);
             // 
-            // button13
+            // BtnArticles
             // 
-            this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button13.FlatAppearance.BorderSize = 0;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button13.Location = new System.Drawing.Point(0, 45);
-            this.button13.Name = "button13";
-            this.button13.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button13.Size = new System.Drawing.Size(282, 45);
-            this.button13.TabIndex = 1;
-            this.button13.Text = "Articulos";
-            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button13.UseVisualStyleBackColor = true;
+            this.BtnArticles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnArticles.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnArticles.FlatAppearance.BorderSize = 0;
+            this.BtnArticles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnArticles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnArticles.Location = new System.Drawing.Point(0, 45);
+            this.BtnArticles.Name = "BtnArticles";
+            this.BtnArticles.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnArticles.Size = new System.Drawing.Size(282, 45);
+            this.BtnArticles.TabIndex = 1;
+            this.BtnArticles.Text = "Articulos";
+            this.BtnArticles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnArticles.UseVisualStyleBackColor = true;
+            this.BtnArticles.Click += new System.EventHandler(this.BtnArticles_Click);
             // 
             // BtnClients
             // 
@@ -186,25 +178,6 @@
             this.BtnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnClients.UseVisualStyleBackColor = true;
             this.BtnClients.Click += new System.EventHandler(this.BtnClients_Click);
-            // 
-            // BtnMaintenance
-            // 
-            this.BtnMaintenance.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnMaintenance.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnMaintenance.FlatAppearance.BorderSize = 0;
-            this.BtnMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
-            this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
-            this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaintenance.Location = new System.Drawing.Point(0, 386);
-            this.BtnMaintenance.Name = "BtnMaintenance";
-            this.BtnMaintenance.Size = new System.Drawing.Size(282, 46);
-            this.BtnMaintenance.TabIndex = 5;
-            this.BtnMaintenance.Text = "Mantenimiento";
-            this.BtnMaintenance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaintenance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnMaintenance.UseVisualStyleBackColor = true;
-            this.BtnMaintenance.Click += new System.EventHandler(this.BtnMaintenance_Click);
             // 
             // PlOrdersSubmenu
             // 
@@ -283,6 +256,129 @@
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = true;
             // 
+            // PlTop
+            // 
+            this.PlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(36)))));
+            this.PlTop.Controls.Add(this.PnlUserDates);
+            this.PlTop.Controls.Add(this.pictureBox2);
+            this.PlTop.Controls.Add(this.LblNameMain);
+            this.PlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PlTop.Location = new System.Drawing.Point(282, 0);
+            this.PlTop.Name = "PlTop";
+            this.PlTop.Size = new System.Drawing.Size(982, 100);
+            this.PlTop.TabIndex = 1;
+            // 
+            // PnlUserDates
+            // 
+            this.PnlUserDates.Controls.Add(this.label1);
+            this.PnlUserDates.Controls.Add(this.label2);
+            this.PnlUserDates.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PnlUserDates.Location = new System.Drawing.Point(663, 0);
+            this.PnlUserDates.Name = "PnlUserDates";
+            this.PnlUserDates.Size = new System.Drawing.Size(219, 100);
+            this.PnlUserDates.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(80, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Juan Stevan Correa";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label2.Location = new System.Drawing.Point(92, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 17);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "ADMINISTRADOR";
+            // 
+            // LblNameMain
+            // 
+            this.LblNameMain.AutoSize = true;
+            this.LblNameMain.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblNameMain.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LblNameMain.Location = new System.Drawing.Point(74, 44);
+            this.LblNameMain.Name = "LblNameMain";
+            this.LblNameMain.Size = new System.Drawing.Size(85, 22);
+            this.LblNameMain.TabIndex = 0;
+            this.LblNameMain.Text = "TABLERO";
+            // 
+            // PlChildForm
+            // 
+            this.PlChildForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
+            this.PlChildForm.Controls.Add(this.pictureBox1);
+            this.PlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PlChildForm.Location = new System.Drawing.Point(282, 100);
+            this.PlChildForm.Name = "PlChildForm";
+            this.PlChildForm.Size = new System.Drawing.Size(982, 821);
+            this.PlChildForm.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = global::CSG.Properties.Resources.icon_csg;
+            this.pictureBox1.Location = new System.Drawing.Point(316, 182);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(324, 324);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox2.Image = global::CSG.Properties.Resources.user;
+            this.pictureBox2.Location = new System.Drawing.Point(882, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // BtnLogout
+            // 
+            this.BtnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnLogout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnLogout.FlatAppearance.BorderSize = 0;
+            this.BtnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
+            this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
+            this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnLogout.Location = new System.Drawing.Point(0, 656);
+            this.BtnLogout.Name = "BtnLogout";
+            this.BtnLogout.Size = new System.Drawing.Size(282, 46);
+            this.BtnLogout.TabIndex = 7;
+            this.BtnLogout.Text = "Cerrar sesión";
+            this.BtnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnLogout.UseVisualStyleBackColor = true;
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
+            // 
+            // BtnMaintenance
+            // 
+            this.BtnMaintenance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnMaintenance.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnMaintenance.FlatAppearance.BorderSize = 0;
+            this.BtnMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
+            this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
+            this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnMaintenance.Location = new System.Drawing.Point(0, 386);
+            this.BtnMaintenance.Name = "BtnMaintenance";
+            this.BtnMaintenance.Size = new System.Drawing.Size(282, 46);
+            this.BtnMaintenance.TabIndex = 5;
+            this.BtnMaintenance.Text = "Mantenimiento";
+            this.BtnMaintenance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnMaintenance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnMaintenance.UseVisualStyleBackColor = true;
+            this.BtnMaintenance.Click += new System.EventHandler(this.BtnMaintenance_Click);
+            // 
             // BtnOrders
             // 
             this.BtnOrders.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -319,6 +415,7 @@
             this.BtnIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnIndex.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnIndex.UseVisualStyleBackColor = true;
+            this.BtnIndex.Click += new System.EventHandler(this.BtnIndex_Click);
             // 
             // PlLogo
             // 
@@ -329,36 +426,6 @@
             this.PlLogo.Name = "PlLogo";
             this.PlLogo.Size = new System.Drawing.Size(282, 100);
             this.PlLogo.TabIndex = 0;
-            // 
-            // PlTop
-            // 
-            this.PlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(36)))));
-            this.PlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PlTop.Location = new System.Drawing.Point(282, 0);
-            this.PlTop.Name = "PlTop";
-            this.PlTop.Size = new System.Drawing.Size(982, 100);
-            this.PlTop.TabIndex = 1;
-            // 
-            // PlChildForm
-            // 
-            this.PlChildForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
-            this.PlChildForm.Controls.Add(this.pictureBox1);
-            this.PlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PlChildForm.Location = new System.Drawing.Point(282, 100);
-            this.PlChildForm.Name = "PlChildForm";
-            this.PlChildForm.Size = new System.Drawing.Size(982, 821);
-            this.PlChildForm.TabIndex = 2;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = global::CSG.Properties.Resources.icon_csg;
-            this.pictureBox1.Location = new System.Drawing.Point(316, 182);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(324, 324);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // FrmDashboard
             // 
@@ -378,9 +445,14 @@
             this.Plmain.ResumeLayout(false);
             this.PlMaintenaceSubmenu.ResumeLayout(false);
             this.PlOrdersSubmenu.ResumeLayout(false);
+            this.PlTop.ResumeLayout(false);
+            this.PlTop.PerformLayout();
+            this.PnlUserDates.ResumeLayout(false);
+            this.PnlUserDates.PerformLayout();
             this.PlChildForm.ResumeLayout(false);
             this.PlChildForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,15 +469,20 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button BtnOrders;
         private System.Windows.Forms.Panel PlMaintenaceSubmenu;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button BtnServices;
+        private System.Windows.Forms.Button BtnRefactions;
+        private System.Windows.Forms.Button BtnArticles;
         private System.Windows.Forms.Button BtnClients;
         private System.Windows.Forms.Button BtnMaintenance;
-        private System.Windows.Forms.Button BtnTechnician;
+        private System.Windows.Forms.Button BtnTechnicians;
         private System.Windows.Forms.Button BtnLogout;
         private System.Windows.Forms.Panel PlTop;
         private System.Windows.Forms.Panel PlChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblNameMain;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel PnlUserDates;
     }
 }

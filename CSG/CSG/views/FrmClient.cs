@@ -24,21 +24,12 @@ namespace CSG.views
         private void BtnReadAll_Click(object sender, EventArgs e)
         {
             DgvClient.DataSource = clientLog.ReadAll();
-            DgvClient.Columns[0].HeaderText = "Identidad";
-            DgvClient.Columns[1].HeaderText = "Nombres";
-            DgvClient.Columns[2].HeaderText = "P. apellido";
-            DgvClient.Columns[3].HeaderText = "S. apellido";
-            DgvClient.Columns[4].HeaderText = "Dirección";
-            DgvClient.Columns[5].HeaderText = "Barrio";
-            DgvClient.Columns[6].HeaderText = "Ciudad";
-            DgvClient.Columns[7].HeaderText = "Departamento";
-            DgvClient.Columns[8].HeaderText = "Teléfono 1";
-            DgvClient.Columns[9].HeaderText = "Teléfono 2";
-            DgvClient.Columns[10].HeaderText = "Correo";
+            CreateHeaders();
         }
 
         private void FrmClient_Load(object sender, EventArgs e)
         {
+            txtId.Focus();
             //BtnReadAll_Click(sender, e);
         }
 
@@ -150,22 +141,83 @@ namespace CSG.views
 
         private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtId.ReadOnly = true;
-            btnCreate.Text = "Guardar";
-            BtnDelete.Enabled = true;
-            txtId.Text = DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtName.Text = DgvClient.Rows[e.RowIndex].Cells[1].Value.ToString();
-            txtLastname1.Text = DgvClient.Rows[e.RowIndex].Cells[2].Value.ToString();
-            txtLastname2.Text = DgvClient.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txtAddress.Text = DgvClient.Rows[e.RowIndex].Cells[4].Value.ToString();
-            txtLocation.Text = DgvClient.Rows[e.RowIndex].Cells[5].Value.ToString();
-            txtCity.Text = DgvClient.Rows[e.RowIndex].Cells[6].Value.ToString();
-            txtDepartment.Text = DgvClient.Rows[e.RowIndex].Cells[7].Value.ToString();
-            txtTel1.Text = DgvClient.Rows[e.RowIndex].Cells[8].Value.ToString();
-            txtTel2.Text = DgvClient.Rows[e.RowIndex].Cells[9].Value.ToString();
-            txtEmail.Text = DgvClient.Rows[e.RowIndex].Cells[10].Value.ToString();
-            //Console.WriteLine("COLUMN: " + e.ColumnIndex);
-            //MessageBox.Show("Id: " + DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (e.RowIndex >= 0)
+            {
+                txtId.ReadOnly = true;
+                btnCreate.Text = "Guardar";
+                BtnDelete.Enabled = true;
+                btnNew.Enabled = true;
+                txtId.Text = DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtName.Text = DgvClient.Rows[e.RowIndex].Cells[1].Value.ToString();
+                txtLastname1.Text = DgvClient.Rows[e.RowIndex].Cells[2].Value.ToString();
+                txtLastname2.Text = DgvClient.Rows[e.RowIndex].Cells[3].Value.ToString();
+                txtAddress.Text = DgvClient.Rows[e.RowIndex].Cells[4].Value.ToString();
+                txtLocation.Text = DgvClient.Rows[e.RowIndex].Cells[5].Value.ToString();
+                txtCity.Text = DgvClient.Rows[e.RowIndex].Cells[6].Value.ToString();
+                txtDepartment.Text = DgvClient.Rows[e.RowIndex].Cells[7].Value.ToString();
+                txtTel1.Text = DgvClient.Rows[e.RowIndex].Cells[8].Value.ToString();
+                txtTel2.Text = DgvClient.Rows[e.RowIndex].Cells[9].Value.ToString();
+                txtEmail.Text = DgvClient.Rows[e.RowIndex].Cells[10].Value.ToString();
+            }
+        }
+
+        //private bool VerificaContenido(DataGridView gridView)
+        //{
+        //    bool bcampo = false;
+        //    if (gridView.RowCount > 0)
+        //    {
+                
+        //        foreach (DataGridViewRow dr in gridView.Rows)
+        //        {
+        //            foreach (DataGridViewCell dc in dr.Cells)
+        //            {
+        //                if (dc.Value == null || string.IsNullOrEmpty(dc.Value.ToString()))
+        //                {
+        //                    bcampo = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return bcampo;
+        //}
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            DgvClient.DataSource = clientLog.Read_all_like(txtSearch.Text);
+            CreateHeaders();
+        }
+
+        //Metodos de interfaz
+        private void CreateHeaders()
+        {
+            DgvClient.Columns[0].HeaderText = "Identidad";
+            DgvClient.Columns[1].HeaderText = "Nombres";
+            DgvClient.Columns[2].HeaderText = "P. apellido";
+            DgvClient.Columns[3].HeaderText = "S. apellido";
+            DgvClient.Columns[4].HeaderText = "Dirección";
+            DgvClient.Columns[5].HeaderText = "Barrio";
+            DgvClient.Columns[6].HeaderText = "Ciudad";
+            DgvClient.Columns[7].HeaderText = "Departamento";
+            DgvClient.Columns[8].HeaderText = "Teléfono 1";
+            DgvClient.Columns[9].HeaderText = "Teléfono 2";
+            DgvClient.Columns[10].HeaderText = "Correo";
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            btnNew.Enabled = false;
+            btnCreate.Text = "Crear";
+            BtnDelete.Enabled = false;
+            CleanFields();
+            txtId.ReadOnly = false;
+            txtId.Focus();
+        }
+
+        private void BtnReadAll_Click_1(object sender, EventArgs e)
+        {
+            DgvClient.Columns.Clear();
+            DgvClient.DataSource = clientLog.ReadAll();
+            CreateHeaders();
         }
     }
 }

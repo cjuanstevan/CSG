@@ -13,24 +13,17 @@ namespace CSG.logic
     {
         public void Create(Client client)
         {
-            try
-            {
-                //Procedemos a crear el cliente
-                DAOFactory.GetClientDAO().Create(client);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Excepción controlada en ClientLog->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                //ReadAll();
-            }
+            DAOFactory.GetClientDAO().Create(client);
         }
 
         public List<Client> ReadAll()
         {
             return DAOFactory.GetClientDAO().Read_all();
+        }
+
+        public List<Client> Read_all_like(string search)
+        {
+            return DAOFactory.GetClientDAO().Read_all_like(search);
         }
 
         public bool Read_once_exist(string id)

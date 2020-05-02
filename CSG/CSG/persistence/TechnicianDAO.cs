@@ -145,6 +145,7 @@ namespace CSG.persistence
             List<Technician> technicians = new List<Technician>();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -177,11 +178,51 @@ namespace CSG.persistence
             return technicians;
         }
 
+        public List<Technician> Read_all_like(string search)
+        {
+            List<Technician> technicians = new List<Technician>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Technician_ReadAllLike(?)}"
+                };
+                command.Parameters.Add("Search", OdbcType.VarChar, 50).Value = search;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Technician technician = new Technician
+                    {
+                        Technician_id = dataReader.GetString(0),
+                        Technician_name = dataReader.GetString(1),
+                        Technician_contact = dataReader.GetString(2),
+                        Technician_alias = dataReader.GetString(3),
+                        Technician_telephone = dataReader.GetString(4),
+                        Technician_position = dataReader.GetString(5)
+                    };
+                    technicians.Add(technician);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en TechnicianDAO->Read_all_like: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return technicians;
+        }
+
         public Technician Read_once(string id)
         {
             Technician technician = new Technician();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),

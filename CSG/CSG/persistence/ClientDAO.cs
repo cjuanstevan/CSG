@@ -193,6 +193,50 @@ namespace CSG.persistence
             return clients;
         }
 
+        public List<Client> Read_all_like(string search)
+        {
+            List<Client> clients = new List<Client>();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Client_ReadAllLike(?)}"
+                };
+                command.Parameters.Add("Search", OdbcType.VarChar, 50).Value = search;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Client client = new Client
+                    {
+                        Client_id = dataReader.GetString(0),
+                        Client_name = dataReader.GetString(1),
+                        Client_lastname1 = dataReader.GetString(2),
+                        Client_lastname2 = dataReader.GetString(3),
+                        Client_address = dataReader.GetString(4),
+                        Client_location = dataReader.GetString(5),
+                        Client_city = dataReader.GetString(6),
+                        Client_department = dataReader.GetString(7),
+                        Client_tel1 = dataReader.GetString(8),
+                        Client_tel2 = dataReader.GetString(9),
+                        Client_email = dataReader.GetString(10)
+                    };
+                    clients.Add(client);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en ClientDAO->Read_all_like: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return clients;
+        }
+
         public Client Read_once(string id)
         {
             Client client = new Client();

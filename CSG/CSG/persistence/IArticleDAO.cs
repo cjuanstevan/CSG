@@ -12,6 +12,7 @@ namespace CSG.persistence
         void Create(Article article);//ok
         string BulkLoad(List<Article> articles);//ok
         List<Article> Read_all();//ok
+        List<Article> Read_all_like(string search);//ok
         Article Read_once(string code);//ok
         bool Read_once_exist(string code);//ok
         void Update(Article article);//ok
