@@ -442,6 +442,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FrmClient";
+            this.ShowInTaskbar = false;
             this.Text = "FrmClient";
             this.Load += new System.EventHandler(this.FrmClient_Load);
             this.panel1.ResumeLayout(false);

@@ -18,6 +18,7 @@ namespace CSG.persistence
         {
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -71,6 +72,7 @@ namespace CSG.persistence
             List<Order_articleFK> order_Articles = new List<Order_articleFK>();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),

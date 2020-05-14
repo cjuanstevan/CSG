@@ -15,5 +15,6 @@ namespace CSG.persistence
         bool Read_once_exist(string number);//ok
         void Update(Order order);//ok
         void Delete(string number);//ok
+        List<Order> Read_all_like(string search);
     }
 }

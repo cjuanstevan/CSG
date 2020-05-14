@@ -18,24 +18,33 @@ namespace CSG.persistence
         {
             try
             {
+
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
                     CommandText = "{call csg.Order_Create(?,?,?,?,?,?,?,?,?,?,?,?)}"
                 };
-                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = order.Order_number;
-                command.Parameters.Add("ReceptionDate", OdbcType.DateTime).Value = order.Order_reception_date;
-                command.Parameters.Add("EndDate", OdbcType.DateTime).Value = order.Order_end_date;
-                command.Parameters.Add("Type", OdbcType.VarChar, 20).Value = order.Order_type;
-                command.Parameters.Add("Invoice", OdbcType.VarChar, 20).Value = order.Order_invoice;
-                command.Parameters.Add("SaleDate", OdbcType.Date).Value = order.Order_sale_date;
-                command.Parameters.Add("State", OdbcType.VarChar, 20).Value = order.Order_state;
-                command.Parameters.Add("Comentarys", OdbcType.VarChar, 200).Value = order.Order_comentarys;
-                command.Parameters.Add("ReportClient", OdbcType.VarChar, 200).Value = order.Order_report_client;
-                command.Parameters.Add("Technician", OdbcType.VarChar, 50).Value = order.Technician.Technician_id;
-                command.Parameters.Add("Client", OdbcType.VarChar, 50).Value = order.Client.Client_id;
-                command.Parameters.Add("Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id;
+                command.Parameters.Add("@Number", OdbcType.VarChar, 50).Value = order.Order_number;
+                command.Parameters.Add("@ReceptionDate", OdbcType.DateTime).Value = order.Order_reception_date.Date;
+                command.Parameters.Add("@EndDate", OdbcType.DateTime).Value = null;
+                command.Parameters.Add("@Type", OdbcType.VarChar, 20).Value = order.Order_type;
+                command.Parameters.Add("@Invoice", OdbcType.VarChar, 20).Value = order.Order_invoice;
+                if (order.Order_invoice.Equals(""))
+                {
+                    command.Parameters.Add("@SaleDate", OdbcType.Date).Value = null;
+                }
+                else
+                {
+                    command.Parameters.Add("@SaleDate", OdbcType.Date).Value = order.Order_sale_date.Date;
+                }
+                command.Parameters.Add("@State", OdbcType.VarChar, 20).Value = "Revision";
+                command.Parameters.Add("@Comentarys", OdbcType.VarChar, 200).Value = null;
+                command.Parameters.Add("@ReportClient", OdbcType.VarChar, 200).Value = order.Order_report_client;
+                command.Parameters.Add("@Technician", OdbcType.VarChar, 50).Value = order.Technician.Technician_id;
+                command.Parameters.Add("@Client", OdbcType.VarChar, 50).Value = order.Client.Client_id;
+                command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Orden creada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -47,7 +56,7 @@ namespace CSG.persistence
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Excepción controlada en OrdenDAO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Excepción controlada en OrderDAO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -133,6 +142,11 @@ namespace CSG.persistence
                 Database.Disconnect();
             }
             return orders;
+        }
+
+        public List<Order> Read_all_like(string search)
+        {
+            throw new NotImplementedException();
         }
 
         public Order Read_once(string number)

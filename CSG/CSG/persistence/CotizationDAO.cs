@@ -18,6 +18,7 @@ namespace CSG.persistence
         {
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -88,6 +89,7 @@ namespace CSG.persistence
             List<Cotization> cotizations = new List<Cotization>();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -128,6 +130,7 @@ namespace CSG.persistence
             Cotization cotization = new Cotization();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -201,6 +204,7 @@ namespace CSG.persistence
         {
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),

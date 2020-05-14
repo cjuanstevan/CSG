@@ -63,6 +63,12 @@ namespace CSG.views
             ShowSubmenu(PlOrdersSubmenu);
         }
 
+        private void BtnOrderCreate_Click(object sender, EventArgs e)
+        {
+            LblNameMain.Text = "CREAR ORDEN";
+            OpenChildForm(new FrmOrderCreate());
+        }
+
         private void BtnMaintenance_Click(object sender, EventArgs e)
         {
             BtnIndex.BackColor = Color.FromArgb(39, 40, 36);
@@ -94,8 +100,8 @@ namespace CSG.views
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
             //Formulario predeterminado
-            //OpenChildForm(new FrmIndex());
-            BtnIndex_Click(sender, e);
+            OpenChildForm(new FrmOrderCreate());
+            //BtnIndex_Click(sender, e);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -164,9 +170,11 @@ namespace CSG.views
 
         
 
-        
 
-        
+
+
+
+
 
 
 

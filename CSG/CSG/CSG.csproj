@@ -63,6 +63,9 @@
     <Compile Include="logic\ArticleLog.cs" />
     <Compile Include="logic\BulkLoadLog.cs" />
     <Compile Include="logic\ClientLog.cs" />
+    <Compile Include="logic\CotizationLog.cs" />
+    <Compile Include="logic\OrderArticleLog.cs" />
+    <Compile Include="logic\OrderLog.cs" />
     <Compile Include="logic\RefactionLog.cs" />
     <Compile Include="logic\ServiceLog.cs" />
     <Compile Include="logic\TechnicianLog.cs" />
@@ -106,6 +109,24 @@
     <Compile Include="Servicio_Tecnico.Designer.cs">
       <DependentUpon>Servicio_Tecnico.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\CdoArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\CdoArticle.Designer.cs">
+      <DependentUpon>CdoArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\CdoClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\CdoClient.Designer.cs">
+      <DependentUpon>CdoClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\CdoClientCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\CdoClientCreate.Designer.cs">
+      <DependentUpon>CdoClientCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmArticle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +157,12 @@
     <Compile Include="views\FrmIndex.Designer.cs">
       <DependentUpon>FrmIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmOrderCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmOrderCreate.Designer.cs">
+      <DependentUpon>FrmOrderCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmRefactions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +181,7 @@
     <Compile Include="views\FrmTechnician.Designer.cs">
       <DependentUpon>FrmTechnician.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\ICom.cs" />
     <Compile Include="views\Resol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +204,15 @@
     <EmbeddedResource Include="Servicio_Tecnico.resx">
       <DependentUpon>Servicio_Tecnico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\CdoArticle.resx">
+      <DependentUpon>CdoArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\CdoClient.resx">
+      <DependentUpon>CdoClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\CdoClientCreate.resx">
+      <DependentUpon>CdoClientCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FrmArticle.resx">
       <DependentUpon>FrmArticle.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmIndex.resx">
       <DependentUpon>FrmIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmOrderCreate.resx">
+      <DependentUpon>FrmOrderCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmRefactions.resx">
       <DependentUpon>FrmRefactions.cs</DependentUpon>
