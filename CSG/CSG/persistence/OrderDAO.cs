@@ -44,7 +44,7 @@ namespace CSG.persistence
                 command.Parameters.Add("@ReportClient", OdbcType.VarChar, 200).Value = order.Order_report_client;
                 command.Parameters.Add("@Technician", OdbcType.VarChar, 50).Value = order.Technician.Technician_id;
                 command.Parameters.Add("@Client", OdbcType.VarChar, 50).Value = order.Client.Client_id;
-                command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id;
+                command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id; //"CT-RL5";
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Orden creada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -147,6 +147,35 @@ namespace CSG.persistence
         public List<Order> Read_all_like(string search)
         {
             throw new NotImplementedException();
+        }
+
+        public uint Read_count()
+        {
+            uint count = 0;
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadCount}"
+                };
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    count = uint.Parse(dataReader.GetInt32(0).ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_count: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return count;
         }
 
         public Order Read_once(string number)

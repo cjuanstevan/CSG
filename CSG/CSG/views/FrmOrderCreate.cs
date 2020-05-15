@@ -22,6 +22,10 @@ namespace CSG.views
         private readonly OrderArticleLog orderArticleLog = new OrderArticleLog();
         //Objetos
         Article article;
+
+        //Arreglos
+        readonly string[] PrOrder = { "RL", "GL", "RF", "GF", "SD" };
+        //readonly string[] TyOrder = { "Reparación Local" };
         public FrmOrderCreate()
         {
             InitializeComponent();
@@ -42,8 +46,7 @@ namespace CSG.views
         private void TxtClientId_TextChanged(object sender, EventArgs e)
         {
             txtClientName.Clear();
-            bool request = false;
-            request = clientLog.Read_once_exist(txtClientId.Text);
+            bool request = clientLog.Read_once_exist(txtClientId.Text);
             if (request)
             {
                 LblClientIdMsj.Text = "";
@@ -124,35 +127,33 @@ namespace CSG.views
             Client c = clientLog.Read_once(txtClientId.Text);
             order.Client = c;
             //Cotización
-            //Consultar el numero de la ultima cotizacion o la cantidad que existen
-
-            Cotization cn = cotizationLog.Read_once(txtCot.Text);
+            //Creamos cotización
+            Cotization cotization = new Cotization
+            {
+                Cotization_id = "CT-" + PrOrder[cboType.SelectedIndex] + "" + orderLog.Read_count().ToString()
+            };
+            cotizationLog.Create(cotization);
+            //Consultamos la cotización
+            Cotization cn = cotizationLog.Read_once(cotization.Cotization_id);
             //MessageBox.Show("Cotizacion: " + cn.Cotization_id);
             order.Cotization = cn;
             //Creación de orden
             orderLog.Create(order);
             //Creamos el order_article para que asigne el artículo sobre el cual se va a operar
-            Order_articleFK order_articleFK = new Order_articleFK();
-            order_articleFK.Order = order;
-            order_articleFK.Article = article;
-            orderArticleLog.Create(order_articleFK);
-        }
-
-        private void TxtCot_TextChanged(object sender, EventArgs e)
-        {
-            txtCotFecha.Clear();
-            bool request = cotizationLog.Read_once_exist(txtCot.Text);
-            if (request)
+            Order_articleFK order_articleFK = new Order_articleFK
             {
-                Cotization cotization = cotizationLog.Read_once(txtCot.Text);
-                txtCotFecha.Text = cotization.Cotization_generation_date.ToShortDateString();
-            }
+                Order = order,
+                Article = article
+            };
+            orderArticleLog.Create(order_articleFK);
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            //Creamos una cotizacion para la orden determinada
-
+            //Pruebas
+            //MessageBox.Show("Prefijo: " + PrOrder[cboType.SelectedIndex]);
+            txtNumber.Text = PrOrder[cboType.SelectedIndex] + "-" + orderLog.Read_count().ToString();
+            //MessageBox.Show("Consecutivo: " + orderLog.Read_count());
         }
 
         public void ClientText(string id)
@@ -169,6 +170,37 @@ namespace CSG.views
         {
             //estado predeterminado de los controles
             cboWarranty.SelectedIndex = 1;
+        }
+
+        private void CboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNumber.Text = PrOrder[cboType.SelectedIndex] + "-" + orderLog.Read_count().ToString();
+        }
+
+        private void CboWarranty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboWarranty.SelectedIndex.Equals(0))
+            {
+                txtInvoice.Enabled = true;
+                dtpSaleDate.Enabled = true;
+            }
+            else if (cboWarranty.SelectedIndex.Equals(1))
+            {
+                txtInvoice.Enabled = false;
+                dtpSaleDate.Enabled = false;
+            }
+        }
+
+        private void BtnReadTechnician_Click(object sender, EventArgs e)
+        {
+            CdoTechnician cdoTechnician = new CdoTechnician();
+            cdoTechnician.com = this;
+            cdoTechnician.ShowDialog();
+        }
+
+        public void TechnicianText(string id)
+        {
+            txtTechnicianId.Text = id;
         }
     }
 }

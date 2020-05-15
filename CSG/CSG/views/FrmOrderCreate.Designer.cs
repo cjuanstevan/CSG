@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtCotFecha = new System.Windows.Forms.TextBox();
-            this.txtCot = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -100,8 +98,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtCotFecha);
-            this.panel1.Controls.Add(this.txtCot);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.label8);
@@ -121,21 +117,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(958, 797);
             this.panel1.TabIndex = 0;
-            // 
-            // txtCotFecha
-            // 
-            this.txtCotFecha.Location = new System.Drawing.Point(284, 89);
-            this.txtCotFecha.Name = "txtCotFecha";
-            this.txtCotFecha.Size = new System.Drawing.Size(173, 20);
-            this.txtCotFecha.TabIndex = 16;
-            // 
-            // txtCot
-            // 
-            this.txtCot.Location = new System.Drawing.Point(104, 89);
-            this.txtCot.Name = "txtCot";
-            this.txtCot.Size = new System.Drawing.Size(174, 20);
-            this.txtCot.TabIndex = 15;
-            this.txtCot.TextChanged += new System.EventHandler(this.TxtCot_TextChanged);
             // 
             // panel5
             // 
@@ -221,6 +202,7 @@
             // 
             // cboType
             // 
+            this.cboType.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.FormattingEnabled = true;
             this.cboType.Items.AddRange(new object[] {
@@ -229,15 +211,16 @@
             "Reparación foránea",
             "Garantía foránea",
             "Solicitud de devolución"});
-            this.cboType.Location = new System.Drawing.Point(104, 63);
+            this.cboType.Location = new System.Drawing.Point(104, 22);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(174, 21);
             this.cboType.TabIndex = 9;
+            this.cboType.SelectedIndexChanged += new System.EventHandler(this.CboType_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 66);
+            this.label6.Location = new System.Drawing.Point(39, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(28, 13);
             this.label6.TabIndex = 8;
@@ -245,15 +228,17 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(104, 33);
+            this.txtNumber.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtNumber.Location = new System.Drawing.Point(104, 56);
             this.txtNumber.Name = "txtNumber";
+            this.txtNumber.ReadOnly = true;
             this.txtNumber.Size = new System.Drawing.Size(174, 20);
             this.txtNumber.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(40, 36);
+            this.label5.Location = new System.Drawing.Point(40, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 6;
@@ -295,6 +280,7 @@
             // 
             this.txtTechnicianTelephone.Location = new System.Drawing.Point(448, 160);
             this.txtTechnicianTelephone.Name = "txtTechnicianTelephone";
+            this.txtTechnicianTelephone.ReadOnly = true;
             this.txtTechnicianTelephone.Size = new System.Drawing.Size(147, 20);
             this.txtTechnicianTelephone.TabIndex = 15;
             // 
@@ -311,6 +297,7 @@
             // 
             this.txtTechnicianContact.Location = new System.Drawing.Point(14, 203);
             this.txtTechnicianContact.Name = "txtTechnicianContact";
+            this.txtTechnicianContact.ReadOnly = true;
             this.txtTechnicianContact.Size = new System.Drawing.Size(147, 20);
             this.txtTechnicianContact.TabIndex = 13;
             // 
@@ -329,6 +316,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTechnicianAlias.Location = new System.Drawing.Point(227, 203);
             this.txtTechnicianAlias.Name = "txtTechnicianAlias";
+            this.txtTechnicianAlias.ReadOnly = true;
             this.txtTechnicianAlias.Size = new System.Drawing.Size(626, 20);
             this.txtTechnicianAlias.TabIndex = 11;
             // 
@@ -349,11 +337,13 @@
             this.btnReadTechnician.TabIndex = 9;
             this.btnReadTechnician.Text = "...";
             this.btnReadTechnician.UseVisualStyleBackColor = true;
+            this.btnReadTechnician.Click += new System.EventHandler(this.BtnReadTechnician_Click);
             // 
             // txtTechnicianName
             // 
             this.txtTechnicianName.Location = new System.Drawing.Point(227, 161);
             this.txtTechnicianName.Name = "txtTechnicianName";
+            this.txtTechnicianName.ReadOnly = true;
             this.txtTechnicianName.Size = new System.Drawing.Size(205, 20);
             this.txtTechnicianName.TabIndex = 5;
             // 
@@ -446,6 +436,7 @@
             // 
             this.txtArticleWarranty.Location = new System.Drawing.Point(448, 89);
             this.txtArticleWarranty.Name = "txtArticleWarranty";
+            this.txtArticleWarranty.ReadOnly = true;
             this.txtArticleWarranty.Size = new System.Drawing.Size(147, 20);
             this.txtArticleWarranty.TabIndex = 16;
             // 
@@ -507,6 +498,7 @@
             this.cboWarranty.Name = "cboWarranty";
             this.cboWarranty.Size = new System.Drawing.Size(82, 21);
             this.cboWarranty.TabIndex = 10;
+            this.cboWarranty.SelectedIndexChanged += new System.EventHandler(this.CboWarranty_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -531,6 +523,7 @@
             // 
             this.txtArticleSerial.Location = new System.Drawing.Point(227, 89);
             this.txtArticleSerial.Name = "txtArticleSerial";
+            this.txtArticleSerial.ReadOnly = true;
             this.txtArticleSerial.Size = new System.Drawing.Size(205, 20);
             this.txtArticleSerial.TabIndex = 7;
             // 
@@ -549,6 +542,7 @@
             // 
             this.txtArticleModel.Location = new System.Drawing.Point(14, 89);
             this.txtArticleModel.Name = "txtArticleModel";
+            this.txtArticleModel.ReadOnly = true;
             this.txtArticleModel.Size = new System.Drawing.Size(193, 20);
             this.txtArticleModel.TabIndex = 5;
             // 
@@ -569,6 +563,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArticleDesc.Location = new System.Drawing.Point(227, 35);
             this.txtArticleDesc.Name = "txtArticleDesc";
+            this.txtArticleDesc.ReadOnly = true;
             this.txtArticleDesc.Size = new System.Drawing.Size(626, 20);
             this.txtArticleDesc.TabIndex = 3;
             // 
@@ -774,7 +769,5 @@
         private System.Windows.Forms.TextBox txtTechnicianTelephone;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label LblClientIdMsj;
-        private System.Windows.Forms.TextBox txtCot;
-        private System.Windows.Forms.TextBox txtCotFecha;
     }
 }

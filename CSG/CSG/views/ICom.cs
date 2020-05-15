@@ -10,5 +10,6 @@ namespace CSG.views
     {
         void ClientText(string id);
         void ArticleText(string code);
+        void TechnicianText(string id);
     }
 }

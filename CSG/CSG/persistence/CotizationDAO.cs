@@ -26,8 +26,8 @@ namespace CSG.persistence
                     CommandText = "{call csg.Cotization_Create(?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = cotization.Cotization_id;
-                command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = cotization.Cotization_generation_date;
-                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = cotization.Cotization_expiration_date;
+                command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = null;
+                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("Quantity", OdbcType.SmallInt).Value = cotization.Cotization_quantity;
                 command.Parameters.Add("Comentarys", OdbcType.VarChar, 200).Value = cotization.Cotization_comentarys;
                 command.Parameters.Add("Subtotal", OdbcType.Decimal).Value = cotization.Cotization_subtotal;
@@ -144,8 +144,8 @@ namespace CSG.persistence
                     cotization = new Cotization
                     {
                         Cotization_id = dataReader.GetString(0),
-                        Cotization_generation_date = dataReader.GetDateTime(1),
-                        Cotization_expiration_date = dataReader.GetDateTime(2),
+                        //Cotization_generation_date = dataReader.GetDateTime(1),
+                        //Cotization_expiration_date = dataReader.GetDateTime(2),
                         Cotization_quantity = uint.Parse(dataReader.GetInt32(3).ToString()),
                         Cotization_comentarys = dataReader.GetString(4),
                         Cotization_subtotal = dataReader.GetDecimal(5),

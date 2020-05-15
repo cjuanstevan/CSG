@@ -24,7 +24,10 @@ namespace CSG.logic
         {
             return DAOFactory.GetOrderDAO().Read_all_like(search);
         }
-
+        public uint Read_count()
+        {
+            return DAOFactory.GetOrderDAO().Read_count();
+        }
         public bool Read_once_exist(string number)
         {
             return DAOFactory.GetOrderDAO().Read_once_exist(number);

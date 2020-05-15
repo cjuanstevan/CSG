@@ -127,6 +127,12 @@
     <Compile Include="views\CdoClientCreate.Designer.cs">
       <DependentUpon>CdoClientCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\CdoTechnician.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\CdoTechnician.Designer.cs">
+      <DependentUpon>CdoTechnician.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmArticle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\CdoClientCreate.resx">
       <DependentUpon>CdoClientCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\CdoTechnician.resx">
+      <DependentUpon>CdoTechnician.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmArticle.resx">
       <DependentUpon>FrmArticle.cs</DependentUpon>

@@ -13,6 +13,7 @@ namespace CSG.persistence
         List<Order> Read_all();//ok
         Order Read_once(string number);//ok
         bool Read_once_exist(string number);//ok
+        uint Read_count();
         void Update(Order order);//ok
         void Delete(string number);//ok
         List<Order> Read_all_like(string search);
