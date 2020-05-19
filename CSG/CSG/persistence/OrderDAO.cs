@@ -27,7 +27,7 @@ namespace CSG.persistence
                     CommandText = "{call csg.Order_Create(?,?,?,?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("@Number", OdbcType.VarChar, 50).Value = order.Order_number;
-                command.Parameters.Add("@ReceptionDate", OdbcType.DateTime).Value = order.Order_reception_date.Date;
+                command.Parameters.Add("@ReceptionDate", OdbcType.DateTime).Value = order.Order_reception_date;
                 command.Parameters.Add("@EndDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("@Type", OdbcType.VarChar, 20).Value = order.Order_type;
                 command.Parameters.Add("@Invoice", OdbcType.VarChar, 20).Value = order.Order_invoice;
@@ -100,6 +100,7 @@ namespace CSG.persistence
             List<Order> orders = new List<Order>();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -183,6 +184,7 @@ namespace CSG.persistence
             Order order = new Order();
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -197,22 +199,26 @@ namespace CSG.persistence
                     {
                         Order_number = dataReader.GetString(0),
                         Order_reception_date = dataReader.GetDateTime(1),
-                        Order_end_date = dataReader.GetDateTime(2),
+                        //Order_end_date = dataReader.GetDateTime(2),
                         Order_type = dataReader.GetString(3),
                         Order_invoice = dataReader.GetString(4),
-                        Order_sale_date = dataReader.GetDate(5),
+                        //Order_sale_date = dataReader.GetDate(5),
                         Order_state = dataReader.GetString(6),
-                        Order_comentarys = dataReader.GetString(7),
+                        //Order_comentarys = dataReader.GetString(7),
                         Order_report_client = dataReader.GetString(8)
                     };
+                    string t = dataReader.GetString(9);
+                    string c = dataReader.GetString(10);
+                    string ct = dataReader.GetString(11);
+                    Database.Disconnect();
                     ITechnicianDAO technicianDAO = new TechnicianDAO();
-                    Technician technician = technicianDAO.Read_once(dataReader.GetString(9));
+                    Technician technician = technicianDAO.Read_once(t);
                     order.Technician = technician;
                     IClientDAO clientDAO = new ClientDAO();
-                    Client client = clientDAO.Read_once(dataReader.GetString(10));
+                    Client client = clientDAO.Read_once(c);
                     order.Client = client;
                     ICotizationDAO cotizationDAO = new CotizationDAO();
-                    Cotization cotization = cotizationDAO.Read_once(dataReader.GetString(11));
+                    Cotization cotization = cotizationDAO.Read_once(ct);
                     order.Cotization = cotization;
                 }
             }

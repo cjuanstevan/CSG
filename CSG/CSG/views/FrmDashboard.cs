@@ -17,6 +17,12 @@ namespace CSG.views
             InitializeComponent();
             CustomizeDesign();
         }
+        private void FrmDashboard_Load(object sender, EventArgs e)
+        {
+            //Formulario predeterminado
+            OpenChildForm(new FrmCotizationCreate());
+            //BtnReadOrder_Click(sender, e);
+        }
         private void CustomizeDesign()
         {
             PlOrdersSubmenu.Visible = false;
@@ -66,7 +72,17 @@ namespace CSG.views
         private void BtnOrderCreate_Click(object sender, EventArgs e)
         {
             LblNameMain.Text = "CREAR ORDEN";
+            BtnOrderCreate.BackColor = Color.FromArgb(127, 127, 127);
+            BtnReadOrder.BackColor = Color.FromArgb(111, 111, 109);
             OpenChildForm(new FrmOrderCreate());
+        }
+
+        private void BtnReadOrder_Click(object sender, EventArgs e)
+        {
+            LblNameMain.Text = "CONSULTAR ORDEN";
+            BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
+            BtnReadOrder.BackColor = Color.FromArgb(127, 127, 127);
+            OpenChildForm(new FrmOrderRead());
         }
 
         private void BtnMaintenance_Click(object sender, EventArgs e)
@@ -97,12 +113,7 @@ namespace CSG.views
             
         }
 
-        private void FrmDashboard_Load(object sender, EventArgs e)
-        {
-            //Formulario predeterminado
-            OpenChildForm(new FrmOrderCreate());
-            //BtnIndex_Click(sender, e);
-        }
+        
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -169,6 +180,8 @@ namespace CSG.views
         }
 
         
+
+
 
 
 

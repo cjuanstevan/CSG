@@ -40,7 +40,7 @@
             this.PlOrdersSubmenu = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.BtnReadOrder = new System.Windows.Forms.Button();
             this.BtnOrderCreate = new System.Windows.Forms.Button();
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnIndex = new System.Windows.Forms.Button();
@@ -89,7 +89,7 @@
             this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
             this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.Location = new System.Drawing.Point(0, 656);
+            this.BtnLogout.Location = new System.Drawing.Point(0, 644);
             this.BtnLogout.Name = "BtnLogout";
             this.BtnLogout.Size = new System.Drawing.Size(282, 46);
             this.BtnLogout.TabIndex = 7;
@@ -108,7 +108,7 @@
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnArticles);
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnClients);
             this.PlMaintenaceSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 432);
+            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 420);
             this.PlMaintenaceSubmenu.Name = "PlMaintenaceSubmenu";
             this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(282, 224);
             this.PlMaintenaceSubmenu.TabIndex = 6;
@@ -207,7 +207,7 @@
             this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
             this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaintenance.Location = new System.Drawing.Point(0, 386);
+            this.BtnMaintenance.Location = new System.Drawing.Point(0, 374);
             this.BtnMaintenance.Name = "BtnMaintenance";
             this.BtnMaintenance.Size = new System.Drawing.Size(282, 46);
             this.BtnMaintenance.TabIndex = 5;
@@ -222,12 +222,12 @@
             this.PlOrdersSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
             this.PlOrdersSubmenu.Controls.Add(this.button6);
             this.PlOrdersSubmenu.Controls.Add(this.button7);
-            this.PlOrdersSubmenu.Controls.Add(this.button8);
+            this.PlOrdersSubmenu.Controls.Add(this.BtnReadOrder);
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderCreate);
             this.PlOrdersSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlOrdersSubmenu.Location = new System.Drawing.Point(0, 192);
             this.PlOrdersSubmenu.Name = "PlOrdersSubmenu";
-            this.PlOrdersSubmenu.Size = new System.Drawing.Size(282, 194);
+            this.PlOrdersSubmenu.Size = new System.Drawing.Size(282, 182);
             this.PlOrdersSubmenu.TabIndex = 4;
             // 
             // button6
@@ -262,21 +262,22 @@
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // BtnReadOrder
             // 
-            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button8.Location = new System.Drawing.Point(0, 45);
-            this.button8.Name = "button8";
-            this.button8.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(282, 45);
-            this.button8.TabIndex = 1;
-            this.button8.Text = "Consultar";
-            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.UseVisualStyleBackColor = true;
+            this.BtnReadOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnReadOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnReadOrder.FlatAppearance.BorderSize = 0;
+            this.BtnReadOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReadOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnReadOrder.Location = new System.Drawing.Point(0, 45);
+            this.BtnReadOrder.Name = "BtnReadOrder";
+            this.BtnReadOrder.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnReadOrder.Size = new System.Drawing.Size(282, 45);
+            this.BtnReadOrder.TabIndex = 1;
+            this.BtnReadOrder.Text = "Consultar";
+            this.BtnReadOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnReadOrder.UseVisualStyleBackColor = true;
+            this.BtnReadOrder.Click += new System.EventHandler(this.BtnReadOrder_Click);
             // 
             // BtnOrderCreate
             // 
@@ -466,7 +467,7 @@
         private System.Windows.Forms.Panel PlOrdersSubmenu;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button BtnReadOrder;
         private System.Windows.Forms.Button BtnOrderCreate;
         private System.Windows.Forms.Button BtnOrders;
         private System.Windows.Forms.Panel PlMaintenaceSubmenu;

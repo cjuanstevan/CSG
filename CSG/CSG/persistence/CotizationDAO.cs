@@ -213,7 +213,7 @@ namespace CSG.persistence
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = cotization.Cotization_id;
                 command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = cotization.Cotization_generation_date;
-                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = cotization.Cotization_expiration_date;
+                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("Quantity", OdbcType.Int, 11).Value = cotization.Cotization_quantity;
                 command.Parameters.Add("Comentarys", OdbcType.VarChar, 200).Value = cotization.Cotization_comentarys;
                 command.Parameters.Add("Subtotal", OdbcType.Decimal).Value = cotization.Cotization_subtotal;
@@ -231,7 +231,7 @@ namespace CSG.persistence
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Excepción controlada en CotizationDAO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Excepción controlada en CotizationDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

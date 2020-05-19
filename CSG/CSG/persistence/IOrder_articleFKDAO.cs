@@ -10,6 +10,7 @@ namespace CSG.persistence
     interface IOrder_articleFKDAO
     {
         void Create(Order_articleFK order_articleFK);//ok
+        string Read_code_article_of_order(string order_number);
         List<Order_articleFK> Read_ArticlesOfOrder(string order_number);//ok
         void Delete(string number, string code);//ok
     }

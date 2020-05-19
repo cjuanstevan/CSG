@@ -106,9 +106,11 @@ namespace CSG.views
 
         private void BtnCreate_Click(object sender, EventArgs e)
         {
+            //DateTime localDate = DateTime.Now;
             Order order = new Order();
             order.Order_number = txtNumber.Text;
-            order.Order_reception_date = dtpDateReception.Value;
+            //DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            order.Order_reception_date = DateTime.Parse(dtpDateReception.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             order.Order_end_date = dtpDateReception.Value;
             order.Order_type = cboType.Text;
             //MessageBox.Show("Seleccionó " + cboWarranty.SelectedItem.ToString());
@@ -146,6 +148,7 @@ namespace CSG.views
                 Article = article
             };
             orderArticleLog.Create(order_articleFK);
+            ResetControls(sender, e);
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -169,7 +172,10 @@ namespace CSG.views
         private void FrmOrderCreate_Load(object sender, EventArgs e)
         {
             //estado predeterminado de los controles
+            cboType.SelectedIndex = 0;
             cboWarranty.SelectedIndex = 1;
+            dtpDateReception.CustomFormat = ("yyyy-MM-dd HH:mm:ss");
+            timer1.Start();
         }
 
         private void CboType_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,6 +207,29 @@ namespace CSG.views
         public void TechnicianText(string id)
         {
             txtTechnicianId.Text = id;
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            dtpDateReception.Value = DateTime.Now;
+        }
+
+        private void ResetControls(object sender, EventArgs e)
+        {
+            cboType.SelectedIndex = 0;
+            txtNumber.Clear();
+            CboType_SelectedIndexChanged(sender, e);
+            txtClientId.Clear();
+            txtArticleCod.Clear();
+            cboWarranty.SelectedIndex = 1;
+            txtInvoice.Clear();
+            txtReportClient.Clear();
+            txtTechnicianId.Clear();
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            ResetControls(sender, e);
         }
     }
 }

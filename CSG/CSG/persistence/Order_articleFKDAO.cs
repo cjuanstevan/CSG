@@ -111,5 +111,35 @@ namespace CSG.persistence
             }
             return order_Articles;
         }
+
+        public string Read_code_article_of_order(string order_number)
+        {
+            string code = "";
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_articleFK_ReadCodeArticleOfOrder(?)}"
+                };
+                command.Parameters.Add("OrderNumber", OdbcType.VarChar, 50).Value = order_number;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    code = dataReader.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en Order_articleFKDAO->Read_code_article_of_order: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return code;
+        }
     }
 }

@@ -151,6 +151,12 @@
     <Compile Include="views\FrmClient.Designer.cs">
       <DependentUpon>FrmClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmCotizationCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmCotizationCreate.Designer.cs">
+      <DependentUpon>FrmCotizationCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,12 @@
     </Compile>
     <Compile Include="views\FrmOrderCreate.Designer.cs">
       <DependentUpon>FrmOrderCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\FrmOrderRead.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmOrderRead.Designer.cs">
+      <DependentUpon>FrmOrderRead.cs</DependentUpon>
     </Compile>
     <Compile Include="views\FrmRefactions.cs">
       <SubType>Form</SubType>
@@ -231,6 +243,9 @@
     <EmbeddedResource Include="views\FrmClient.resx">
       <DependentUpon>FrmClient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmCotizationCreate.resx">
+      <DependentUpon>FrmCotizationCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmOrderCreate.resx">
       <DependentUpon>FrmOrderCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmOrderRead.resx">
+      <DependentUpon>FrmOrderRead.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmRefactions.resx">
       <DependentUpon>FrmRefactions.cs</DependentUpon>

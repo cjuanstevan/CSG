@@ -14,6 +14,10 @@ namespace CSG.logic
         {
             DAOFactory.GetOrder_ArticleFKDAO().Create(order_articleFK);
         }
+        public string Read_code_article_of_order(string order_number)
+        {
+            return DAOFactory.GetOrder_ArticleFKDAO().Read_code_article_of_order(order_number);
+        }
         public List<Order_articleFK> Read_ArticlesOfOrder(string order_number)
         {
             return DAOFactory.GetOrder_ArticleFKDAO().Read_ArticlesOfOrder(order_number);
