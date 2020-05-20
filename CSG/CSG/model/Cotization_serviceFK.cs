@@ -8,21 +8,21 @@ namespace CSG.model
 {
     class Cotization_serviceFK
     {
-        private Cotization _cotization;
-        private Service _service;
+        private string _cotization_id;
+        private string _service_code;
 
         public Cotization_serviceFK()
         {
 
         }
 
-        public Cotization_serviceFK(Cotization cotization, Service service)
+        public Cotization_serviceFK(string cotization_id, string service_code)
         {
-            _cotization = cotization;
-            _service = service;
+            Cotization_id = cotization_id;
+            Service_code = service_code;
         }
 
-        internal Cotization Cotization { get => _cotization; set => _cotization = value; }
-        internal Service Service { get => _service; set => _service = value; }
+        public string Cotization_id { get => _cotization_id; set => _cotization_id = value; }
+        public string Service_code { get => _service_code; set => _service_code = value; }
     }
 }

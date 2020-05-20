@@ -20,7 +20,7 @@ namespace CSG.views
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
             //Formulario predeterminado
-            OpenChildForm(new FrmCotizationCreate());
+            OpenChildForm(new FrmOrderRead());
             //BtnReadOrder_Click(sender, e);
         }
         private void CustomizeDesign()

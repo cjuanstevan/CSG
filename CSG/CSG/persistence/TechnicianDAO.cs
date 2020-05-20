@@ -222,7 +222,11 @@ namespace CSG.persistence
             Technician technician = new Technician();
             try
             {
-                Database.Connect();
+                //Console.WriteLine("Conexion Tecnico: " + Database.GetConn().State);
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -255,6 +259,7 @@ namespace CSG.persistence
             finally
             {
                 Database.Disconnect();
+                //Database.Connect();
             }
             return technician;
         }

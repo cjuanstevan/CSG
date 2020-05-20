@@ -18,16 +18,17 @@ namespace CSG.persistence
         {
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
                     CommandText = "{call csg.Cotization_serviceFK_Create(?,?)}"
                 };
-                command.Parameters.Add("Cotization", OdbcType.VarChar, 50).Value = cotization_serviceFK.Cotization.Cotization_id;
-                command.Parameters.Add("Service", OdbcType.VarChar, 50).Value = cotization_serviceFK.Service.Service_code;
+                command.Parameters.Add("CotizationId", OdbcType.VarChar, 50).Value = cotization_serviceFK.Cotization_id;
+                command.Parameters.Add("ServiceCode", OdbcType.VarChar, 50).Value = cotization_serviceFK.Service_code;
                 command.ExecuteNonQuery();
-                Console.WriteLine("CREATE-> cotization: " + cotization_serviceFK.Cotization.Cotization_id + " | service: " + cotization_serviceFK.Service.Service_code);
+                Console.WriteLine("CREATE-> cotization: " + cotization_serviceFK.Cotization_id + " | service: " + cotization_serviceFK.Service_code);
 
             }
             catch (Exception ex)
@@ -40,7 +41,7 @@ namespace CSG.persistence
             }
         }
 
-        public void Delete(string id, string code)
+        public void Delete(string cotization_id, string service_code)
         {
             try
             {
@@ -51,10 +52,10 @@ namespace CSG.persistence
                     CommandType = CommandType.StoredProcedure,
                     CommandText = "{call csg.Cotization_serviceFK_Delete(?,?)}"
                 };
-                command.Parameters.Add("Cotization", OdbcType.VarChar, 50).Value = id;
-                command.Parameters.Add("Service", OdbcType.VarChar, 50).Value = code;
+                command.Parameters.Add("Cotization", OdbcType.VarChar, 50).Value = cotization_id;
+                command.Parameters.Add("Service", OdbcType.VarChar, 50).Value = service_code;
                 command.ExecuteNonQuery();
-                Console.WriteLine("DELETE-> cotization: " + id + " | service: " + code);
+                Console.WriteLine("DELETE-> cotization: " + cotization_id + " | service: " + service_code);
             }
             catch (Exception ex)
             {
@@ -84,17 +85,18 @@ namespace CSG.persistence
                 if (cotizationDAO.Read_once_exist(cotization_id))
                 {
                     //consultamos el objeto Cotization                    
-                    Cotization cotization = cotizationDAO.Read_once(cotization_id);
+                    //Cotization cotization = cotizationDAO.Read_once(cotization_id);
                     //ejecutamos la lectura del DataReader
                     dataReader = command.ExecuteReader();
                     while (dataReader.Read())
                     {
                         Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
                         {
-                            Cotization = cotization
+                            Cotization_id = cotization_id,
+                            Service_code= dataReader.GetString(0)
                         };
-                        Service service = serviceDAO.Read_once(dataReader.GetString(0));
-                        cotization_ServiceFK.Service = service;
+                        //Service service = serviceDAO.Read_once(dataReader.GetString(0));
+                        //cotization_ServiceFK.Service = service;
                         cotization_Services.Add(cotization_ServiceFK);
                     }
                 }

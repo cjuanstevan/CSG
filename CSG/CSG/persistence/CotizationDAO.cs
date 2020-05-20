@@ -130,7 +130,11 @@ namespace CSG.persistence
             Cotization cotization = new Cotization();
             try
             {
-                Database.Connect();
+                //Console.WriteLine("Conexion Cotizacion: " + Database.GetConn().State);
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),

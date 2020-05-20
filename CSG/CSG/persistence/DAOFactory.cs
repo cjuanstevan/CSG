@@ -17,6 +17,7 @@ namespace CSG.persistence
         private static readonly IOrderDAO orderDAO = new OrderDAO();
         private static readonly IRefactionDAO refactionDAO = new RefactionDAO();
         private static readonly IServiceDAO serviceDAO = new ServiceDAO();
+        private static readonly ITaxDAO taxDAO = new TaxDAO();
         private static readonly ITechnicianDAO technicianDAO = new TechnicianDAO();
 
         public static IArticleDAO GetArticleDAO()
@@ -54,6 +55,10 @@ namespace CSG.persistence
         public static IServiceDAO GetServiceDAO()
         {
             return serviceDAO;
+        }
+        public static ITaxDAO GetTaxDAO()
+        {
+            return taxDAO;
         }
         public static ITechnicianDAO GetTechnicianDAO()
         {

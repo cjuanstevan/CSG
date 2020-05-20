@@ -84,7 +84,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtClientId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -95,11 +94,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.label8);
@@ -115,9 +110,10 @@
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(958, 797);
+            this.panel1.Size = new System.Drawing.Size(982, 821);
             this.panel1.TabIndex = 0;
             // 
             // panel5
@@ -126,7 +122,7 @@
             this.panel5.Controls.Add(this.button5);
             this.panel5.Controls.Add(this.button4);
             this.panel5.Controls.Add(this.BtnCreate);
-            this.panel5.Location = new System.Drawing.Point(0, 677);
+            this.panel5.Location = new System.Drawing.Point(26, 677);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(956, 118);
             this.panel5.TabIndex = 14;
@@ -170,7 +166,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker2.Location = new System.Drawing.Point(463, 52);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(451, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(477, 20);
             this.dateTimePicker2.TabIndex = 13;
             this.dateTimePicker2.Visible = false;
             // 
@@ -194,7 +190,7 @@
             this.dtpDateReception.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDateReception.Location = new System.Drawing.Point(464, 22);
             this.dtpDateReception.Name = "dtpDateReception";
-            this.dtpDateReception.Size = new System.Drawing.Size(451, 20);
+            this.dtpDateReception.Size = new System.Drawing.Size(477, 20);
             this.dtpDateReception.TabIndex = 11;
             // 
             // label7
@@ -255,7 +251,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 413);
+            this.label4.Location = new System.Drawing.Point(50, 394);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 5;
@@ -279,9 +275,9 @@
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.txtReportClient);
             this.panel4.Controls.Add(this.label15);
-            this.panel4.Location = new System.Drawing.Point(42, 420);
+            this.panel4.Location = new System.Drawing.Point(42, 401);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(872, 239);
+            this.panel4.Size = new System.Drawing.Size(898, 239);
             this.panel4.TabIndex = 4;
             // 
             // txtTechnicianTelephone
@@ -325,7 +321,7 @@
             this.txtTechnicianAlias.Location = new System.Drawing.Point(227, 203);
             this.txtTechnicianAlias.Name = "txtTechnicianAlias";
             this.txtTechnicianAlias.ReadOnly = true;
-            this.txtTechnicianAlias.Size = new System.Drawing.Size(626, 20);
+            this.txtTechnicianAlias.Size = new System.Drawing.Size(652, 20);
             this.txtTechnicianAlias.TabIndex = 11;
             // 
             // label21
@@ -390,7 +386,7 @@
             this.txtReportClient.Location = new System.Drawing.Point(14, 41);
             this.txtReportClient.Multiline = true;
             this.txtReportClient.Name = "txtReportClient";
-            this.txtReportClient.Size = new System.Drawing.Size(839, 93);
+            this.txtReportClient.Size = new System.Drawing.Size(865, 93);
             this.txtReportClient.TabIndex = 1;
             // 
             // label15
@@ -407,7 +403,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 211);
+            this.label3.Location = new System.Drawing.Point(50, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 3;
@@ -435,9 +431,9 @@
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.txtArticleCod);
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Location = new System.Drawing.Point(42, 216);
+            this.panel3.Location = new System.Drawing.Point(42, 201);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(872, 182);
+            this.panel3.Size = new System.Drawing.Size(898, 182);
             this.panel3.TabIndex = 2;
             // 
             // txtArticleWarranty
@@ -466,7 +462,7 @@
             this.dtpSaleDate.Enabled = false;
             this.dtpSaleDate.Location = new System.Drawing.Point(352, 142);
             this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.Size = new System.Drawing.Size(501, 20);
+            this.dtpSaleDate.Size = new System.Drawing.Size(527, 20);
             this.dtpSaleDate.TabIndex = 14;
             // 
             // label18
@@ -572,7 +568,7 @@
             this.txtArticleDesc.Location = new System.Drawing.Point(227, 35);
             this.txtArticleDesc.Name = "txtArticleDesc";
             this.txtArticleDesc.ReadOnly = true;
-            this.txtArticleDesc.Size = new System.Drawing.Size(626, 20);
+            this.txtArticleDesc.Size = new System.Drawing.Size(652, 20);
             this.txtArticleDesc.TabIndex = 3;
             // 
             // label12
@@ -608,7 +604,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 108);
+            this.label2.Location = new System.Drawing.Point(51, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 1;
@@ -625,9 +621,9 @@
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.txtClientId);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(43, 115);
+            this.panel2.Location = new System.Drawing.Point(43, 103);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(872, 80);
+            this.panel2.Size = new System.Drawing.Size(898, 80);
             this.panel2.TabIndex = 0;
             // 
             // LblClientIdMsj
@@ -655,7 +651,7 @@
             this.txtClientName.Location = new System.Drawing.Point(226, 38);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
-            this.txtClientName.Size = new System.Drawing.Size(626, 20);
+            this.txtClientName.Size = new System.Drawing.Size(652, 20);
             this.txtClientName.TabIndex = 3;
             // 
             // label10
@@ -686,15 +682,6 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Identidad";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Orden";
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
@@ -705,7 +692,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 821);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "FrmOrderCreate";
             this.Text = "FrmOrderCreate";
@@ -720,14 +706,12 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;

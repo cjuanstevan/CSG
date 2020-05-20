@@ -20,6 +20,9 @@ namespace CSG.views
         private readonly ServiceLog serviceLog = new ServiceLog();
         private readonly RefactionLog refactionLog = new RefactionLog();
         private readonly CotizationLog cotizationLog = new CotizationLog();
+        private readonly CotizationServiceLog cotizationServiceLog = new CotizationServiceLog();
+        private readonly CotizationRefactionLog cotizationRefactionLog = new CotizationRefactionLog();
+        private readonly TaxLog taxLog = new TaxLog();
 
         //Data Services
         //DataSet dataSet;
@@ -37,7 +40,7 @@ namespace CSG.views
         private void FrmCotizationCreate_Load(object sender, EventArgs e)
         {
             //Consultamos la orden requerida. pruebas con RL-15
-            string order_number = "RL-29";
+            string order_number = "RL-1";
             order = orderLog.Read_once(order_number);
             txtOrder.Text = order.Order_number;
             dtpReception_date.Value = order.Order_reception_date;
@@ -58,6 +61,7 @@ namespace CSG.views
             AutoCompleteService();
             AutoCompleteRefaction();
             CreateDataTables();
+            //Console.WriteLine("IVA: " + taxLog.Read_once_value("19"));
         }
 
         private void AutoCompleteService()
@@ -253,7 +257,7 @@ namespace CSG.views
             }
         }
 
-        //Metodo que recorre el DataTable de servicios para validar que no se repita el código
+        //Metodo que recorre el DataTable para validar que no se repita el código
         private bool SearchDtCode(DataTable dt, string text)
         {
             bool request = true;
@@ -293,6 +297,13 @@ namespace CSG.views
                 Service service = serviceLog.Read_once(dts.Rows[i][0].ToString());
                 //Console.WriteLine("Costo: " + service.Service_cost);
                 subtotal += Decimal.Parse(service.Service_cost);
+                //Creamos cotization_service (DETALLES)
+                Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
+                {
+                    Cotization_id = order.Cotization.Cotization_id,
+                    Service_code = service.Service_code
+                };
+                cotizationServiceLog.Create(cotization_ServiceFK);
             }
             //Obtenemos la suma de los repuestos
             for (int i = 0; i < dtr.Rows.Count; i++)
@@ -300,6 +311,15 @@ namespace CSG.views
                 Refaction refaction = refactionLog.Read_once(dtr.Rows[i][0].ToString());
                 //Console.WriteLine("Costo: " + refaction.Refaction_unit_price);
                 subtotal += refaction.Refaction_unit_price;
+                //Creamos cotization_refaction (DETALLES)
+                Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
+                {
+                    Cotization_id = order.Cotization.Cotization_id,
+                    Refaction_code = refaction.Refaction_code,
+                    Refaction_quantity = ushort.Parse("1"),
+                    Refaction_amount = refaction.Refaction_unit_price
+                };
+                cotizationRefactionLog.Create(cotization_RefactionFK);
             }
             cotization.Cotization_subtotal = subtotal;
             Console.WriteLine("Subtotal: " + subtotal);
@@ -307,7 +327,7 @@ namespace CSG.views
             cotization.Cotization_discount = 0;
             //DEfinimos el IVA->por ahora se hará con el 19%. pero se debe tener en cuenta el IVA
             //de cada servicio y respuesto.
-            decimal im = 0.19m;
+            decimal im = taxLog.Read_once_value("19");
             //Calculamos el IVA
             decimal iva = subtotal * im;
             cotization.Cotization_iva = iva;

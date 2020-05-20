@@ -54,20 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="logic\ArticleLog.cs" />
     <Compile Include="logic\BulkLoadLog.cs" />
     <Compile Include="logic\ClientLog.cs" />
     <Compile Include="logic\CotizationLog.cs" />
+    <Compile Include="logic\CotizationRefactionLog.cs" />
+    <Compile Include="logic\CotizationServiceLog.cs" />
     <Compile Include="logic\OrderArticleLog.cs" />
     <Compile Include="logic\OrderLog.cs" />
     <Compile Include="logic\RefactionLog.cs" />
     <Compile Include="logic\ServiceLog.cs" />
+    <Compile Include="logic\TaxLog.cs" />
     <Compile Include="logic\TechnicianLog.cs" />
     <Compile Include="model\Article.cs" />
     <Compile Include="model\Client.cs" />
@@ -76,12 +73,14 @@
     <Compile Include="model\Cotization_serviceFK.cs" />
     <Compile Include="model\Order.cs" />
     <Compile Include="model\Order_articleFK.cs" />
+    <Compile Include="model\Tax.cs" />
     <Compile Include="persistence\Cotization_refactionFKDAO.cs" />
     <Compile Include="persistence\Cotization_serviceFKDAO.cs" />
     <Compile Include="persistence\DAOFactory.cs" />
     <Compile Include="persistence\Database.cs" />
     <Compile Include="persistence\ICotization_refactionFKDAO.cs" />
     <Compile Include="persistence\ICotization_serviceFKDAO.cs" />
+    <Compile Include="persistence\ITaxDAO.cs" />
     <Compile Include="persistence\Order_articleFKDAO.cs" />
     <Compile Include="model\Refaction.cs" />
     <Compile Include="model\Service.cs" />
@@ -100,6 +99,7 @@
     <Compile Include="persistence\OrderDAO.cs" />
     <Compile Include="persistence\RefactionDAO.cs" />
     <Compile Include="persistence\ServiceDAO.cs" />
+    <Compile Include="persistence\TaxDAO.cs" />
     <Compile Include="persistence\TechnicianDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,9 +206,6 @@
     <Compile Include="views\Resol.Designer.cs">
       <DependentUpon>Resol.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

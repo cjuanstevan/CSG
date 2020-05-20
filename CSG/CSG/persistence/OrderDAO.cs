@@ -108,8 +108,11 @@ namespace CSG.persistence
                     CommandText = "{call csg.Order_ReadAll}"
                 };
                 dataReader = command.ExecuteReader();
+                //Console.WriteLine("Lecturas: " + dataReader.RecordsAffected);
+                int cont = 0;
                 while (dataReader.Read())
                 {
+                    //Database.Connect();
                     Order order = new Order
                     {
                         Order_number = dataReader.GetString(0),
@@ -122,17 +125,25 @@ namespace CSG.persistence
                         Order_comentarys = dataReader.GetString(7),
                         Order_report_client = dataReader.GetString(8)
                     };
-                    ITechnicianDAO technicianDAO = new TechnicianDAO();
-                    Technician technician = technicianDAO.Read_once(dataReader.GetString(9));
-                    order.Technician = technician;
-                    IClientDAO clientDAO = new ClientDAO();
-                    Client client = clientDAO.Read_once(dataReader.GetString(10));
-                    order.Client = client;
-                    ICotizationDAO cotizationDAO = new CotizationDAO();
-                    Cotization cotization = cotizationDAO.Read_once(dataReader.GetString(11));
-                    order.Cotization = cotization;
+                    string t = dataReader.GetString(9);
+                    string c = dataReader.GetString(10);
+                    string ct = dataReader.GetString(11);
+                    //cont += 1;
+                    //ITechnicianDAO technicianDAO = new TechnicianDAO();
+                    //Technician technician = technicianDAO.Read_once(t);
+                    //Database.Connect();
+                    //order.Technician = technician;
+                    //IClientDAO clientDAO = new ClientDAO();
+                    //Client client = clientDAO.Read_once(c);
+                    //Database.Connect();
+                    //order.Client = client;
+                    //ICotizationDAO cotizationDAO = new CotizationDAO();
+                    //Cotization cotization = cotizationDAO.Read_once(ct);
+                    //Database.Connect();
+                    //order.Cotization = cotization;
                     orders.Add(order);
                 }
+                Console.WriteLine("Cantidad: " + cont);
             }
             catch (Exception ex)
             {
@@ -142,6 +153,7 @@ namespace CSG.persistence
             {
                 Database.Disconnect();
             }
+            
             return orders;
         }
 

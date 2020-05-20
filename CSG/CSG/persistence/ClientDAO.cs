@@ -242,7 +242,11 @@ namespace CSG.persistence
             Client client = new Client();
             try
             {
-                Database.Connect();
+                //Console.WriteLine("Conexion Cliente: " + Database.GetConn().State);
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -281,6 +285,7 @@ namespace CSG.persistence
             finally
             {
                 Database.Disconnect();
+                //Database.Connect();
             }
             return client;
         }

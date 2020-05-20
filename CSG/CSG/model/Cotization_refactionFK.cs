@@ -8,8 +8,8 @@ namespace CSG.model
 {
     class Cotization_refactionFK
     {
-        private Cotization _cotization;
-        private Refaction _refaction;
+        private string _cotization_id;
+        private string _refaction_code;
         private ushort _refaction_quantity;
         private decimal _refaction_amount;
 
@@ -18,17 +18,17 @@ namespace CSG.model
 
         }
 
-        public Cotization_refactionFK(Cotization cotization, Refaction refaction, ushort refaction_quantity, decimal refaction_amount)
+        public Cotization_refactionFK(string cotization_id, string refaction_code, ushort refaction_quantity, decimal refaction_amount)
         {
-            _cotization = cotization;
-            _refaction = refaction;
-            _refaction_quantity = refaction_quantity;
-            _refaction_amount = refaction_amount;
+            Cotization_id = cotization_id;
+            Refaction_code = refaction_code;
+            Refaction_quantity = refaction_quantity;
+            Refaction_amount = refaction_amount;
         }
 
+        public string Cotization_id { get => _cotization_id; set => _cotization_id = value; }
+        public string Refaction_code { get => _refaction_code; set => _refaction_code = value; }
         public ushort Refaction_quantity { get => _refaction_quantity; set => _refaction_quantity = value; }
         public decimal Refaction_amount { get => _refaction_amount; set => _refaction_amount = value; }
-        internal Cotization Cotization { get => _cotization; set => _cotization = value; }
-        internal Refaction Refaction { get => _refaction; set => _refaction = value; }
     }
 }
