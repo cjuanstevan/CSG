@@ -443,7 +443,6 @@
             this.Name = "FrmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Control de Servicios y Garantías";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmDashboard_Load);
             this.Plmain.ResumeLayout(false);
             this.PlMaintenaceSubmenu.ResumeLayout(false);

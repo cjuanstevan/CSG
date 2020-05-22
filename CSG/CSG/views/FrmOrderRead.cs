@@ -1,6 +1,7 @@
 ﻿using CSG.logic;
 using CSG.model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,12 +15,14 @@ namespace CSG.views
 {
     public partial class FrmOrderRead : Form
     {
-        DataTable dto = new DataTable();
-        DataColumn column;
-        DataRow row;
-        List<Order> data;
-        //DataGridViewButtonCell buttonCell;
+        //LOGICA
         private readonly OrderLog orderLog = new OrderLog();
+        //VARIABLES
+        private DataTable dto = new DataTable();
+        private DataColumn column;
+        private DataRow row;
+        //private List<Order> data;
+        
         public FrmOrderRead()
         {
             InitializeComponent();
@@ -27,30 +30,32 @@ namespace CSG.views
 
         private void FrmOrderRead_Load(object sender, EventArgs e)
         {
+            AutoCompleteSearch('o');
+            ChbAll.Checked = true;
+            RbtOrderNumber.Checked = true;
+            //RbtDates.Enabled = false;
+            txtSearch.Focus();
             //Creamos el DataTable
             CreateDataTable();
             //Cargamos el DataTable
-            LoadDataTable();
+            List<Order> orders = orderLog.ReadAll();
+            LoadDataTable(orders);
 
         }
 
-        private void LoadDataTable()
+        
+
+        private void LoadDataTable(List<Order> orders)
         {
-            //Consultamos las ordenes
-            List<Order> orders = orderLog.ReadAll();
-            data = new List<Order>();
-            for (int i = 0; i < orders.Count; i++)
+            foreach (var o in orders)
             {
-                Order order = orderLog.Read_once(orders[i].Order_number);
-                data.Add(order);
-                //Console.WriteLine("Order: " + data[i].Order_number + " | Cliente: " + order.Client.Client_name);
                 row = dto.NewRow();
-                row[0] = data[i].Order_number;
-                row[1] = data[i].Order_reception_date;
-                row[2] = data[i].Order_type;
-                row[3] = data[i].Client.Client_name + " " + data[i].Client.Client_lastname1 + " " + data[i].Client.Client_lastname2;
-                row[4] = data[i].Technician.Technician_name;
-                row[5] = data[i].Order_state;
+                row[0] = o.Order_number;
+                row[1] = o.Order_reception_date;
+                row[2] = o.Order_type;
+                row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                row[4] = o.Technician.Technician_name;
+                row[5] = o.Order_state;
                 row["ACCIONES"] = "COTIZAR";
                 dto.Rows.Add(row);
             }
@@ -153,6 +158,211 @@ namespace CSG.views
                 }
             }
             
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            //Limpiamos las rows
+            dto = new DataTable();
+            //creamos el Datable
+            CreateDataTable();
+
+            //Consulta todas (no tiene en cuenta fechas)
+            if (ChbAll.Checked)
+            {
+                //Consulta por número de orden
+                if (RbtOrderNumber.Checked)
+                {
+                    //si textbox vacio se actualiza la tabla
+                    if (txtSearch.Text.Equals(""))
+                    {
+                        //Refrescamos la tabla
+                        List<Order> orders = orderLog.ReadAll();
+                        LoadDataTable(orders);
+                    }
+                    else
+                    {
+                        //Realizamos la busqueda por número de orden
+                        List<Order> orders = orderLog.Read_all_like_number(txtSearch.Text);
+                        LoadDataTable(orders);
+                    }
+                }
+                //Consulta por cliente
+                else if (RbtClient.Checked)
+                {
+                    //si textbox vacio se actualiza la tabla
+                    if (txtSearch.Text.Equals(""))
+                    {
+                        //Refrescamos la tabla
+                        List<Order> orders = orderLog.ReadAll();
+                        LoadDataTable(orders);
+                    }
+                    else
+                    {
+                        //Realizamos la busqueda por id de cliente
+                        List<Order> orders = orderLog.Read_all_like_client(txtSearch.Text);
+                        LoadDataTable(orders);
+                    }
+                }//Consulta por técnico
+                else if (RbtTechnician.Checked)
+                {
+                    //si textbox vacio se actualiza la tabla
+                    if (txtSearch.Text.Equals(""))
+                    {
+                        //Refrescamos la tabla
+                        List<Order> orders = orderLog.ReadAll();
+                        LoadDataTable(orders);
+                    }
+                    else
+                    {
+                        //Realizamos la busqueda por id de técnico
+                        List<Order> orders = orderLog.Read_all_like_technician(txtSearch.Text);
+                        LoadDataTable(orders);
+                    }
+                }
+
+
+            }
+            else if (!ChbAll.Checked)
+            {
+                //Capturamos las fechas y las formateamos
+                DateTime DateI = DateTime.Parse(DtpIni.Value.ToString("yyyy-MM-dd 00:00:00"));
+                DateTime DateF = DateTime.Parse(DtpFin.Value.ToString("yyyy-MM-dd 23:59:59"));
+                //Console.WriteLine("DateI: " + DateI + " | DateF: " + DateF);
+
+                //Si txtSearch vacio
+                if (txtSearch.Text.Equals(""))
+                {
+                    //Consulta solamente por rango de fechas
+                    List<Order> orders = orderLog.Read_all_DateReception(DateI, DateF);
+                    LoadDataTable(orders);
+                }
+                //sino esta vacio el txt
+                else
+                {
+                    Console.WriteLine("Orden?" + RbtOrderNumber.Checked);
+                    Console.WriteLine("Cliente?" + RbtClient.Checked);
+                    Console.WriteLine("Técnico?" + RbtTechnician.Checked);
+                    //Si radio boton orden chequeado
+                    if (RbtOrderNumber.Checked)
+                    {
+                        List<Order> orders = orderLog.Read_all_like_number_daterange(txtSearch.Text, DateI, DateF);
+                        LoadDataTable(orders);
+                    }
+                    //si radio boton cliente chequeado
+                    else if (RbtClient.Checked)
+                    {
+                        List<Order> orders = orderLog.Read_all_like_client_daterange(txtSearch.Text, DateI, DateF);
+                        LoadDataTable(orders);
+                    }
+                    //si radio botón técnico cheaqueado
+                    else if (RbtTechnician.Checked)
+                    {
+                        List<Order> orders = orderLog.Read_all_like_technician_daterange(txtSearch.Text, DateI, DateF);
+                        LoadDataTable(orders);
+                    }
+                }
+
+
+            }
+        }
+
+        private void ChbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChbAll.Checked)
+            {
+                //inhabilita las fechas de inicio y fin
+                DtpIni.Enabled = false;
+                DtpFin.Enabled = false;
+            }
+            else
+            {
+                //habilita las fechas de inicio y fin
+                DtpIni.Enabled = true;
+                DtpFin.Enabled = true;
+            }
+        }
+
+        private void RbtOrderNumber_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RbtOrderNumber.Checked.Equals(true))
+            {
+                Console.WriteLine("Número de orden checked");
+                //Invocamos el método automcompletar
+                AutoCompleteSearch('o');
+            }
+            
+        }
+
+        private void RbtClient_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RbtClient.Checked.Equals(true))
+            {
+                Console.WriteLine("Cliente checked");
+                //Invocamos el método automcompletar
+                AutoCompleteSearch('c');
+            }
+        }
+
+        private void RbtTechnician_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RbtTechnician.Checked.Equals(true))
+            {
+                Console.WriteLine("Técnico checked");
+                //Invocamos el método automcompletar
+                AutoCompleteSearch('t');
+            }
+        }
+
+        private void AutoCompleteSearch(char rbt)
+        {
+            if (rbt.Equals('o'))
+            {
+                txtSearch.AutoCompleteCustomSource = AutocompleteOrder();
+            }
+            else if (rbt.Equals('c'))
+            {
+                txtSearch.AutoCompleteCustomSource = AutocompleteClient();
+            }
+            else if (rbt.Equals('t'))
+            {
+                txtSearch.AutoCompleteCustomSource = AutocompleteTechnician();
+            }
+            txtSearch.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txtSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private AutoCompleteStringCollection AutocompleteOrder()
+        {
+            AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+            List<Order> orders = orderLog.ReadAll();
+            foreach (var o in orders)
+            {
+                collection.Add(o.Order_number);
+            }
+            return collection;
+        }
+
+        private AutoCompleteStringCollection AutocompleteClient()
+        {
+            AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+            List<Order> orders = orderLog.ReadAll();
+            foreach (var o in orders)
+            {
+                collection.Add(o.Client.Client_id);
+            }
+            return collection;
+        }
+
+        private AutoCompleteStringCollection AutocompleteTechnician()
+        {
+            AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+            List<Order> orders = orderLog.ReadAll();
+            foreach (var o in orders)
+            {
+                collection.Add(o.Technician.Technician_id);
+            }
+            return collection;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
@@ -94,10 +95,11 @@ namespace CSG.persistence
                 Database.Disconnect();
             }
         }
-
+        //Consulta todos los numeros de orden y crea una lista de Order
         public List<Order> Read_all()
         {
             List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
             try
             {
                 Database.Connect();
@@ -105,61 +107,298 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Order_ReadAll}"
+                    CommandText = "{call csg.Order_ReadAllNumbers}"
                 };
                 dataReader = command.ExecuteReader();
-                //Console.WriteLine("Lecturas: " + dataReader.RecordsAffected);
-                int cont = 0;
                 while (dataReader.Read())
                 {
-                    //Database.Connect();
-                    Order order = new Order
-                    {
-                        Order_number = dataReader.GetString(0),
-                        Order_reception_date = dataReader.GetDateTime(1),
-                        Order_end_date = dataReader.GetDateTime(2),
-                        Order_type = dataReader.GetString(3),
-                        Order_invoice = dataReader.GetString(4),
-                        Order_sale_date = dataReader.GetDate(5),
-                        Order_state = dataReader.GetString(6),
-                        Order_comentarys = dataReader.GetString(7),
-                        Order_report_client = dataReader.GetString(8)
-                    };
-                    string t = dataReader.GetString(9);
-                    string c = dataReader.GetString(10);
-                    string ct = dataReader.GetString(11);
-                    //cont += 1;
-                    //ITechnicianDAO technicianDAO = new TechnicianDAO();
-                    //Technician technician = technicianDAO.Read_once(t);
-                    //Database.Connect();
-                    //order.Technician = technician;
-                    //IClientDAO clientDAO = new ClientDAO();
-                    //Client client = clientDAO.Read_once(c);
-                    //Database.Connect();
-                    //order.Client = client;
-                    //ICotizationDAO cotizationDAO = new CotizationDAO();
-                    //Cotization cotization = cotizationDAO.Read_once(ct);
-                    //Database.Connect();
-                    //order.Cotization = cotization;
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
                     orders.Add(order);
                 }
-                Console.WriteLine("Cantidad: " + cont);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Excepción controlada en OrderDAO->Read_all: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
+            return orders;
+        }
+
+        public List<Order> Read_all_DateReception(DateTime DateI, DateTime DateF)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
             {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllDateReception(?,?)}"
+                };
+                command.Parameters.Add("DateI", OdbcType.DateTime).Value = DateI;
+                command.Parameters.Add("DateF", OdbcType.DateTime).Value = DateF;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
                 Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_DateReception: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             return orders;
         }
 
         public List<Order> Read_all_like(string search)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Order> Read_all_like_client(string id)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeClient(?)}"
+                };
+                command.Parameters.Add("ClientId", OdbcType.VarChar, 50).Value = id;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_client: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public List<Order> Read_all_like_client_daterange(string id, DateTime DateI, DateTime DateF)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeClientDateRange(?,?,?)}"
+                };
+                command.Parameters.Add("ClientId", OdbcType.VarChar, 50).Value = id;
+                command.Parameters.Add("DateI", OdbcType.DateTime).Value = DateI;
+                command.Parameters.Add("DateF", OdbcType.DateTime).Value = DateF;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_client_daterange: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public List<Order> Read_all_like_number(string number)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeNumber(?)}"
+                };
+                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = number;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_number: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public List<Order> Read_all_like_number_daterange(string number, DateTime DateI, DateTime DateF)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeNumberDateRange(?,?,?)}"
+                };
+                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = number;
+                command.Parameters.Add("DateI", OdbcType.DateTime).Value = DateI;
+                command.Parameters.Add("DateF", OdbcType.DateTime).Value = DateF;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_number_daterange: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public List<Order> Read_all_like_technician(string id)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeTechnician(?)}"
+                };
+                command.Parameters.Add("TechnicianId", OdbcType.VarChar, 50).Value = id;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_technician: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public List<Order> Read_all_like_technician_daterange(string id, DateTime DateI, DateTime DateF)
+        {
+            List<Order> orders = new List<Order>();
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllLikeTechnicianDateRange(?,?,?)}"
+                };
+                command.Parameters.Add("TechnicianId", OdbcType.VarChar, 50).Value = id;
+                command.Parameters.Add("DateI", OdbcType.DateTime).Value = DateI;
+                command.Parameters.Add("DateF", OdbcType.DateTime).Value = DateF;
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+                Database.Disconnect();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Order order = Read_once(list[i].ToString());
+                    orders.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_like_technician_daterange: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return orders;
+        }
+
+        public ArrayList Read_all_numbers()
+        {
+            ArrayList list = new ArrayList();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadAllNumbers}"
+                };
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader.GetString(0));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_all_numbers: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Console.WriteLine("Excepción controlada en OrderDAO->Read_all_DateReception: " + ex.Message);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return list;
         }
 
         public uint Read_count()
