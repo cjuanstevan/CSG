@@ -119,7 +119,7 @@ namespace CSG.views
             {
                 order.Order_sale_date = dtpSaleDate.Value;
             }
-            order.Order_state = "Revisión";
+            //order.Order_state = "RECEPCIÓN";
             //order.Order_comentarys = "";
             order.Order_report_client = txtReportClient.Text;
             //Técnico

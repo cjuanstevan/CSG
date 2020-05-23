@@ -73,6 +73,11 @@ namespace CSG.logic
             DAOFactory.GetOrderDAO().Update(order);
         }
 
+        public void UpdateState(string number, string state)
+        {
+            DAOFactory.GetOrderDAO().UpdateState(number, state);
+        }
+
         public void Delete(string number)
         {
             DAOFactory.GetOrderDAO().Delete(number);

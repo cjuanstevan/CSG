@@ -384,6 +384,7 @@
             this.txtReportClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtReportClient.Location = new System.Drawing.Point(14, 41);
+            this.txtReportClient.MaxLength = 1000;
             this.txtReportClient.Multiline = true;
             this.txtReportClient.Name = "txtReportClient";
             this.txtReportClient.Size = new System.Drawing.Size(865, 93);

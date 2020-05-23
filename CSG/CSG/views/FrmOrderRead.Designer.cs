@@ -168,14 +168,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvOrders.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvOrders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvOrders.ColumnHeadersHeight = 40;
+            this.DgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgvOrders.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DgvOrders.Location = new System.Drawing.Point(27, 150);
+            this.DgvOrders.Location = new System.Drawing.Point(30, 150);
             this.DgvOrders.MultiSelect = false;
             this.DgvOrders.Name = "DgvOrders";
             this.DgvOrders.ReadOnly = true;
+            this.DgvOrders.RowHeadersVisible = false;
             this.DgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvOrders.Size = new System.Drawing.Size(906, 617);
+            this.DgvOrders.Size = new System.Drawing.Size(903, 617);
             this.DgvOrders.TabIndex = 4;
             this.DgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvOrders_CellClick);
             // 

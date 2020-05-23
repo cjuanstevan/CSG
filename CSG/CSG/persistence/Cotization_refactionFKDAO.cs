@@ -74,7 +74,10 @@ namespace CSG.persistence
             List<Cotization_refactionFK> cotization_Refactions = new List<Cotization_refactionFK>();
             try
             {
-                Database.Connect();
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -82,31 +85,24 @@ namespace CSG.persistence
                     CommandText = "{call csg.Cotization_refactionFK_ReadRefactionsOfCotization(?)}"
                 };
                 command.Parameters.Add("CotizationId", OdbcType.VarChar, 50).Value = cotization_id;
-                ICotizationDAO cotizationDAO = new CotizationDAO();
-                IRefactionDAO refactionDAO = new RefactionDAO();
-                //verificamos que exista la cotización
-                if (cotizationDAO.Read_once_exist(cotization_id))
+                //ejecutamos la lectura del DataReader
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    //consultamos el objeto Cotization                    
-                    Cotization cotization = cotizationDAO.Read_once(cotization_id);
-                    //ejecutamos la lectura del DataReader
-                    dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
+                    Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
                     {
-                        Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
-                        {
-                            Cotization_id = cotization_id,
-                            Refaction_code = dataReader.GetString(0),
-                            Refaction_quantity = ushort.Parse(dataReader.GetString(1)),
-                            Refaction_amount = decimal.Parse(dataReader.GetString(2))
-                        };
-                        //Refaction refaction = refactionDAO.Read_once(dataReader.GetString(0));
-                        //cotization_RefactionFK.Refaction = refaction;
-                        //cotization_RefactionFK.Refaction_quantity = ushort.Parse(dataReader.GetInt32(1).ToString());
-                        //cotization_RefactionFK.Refaction_amount = dataReader.GetDecimal(2);
-                        cotization_Refactions.Add(cotization_RefactionFK);
-                    }
+                        Cotization_id = cotization_id,
+                        Refaction_code = dataReader.GetString(0),
+                        Refaction_quantity = ushort.Parse(dataReader.GetString(1)),
+                        Refaction_amount = decimal.Parse(dataReader.GetString(2))
+                    };
+                    //Refaction refaction = refactionDAO.Read_once(dataReader.GetString(0));
+                    //cotization_RefactionFK.Refaction = refaction;
+                    //cotization_RefactionFK.Refaction_quantity = ushort.Parse(dataReader.GetInt32(1).ToString());
+                    //cotization_RefactionFK.Refaction_amount = dataReader.GetDecimal(2);
+                    cotization_Refactions.Add(cotization_RefactionFK);
                 }
+                
             }
             catch (Exception ex)
             {

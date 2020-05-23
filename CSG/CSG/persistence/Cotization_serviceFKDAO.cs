@@ -72,6 +72,10 @@ namespace CSG.persistence
             List<Cotization_serviceFK> cotization_Services = new List<Cotization_serviceFK>();
             try
             {
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -79,27 +83,17 @@ namespace CSG.persistence
                     CommandText = "{call csg.Cotization_serviceFK_ReadServicesOfCotization(?)}"
                 };
                 command.Parameters.Add("CotizationId", OdbcType.VarChar, 50).Value = cotization_id;
-                ICotizationDAO cotizationDAO = new CotizationDAO();
-                IServiceDAO serviceDAO = new ServiceDAO();
-                //verificamos que exista la cotización
-                if (cotizationDAO.Read_once_exist(cotization_id))
+                //ejecutamos la lectura del DataReader
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    //consultamos el objeto Cotization                    
-                    //Cotization cotization = cotizationDAO.Read_once(cotization_id);
-                    //ejecutamos la lectura del DataReader
-                    dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
+                    Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
                     {
-                        Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
-                        {
-                            Cotization_id = cotization_id,
-                            Service_code= dataReader.GetString(0)
-                        };
-                        //Service service = serviceDAO.Read_once(dataReader.GetString(0));
-                        //cotization_ServiceFK.Service = service;
-                        cotization_Services.Add(cotization_ServiceFK);
-                    }
-                }
+                        Cotization_id = cotization_id,
+                        Service_code= dataReader.GetString(0)
+                    };
+                    cotization_Services.Add(cotization_ServiceFK);
+                }                
             }
             catch (Exception ex)
             {

@@ -40,7 +40,6 @@ namespace CSG.views
             //Cargamos el DataTable
             List<Order> orders = orderLog.ReadAll();
             LoadDataTable(orders);
-
         }
 
         
@@ -49,15 +48,33 @@ namespace CSG.views
         {
             foreach (var o in orders)
             {
-                row = dto.NewRow();
-                row[0] = o.Order_number;
-                row[1] = o.Order_reception_date;
-                row[2] = o.Order_type;
-                row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
-                row[4] = o.Technician.Technician_name;
-                row[5] = o.Order_state;
-                row["ACCIONES"] = "COTIZAR";
-                dto.Rows.Add(row);
+                Console.WriteLine("Order: " + o.Order_number + " | State" + o.Order_state);
+                //Si el estado es recepcion
+                if (o.Order_state.Equals("Recepción"))
+                {
+                    row = dto.NewRow();
+                    row[0] = o.Order_number;
+                    row[1] = o.Order_reception_date;
+                    row[2] = o.Order_type;
+                    row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                    row[4] = o.Technician.Technician_name;
+                    row[5] = o.Order_state;
+                    row["ACCIONES"] = "COTIZAR";
+                    dto.Rows.Add(row);
+                }
+                //si el estado es revision
+                else if (o.Order_state.Equals("Revisión"))
+                {
+                    row = dto.NewRow();
+                    row[0] = o.Order_number;
+                    row[1] = o.Order_reception_date;
+                    row[2] = o.Order_type;
+                    row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                    row[4] = o.Technician.Technician_name;
+                    row[5] = o.Order_state;
+                    row["ACCIONES"] = "VER";
+                    dto.Rows.Add(row);
+                }
             }
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
             {
@@ -154,7 +171,27 @@ namespace CSG.views
                 //Console.WriteLine(DgvOrders.CurrentCell.GetType());
                 if (DgvOrders.CurrentCell.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonCell")
                 {
-                    Console.WriteLine("Cotizar a: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                    Console.WriteLine("Botón: " + DgvOrders.CurrentCell.Value);
+                    //Validamos según el valor del botón
+                    if (DgvOrders.CurrentCell.Value.Equals("VER"))
+                    {
+                        Console.WriteLine("Ver cotización de orden: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        //Almacenamos la variable estática número de orden en el modelo
+                        Order.Order_number_st = DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        //Abrimos el form FrmCotizationViewer
+                        FrmCotizationViewer frmCotizationViewer = new FrmCotizationViewer();
+                        frmCotizationViewer.ShowDialog();
+                    }
+                    else if (DgvOrders.CurrentCell.Value.Equals("COTIZAR"))
+                    {
+                        Console.WriteLine("Cotizar a: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        //Almacenamos la variable estática número de orden en el modelo
+                        Order.Order_number_st = DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        //Abrimos el form FrmCotizationCreate
+                        FrmCotizationCreate frmCotizationCreate = new FrmCotizationCreate();
+                        frmCotizationCreate.ShowDialog();
+                    }
                 }
             }
             

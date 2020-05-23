@@ -15,6 +15,13 @@ namespace CSG.logic
             DAOFactory.GetCotization_ServiceFKDAO().Create(cotization_ServiceFK);
         }
 
+        public List<Cotization_serviceFK> Read_ServicesOfCotization(string cotization_id)
+        {
+            return DAOFactory.GetCotization_ServiceFKDAO().Read_ServicesOfCotization(cotization_id);
+        }
+
+
+
 
     }
 }

@@ -21,6 +21,9 @@ namespace CSG.model
         private Client _client;
         private Cotization _cotization;
 
+        //static vars
+        private static string _order_number_st;
+
         public Order()
         {
 
@@ -54,5 +57,6 @@ namespace CSG.model
         internal Technician Technician { get => _technician; set => _technician = value; }
         internal Client Client { get => _client; set => _client = value; }
         internal Cotization Cotization { get => _cotization; set => _cotization = value; }
+        public static string Order_number_st { get => _order_number_st; set => _order_number_st = value; }
     }
 }

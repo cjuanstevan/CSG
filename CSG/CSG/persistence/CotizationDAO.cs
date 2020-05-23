@@ -29,7 +29,7 @@ namespace CSG.persistence
                 command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("Quantity", OdbcType.SmallInt).Value = cotization.Cotization_quantity;
-                command.Parameters.Add("Comentarys", OdbcType.VarChar, 200).Value = cotization.Cotization_comentarys;
+                command.Parameters.Add("Comentarys", OdbcType.VarChar, 1000).Value = cotization.Cotization_comentarys;
                 command.Parameters.Add("Subtotal", OdbcType.Decimal).Value = cotization.Cotization_subtotal;
                 command.Parameters.Add("Discount", OdbcType.Decimal).Value = cotization.Cotization_discount;
                 command.Parameters.Add("Iva", OdbcType.Decimal).Value = cotization.Cotization_iva;
@@ -179,7 +179,10 @@ namespace CSG.persistence
             bool response = false;
             try
             {
-                Database.Connect();
+                if (!Database.GetConn().State.ToString().Equals("Open"))
+                {
+                    Database.Connect();
+                }
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -218,8 +221,8 @@ namespace CSG.persistence
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = cotization.Cotization_id;
                 command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = cotization.Cotization_generation_date;
                 command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
-                command.Parameters.Add("Quantity", OdbcType.Int, 11).Value = cotization.Cotization_quantity;
-                command.Parameters.Add("Comentarys", OdbcType.VarChar, 200).Value = cotization.Cotization_comentarys;
+                command.Parameters.Add("Quantity", OdbcType.Int).Value = cotization.Cotization_quantity;
+                command.Parameters.Add("Comentarys", OdbcType.VarChar, 1000).Value = cotization.Cotization_comentarys;
                 command.Parameters.Add("Subtotal", OdbcType.Decimal).Value = cotization.Cotization_subtotal;
                 command.Parameters.Add("Discount", OdbcType.Decimal).Value = cotization.Cotization_discount;
                 command.Parameters.Add("Iva", OdbcType.Decimal).Value = cotization.Cotization_iva;

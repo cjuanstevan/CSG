@@ -157,6 +157,12 @@
     <Compile Include="views\FrmCotizationCreate.Designer.cs">
       <DependentUpon>FrmCotizationCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmCotizationViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmCotizationViewer.Designer.cs">
+      <DependentUpon>FrmCotizationViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmCotizationCreate.resx">
       <DependentUpon>FrmCotizationCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmCotizationViewer.resx">
+      <DependentUpon>FrmCotizationViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>

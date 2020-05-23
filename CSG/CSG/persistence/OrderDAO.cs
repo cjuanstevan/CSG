@@ -40,9 +40,9 @@ namespace CSG.persistence
                 {
                     command.Parameters.Add("@SaleDate", OdbcType.Date).Value = order.Order_sale_date.Date;
                 }
-                command.Parameters.Add("@State", OdbcType.VarChar, 20).Value = "Revision";
-                command.Parameters.Add("@Comentarys", OdbcType.VarChar, 200).Value = null;
-                command.Parameters.Add("@ReportClient", OdbcType.VarChar, 200).Value = order.Order_report_client;
+                command.Parameters.Add("@State", OdbcType.VarChar, 20).Value = "Recepción";
+                command.Parameters.Add("@Comentarys", OdbcType.VarChar, 1000).Value = null;
+                command.Parameters.Add("@ReportClient", OdbcType.VarChar, 1000).Value = order.Order_report_client;
                 command.Parameters.Add("@Technician", OdbcType.VarChar, 50).Value = order.Technician.Technician_id;
                 command.Parameters.Add("@Client", OdbcType.VarChar, 50).Value = order.Client.Client_id;
                 command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id; //"CT-RL5";
@@ -518,6 +518,7 @@ namespace CSG.persistence
         {
             try
             {
+                Database.Connect();
                 command = new OdbcCommand
                 {
                     Connection = Database.GetConn(),
@@ -547,7 +548,39 @@ namespace CSG.persistence
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Excepción controlada en OrdenDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Excepción controlada en OrderDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+        }
+
+        public void UpdateState(string number, string state)
+        {
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_UpdateState(?,?)}"
+                };
+                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = number;
+                command.Parameters.Add("State", OdbcType.VarChar, 20).Value = state;
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Orden actualizada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha actualizado la orden", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->UpdateState: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

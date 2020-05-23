@@ -39,8 +39,10 @@ namespace CSG.views
 
         private void FrmCotizationCreate_Load(object sender, EventArgs e)
         {
+            //Estado de los controles del formulario
+            txtServiceCode.Focus();
             //Consultamos la orden requerida. pruebas con RL-15
-            string order_number = "RL-1";
+            string order_number = Order.Order_number_st;
             order = orderLog.Read_once(order_number);
             txtOrder.Text = order.Order_number;
             dtpReception_date.Value = order.Order_reception_date;
@@ -276,67 +278,99 @@ namespace CSG.views
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            DateTime localDate = DateTime.Now;
-            //Console.WriteLine(localDate);
-            //Console.WriteLine(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
-            Cotization cotization = new Cotization();
-            cotization.Cotization_id = order.Cotization.Cotization_id;
-            cotization.Cotization_generation_date = DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
-            //cotization.Cotization_expiration_date = null;
-            //Calculamos la cantidad de servicios y repuestos
-            int quantity = 0;
-            quantity = dts.Rows.Count + dtr.Rows.Count;
-            cotization.Cotization_quantity = uint.Parse(quantity.ToString());
-            //Capturamos los comentarios técnicos
-            cotization.Cotization_comentarys = txtComentarys.Text;
-            //Calculamos el subtotal
-            Decimal subtotal = 0.0m;
-            //Obtenemos la suma de los servicios
-            for (int i = 0; i < dts.Rows.Count; i++)
+            if (ValidateData())
             {
-                Service service = serviceLog.Read_once(dts.Rows[i][0].ToString());
-                //Console.WriteLine("Costo: " + service.Service_cost);
-                subtotal += Decimal.Parse(service.Service_cost);
-                //Creamos cotization_service (DETALLES)
-                Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
+                DateTime localDate = DateTime.Now;
+                //Console.WriteLine(localDate);
+                //Console.WriteLine(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
+                Cotization cotization = new Cotization();
+                cotization.Cotization_id = order.Cotization.Cotization_id;
+                cotization.Cotization_generation_date = DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
+                //cotization.Cotization_expiration_date = null;
+                //Calculamos la cantidad de servicios y repuestos
+                int quantity = 0;
+                quantity = dts.Rows.Count + dtr.Rows.Count;
+                cotization.Cotization_quantity = uint.Parse(quantity.ToString());
+                //Capturamos los comentarios técnicos
+                cotization.Cotization_comentarys = txtComentarys.Text;
+                //Calculamos el subtotal
+                Decimal subtotal = 0.0m;
+                //Obtenemos la suma de los servicios
+                for (int i = 0; i < dts.Rows.Count; i++)
                 {
-                    Cotization_id = order.Cotization.Cotization_id,
-                    Service_code = service.Service_code
-                };
-                cotizationServiceLog.Create(cotization_ServiceFK);
+                    Service service = serviceLog.Read_once(dts.Rows[i][0].ToString());
+                    //Console.WriteLine("Costo: " + service.Service_cost);
+                    subtotal += Decimal.Parse(service.Service_cost);
+                    //Creamos cotization_service (DETALLES)
+                    Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
+                    {
+                        Cotization_id = order.Cotization.Cotization_id,
+                        Service_code = service.Service_code
+                    };
+                    cotizationServiceLog.Create(cotization_ServiceFK);
+                }
+                //Obtenemos la suma de los repuestos
+                for (int i = 0; i < dtr.Rows.Count; i++)
+                {
+                    Refaction refaction = refactionLog.Read_once(dtr.Rows[i][0].ToString());
+                    //Console.WriteLine("Costo: " + refaction.Refaction_unit_price);
+                    subtotal += refaction.Refaction_unit_price;
+                    //Creamos cotization_refaction (DETALLES)
+                    Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
+                    {
+                        Cotization_id = order.Cotization.Cotization_id,
+                        Refaction_code = refaction.Refaction_code,
+                        Refaction_quantity = ushort.Parse("1"),
+                        Refaction_amount = refaction.Refaction_unit_price
+                    };
+                    cotizationRefactionLog.Create(cotization_RefactionFK);
+                }
+                cotization.Cotization_subtotal = subtotal;
+                Console.WriteLine("Subtotal: " + subtotal);
+                //Definimos el descuento->preguntar a EVANS si maneja descuento
+                cotization.Cotization_discount = 0;
+                //DEfinimos el IVA->por ahora se hará con el 19%. pero se debe tener en cuenta el IVA
+                //de cada servicio y respuesto.
+                decimal im = taxLog.Read_once_value("19");
+                //Calculamos el IVA
+                decimal iva = subtotal * im;
+                cotization.Cotization_iva = iva;
+                Console.WriteLine("IVA: " + iva);
+                decimal total = subtotal + iva;
+                cotization.Cotization_total = total;
+                Console.WriteLine("Total: " + total);
+                //Actualizamos la cotización
+                cotizationLog.Update(cotization);
+                //Cambiamos el estado de la orden
+                orderLog.UpdateState(order.Order_number, "REVISIÓN");
             }
-            //Obtenemos la suma de los repuestos
-            for (int i = 0; i < dtr.Rows.Count; i++)
+        }
+
+        private bool ValidateData()
+        {
+            //bool request = true;
+            //Validamos que haya agregado servicios
+            if (dts.Rows.Count.Equals(0))
             {
-                Refaction refaction = refactionLog.Read_once(dtr.Rows[i][0].ToString());
-                //Console.WriteLine("Costo: " + refaction.Refaction_unit_price);
-                subtotal += refaction.Refaction_unit_price;
-                //Creamos cotization_refaction (DETALLES)
-                Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
-                {
-                    Cotization_id = order.Cotization.Cotization_id,
-                    Refaction_code = refaction.Refaction_code,
-                    Refaction_quantity = ushort.Parse("1"),
-                    Refaction_amount = refaction.Refaction_unit_price
-                };
-                cotizationRefactionLog.Create(cotization_RefactionFK);
+                //request = false;
+                MessageBox.Show("Agregue servicios");
+                return false;
             }
-            cotization.Cotization_subtotal = subtotal;
-            Console.WriteLine("Subtotal: " + subtotal);
-            //Definimos el descuento->preguntar a EVANS si maneja descuento
-            cotization.Cotization_discount = 0;
-            //DEfinimos el IVA->por ahora se hará con el 19%. pero se debe tener en cuenta el IVA
-            //de cada servicio y respuesto.
-            decimal im = taxLog.Read_once_value("19");
-            //Calculamos el IVA
-            decimal iva = subtotal * im;
-            cotization.Cotization_iva = iva;
-            Console.WriteLine("IVA: " + iva);
-            decimal total = subtotal + iva;
-            cotization.Cotization_total = total;
-            Console.WriteLine("Total: " + total);
-            //Actualizamos la cotización
-            cotizationLog.Update(cotization);
+            //Validamos que haya agregado repuestos
+            if (dtr.Rows.Count.Equals(0))
+            {
+                //request = false;
+                MessageBox.Show("Agregue repuestos");
+                return false;
+            }
+            //Validamos que haya agregado comentarios técnicos
+            if (txtComentarys.Text.Length.Equals(0))
+            {
+                //request = false;
+                MessageBox.Show("Agregue comentarios");
+                return false;
+            }
+            return true;
         }
     }
 }

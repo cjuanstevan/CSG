@@ -14,5 +14,10 @@ namespace CSG.logic
         {
             DAOFactory.GetCotization_RefactionFKDAO().Create(cotization_RefactionFK);
         }
+
+        public List<Cotization_refactionFK> Read_RefactionsOfCotization(string cotization_id)
+        {
+            return DAOFactory.GetCotization_RefactionFKDAO().Read_RefactionsOfCotization(cotization_id);
+        }
     }
 }
