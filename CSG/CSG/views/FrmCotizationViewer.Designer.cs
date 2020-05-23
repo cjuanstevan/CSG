@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.lblIva = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.lblDiscount = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.DgvSr = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.txtComentarys = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.BtnSaveSendMail = new System.Windows.Forms.Button();
             this.BtnUpdate = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -86,15 +87,14 @@
             this.txtArticleCode = new System.Windows.Forms.TextBox();
             this.txtArticleDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvSr)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -115,6 +115,22 @@
             this.panel1.Size = new System.Drawing.Size(982, 821);
             this.panel1.TabIndex = 1;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.lblTotal);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.lblIva);
+            this.panel3.Controls.Add(this.label22);
+            this.panel3.Controls.Add(this.lblDiscount);
+            this.panel3.Controls.Add(this.label23);
+            this.panel3.Controls.Add(this.lblSubtotal);
+            this.panel3.Controls.Add(this.label24);
+            this.panel3.Location = new System.Drawing.Point(680, 591);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(289, 127);
+            this.panel3.TabIndex = 99;
+            // 
             // lblTotal
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -124,6 +140,15 @@
             this.lblTotal.TabIndex = 42;
             this.lblTotal.Text = "label25";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(17, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(46, 13);
+            this.label21.TabIndex = 35;
+            this.label21.Text = "Subtotal";
             // 
             // lblIva
             // 
@@ -135,6 +160,15 @@
             this.lblIva.Text = "label26";
             this.lblIva.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(17, 47);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "Descuento";
+            // 
             // lblDiscount
             // 
             this.lblDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -144,6 +178,15 @@
             this.lblDiscount.TabIndex = 40;
             this.lblDiscount.Text = "label27";
             this.lblDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(17, 76);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(30, 13);
+            this.label23.TabIndex = 37;
+            this.label23.Text = "I.V.A";
             // 
             // lblSubtotal
             // 
@@ -163,33 +206,6 @@
             this.label24.Size = new System.Drawing.Size(31, 13);
             this.label24.TabIndex = 38;
             this.label24.Text = "Total";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(17, 76);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(30, 13);
-            this.label23.TabIndex = 37;
-            this.label23.Text = "I.V.A";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(17, 47);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "Descuento";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(17, 16);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(46, 13);
-            this.label21.TabIndex = 35;
-            this.label21.Text = "Subtotal";
             // 
             // groupBox3
             // 
@@ -237,7 +253,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.BtnSaveSendMail);
             this.panel2.Controls.Add(this.BtnUpdate);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -246,14 +262,15 @@
             this.panel2.Size = new System.Drawing.Size(980, 74);
             this.panel2.TabIndex = 31;
             // 
-            // button5
+            // BtnSaveSendMail
             // 
-            this.button5.Location = new System.Drawing.Point(853, 15);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Guardar y enviar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtnSaveSendMail.Location = new System.Drawing.Point(853, 15);
+            this.BtnSaveSendMail.Name = "BtnSaveSendMail";
+            this.BtnSaveSendMail.Size = new System.Drawing.Size(102, 23);
+            this.BtnSaveSendMail.TabIndex = 2;
+            this.BtnSaveSendMail.Text = "Guardar y enviar";
+            this.BtnSaveSendMail.UseVisualStyleBackColor = true;
+            this.BtnSaveSendMail.Click += new System.EventHandler(this.BtnSaveSendMail_Click);
             // 
             // BtnUpdate
             // 
@@ -309,9 +326,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(626, 63);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(102, 13);
+            this.label16.Size = new System.Drawing.Size(103, 13);
             this.label16.TabIndex = 26;
-            this.label16.Text = "Fecha de recepción";
+            this.label16.Text = "Fecha de expiración";
             // 
             // label1
             // 
@@ -668,22 +685,6 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Descripción";
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.lblTotal);
-            this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.lblIva);
-            this.panel3.Controls.Add(this.label22);
-            this.panel3.Controls.Add(this.lblDiscount);
-            this.panel3.Controls.Add(this.label23);
-            this.panel3.Controls.Add(this.lblSubtotal);
-            this.panel3.Controls.Add(this.label24);
-            this.panel3.Location = new System.Drawing.Point(680, 591);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(289, 127);
-            this.panel3.TabIndex = 99;
-            // 
             // FrmCotizationViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -698,6 +699,8 @@
             this.Load += new System.EventHandler(this.FrmCotizationViewer_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvSr)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -707,8 +710,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -719,7 +720,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox txtComentarys;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button BtnSaveSendMail;
         private System.Windows.Forms.Button BtnUpdate;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox4;
