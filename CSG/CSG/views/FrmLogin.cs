@@ -95,6 +95,7 @@ namespace CSG.views
                     {
                         FrmDashboard dashboard = new FrmDashboard();
                         dashboard.Show();
+                        dashboard.FormClosed += Logout;
                         this.Hide();
                     }
                     else
@@ -120,6 +121,25 @@ namespace CSG.views
         {
             lblErrorMessage.Text = "      " + msg;
             lblErrorMessage.Visible = true;
+        }
+
+        private void Logout(object sender,FormClosedEventArgs e)
+        {
+            Console.WriteLine("Evento: " + e.CloseReason);
+            txtuser.Clear();
+            txtpass.Clear();
+            lblErrorMessage.Visible = false;
+            this.Show();
+            txtuser.Focus();
+            txtpass.UseSystemPasswordChar = false;
+            txtpass.ForeColor = Color.DimGray;
+            txtpass.Text = "CONTRASEÑA";
+        }
+
+        private void Linkrecoveryaccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmRecoveryAccount recoveryAccount = new FrmRecoveryAccount();
+            recoveryAccount.ShowDialog();
         }
     }
 }

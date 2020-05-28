@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cache\Roles.cs" />
+    <Compile Include="cache\UserLoginCache.cs" />
     <Compile Include="logic\ArticleLog.cs" />
     <Compile Include="logic\BulkLoadLog.cs" />
     <Compile Include="logic\ClientLog.cs" />
@@ -67,6 +69,8 @@
     <Compile Include="logic\TaxLog.cs" />
     <Compile Include="logic\TechnicianLog.cs" />
     <Compile Include="logic\UserLog.cs" />
+    <Compile Include="mailservices\MasterMailServer.cs" />
+    <Compile Include="mailservices\SystemSupportMail.cs" />
     <Compile Include="model\Article.cs" />
     <Compile Include="model\Client.cs" />
     <Compile Include="model\Cotization.cs" />
@@ -192,6 +196,12 @@
     <Compile Include="views\FrmOrderRead.Designer.cs">
       <DependentUpon>FrmOrderRead.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmRecoveryAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmRecoveryAccount.Designer.cs">
+      <DependentUpon>FrmRecoveryAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmRefactions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +279,9 @@
     <EmbeddedResource Include="views\FrmOrderRead.resx">
       <DependentUpon>FrmOrderRead.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmRecoveryAccount.resx">
+      <DependentUpon>FrmRecoveryAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FrmRefactions.resx">
       <DependentUpon>FrmRefactions.cs</DependentUpon>
     </EmbeddedResource>
@@ -333,6 +346,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_equis.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

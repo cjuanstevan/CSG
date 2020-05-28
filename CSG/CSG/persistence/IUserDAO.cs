@@ -10,5 +10,6 @@ namespace CSG.persistence
     interface IUserDAO
     {
         bool UserLogin(string user, string pass);
+        string UserRecoveryAccount(string account, string token);
     }
 }

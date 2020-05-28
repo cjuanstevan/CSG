@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LblCreateClient = new System.Windows.Forms.LinkLabel();
+            this.linktechnician = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.DgvTechnician = new System.Windows.Forms.DataGridView();
@@ -37,15 +37,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvTechnician)).BeginInit();
             this.SuspendLayout();
             // 
-            // LblCreateClient
+            // linktechnician
             // 
-            this.LblCreateClient.AutoSize = true;
-            this.LblCreateClient.Location = new System.Drawing.Point(19, 9);
-            this.LblCreateClient.Name = "LblCreateClient";
-            this.LblCreateClient.Size = new System.Drawing.Size(70, 13);
-            this.LblCreateClient.TabIndex = 7;
-            this.LblCreateClient.TabStop = true;
-            this.LblCreateClient.Text = "Crear técnico";
+            this.linktechnician.AutoSize = true;
+            this.linktechnician.Location = new System.Drawing.Point(19, 9);
+            this.linktechnician.Name = "linktechnician";
+            this.linktechnician.Size = new System.Drawing.Size(70, 13);
+            this.linktechnician.TabIndex = 7;
+            this.linktechnician.TabStop = true;
+            this.linktechnician.Text = "Crear técnico";
             // 
             // label1
             // 
@@ -94,7 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 374);
-            this.Controls.Add(this.LblCreateClient);
+            this.Controls.Add(this.linktechnician);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -115,7 +115,7 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel LblCreateClient;
+        private System.Windows.Forms.LinkLabel linktechnician;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView DgvTechnician;

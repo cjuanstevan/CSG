@@ -1,4 +1,5 @@
-﻿using CSG.logic;
+﻿using CSG.cache;
+using CSG.logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,27 @@ namespace CSG.views
         private void CdoArticle_Load(object sender, EventArgs e)
         {
             ReadArticles();
+            //PERMISOS DE USUARIO
+            //Si el usuario es Recepcionista
+            if (UserCache.UserRol.Equals(Roles.REC))
+            {
+                linkarticle.Visible = false;
+            }
+            //Si el usuario es técnico
+            if (UserCache.UserRol.Equals(Roles.TEC))
+            {
+                linkarticle.Visible = false;
+            }
+            //Si el usuario es jefe técnico
+            if (UserCache.UserRol.Equals(Roles.JTE))
+            {
+                linkarticle.Visible = true;
+            }
+            //Si el usuario es administrador
+            if (UserCache.UserRol.Equals(Roles.ADM))
+            {
+                linkarticle.Visible = true;
+            }
         }
 
         private void ReadArticles()

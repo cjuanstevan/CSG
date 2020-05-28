@@ -1,4 +1,5 @@
-﻿using CSG.logic;
+﻿using CSG.cache;
+using CSG.logic;
 using CSG.model;
 using System;
 using System.Collections;
@@ -46,44 +47,103 @@ namespace CSG.views
 
         private void LoadDataTable(List<Order> orders)
         {
-            foreach (var o in orders)
+            //PERMISOS DE USUARIO
+            //Si el usuario es Recepcionista
+            if (UserCache.UserRol.Equals(Roles.REC))
             {
-                Console.WriteLine("Order: " + o.Order_number + " | State" + o.Order_state);
-                //Si el estado es recepcion
-                if (o.Order_state.Equals("Recepción"))
+                foreach (var o in orders)
                 {
-                    row = dto.NewRow();
-                    row[0] = o.Order_number;
-                    row[1] = o.Order_reception_date;
-                    row[2] = o.Order_type;
-                    row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
-                    row[4] = o.Technician.Technician_name;
-                    row[5] = o.Order_state;
-                    row["ACCIONES"] = "COTIZAR";
-                    dto.Rows.Add(row);
+                    //Console.WriteLine("Order: " + o.Order_number + " | State" + o.Order_state);
+                    //Si el estado es recepcion
+                    //if (o.Order_state.Equals("Recepción"))
+                    //{
+                    //    row = dto.NewRow();
+                    //    row[0] = o.Order_number;
+                    //    row[1] = o.Order_reception_date;
+                    //    row[2] = o.Order_type;
+                    //    row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                    //    row[4] = o.Technician.Technician_name;
+                    //    row[5] = o.Order_state;
+                    //    row["ACCIONES"] = "COTIZAR";
+                    //    dto.Rows.Add(row);
+                    //}
+                    //si el estado es revision
+                    if (o.Order_state.Equals("Revisión"))
+                    {
+                        row = dto.NewRow();
+                        row[0] = o.Order_number;
+                        row[1] = o.Order_reception_date;
+                        row[2] = o.Order_type;
+                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[4] = o.Technician.Technician_name;
+                        row[5] = o.Order_state;
+                        row["ACCIONES"] = "VER";
+                        dto.Rows.Add(row);
+                    }
                 }
-                //si el estado es revision
-                else if (o.Order_state.Equals("Revisión"))
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
                 {
-                    row = dto.NewRow();
-                    row[0] = o.Order_number;
-                    row[1] = o.Order_reception_date;
-                    row[2] = o.Order_type;
-                    row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
-                    row[4] = o.Technician.Technician_name;
-                    row[5] = o.Order_state;
-                    row["ACCIONES"] = "VER";
-                    dto.Rows.Add(row);
-                }
+                    DataPropertyName = "ACCIONES",
+                    Text = "Ver",
+                    HeaderText = "ACCIONES",
+                    FlatStyle = FlatStyle.Standard
+                };
+                DgvOrders.Columns.AddRange(buttonColumn);
             }
-            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+            //Si el usuario es técnico
+            if (UserCache.UserRol.Equals(Roles.TEC))
             {
-                DataPropertyName = "ACCIONES",
-                Text = "Ver",
-                HeaderText = "ACCIONES",
-                FlatStyle = FlatStyle.Standard
-            };
-            DgvOrders.Columns.AddRange(buttonColumn);
+
+            }
+            //Si el usuario es jefe técnico
+            if (UserCache.UserRol.Equals(Roles.JTE))
+            {
+
+            }
+            //Si el usuario es administrador
+            if (UserCache.UserRol.Equals(Roles.ADM))
+            {
+                foreach (var o in orders)
+                {
+                    //Console.WriteLine("Order: " + o.Order_number + " | State" + o.Order_state);
+                    //Si el estado es recepcion
+                    if (o.Order_state.Equals("Recepción"))
+                    {
+                        row = dto.NewRow();
+                        row[0] = o.Order_number;
+                        row[1] = o.Order_reception_date;
+                        row[2] = o.Order_type;
+                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[4] = o.Technician.Technician_name;
+                        row[5] = o.Order_state;
+                        row["ACCIONES"] = "COTIZAR";
+                        dto.Rows.Add(row);
+                    }
+                    //si el estado es revision
+                    else if (o.Order_state.Equals("Revisión"))
+                    {
+                        row = dto.NewRow();
+                        row[0] = o.Order_number;
+                        row[1] = o.Order_reception_date;
+                        row[2] = o.Order_type;
+                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[4] = o.Technician.Technician_name;
+                        row[5] = o.Order_state;
+                        row["ACCIONES"] = "VER";
+                        dto.Rows.Add(row);
+                    }
+                }
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+                {
+                    DataPropertyName = "ACCIONES",
+                    Text = "Ver",
+                    HeaderText = "ACCIONES",
+                    FlatStyle = FlatStyle.Standard
+                };
+                DgvOrders.Columns.AddRange(buttonColumn);
+            }
+
+            
         }
 
         private void CreateDataTable()
@@ -165,18 +225,18 @@ namespace CSG.views
 
         private void DgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("e.RowIndex=" + e.RowIndex);
+            //Console.WriteLine("e.RowIndex=" + e.RowIndex);
             if (e.RowIndex >= 0)
             {
                 //Console.WriteLine(DgvOrders.CurrentCell.GetType());
                 if (DgvOrders.CurrentCell.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonCell")
                 {
 
-                    Console.WriteLine("Botón: " + DgvOrders.CurrentCell.Value);
+                    //Console.WriteLine("Botón: " + DgvOrders.CurrentCell.Value);
                     //Validamos según el valor del botón
                     if (DgvOrders.CurrentCell.Value.Equals("VER"))
                     {
-                        Console.WriteLine("Ver cotización de orden: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        //Console.WriteLine("Ver cotización de orden: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
                         //Almacenamos la variable estática número de orden en el modelo
                         Order.Order_number_st = DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString();
                         //Abrimos el form FrmCotizationViewer
@@ -185,7 +245,7 @@ namespace CSG.views
                     }
                     else if (DgvOrders.CurrentCell.Value.Equals("COTIZAR"))
                     {
-                        Console.WriteLine("Cotizar a: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        //Console.WriteLine("Cotizar a: " + DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString());
                         //Almacenamos la variable estática número de orden en el modelo
                         Order.Order_number_st = DgvOrders.Rows[e.RowIndex].Cells[0].Value.ToString();
                         //Abrimos el form FrmCotizationCreate
@@ -277,9 +337,9 @@ namespace CSG.views
                 //sino esta vacio el txt
                 else
                 {
-                    Console.WriteLine("Orden?" + RbtOrderNumber.Checked);
+                    /*Console.WriteLine("Orden?" + RbtOrderNumber.Checked);
                     Console.WriteLine("Cliente?" + RbtClient.Checked);
-                    Console.WriteLine("Técnico?" + RbtTechnician.Checked);
+                    Console.WriteLine("Técnico?" + RbtTechnician.Checked);*/
                     //Si radio boton orden chequeado
                     if (RbtOrderNumber.Checked)
                     {
@@ -324,7 +384,7 @@ namespace CSG.views
         {
             if (RbtOrderNumber.Checked.Equals(true))
             {
-                Console.WriteLine("Número de orden checked");
+                //Console.WriteLine("Número de orden checked");
                 //Invocamos el método automcompletar
                 AutoCompleteSearch('o');
             }
@@ -335,7 +395,7 @@ namespace CSG.views
         {
             if (RbtClient.Checked.Equals(true))
             {
-                Console.WriteLine("Cliente checked");
+                //Console.WriteLine("Cliente checked");
                 //Invocamos el método automcompletar
                 AutoCompleteSearch('c');
             }
@@ -345,7 +405,7 @@ namespace CSG.views
         {
             if (RbtTechnician.Checked.Equals(true))
             {
-                Console.WriteLine("Técnico checked");
+                //Console.WriteLine("Técnico checked");
                 //Invocamos el método automcompletar
                 AutoCompleteSearch('t');
             }

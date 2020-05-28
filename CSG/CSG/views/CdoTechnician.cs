@@ -1,4 +1,5 @@
-﻿using CSG.logic;
+﻿using CSG.cache;
+using CSG.logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,27 @@ namespace CSG.views
         private void CdoTechnician_Load(object sender, EventArgs e)
         {
             ReadTechnicians();
+            //PERMISOS DE USUARIO
+            //Si el usuario es Recepcionista
+            if (UserCache.UserRol.Equals(Roles.REC))
+            {
+                linktechnician.Visible = false;
+            }
+            //Si el usuario es técnico
+            if (UserCache.UserRol.Equals(Roles.TEC))
+            {
+                linktechnician.Visible = false;
+            }
+            //Si el usuario es jefe técnico
+            if (UserCache.UserRol.Equals(Roles.JTE))
+            {
+                linktechnician.Visible = true;
+            }
+            //Si el usuario es administrador
+            if (UserCache.UserRol.Equals(Roles.ADM))
+            {
+                linktechnician.Visible = true;
+            }
         }
 
         private void ReadTechnicians()

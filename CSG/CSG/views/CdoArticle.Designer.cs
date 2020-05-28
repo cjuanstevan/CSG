@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkarticle = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.DgvArticle = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -37,15 +37,15 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // linkLabel1
+            // linkarticle
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(19, 9);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(71, 13);
-            this.linkLabel1.TabIndex = 7;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Crear artículo";
+            this.linkarticle.AutoSize = true;
+            this.linkarticle.Location = new System.Drawing.Point(19, 9);
+            this.linkarticle.Name = "linkarticle";
+            this.linkarticle.Size = new System.Drawing.Size(71, 13);
+            this.linkarticle.TabIndex = 7;
+            this.linkarticle.TabStop = true;
+            this.linkarticle.Text = "Crear artículo";
             // 
             // label1
             // 
@@ -94,7 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 374);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.linkarticle);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -114,7 +114,7 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkarticle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DgvArticle;
         private System.Windows.Forms.TextBox txtSearch;

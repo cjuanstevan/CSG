@@ -38,24 +38,26 @@
             this.BtnClients = new System.Windows.Forms.Button();
             this.BtnMaintenance = new System.Windows.Forms.Button();
             this.PlOrdersSubmenu = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.BtnReadOrder = new System.Windows.Forms.Button();
+            this.BtnInvoices = new System.Windows.Forms.Button();
+            this.BtnReports = new System.Windows.Forms.Button();
+            this.BtnOrderRead = new System.Windows.Forms.Button();
             this.BtnOrderCreate = new System.Windows.Forms.Button();
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.PlLogo = new System.Windows.Forms.Panel();
             this.PlTop = new System.Windows.Forms.Panel();
             this.PnlUserDates = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblUserDefinition = new System.Windows.Forms.Label();
+            this.lblUserRol = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.LblNameMain = new System.Windows.Forms.Label();
             this.PlChildForm = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.Plmain.SuspendLayout();
             this.PlMaintenaceSubmenu.SuspendLayout();
             this.PlOrdersSubmenu.SuspendLayout();
+            this.PlLogo.SuspendLayout();
             this.PlTop.SuspendLayout();
             this.PnlUserDates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -77,27 +79,27 @@
             this.Plmain.Dock = System.Windows.Forms.DockStyle.Left;
             this.Plmain.Location = new System.Drawing.Point(0, 0);
             this.Plmain.Name = "Plmain";
-            this.Plmain.Size = new System.Drawing.Size(282, 921);
+            this.Plmain.Size = new System.Drawing.Size(282, 960);
             this.Plmain.TabIndex = 0;
             // 
             // BtnLogout
             // 
             this.BtnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLogout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnLogout.FlatAppearance.BorderSize = 0;
             this.BtnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
             this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.Location = new System.Drawing.Point(0, 644);
+            this.BtnLogout.Location = new System.Drawing.Point(0, 914);
             this.BtnLogout.Name = "BtnLogout";
             this.BtnLogout.Size = new System.Drawing.Size(282, 46);
-            this.BtnLogout.TabIndex = 7;
+            this.BtnLogout.TabIndex = 8;
             this.BtnLogout.Text = "Cerrar sesión";
             this.BtnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnLogout.UseVisualStyleBackColor = true;
-            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click_1);
             // 
             // PlMaintenaceSubmenu
             // 
@@ -220,9 +222,9 @@
             // PlOrdersSubmenu
             // 
             this.PlOrdersSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
-            this.PlOrdersSubmenu.Controls.Add(this.button6);
-            this.PlOrdersSubmenu.Controls.Add(this.button7);
-            this.PlOrdersSubmenu.Controls.Add(this.BtnReadOrder);
+            this.PlOrdersSubmenu.Controls.Add(this.BtnInvoices);
+            this.PlOrdersSubmenu.Controls.Add(this.BtnReports);
+            this.PlOrdersSubmenu.Controls.Add(this.BtnOrderRead);
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderCreate);
             this.PlOrdersSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlOrdersSubmenu.Location = new System.Drawing.Point(0, 192);
@@ -230,54 +232,54 @@
             this.PlOrdersSubmenu.Size = new System.Drawing.Size(282, 182);
             this.PlOrdersSubmenu.TabIndex = 4;
             // 
-            // button6
+            // BtnInvoices
             // 
-            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button6.Location = new System.Drawing.Point(0, 135);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button6.Size = new System.Drawing.Size(282, 45);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Generar factura";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = true;
+            this.BtnInvoices.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnInvoices.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnInvoices.FlatAppearance.BorderSize = 0;
+            this.BtnInvoices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInvoices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnInvoices.Location = new System.Drawing.Point(0, 135);
+            this.BtnInvoices.Name = "BtnInvoices";
+            this.BtnInvoices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnInvoices.Size = new System.Drawing.Size(282, 45);
+            this.BtnInvoices.TabIndex = 3;
+            this.BtnInvoices.Text = "Generar factura";
+            this.BtnInvoices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnInvoices.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // BtnReports
             // 
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button7.Location = new System.Drawing.Point(0, 90);
-            this.button7.Name = "button7";
-            this.button7.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.button7.Size = new System.Drawing.Size(282, 45);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Reportes";
-            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.UseVisualStyleBackColor = true;
+            this.BtnReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnReports.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnReports.FlatAppearance.BorderSize = 0;
+            this.BtnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnReports.Location = new System.Drawing.Point(0, 90);
+            this.BtnReports.Name = "BtnReports";
+            this.BtnReports.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnReports.Size = new System.Drawing.Size(282, 45);
+            this.BtnReports.TabIndex = 2;
+            this.BtnReports.Text = "Reportes";
+            this.BtnReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnReports.UseVisualStyleBackColor = true;
             // 
-            // BtnReadOrder
+            // BtnOrderRead
             // 
-            this.BtnReadOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnReadOrder.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnReadOrder.FlatAppearance.BorderSize = 0;
-            this.BtnReadOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReadOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnReadOrder.Location = new System.Drawing.Point(0, 45);
-            this.BtnReadOrder.Name = "BtnReadOrder";
-            this.BtnReadOrder.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnReadOrder.Size = new System.Drawing.Size(282, 45);
-            this.BtnReadOrder.TabIndex = 1;
-            this.BtnReadOrder.Text = "Consultar";
-            this.BtnReadOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnReadOrder.UseVisualStyleBackColor = true;
-            this.BtnReadOrder.Click += new System.EventHandler(this.BtnReadOrder_Click);
+            this.BtnOrderRead.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnOrderRead.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnOrderRead.FlatAppearance.BorderSize = 0;
+            this.BtnOrderRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrderRead.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnOrderRead.Location = new System.Drawing.Point(0, 45);
+            this.BtnOrderRead.Name = "BtnOrderRead";
+            this.BtnOrderRead.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnOrderRead.Size = new System.Drawing.Size(282, 45);
+            this.BtnOrderRead.TabIndex = 1;
+            this.BtnOrderRead.Text = "Consultar";
+            this.BtnOrderRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnOrderRead.UseVisualStyleBackColor = true;
+            this.BtnOrderRead.Click += new System.EventHandler(this.BtnOrderRead_Click);
             // 
             // BtnOrderCreate
             // 
@@ -336,8 +338,10 @@
             // 
             // PlLogo
             // 
-            this.PlLogo.BackgroundImage = global::CSG.Properties.Resources.VALSI;
-            this.PlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PlLogo.BackColor = System.Drawing.Color.White;
+            this.PlLogo.BackgroundImage = global::CSG.Properties.Resources.logo_prueba1;
+            this.PlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PlLogo.Controls.Add(this.label4);
             this.PlLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlLogo.Location = new System.Drawing.Point(0, 0);
             this.PlLogo.Name = "PlLogo";
@@ -353,44 +357,45 @@
             this.PlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlTop.Location = new System.Drawing.Point(282, 0);
             this.PlTop.Name = "PlTop";
-            this.PlTop.Size = new System.Drawing.Size(982, 100);
+            this.PlTop.Size = new System.Drawing.Size(998, 100);
             this.PlTop.TabIndex = 1;
             // 
             // PnlUserDates
             // 
-            this.PnlUserDates.Controls.Add(this.label1);
-            this.PnlUserDates.Controls.Add(this.label2);
+            this.PnlUserDates.Controls.Add(this.lblUserDefinition);
+            this.PnlUserDates.Controls.Add(this.lblUserRol);
             this.PnlUserDates.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PnlUserDates.Location = new System.Drawing.Point(663, 0);
+            this.PnlUserDates.Location = new System.Drawing.Point(679, 0);
             this.PnlUserDates.Name = "PnlUserDates";
             this.PnlUserDates.Size = new System.Drawing.Size(219, 100);
             this.PnlUserDates.TabIndex = 4;
             // 
-            // label1
+            // lblUserDefinition
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(80, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Juan Stevan Correa";
+            this.lblUserDefinition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUserDefinition.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblUserDefinition.Location = new System.Drawing.Point(3, 9);
+            this.lblUserDefinition.Name = "lblUserDefinition";
+            this.lblUserDefinition.Size = new System.Drawing.Size(208, 17);
+            this.lblUserDefinition.TabIndex = 2;
+            this.lblUserDefinition.Text = "user_definition";
+            this.lblUserDefinition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label2
+            // lblUserRol
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(92, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "ADMINISTRADOR";
+            this.lblUserRol.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblUserRol.Location = new System.Drawing.Point(6, 26);
+            this.lblUserRol.Name = "lblUserRol";
+            this.lblUserRol.Size = new System.Drawing.Size(205, 17);
+            this.lblUserRol.TabIndex = 3;
+            this.lblUserRol.Text = "user_rol";
+            this.lblUserRol.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox2.Image = global::CSG.Properties.Resources.user;
-            this.pictureBox2.Location = new System.Drawing.Point(882, 0);
+            this.pictureBox2.Location = new System.Drawing.Point(898, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -415,7 +420,7 @@
             this.PlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlChildForm.Location = new System.Drawing.Point(282, 100);
             this.PlChildForm.Name = "PlChildForm";
-            this.PlChildForm.Size = new System.Drawing.Size(982, 821);
+            this.PlChildForm.Size = new System.Drawing.Size(998, 860);
             this.PlChildForm.TabIndex = 2;
             // 
             // pictureBox1
@@ -429,11 +434,21 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(37, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(213, 17);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Control de Servicios y Garantías";
+            // 
             // FrmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.ClientSize = new System.Drawing.Size(1280, 960);
             this.Controls.Add(this.PlChildForm);
             this.Controls.Add(this.PlTop);
             this.Controls.Add(this.Plmain);
@@ -447,10 +462,11 @@
             this.Plmain.ResumeLayout(false);
             this.PlMaintenaceSubmenu.ResumeLayout(false);
             this.PlOrdersSubmenu.ResumeLayout(false);
+            this.PlLogo.ResumeLayout(false);
+            this.PlLogo.PerformLayout();
             this.PlTop.ResumeLayout(false);
             this.PlTop.PerformLayout();
             this.PnlUserDates.ResumeLayout(false);
-            this.PnlUserDates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.PlChildForm.ResumeLayout(false);
             this.PlChildForm.PerformLayout();
@@ -465,9 +481,9 @@
         private System.Windows.Forms.Panel PlLogo;
         private System.Windows.Forms.Button BtnIndex;
         private System.Windows.Forms.Panel PlOrdersSubmenu;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button BtnReadOrder;
+        private System.Windows.Forms.Button BtnInvoices;
+        private System.Windows.Forms.Button BtnReports;
+        private System.Windows.Forms.Button BtnOrderRead;
         private System.Windows.Forms.Button BtnOrderCreate;
         private System.Windows.Forms.Button BtnOrders;
         private System.Windows.Forms.Panel PlMaintenaceSubmenu;
@@ -477,14 +493,15 @@
         private System.Windows.Forms.Button BtnClients;
         private System.Windows.Forms.Button BtnMaintenance;
         private System.Windows.Forms.Button BtnTechnicians;
-        private System.Windows.Forms.Button BtnLogout;
         private System.Windows.Forms.Panel PlTop;
         private System.Windows.Forms.Panel PlChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblNameMain;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblUserDefinition;
+        private System.Windows.Forms.Label lblUserRol;
         private System.Windows.Forms.Panel PnlUserDates;
+        private System.Windows.Forms.Button BtnLogout;
+        private System.Windows.Forms.Label label4;
     }
 }

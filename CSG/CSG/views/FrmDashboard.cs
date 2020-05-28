@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 
 namespace CSG.views
 {
@@ -19,10 +20,55 @@ namespace CSG.views
         }
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
+            //Cargamos datos de usuario
+            LoadUserData();
+            //PERMISOS DE USUARIO
+            //Si el usuario es Recepcionista
+            if (UserCache.UserRol.Equals(Roles.REC))
+            {
+                //Tablero
+                BtnIndex.Enabled = true;
+                //Ordenes
+                BtnOrders.Enabled = true;
+                BtnOrderRead.Enabled = true;
+                BtnReports.Enabled = false;
+                BtnInvoices.Enabled = false;
+                //Mantenimiento
+                BtnMaintenance.Enabled = true;
+                BtnClients.Enabled = true;
+                BtnArticles.Enabled = false;
+                BtnRefactions.Enabled = false;
+                BtnServices.Enabled = false;
+                BtnTechnicians.Enabled = false;
+            }
+            //Si el usuario es técnico
+            if (UserCache.UserRol.Equals(Roles.TEC))
+            {
+
+            }
+            //Si el usuario es jefe técnico
+            if (UserCache.UserRol.Equals(Roles.JTE))
+            {
+
+            }
+            //Si el usuario es administrador
+            if (UserCache.UserRol.Equals(Roles.ADM))
+            {
+                BtnIndex.Enabled = true;
+                BtnOrders.Enabled = true;
+                BtnMaintenance.Enabled = true;
+            }
             //Formulario predeterminado
-            OpenChildForm(new FrmOrderRead());
-            //BtnReadOrder_Click(sender, e);
+            //OpenChildForm(new FrmIndex());
+            BtnIndex_Click(sender, e);
         }
+
+        private void LoadUserData()
+        {
+            lblUserDefinition.Text = UserCache.UserDefinition;
+            lblUserRol.Text = UserCache.UserRolDefinition;
+        }
+
         private void CustomizeDesign()
         {
             PlOrdersSubmenu.Visible = false;
@@ -73,15 +119,15 @@ namespace CSG.views
         {
             LblNameMain.Text = "CREAR ORDEN";
             BtnOrderCreate.BackColor = Color.FromArgb(127, 127, 127);
-            BtnReadOrder.BackColor = Color.FromArgb(111, 111, 109);
+            BtnOrderRead.BackColor = Color.FromArgb(111, 111, 109);
             OpenChildForm(new FrmOrderCreate());
         }
-
-        private void BtnReadOrder_Click(object sender, EventArgs e)
+        
+        private void BtnOrderRead_Click(object sender, EventArgs e)
         {
             LblNameMain.Text = "CONSULTAR ORDEN";
             BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
-            BtnReadOrder.BackColor = Color.FromArgb(127, 127, 127);
+            BtnOrderRead.BackColor = Color.FromArgb(127, 127, 127);
             OpenChildForm(new FrmOrderRead());
         }
 
@@ -107,13 +153,6 @@ namespace CSG.views
             childForm.BringToFront();
             childForm.Show();
         }
-
-        private void BtnLogout_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -179,18 +218,13 @@ namespace CSG.views
             OpenChildForm(new FrmTechnician());
         }
 
-        
-
-
-
-
-
-
-
-
-
-
-
+        private void BtnLogout_Click_1(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea cerrar sesión?", "Aviso del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes))
+            {
+                this.Close();
+            }
+        }
 
         //private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
         //{

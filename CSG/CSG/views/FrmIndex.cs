@@ -16,5 +16,13 @@ namespace CSG.views
         {
             InitializeComponent();
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea salir?", "Aviso del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes))
+            {
+                Application.Exit();
+            }
+        }
     }
 }
