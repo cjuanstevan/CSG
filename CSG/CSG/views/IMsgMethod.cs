@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CSG.views
 {
-    public interface ICom
+    public interface IMsgMethod
     {
-        void ClientText(string id);
-        void ArticleText(string code);
-        void TechnicianText(string id);
-        
+        void txtpassActivator();
     }
 }

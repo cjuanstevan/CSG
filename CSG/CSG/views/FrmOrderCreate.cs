@@ -105,9 +105,8 @@ namespace CSG.views
             }
         }
 
-        private void BtnCreate_Click(object sender, EventArgs e)
-        {
-            //DateTime localDate = DateTime.Now;
+
+        /*//DateTime localDate = DateTime.Now;
             Order order = new Order();
             order.Order_number = txtNumber.Text;
             //DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -149,8 +148,7 @@ namespace CSG.views
                 Article = article
             };
             orderArticleLog.Create(order_articleFK);
-            ResetControls(sender, e);
-        }
+            ResetControls(sender, e);*/
 
         private void Button4_Click(object sender, EventArgs e)
         {
@@ -252,6 +250,53 @@ namespace CSG.views
 
         private void Button5_Click(object sender, EventArgs e)
         {
+            ResetControls(sender, e);
+        }
+
+        private void IbtnCreate_Click(object sender, EventArgs e)
+        {
+            //DateTime localDate = DateTime.Now;
+            Order order = new Order();
+            order.Order_number = txtNumber.Text;
+            //DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            order.Order_reception_date = DateTime.Parse(dtpDateReception.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+            order.Order_end_date = dtpDateReception.Value;
+            order.Order_type = cboType.Text;
+            //MessageBox.Show("Seleccionó " + cboWarranty.SelectedItem.ToString());
+            order.Order_invoice = txtInvoice.Text;
+            if (cboWarranty.SelectedIndex.Equals(0))
+            {
+                order.Order_sale_date = dtpSaleDate.Value;
+            }
+            //order.Order_state = "RECEPCIÓN";
+            //order.Order_comentarys = "";
+            order.Order_report_client = txtReportClient.Text;
+            //Técnico
+            Technician t = technicianLog.Read_once(txtTechnicianId.Text);
+            order.Technician = t;
+            //Cliente
+            Client c = clientLog.Read_once(txtClientId.Text);
+            order.Client = c;
+            //Cotización
+            //Creamos cotización
+            Cotization cotization = new Cotization
+            {
+                Cotization_id = "CT-" + PrOrder[cboType.SelectedIndex] + "" + orderLog.Read_count().ToString()
+            };
+            cotizationLog.Create(cotization);
+            //Consultamos la cotización
+            Cotization cn = cotizationLog.Read_once(cotization.Cotization_id);
+            //MessageBox.Show("Cotizacion: " + cn.Cotization_id);
+            order.Cotization = cn;
+            //Creación de orden
+            orderLog.Create(order);
+            //Creamos el order_article para que asigne el artículo sobre el cual se va a operar
+            Order_articleFK order_articleFK = new Order_articleFK
+            {
+                Order = order,
+                Article = article
+            };
+            orderArticleLog.Create(order_articleFK);
             ResetControls(sender, e);
         }
     }

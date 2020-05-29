@@ -18,5 +18,9 @@ namespace CSG.logic
         {
             return DAOFactory.GetUserDAO().UserRecoveryAccount(account, token);
         }
+        public void UserUpdate(User user)
+        {
+            DAOFactory.GetUserDAO().UserUpdate(user);
+        }
     }
 }

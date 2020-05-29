@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDashboard));
             this.Plmain = new System.Windows.Forms.Panel();
             this.BtnLogout = new System.Windows.Forms.Button();
             this.PlMaintenaceSubmenu = new System.Windows.Forms.Panel();
@@ -45,23 +46,23 @@
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.PlLogo = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.PlTop = new System.Windows.Forms.Panel();
+            this.IpbUser = new FontAwesome.Sharp.IconPictureBox();
             this.PnlUserDates = new System.Windows.Forms.Panel();
+            this.linkBtnEdit = new System.Windows.Forms.LinkLabel();
             this.lblUserDefinition = new System.Windows.Forms.Label();
             this.lblUserRol = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.LblNameMain = new System.Windows.Forms.Label();
             this.PlChildForm = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.Plmain.SuspendLayout();
             this.PlMaintenaceSubmenu.SuspendLayout();
             this.PlOrdersSubmenu.SuspendLayout();
             this.PlLogo.SuspendLayout();
             this.PlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IpbUser)).BeginInit();
             this.PnlUserDates.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.PlChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +80,7 @@
             this.Plmain.Dock = System.Windows.Forms.DockStyle.Left;
             this.Plmain.Location = new System.Drawing.Point(0, 0);
             this.Plmain.Name = "Plmain";
-            this.Plmain.Size = new System.Drawing.Size(282, 960);
+            this.Plmain.Size = new System.Drawing.Size(282, 721);
             this.Plmain.TabIndex = 0;
             // 
             // BtnLogout
@@ -91,15 +92,15 @@
             this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
             this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.Location = new System.Drawing.Point(0, 914);
+            this.BtnLogout.Location = new System.Drawing.Point(0, 691);
             this.BtnLogout.Name = "BtnLogout";
-            this.BtnLogout.Size = new System.Drawing.Size(282, 46);
+            this.BtnLogout.Size = new System.Drawing.Size(265, 52);
             this.BtnLogout.TabIndex = 8;
             this.BtnLogout.Text = "Cerrar sesión";
             this.BtnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnLogout.UseVisualStyleBackColor = true;
-            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click_1);
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // PlMaintenaceSubmenu
             // 
@@ -110,9 +111,9 @@
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnArticles);
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnClients);
             this.PlMaintenaceSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 420);
+            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 439);
             this.PlMaintenaceSubmenu.Name = "PlMaintenaceSubmenu";
-            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(282, 224);
+            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(265, 252);
             this.PlMaintenaceSubmenu.TabIndex = 6;
             // 
             // BtnTechnicians
@@ -122,10 +123,10 @@
             this.BtnTechnicians.FlatAppearance.BorderSize = 0;
             this.BtnTechnicians.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnTechnicians.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnTechnicians.Location = new System.Drawing.Point(0, 180);
+            this.BtnTechnicians.Location = new System.Drawing.Point(0, 204);
             this.BtnTechnicians.Name = "BtnTechnicians";
             this.BtnTechnicians.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnTechnicians.Size = new System.Drawing.Size(282, 45);
+            this.BtnTechnicians.Size = new System.Drawing.Size(265, 51);
             this.BtnTechnicians.TabIndex = 4;
             this.BtnTechnicians.Text = "Técnicos";
             this.BtnTechnicians.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -139,10 +140,10 @@
             this.BtnServices.FlatAppearance.BorderSize = 0;
             this.BtnServices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnServices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnServices.Location = new System.Drawing.Point(0, 135);
+            this.BtnServices.Location = new System.Drawing.Point(0, 153);
             this.BtnServices.Name = "BtnServices";
             this.BtnServices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnServices.Size = new System.Drawing.Size(282, 45);
+            this.BtnServices.Size = new System.Drawing.Size(265, 51);
             this.BtnServices.TabIndex = 3;
             this.BtnServices.Text = "Servicios";
             this.BtnServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,10 +157,10 @@
             this.BtnRefactions.FlatAppearance.BorderSize = 0;
             this.BtnRefactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRefactions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnRefactions.Location = new System.Drawing.Point(0, 90);
+            this.BtnRefactions.Location = new System.Drawing.Point(0, 102);
             this.BtnRefactions.Name = "BtnRefactions";
             this.BtnRefactions.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnRefactions.Size = new System.Drawing.Size(282, 45);
+            this.BtnRefactions.Size = new System.Drawing.Size(265, 51);
             this.BtnRefactions.TabIndex = 2;
             this.BtnRefactions.Text = "Repuestos";
             this.BtnRefactions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,10 +174,10 @@
             this.BtnArticles.FlatAppearance.BorderSize = 0;
             this.BtnArticles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnArticles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnArticles.Location = new System.Drawing.Point(0, 45);
+            this.BtnArticles.Location = new System.Drawing.Point(0, 51);
             this.BtnArticles.Name = "BtnArticles";
             this.BtnArticles.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnArticles.Size = new System.Drawing.Size(282, 45);
+            this.BtnArticles.Size = new System.Drawing.Size(265, 51);
             this.BtnArticles.TabIndex = 1;
             this.BtnArticles.Text = "Articulos";
             this.BtnArticles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -193,7 +194,7 @@
             this.BtnClients.Location = new System.Drawing.Point(0, 0);
             this.BtnClients.Name = "BtnClients";
             this.BtnClients.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnClients.Size = new System.Drawing.Size(282, 45);
+            this.BtnClients.Size = new System.Drawing.Size(265, 51);
             this.BtnClients.TabIndex = 0;
             this.BtnClients.Text = "Clientes";
             this.BtnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -209,9 +210,9 @@
             this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
             this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaintenance.Location = new System.Drawing.Point(0, 374);
+            this.BtnMaintenance.Location = new System.Drawing.Point(0, 387);
             this.BtnMaintenance.Name = "BtnMaintenance";
-            this.BtnMaintenance.Size = new System.Drawing.Size(282, 46);
+            this.BtnMaintenance.Size = new System.Drawing.Size(265, 52);
             this.BtnMaintenance.TabIndex = 5;
             this.BtnMaintenance.Text = "Mantenimiento";
             this.BtnMaintenance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -227,9 +228,9 @@
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderRead);
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderCreate);
             this.PlOrdersSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PlOrdersSubmenu.Location = new System.Drawing.Point(0, 192);
+            this.PlOrdersSubmenu.Location = new System.Drawing.Point(0, 183);
             this.PlOrdersSubmenu.Name = "PlOrdersSubmenu";
-            this.PlOrdersSubmenu.Size = new System.Drawing.Size(282, 182);
+            this.PlOrdersSubmenu.Size = new System.Drawing.Size(265, 204);
             this.PlOrdersSubmenu.TabIndex = 4;
             // 
             // BtnInvoices
@@ -239,10 +240,10 @@
             this.BtnInvoices.FlatAppearance.BorderSize = 0;
             this.BtnInvoices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInvoices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnInvoices.Location = new System.Drawing.Point(0, 135);
+            this.BtnInvoices.Location = new System.Drawing.Point(0, 153);
             this.BtnInvoices.Name = "BtnInvoices";
             this.BtnInvoices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnInvoices.Size = new System.Drawing.Size(282, 45);
+            this.BtnInvoices.Size = new System.Drawing.Size(265, 51);
             this.BtnInvoices.TabIndex = 3;
             this.BtnInvoices.Text = "Generar factura";
             this.BtnInvoices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -255,10 +256,10 @@
             this.BtnReports.FlatAppearance.BorderSize = 0;
             this.BtnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnReports.Location = new System.Drawing.Point(0, 90);
+            this.BtnReports.Location = new System.Drawing.Point(0, 102);
             this.BtnReports.Name = "BtnReports";
             this.BtnReports.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnReports.Size = new System.Drawing.Size(282, 45);
+            this.BtnReports.Size = new System.Drawing.Size(265, 51);
             this.BtnReports.TabIndex = 2;
             this.BtnReports.Text = "Reportes";
             this.BtnReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -271,10 +272,10 @@
             this.BtnOrderRead.FlatAppearance.BorderSize = 0;
             this.BtnOrderRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOrderRead.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnOrderRead.Location = new System.Drawing.Point(0, 45);
+            this.BtnOrderRead.Location = new System.Drawing.Point(0, 51);
             this.BtnOrderRead.Name = "BtnOrderRead";
             this.BtnOrderRead.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnOrderRead.Size = new System.Drawing.Size(282, 45);
+            this.BtnOrderRead.Size = new System.Drawing.Size(265, 51);
             this.BtnOrderRead.TabIndex = 1;
             this.BtnOrderRead.Text = "Consultar";
             this.BtnOrderRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -291,7 +292,7 @@
             this.BtnOrderCreate.Location = new System.Drawing.Point(0, 0);
             this.BtnOrderCreate.Name = "BtnOrderCreate";
             this.BtnOrderCreate.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnOrderCreate.Size = new System.Drawing.Size(282, 45);
+            this.BtnOrderCreate.Size = new System.Drawing.Size(265, 51);
             this.BtnOrderCreate.TabIndex = 0;
             this.BtnOrderCreate.Text = "Crear";
             this.BtnOrderCreate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -307,9 +308,9 @@
             this.BtnOrders.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnOrders.Image = global::CSG.Properties.Resources.orders;
             this.BtnOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOrders.Location = new System.Drawing.Point(0, 146);
+            this.BtnOrders.Location = new System.Drawing.Point(0, 131);
             this.BtnOrders.Name = "BtnOrders";
-            this.BtnOrders.Size = new System.Drawing.Size(282, 46);
+            this.BtnOrders.Size = new System.Drawing.Size(265, 52);
             this.BtnOrders.TabIndex = 3;
             this.BtnOrders.Text = "Ordenes";
             this.BtnOrders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -326,9 +327,9 @@
             this.BtnIndex.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnIndex.Image = global::CSG.Properties.Resources.dashboard;
             this.BtnIndex.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnIndex.Location = new System.Drawing.Point(0, 100);
+            this.BtnIndex.Location = new System.Drawing.Point(0, 79);
             this.BtnIndex.Name = "BtnIndex";
-            this.BtnIndex.Size = new System.Drawing.Size(282, 46);
+            this.BtnIndex.Size = new System.Drawing.Size(265, 52);
             this.BtnIndex.TabIndex = 1;
             this.BtnIndex.Text = "Tablero";
             this.BtnIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -338,45 +339,82 @@
             // 
             // PlLogo
             // 
-            this.PlLogo.BackColor = System.Drawing.Color.White;
-            this.PlLogo.BackgroundImage = global::CSG.Properties.Resources.logo_prueba1;
-            this.PlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PlLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(36)))));
+            this.PlLogo.Controls.Add(this.pictureBox1);
             this.PlLogo.Controls.Add(this.label4);
             this.PlLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlLogo.Location = new System.Drawing.Point(0, 0);
             this.PlLogo.Name = "PlLogo";
-            this.PlLogo.Size = new System.Drawing.Size(282, 100);
+            this.PlLogo.Size = new System.Drawing.Size(265, 79);
             this.PlLogo.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.LightGray;
+            this.label4.Location = new System.Drawing.Point(23, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(213, 17);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Control de Servicios y Garantías";
             // 
             // PlTop
             // 
             this.PlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(36)))));
+            this.PlTop.Controls.Add(this.IpbUser);
             this.PlTop.Controls.Add(this.PnlUserDates);
-            this.PlTop.Controls.Add(this.pictureBox2);
             this.PlTop.Controls.Add(this.LblNameMain);
             this.PlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlTop.Location = new System.Drawing.Point(282, 0);
             this.PlTop.Name = "PlTop";
-            this.PlTop.Size = new System.Drawing.Size(998, 100);
+            this.PlTop.Size = new System.Drawing.Size(982, 75);
             this.PlTop.TabIndex = 1;
+            // 
+            // IpbUser
+            // 
+            this.IpbUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(36)))));
+            this.IpbUser.Dock = System.Windows.Forms.DockStyle.Right;
+            this.IpbUser.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.IpbUser.IconColor = System.Drawing.Color.White;
+            this.IpbUser.IconSize = 75;
+            this.IpbUser.Location = new System.Drawing.Point(892, 0);
+            this.IpbUser.Name = "IpbUser";
+            this.IpbUser.Padding = new System.Windows.Forms.Padding(0, 11, 0, 0);
+            this.IpbUser.Size = new System.Drawing.Size(90, 75);
+            this.IpbUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.IpbUser.TabIndex = 6;
+            this.IpbUser.TabStop = false;
             // 
             // PnlUserDates
             // 
+            this.PnlUserDates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PnlUserDates.Controls.Add(this.linkBtnEdit);
             this.PnlUserDates.Controls.Add(this.lblUserDefinition);
             this.PnlUserDates.Controls.Add(this.lblUserRol);
-            this.PnlUserDates.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PnlUserDates.Location = new System.Drawing.Point(679, 0);
+            this.PnlUserDates.Location = new System.Drawing.Point(673, 0);
             this.PnlUserDates.Name = "PnlUserDates";
-            this.PnlUserDates.Size = new System.Drawing.Size(219, 100);
+            this.PnlUserDates.Size = new System.Drawing.Size(219, 79);
             this.PnlUserDates.TabIndex = 4;
+            // 
+            // linkBtnEdit
+            // 
+            this.linkBtnEdit.AutoSize = true;
+            this.linkBtnEdit.Location = new System.Drawing.Point(158, 52);
+            this.linkBtnEdit.Name = "linkBtnEdit";
+            this.linkBtnEdit.Size = new System.Drawing.Size(49, 18);
+            this.linkBtnEdit.TabIndex = 4;
+            this.linkBtnEdit.TabStop = true;
+            this.linkBtnEdit.Text = "Cuenta";
+            this.linkBtnEdit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkBtnEdit_LinkClicked);
             // 
             // lblUserDefinition
             // 
             this.lblUserDefinition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserDefinition.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblUserDefinition.Location = new System.Drawing.Point(3, 9);
+            this.lblUserDefinition.Location = new System.Drawing.Point(3, 11);
             this.lblUserDefinition.Name = "lblUserDefinition";
-            this.lblUserDefinition.Size = new System.Drawing.Size(208, 17);
+            this.lblUserDefinition.Size = new System.Drawing.Size(208, 19);
             this.lblUserDefinition.TabIndex = 2;
             this.lblUserDefinition.Text = "user_definition";
             this.lblUserDefinition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -384,30 +422,19 @@
             // lblUserRol
             // 
             this.lblUserRol.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lblUserRol.Location = new System.Drawing.Point(6, 26);
+            this.lblUserRol.Location = new System.Drawing.Point(6, 30);
             this.lblUserRol.Name = "lblUserRol";
-            this.lblUserRol.Size = new System.Drawing.Size(205, 17);
+            this.lblUserRol.Size = new System.Drawing.Size(205, 19);
             this.lblUserRol.TabIndex = 3;
             this.lblUserRol.Text = "user_rol";
             this.lblUserRol.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox2.Image = global::CSG.Properties.Resources.user;
-            this.pictureBox2.Location = new System.Drawing.Point(898, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
             // 
             // LblNameMain
             // 
             this.LblNameMain.AutoSize = true;
             this.LblNameMain.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblNameMain.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.LblNameMain.Location = new System.Drawing.Point(74, 44);
+            this.LblNameMain.Location = new System.Drawing.Point(58, 30);
             this.LblNameMain.Name = "LblNameMain";
             this.LblNameMain.Size = new System.Drawing.Size(85, 22);
             this.LblNameMain.TabIndex = 0;
@@ -416,45 +443,34 @@
             // PlChildForm
             // 
             this.PlChildForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
-            this.PlChildForm.Controls.Add(this.pictureBox1);
             this.PlChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PlChildForm.Location = new System.Drawing.Point(282, 100);
+            this.PlChildForm.Location = new System.Drawing.Point(282, 75);
             this.PlChildForm.Name = "PlChildForm";
-            this.PlChildForm.Size = new System.Drawing.Size(998, 860);
+            this.PlChildForm.Size = new System.Drawing.Size(982, 646);
             this.PlChildForm.TabIndex = 2;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = global::CSG.Properties.Resources.icon_csg;
-            this.pictureBox1.Location = new System.Drawing.Point(316, 182);
+            this.pictureBox1.Image = global::CSG.Properties.Resources.logo_prueba_edit;
+            this.pictureBox1.Location = new System.Drawing.Point(75, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(324, 324);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.Size = new System.Drawing.Size(82, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(37, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(213, 17);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Control de Servicios y Garantías";
-            // 
             // FrmDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1280, 960);
+            this.ClientSize = new System.Drawing.Size(1264, 721);
             this.Controls.Add(this.PlChildForm);
             this.Controls.Add(this.PlTop);
             this.Controls.Add(this.Plmain);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1280, 960);
+            this.MinimumSize = new System.Drawing.Size(1280, 760);
             this.Name = "FrmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Control de Servicios y Garantías";
@@ -466,10 +482,9 @@
             this.PlLogo.PerformLayout();
             this.PlTop.ResumeLayout(false);
             this.PlTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IpbUser)).EndInit();
             this.PnlUserDates.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.PlChildForm.ResumeLayout(false);
-            this.PlChildForm.PerformLayout();
+            this.PnlUserDates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -495,13 +510,14 @@
         private System.Windows.Forms.Button BtnTechnicians;
         private System.Windows.Forms.Panel PlTop;
         private System.Windows.Forms.Panel PlChildForm;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LblNameMain;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblUserDefinition;
         private System.Windows.Forms.Label lblUserRol;
         private System.Windows.Forms.Panel PnlUserDates;
         private System.Windows.Forms.Button BtnLogout;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel linkBtnEdit;
+        private FontAwesome.Sharp.IconPictureBox IpbUser;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

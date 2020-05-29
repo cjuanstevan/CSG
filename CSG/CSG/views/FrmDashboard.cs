@@ -20,6 +20,8 @@ namespace CSG.views
         }
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
+            //Posicionamos el form
+            //this.Location = new Point(-5, -5);
             //Cargamos datos de usuario
             LoadUserData();
             //PERMISOS DE USUARIO
@@ -93,6 +95,12 @@ namespace CSG.views
             else
                 subMenu.Visible = false;
         }
+
+        private void LinkBtnEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LblNameMain.Text = "EDITAR USUARIO";
+            OpenChildForm(new FrmUserEdit());
+        }
         private void BtnIndex_Click(object sender, EventArgs e)
         {
             HideSubmenu();
@@ -109,6 +117,7 @@ namespace CSG.views
         }
         private void BtnOrders_Click(object sender, EventArgs e)
         {
+            LblNameMain.Text = "ÓRDENES";
             BtnIndex.BackColor = Color.FromArgb(39, 40, 36);
             BtnOrders.BackColor = Color.FromArgb(109, 119, 129);
             BtnMaintenance.BackColor = Color.FromArgb(39, 40, 36);
@@ -133,6 +142,7 @@ namespace CSG.views
 
         private void BtnMaintenance_Click(object sender, EventArgs e)
         {
+            LblNameMain.Text = "MANTENIMIENTO";
             BtnIndex.BackColor = Color.FromArgb(39, 40, 36);
             BtnOrders.BackColor = Color.FromArgb(39, 40, 36);
             BtnMaintenance.BackColor = Color.FromArgb(109, 119, 129);
@@ -218,13 +228,31 @@ namespace CSG.views
             OpenChildForm(new FrmTechnician());
         }
 
-        private void BtnLogout_Click_1(object sender, EventArgs e)
+        
+
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea cerrar sesión?", "Aviso del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes))
+            Console.WriteLine("Screen: " + Screen.PrimaryScreen.WorkingArea +
+                " | Size: " + this.Size);
+            MsgLogout msgLogout = new MsgLogout();
+            msgLogout.ShowDialog();
+            //Console.WriteLine(msgLogout.DialogResult.Equals(DialogResult.Yes));
+            if (msgLogout.DialogResult.Equals(DialogResult.Yes))
             {
                 this.Close();
             }
         }
+
+
+        /*MsgLogout msgLogout = new MsgLogout();
+            msgLogout.ShowDialog();
+            Console.WriteLine(msgLogout.DialogResult.Equals(DialogResult.Yes));
+            if (msgLogout.DialogResult.Equals(DialogResult.Yes))
+            {
+                this.Close();
+            }*/
+
+
 
         //private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
         //{

@@ -11,5 +11,6 @@ namespace CSG.persistence
     {
         bool UserLogin(string user, string pass);
         string UserRecoveryAccount(string account, string token);
+        void UserUpdate(User user);
     }
 }

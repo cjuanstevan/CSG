@@ -123,9 +123,9 @@ namespace CSG.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo_prueba1 {
+        internal static System.Drawing.Bitmap logo_prueba_edit {
             get {
-                object obj = ResourceManager.GetObject("logo_prueba1", resourceCulture);
+                object obj = ResourceManager.GetObject("logo_prueba_edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace CSG.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo_prueba2 {
+        internal static System.Drawing.Bitmap logo_prueba1 {
             get {
-                object obj = ResourceManager.GetObject("logo_prueba2", resourceCulture);
+                object obj = ResourceManager.GetObject("logo_prueba1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +196,36 @@ namespace CSG.Properties {
         internal static System.Drawing.Bitmap user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user32 {
+            get {
+                object obj = ResourceManager.GetObject("user32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user512 {
+            get {
+                object obj = ResourceManager.GetObject("user512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user64 {
+            get {
+                object obj = ResourceManager.GetObject("user64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
