@@ -13,7 +13,10 @@ namespace CSG.cache
         public static string UserAccount { get; set; }
         public static string UserPass { get; set; }
         public static string UserEmail { get; set; }
+        public static string UserToken { get; set; }
+        public static char UserUseToken { get; set; }
         public static string UserRol { get; set; }
         public static string UserRolDefinition { get; set; }
+        
     }
 }

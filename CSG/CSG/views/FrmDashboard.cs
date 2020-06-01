@@ -20,10 +20,20 @@ namespace CSG.views
         }
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
+            if (UserCache.UserUseToken.Equals('S'))
+            {
+                Console.WriteLine("DASHBOARD/Ingresa con token");
+                FrmChangePassword changePassword = new FrmChangePassword();
+                changePassword.ShowDialog();
+            }
             //Posicionamos el form
             //this.Location = new Point(-5, -5);
             //Cargamos datos de usuario
             LoadUserData();
+
+            //Preguntamos si viene de ingresar con token
+            
+            Console.WriteLine("DASHBOARD/Contraseña de sesion: " + UserCache.UserPass);
             //PERMISOS DE USUARIO
             //Si el usuario es Recepcionista
             if (UserCache.UserRol.Equals(Roles.REC))

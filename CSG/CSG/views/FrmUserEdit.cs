@@ -64,6 +64,7 @@ namespace CSG.views
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
+            var rsa = new cryptography.SystemSupportRSA();
             //Validamos que la contraseña actual coincida(OK)
 
             //validamos que escriba las dos contraseñas
@@ -77,10 +78,11 @@ namespace CSG.views
                     {
                         User_definition = txtusername.Text,
                         User_email = txtemail.Text,
-                        User_password = txtpass1.Text,
+                        User_password = rsa.GetMd5Hash(txtpass1.Text),
                         User_code = UserCache.UserCode
                     };
                     userLog.UserUpdate(user);
+                    FrmUserEdit_Load(sender, e);
                 }
                 else
                 {
@@ -113,7 +115,7 @@ namespace CSG.views
             Console.WriteLine("Limpiamos y activamos el txtpass1 y 2");
             txtpass1.Enabled = true;
             txtpass2.Enabled = true;
-            txtCurrenPass.Enabled = true;
+            //txtCurrenPass.Enabled = true;
             txtpass1.Clear();
             txtpass2.Clear();
             txtpass1.Focus();

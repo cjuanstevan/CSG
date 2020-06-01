@@ -40,9 +40,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelEdit = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtCurrenPass = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtnUpdate = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
@@ -73,10 +70,11 @@
             // 
             this.groupBox1.Controls.Add(this.panelData);
             this.groupBox1.Controls.Add(this.panelEdit);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.ForeColor = System.Drawing.Color.LightGray;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(934, 609);
+            this.groupBox1.Size = new System.Drawing.Size(982, 646);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mi perfil";
@@ -95,7 +93,7 @@
             this.panelData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelData.Location = new System.Drawing.Point(3, 16);
             this.panelData.Name = "panelData";
-            this.panelData.Size = new System.Drawing.Size(452, 590);
+            this.panelData.Size = new System.Drawing.Size(500, 627);
             this.panelData.TabIndex = 2;
             // 
             // BtnEdit
@@ -204,9 +202,6 @@
             // 
             this.panelEdit.AutoScroll = true;
             this.panelEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelEdit.Controls.Add(this.label15);
-            this.panelEdit.Controls.Add(this.label16);
-            this.panelEdit.Controls.Add(this.txtCurrenPass);
             this.panelEdit.Controls.Add(this.panel1);
             this.panelEdit.Controls.Add(this.label14);
             this.panelEdit.Controls.Add(this.label13);
@@ -226,48 +221,17 @@
             this.panelEdit.Controls.Add(this.txtusername);
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEdit.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelEdit.Location = new System.Drawing.Point(455, 16);
+            this.panelEdit.Location = new System.Drawing.Point(503, 16);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(476, 590);
+            this.panelEdit.Size = new System.Drawing.Size(476, 627);
             this.panelEdit.TabIndex = 1;
             this.panelEdit.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(81, 438);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(129, 16);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Contraseña actual";
-            // 
-            // label16
-            // 
-            this.label16.BackColor = System.Drawing.Color.DimGray;
-            this.label16.Location = new System.Drawing.Point(85, 483);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(278, 2);
-            this.label16.TabIndex = 28;
-            // 
-            // txtCurrenPass
-            // 
-            this.txtCurrenPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.txtCurrenPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCurrenPass.Enabled = false;
-            this.txtCurrenPass.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCurrenPass.ForeColor = System.Drawing.Color.DimGray;
-            this.txtCurrenPass.Location = new System.Drawing.Point(85, 460);
-            this.txtCurrenPass.Name = "txtCurrenPass";
-            this.txtCurrenPass.PasswordChar = '*';
-            this.txtCurrenPass.Size = new System.Drawing.Size(278, 20);
-            this.txtCurrenPass.TabIndex = 27;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.BtnUpdate);
             this.panel1.Controls.Add(this.BtnCancel);
-            this.panel1.Location = new System.Drawing.Point(71, 488);
+            this.panel1.Location = new System.Drawing.Point(75, 438);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(307, 75);
             this.panel1.TabIndex = 26;
@@ -509,9 +473,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private FontAwesome.Sharp.IconButton BtnEdit;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtCurrenPass;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnUpdate;
         private System.Windows.Forms.Button BtnCancel;

@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using CSG.logic;
+using CSG.cryptography;
+using System.Security.Cryptography;
 
 namespace CSG.views
 {
     public partial class FrmLogin : Form
     {
+        //Create a UnicodeEncoder to convert between byte array and string.
+        UnicodeEncoding ByteConverter = new UnicodeEncoding();
         private readonly UserLog userLog = new UserLog();
         public FrmLogin()
         {
@@ -90,19 +94,30 @@ namespace CSG.views
             {
                 if (txtpass.Text!="CONTRASEÑA")
                 {
-                    //Iniciamos sesión
-                    if (userLog.UserLogin(txtuser.Text,txtpass.Text))
+                    // Create a new instance of the AesManaged
+                    // class.  This generates a new key and initialization
+                    // vector (IV).
+                    using (AesManaged myAes = new AesManaged())
                     {
-                        FrmDashboard dashboard = new FrmDashboard();
-                        dashboard.Show();
-                        dashboard.FormClosed += Logout;
-                        this.Hide();
+                        var rsa = new cryptography.SystemSupportRSA();
+
+                        // Encrypt the string to an array of bytes.
+                        byte[] user_encrypted = rsa.EncryptStringToBytes_Aes(txtuser.Text, myAes.Key, myAes.IV);
+                        byte[] pass_encrypted = rsa.EncryptStringToBytes_Aes(txtpass.Text, myAes.Key, myAes.IV);
+
+                        //Iniciamos sesión
+                        if (userLog.UserLogin(user_encrypted,pass_encrypted,myAes.Key,myAes.IV))
+                        {
+                            FrmDashboard dashboard = new FrmDashboard();
+                            dashboard.Show();
+                            dashboard.FormClosed += Logout;
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MsgError("Usuario y/o contraseña incorrectos");
+                        }
                     }
-                    else
-                    {
-                        MsgError("Usuario y/o contraseña incorrectos");
-                    }
-                    
                 }
                 else
                 {

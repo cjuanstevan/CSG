@@ -22,7 +22,10 @@ namespace CSG.views
         private void BtnOk_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            if (txtPassValidate.Text.Equals(UserCache.UserPass))
+            
+            var rsa = new cryptography.SystemSupportRSA();
+            Console.WriteLine(rsa.GetMd5Hash(txtPassValidate.Text) + "=" + UserCache.UserPass);
+            if (rsa.GetMd5Hash(txtPassValidate.Text).Equals(UserCache.UserPass))
             {
                 //Permitimos editar contraseña
                 msg.txtpassActivator();

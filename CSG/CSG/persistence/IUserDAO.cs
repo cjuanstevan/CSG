@@ -9,8 +9,12 @@ namespace CSG.persistence
 {
     interface IUserDAO
     {
-        bool UserLogin(string user, string pass);
-        string UserRecoveryAccount(string account, string token);
+        bool UserLogin(byte[] cipheruser, byte[] cipherpass,
+            byte[] Key, byte[] IV);
+        string UserRecoveryAccount(byte[] ciphertoken, byte[] cipheraccuont,
+            byte[] Key, byte[] IV);
         void UserUpdate(User user);
+        void UserUpdatePass(byte[] cipherpass, byte[] ciphercode,
+            byte[] Key, byte[] IV);
     }
 }

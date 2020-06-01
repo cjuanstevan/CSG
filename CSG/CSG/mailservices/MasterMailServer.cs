@@ -32,7 +32,7 @@ namespace CSG.mailservices
         }
 
         
-        public void SendRecoveryMail(string username ,string user,string pass,string subject, string to)
+        public void SendRecoveryMail(string username ,string user,string token,string subject, string to)
         {
             string html =
                 "<html>" +
@@ -52,29 +52,10 @@ namespace CSG.mailservices
                 "haya ingresado al sistema.<br><br>" +
                 "<label style='text-decoration:underline;'>Datos de inicio de sesión:</label><br>" +
                 "<b>Usuario: </b>"+user+"<br>" +
-                "<b>Contraseña: </b>"+pass+
+                "<b>Token: </b>" + token +
                 "</div></div>" +
                 "</body></html>";
 
-
-            //string html =
-            //            "<html><head></head>" +
-            //            "<body style='background-color:rgba(58, 74, 64,1);'>" +
-            //            "<table style='width:100%;border: solid black 1px;'>" +
-            //            "<colgroup>" +
-            //            "<col style ='width:50%'/>" +
-            //            "<col style ='width:50%'/>" +
-            //            "</colgroup>" +
-            //            "<tr>" +
-            //            "<td><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4tqmCn2nY6hXvW-Dv1boChHFctGtJ4SE46HeW4O5bVCtLj1AX&usqp=CAU' title='logo_top'/><h2>Valsi de Colombia S.A</td></td>" +
-            //            "<td>" +
-            //            "</tr></table>"+
-            //            "<p>Señor(a) " + username +
-            //            "<br>ha solicitado recuperar su cuenta:<br>" +
-            //            "<b>Usuario: </b>" + user +"<br>"+
-            //            "<b>Contraseña: </b>" + pass +
-            //            "</p>" +
-            //            "</body></html>";
             MailMessage mailMessage = new MailMessage();
             try
             {

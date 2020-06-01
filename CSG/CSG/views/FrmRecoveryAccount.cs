@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cryptography;
+using System.Security.Cryptography;
 
 namespace CSG.views
 {
@@ -25,16 +27,29 @@ namespace CSG.views
             {
                 if (!txtToken.Text.Equals("TOKEN"))
                 {
-                    var request = userLog.UserRecoveryAccount(txtAccount.Text, txtToken.Text);
-                    string[] result = request.Split(',');
-                    if (result[0].Equals("s"))
+                    byte[] cipheraccount;
+                    byte[] ciphertoken;
+                    using (AesManaged myAes = new AesManaged())
                     {
-                        MsgOk(result[1]);
+                        var rsa = new cryptography.SystemSupportRSA();
+                        // Encrypt the string to an array of bytes.
+                        cipheraccount = rsa.EncryptStringToBytes_Aes(txtAccount.Text, myAes.Key, myAes.IV);
+                        ciphertoken = rsa.EncryptStringToBytes_Aes(txtToken.Text, myAes.Key, myAes.IV);
+                        var request = userLog.UserRecoveryAccount(ciphertoken, cipheraccount, myAes.Key, myAes.IV);
+                        string[] result = request.Split(',');
+                        if (result[0].Equals("s"))
+                        {
+                            MsgOk(result[1]);
+                        }
+                        else
+                        {
+                            MsgError(result[1]);
+                        }
+
                     }
-                    else
-                    {
-                        MsgError(result[1]);
-                    }
+
+
+                   
                     
                 }
                 else
