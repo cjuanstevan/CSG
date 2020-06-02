@@ -342,7 +342,7 @@ namespace CSG.views
                 //Actualizamos la cotización
                 cotizationLog.Update(cotization);
                 //Cambiamos el estado de la orden
-                orderLog.UpdateState(order.Order_number, "REVISIÓN");
+                orderLog.UpdateState(order.Order_number, "Revisión");
             }
         }
 

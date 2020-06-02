@@ -72,7 +72,7 @@ namespace CSG.views
             }
             //Formulario predeterminado
             //OpenChildForm(new FrmIndex());
-            BtnIndex_Click(sender, e);
+            BtnClients_Click(sender, e);
         }
 
         private void LoadUserData()

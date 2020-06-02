@@ -68,6 +68,8 @@
     <Compile Include="logic\CotizationLog.cs" />
     <Compile Include="logic\CotizationRefactionLog.cs" />
     <Compile Include="logic\CotizationServiceLog.cs" />
+    <Compile Include="logic\DepartmentLog.cs" />
+    <Compile Include="logic\MunicipalityLog.cs" />
     <Compile Include="logic\OrderArticleLog.cs" />
     <Compile Include="logic\OrderLog.cs" />
     <Compile Include="logic\RefactionLog.cs" />
@@ -82,6 +84,8 @@
     <Compile Include="model\Cotization.cs" />
     <Compile Include="model\Cotization_refactionFK.cs" />
     <Compile Include="model\Cotization_serviceFK.cs" />
+    <Compile Include="model\Department.cs" />
+    <Compile Include="model\Municipality.cs" />
     <Compile Include="model\Order.cs" />
     <Compile Include="model\Order_articleFK.cs" />
     <Compile Include="model\Role.cs" />
@@ -91,10 +95,14 @@
     <Compile Include="persistence\Cotization_serviceFKDAO.cs" />
     <Compile Include="persistence\DAOFactory.cs" />
     <Compile Include="persistence\Database.cs" />
+    <Compile Include="persistence\DepartmentDAO.cs" />
     <Compile Include="persistence\ICotization_refactionFKDAO.cs" />
     <Compile Include="persistence\ICotization_serviceFKDAO.cs" />
+    <Compile Include="persistence\IDepartmentDAO.cs" />
+    <Compile Include="persistence\IMunicipalityDAO.cs" />
     <Compile Include="persistence\ITaxDAO.cs" />
     <Compile Include="persistence\IUserDAO.cs" />
+    <Compile Include="persistence\MunicipalityDAO.cs" />
     <Compile Include="persistence\Order_articleFKDAO.cs" />
     <Compile Include="model\Refaction.cs" />
     <Compile Include="model\Service.cs" />

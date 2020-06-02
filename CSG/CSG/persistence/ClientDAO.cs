@@ -86,7 +86,7 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Client_Create(?,?,?,?,?,?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Client_Create(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = client.Client_id;
                 command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = client.Client_name;
@@ -99,6 +99,15 @@ namespace CSG.persistence
                 command.Parameters.Add("Tel1", OdbcType.VarChar, 50).Value = client.Client_tel1;
                 command.Parameters.Add("Tel2", OdbcType.VarChar, 50).Value = client.Client_tel2;
                 command.Parameters.Add("Email", OdbcType.VarChar, 50).Value = client.Client_email;
+                //Adds
+                command.Parameters.Add("RUT", OdbcType.VarChar, 50).Value = client.Client_rut;
+                command.Parameters.Add("Rlegal", OdbcType.VarChar, 50).Value = client.Client_rlegal;
+                command.Parameters.Add("Admin", OdbcType.VarChar, 50).Value = client.Client_adm;
+                command.Parameters.Add("WSite", OdbcType.VarChar, 50).Value = client.Client_website;
+                command.Parameters.Add("Postal", OdbcType.VarChar, 10).Value = client.Client_postal;
+                command.Parameters.Add("Fax", OdbcType.VarChar, 20).Value = client.Client_fax;
+                command.Parameters.Add("LEst", OdbcType.VarChar, 50).Value = client.Client_lstructure;
+                command.Parameters.Add("Type", OdbcType.NChar, 1).Value = client.Client_type;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Cliente creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

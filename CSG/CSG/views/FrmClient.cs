@@ -16,6 +16,8 @@ namespace CSG.views
     public partial class FrmClient : Form
     {
         private readonly ClientLog clientLog = new ClientLog();
+        private readonly DepartmentLog departmentLog = new DepartmentLog();
+        private readonly MunicipalityLog municipalityLog = new MunicipalityLog();
         public FrmClient()
         {
             InitializeComponent();
@@ -31,6 +33,231 @@ namespace CSG.views
         {
             txtId.Focus();
             //BtnReadAll_Click(sender, e);
+            cboTypeClient.SelectedIndex = 0;
+            //gpNatural.Visible = false;
+            LoadCboDpts();
+        }
+        private void LoadCboDpts()
+        {
+            List<string> dpts = departmentLog.Read_all_names();
+            foreach (var d in dpts)
+            {
+                cboDptoJ.Items.Add(d);
+                cboDptoN.Items.Add(d);
+            }
+
+            
+        }
+
+        private void MsgWarning(string msg)
+        {
+            lblMsg.Visible = true;
+            lblMsg.Text = "        " + msg;
+        }
+        private bool DataValidateJuridic()
+        {
+            if (txtNit.Text.Equals(""))
+            {
+                MsgWarning("Ingrese NIT");
+                txtNit.Focus();
+                return false;
+            }
+            if (txtRut.Text.Equals(""))
+            {
+                MsgWarning("Ingrese RUT");
+                txtRut.Focus();
+                return false;
+            }
+            if (txtTradename.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el nombre comercial");
+                txtTradename.Focus();
+                return false;
+            }
+            if (cboLestruct.Text.Equals(""))
+            {
+                MsgWarning("Seleccione la estructura jurídica");
+                cboLestruct.Focus();
+                return false;
+            }
+            if (txtRlegal.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el nombre del representante legal");
+                txtRlegal.Focus();
+                return false;
+            }
+            if (txtAdmin.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el nombre del administrador");
+                txtAdmin.Focus();
+                return false;
+            }
+            if (txtTel1.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el número telefónico del administrador");
+                txtTel1.Focus();
+                return false;
+            }
+            if (cboDptoJ.Text.Equals(""))
+            {
+                MsgWarning("Seleccione el departamento");
+                cboDptoJ.Focus();
+                return false;
+            }
+            if (cboCityJ.Text.Equals(""))
+            {
+                MsgWarning("Seleccione la ciudad o municipio");
+                cboCityJ.Focus();
+                return false;
+            }
+            if (txtAddresJ.Text.Equals(""))
+            {
+                MsgWarning("Ingrese la dirección");
+                txtAddresJ.Focus();
+                return false;
+            }
+            if (txtEmailJ.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el correo electrónico");
+                txtEmailJ.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private bool DataValidateNatural()
+        {
+            if (txtId.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el número de identificación");
+                txtId.Focus();
+                return false;
+            }
+            if (txtName.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el nombre");
+                txtName.Focus();
+                return false;
+            }
+            if (txtLastname1.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el primero apellido");
+                txtLastname1.Focus();
+                return false;
+            }
+            if (txtLastname2.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el segundo apellido");
+                txtLastname2.Focus();
+                return false;
+            }
+            if (cboDptoN.Text.Equals(""))
+            {
+                MsgWarning("Seleccione el departamento");
+                cboDptoN.Focus();
+                return false;
+            }
+            if (cboCityN.Text.Equals(""))
+            {
+                MsgWarning("Seleccione la ciudad o municipio");
+                cboCityN.Focus();
+                return false;
+            }
+            if (txtAddresN.Text.Equals(""))
+            {
+                MsgWarning("Ingrese la dirección de domicilio");
+                txtAddresN.Focus();
+                return false;
+            }
+            if (txtTel.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el número telefónico");
+                txtTel.Focus();
+                return false;
+            }
+            if (txtEmailN.Text.Equals(""))
+            {
+                MsgWarning("Ingrese el correo electrónico");
+                txtEmailN.Focus();
+                return false;
+            }
+            return true;
+        }
+        private void IbtnCreate_Click(object sender, EventArgs e)
+        {
+            
+            //validamos el tipo de accion del boton
+            if (IbtnCreate.Text.Equals("Crear"))
+            {
+                //Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+                //txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
+                //CleanFields();
+                //clientLog.Create(client);
+                //BtnReadAll_Click(sender, e);
+                //Si tipo empresa
+                if (cboTypeClient.SelectedIndex.Equals(0))
+                {
+                    //validamos los datos de Empresa
+                    if (DataValidateJuridic())
+                    {
+                        //creamos el objeto
+                        Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
+                            cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
+                            txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
+                            txtFax.Text, cboLestruct.Text, 'j');
+                        CleanFields();
+                        clientLog.Create(client);
+                        BtnReadAll_Click(sender, e);
+                    }
+                }
+                //Si tipo natural
+                else if (cboTypeClient.SelectedIndex.Equals(1))
+                {
+                    if (DataValidateNatural())
+                    {
+                        //creamos objeto
+                        Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+                            txtAddresN.Text, "predeterminado", cboCityN.Text, cboDptoN.Text, txtTel.Text,
+                            txtEmailN.Text, 'n');
+                        CleanFields();
+                        clientLog.Create(client);
+                        BtnReadAll_Click(sender, e);
+                    }
+                }
+            }
+
+
+
+            //if (txtId.Text.Equals(""))
+            //{
+            //    MessageBox.Show("El Id es obligatorio");
+            //    txtId.Focus();
+            //}
+            //else
+            //{
+            //    //validamos el tipo de accion del boton
+            //    if (IbtnCreate.Text.Equals("Crear"))
+            //    {
+            //        //Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+            //        //txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
+            //        //CleanFields();
+            //        //clientLog.Create(client);
+            //        //BtnReadAll_Click(sender, e);
+            //    }
+            //    else if (IbtnCreate.Text.Equals("Guardar"))
+            //    {
+            //        ////Guardamos
+            //        //Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+            //        // txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
+            //        //CleanFields();
+            //        //clientLog.Update(client);
+            //        //BtnReadAll_Click(sender, e);
+            //        ////cambiamos botones
+            //        //btnCreate.Text = "Crear";
+            //        //BtnDelete.Enabled = false;
+            //    }
+
+            //}
         }
 
         private void TxtId_Leave(object sender, EventArgs e)
@@ -49,57 +276,25 @@ namespace CSG.views
                         //Desactivamos los campos ineditables.
                         txtId.Enabled = false;
                         //Cambiamos el tipo de accion del boton
-                        btnCreate.Text = "Guardar";
+                        IbtnCreate.Text = "Guardar";
                         //Llenamos los campos.
                         txtId.Text = client.Client_id;
                         txtName.Text = client.Client_name;
                         txtLastname1.Text = client.Client_lastname1;
                         txtLastname2.Text = client.Client_lastname2;
-                        txtAddress.Text = client.Client_address;
-                        txtLocation.Text = client.Client_location;
-                        txtCity.Text = client.Client_city;
-                        txtDepartment.Text = client.Client_department;
-                        txtTel1.Text = client.Client_tel1;
-                        txtTel2.Text = client.Client_tel2;
-                        txtEmail.Text = client.Client_email;
+                        //txtAddress.Text = client.Client_address;
+                        txtLocationJ.Text = client.Client_location;
+                        txtAddresN.Text = client.Client_city;
+                        //txtDepartment.Text = client.Client_department;
+                        txtTel.Text = client.Client_tel1;
+                        txtTel1.Text = client.Client_tel2;
+                        txtEmailN.Text = client.Client_email;
                     }
                 }
             }
         }
 
-        private void BtnCreate_Click(object sender, EventArgs e)
-        {
-            if (txtId.Text.Equals(""))
-            {
-                MessageBox.Show("El Id es obligatorio");
-                txtId.Focus();
-            }
-            else
-            {
-                //validamos el tipo de accion del boton
-                if (btnCreate.Text.Equals("Crear"))
-                {
-                    Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-                    txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
-                    CleanFields();
-                    clientLog.Create(client);
-                    BtnReadAll_Click(sender, e);
-                }
-                else if (btnCreate.Text.Equals("Guardar"))
-                {
-                    //Guardamos
-                    Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-                     txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
-                    CleanFields();
-                    clientLog.Update(client);
-                    BtnReadAll_Click(sender, e);
-                    //cambiamos botones
-                    btnCreate.Text = "Crear";
-                    BtnDelete.Enabled = false;
-                }
-
-            }
-        }
+        
         //métodos locales
         private void CleanFields()
         {
@@ -107,57 +302,38 @@ namespace CSG.views
             txtName.Clear();
             txtLastname1.Clear();
             txtLastname2.Clear();
-            txtAddress.Clear();
-            txtLocation.Clear();
-            txtCity.Clear();
-            txtDepartment.Clear();
+            //txtAddress.Clear();
+            txtLocationJ.Clear();
+            txtAddresN.Clear();
+            //txtDepartment.Clear();
+            txtTel.Clear();
             txtTel1.Clear();
-            txtTel2.Clear();
-            txtEmail.Clear();
+            txtEmailN.Clear();
             txtId.Focus();
             txtId.ReadOnly = false;
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (txtId.Text != "")
-            {
-                DialogResult dr = MessageBox.Show("¿Desea eliminar el cliente " + txtId.Text + "?", "Mensaje",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
-                {
-                    //Eliminamos
-                    clientLog.Delete(txtId.Text);
-                    //habilita botones
-                    BtnDelete.Enabled = false;
-                    btnCreate.Text = "Crear";
-                    //Limpiamos campos
-                    CleanFields();
-                    //Actualizamos tabla
-                    BtnReadAll_Click(sender, e);
-                }
-            }
-        }
+        
 
         private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 txtId.ReadOnly = true;
-                btnCreate.Text = "Guardar";
-                BtnDelete.Enabled = true;
-                btnNew.Enabled = true;
+                IbtnCreate.Text = "Guardar";
+                IbtnDelete.Enabled = true;
+                IbtnNew.Enabled = true;
                 txtId.Text = DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtName.Text = DgvClient.Rows[e.RowIndex].Cells[1].Value.ToString();
                 txtLastname1.Text = DgvClient.Rows[e.RowIndex].Cells[2].Value.ToString();
                 txtLastname2.Text = DgvClient.Rows[e.RowIndex].Cells[3].Value.ToString();
-                txtAddress.Text = DgvClient.Rows[e.RowIndex].Cells[4].Value.ToString();
-                txtLocation.Text = DgvClient.Rows[e.RowIndex].Cells[5].Value.ToString();
-                txtCity.Text = DgvClient.Rows[e.RowIndex].Cells[6].Value.ToString();
-                txtDepartment.Text = DgvClient.Rows[e.RowIndex].Cells[7].Value.ToString();
-                txtTel1.Text = DgvClient.Rows[e.RowIndex].Cells[8].Value.ToString();
-                txtTel2.Text = DgvClient.Rows[e.RowIndex].Cells[9].Value.ToString();
-                txtEmail.Text = DgvClient.Rows[e.RowIndex].Cells[10].Value.ToString();
+                //txtAddress.Text = DgvClient.Rows[e.RowIndex].Cells[4].Value.ToString();
+                txtLocationJ.Text = DgvClient.Rows[e.RowIndex].Cells[5].Value.ToString();
+                txtAddresN.Text = DgvClient.Rows[e.RowIndex].Cells[6].Value.ToString();
+                //txtDepartment.Text = DgvClient.Rows[e.RowIndex].Cells[7].Value.ToString();
+                txtTel.Text = DgvClient.Rows[e.RowIndex].Cells[8].Value.ToString();
+                txtTel1.Text = DgvClient.Rows[e.RowIndex].Cells[9].Value.ToString();
+                txtEmailN.Text = DgvClient.Rows[e.RowIndex].Cells[10].Value.ToString();
             }
         }
 
@@ -205,9 +381,9 @@ namespace CSG.views
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            btnNew.Enabled = false;
-            btnCreate.Text = "Crear";
-            BtnDelete.Enabled = false;
+            IbtnNew.Enabled = false;
+            IbtnCreate.Text = "Crear";
+            IbtnDelete.Enabled = false;
             CleanFields();
             txtId.ReadOnly = false;
             txtId.Focus();
@@ -218,6 +394,78 @@ namespace CSG.views
             DgvClient.Columns.Clear();
             DgvClient.DataSource = clientLog.ReadAll();
             CreateHeaders();
+        }
+
+        private void CboTypeClient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTypeClient.SelectedIndex.Equals(0))
+            {
+                gpJuridic.Visible = true;
+                gpNatural.Visible = false;
+                gpJuridic.Location = new Point(11, 56);
+            }
+            else if (cboTypeClient.SelectedIndex.Equals(1))
+            {
+                gpJuridic.Visible = false;
+                gpNatural.Visible = true;
+            }
+        }
+
+        private void IbtnNew_Click(object sender, EventArgs e)
+        {
+            IbtnNew.Enabled = false;
+            IbtnCreate.Text = "Crear";
+            IbtnDelete.Enabled = false;
+            CleanFields();
+            txtId.ReadOnly = false;
+            txtId.Focus();
+        }
+
+        
+
+        private void IbtnDelete_Click(object sender, EventArgs e)
+        {
+            if (txtId.Text != "")
+            {
+                DialogResult dr = MessageBox.Show("¿Desea eliminar el cliente " + txtId.Text + "?", "Mensaje",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    //Eliminamos
+                    clientLog.Delete(txtId.Text);
+                    //habilita botones
+                    IbtnDelete.Enabled = false;
+                    IbtnCreate.Text = "Crear";
+                    //Limpiamos campos
+                    CleanFields();
+                    //Actualizamos tabla
+                    BtnReadAll_Click(sender, e);
+                }
+            }
+        }
+
+        private void CboDptoJ_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboCityJ.Text = "";
+            cboCityJ.Items.Clear();
+            //Console.WriteLine("index: {0} | index+1: {1}",cboDptoJ.SelectedIndex, cboDptoJ.SelectedIndex + 1);
+            List<Municipality> municipalities = municipalityLog.Read_mnps_of_dpt(byte.Parse((cboDptoJ.SelectedIndex + 1).ToString()));
+            foreach (var m in municipalities)
+            {
+                cboCityJ.Items.Add(m.Name);
+            }
+        }
+
+        private void CboDptoN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboCityN.Text = "";
+            cboCityN.Items.Clear();
+            //Console.WriteLine("index: {0} | index+1: {1}", cboDptoJ.SelectedIndex, cboDptoJ.SelectedIndex + 1);
+            List<Municipality> municipalities = municipalityLog.Read_mnps_of_dpt(byte.Parse((cboDptoN.SelectedIndex + 1).ToString()));
+            foreach (var m in municipalities)
+            {
+                cboCityN.Items.Add(m.Name);
+            }
         }
     }
 }
