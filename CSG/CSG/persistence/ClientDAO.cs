@@ -238,7 +238,15 @@ namespace CSG.persistence
                         Client_department = dataReader.GetString(7),
                         Client_tel1 = dataReader.GetString(8),
                         Client_tel2 = dataReader.GetString(9),
-                        Client_email = dataReader.GetString(10)
+                        Client_email = dataReader.GetString(10),
+                        Client_rut = dataReader.GetString(11),
+                        Client_rlegal = dataReader.GetString(12),
+                        Client_adm = dataReader.GetString(13),
+                        Client_website = dataReader.GetString(14),
+                        Client_postal = dataReader.GetString(15),
+                        Client_fax = dataReader.GetString(16),
+                        Client_lstructure = dataReader.GetString(17),
+                        Client_type = dataReader.GetChar(18)
                     };
                     clients.Add(client);
                 }
@@ -375,19 +383,17 @@ namespace CSG.persistence
                     command.Parameters.Add("@Fax", OdbcType.VarChar, 20).Value = client.Client_fax;
                     command.Parameters.Add("@LEst", OdbcType.VarChar, 5).Value = client.Client_lstructure;
                 }
-                else if (client.Client_type.Equals('j'))
+                else if (client.Client_type.Equals('n'))
                 {
-                    command.CommandText = "{call csg.Client_UpdateN(?,?,?,?,?,?,?,?,?,?,?)}";
+                    command.CommandText = "{call csg.Client_UpdateN(?,?,?,?,?,?,?,?,?)}";
                     command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = client.Client_id;
                     command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = client.Client_name;
                     command.Parameters.Add("Lastname1", OdbcType.VarChar, 50).Value = client.Client_lastname1;
                     command.Parameters.Add("Lastname2", OdbcType.VarChar, 50).Value = client.Client_lastname2;
                     command.Parameters.Add("Address", OdbcType.VarChar, 50).Value = client.Client_address;
-                    command.Parameters.Add("Location", OdbcType.VarChar, 50).Value = client.Client_location;
                     command.Parameters.Add("City", OdbcType.VarChar, 50).Value = client.Client_city;
                     command.Parameters.Add("Department", OdbcType.VarChar, 50).Value = client.Client_department;
                     command.Parameters.Add("Tel1", OdbcType.VarChar, 50).Value = client.Client_tel1;
-                    command.Parameters.Add("Tel2", OdbcType.VarChar, 50).Value = client.Client_tel2;
                     command.Parameters.Add("Email", OdbcType.VarChar, 50).Value = client.Client_email;
                 }
                 

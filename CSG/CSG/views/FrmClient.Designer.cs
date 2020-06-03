@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMsg = new System.Windows.Forms.Label();
             this.IbtnDelete = new FontAwesome.Sharp.IconButton();
@@ -88,7 +88,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.BtnReadAll = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.DgvClient = new System.Windows.Forms.DataGridView();
@@ -137,6 +136,7 @@
             // 
             // IbtnDelete
             // 
+            this.IbtnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IbtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IbtnDelete.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IbtnDelete.IconChar = FontAwesome.Sharp.IconChar.UserMinus;
@@ -154,6 +154,7 @@
             // 
             // IbtnCreate
             // 
+            this.IbtnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IbtnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IbtnCreate.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IbtnCreate.IconChar = FontAwesome.Sharp.IconChar.UserCheck;
@@ -171,6 +172,7 @@
             // 
             // IbtnNew
             // 
+            this.IbtnNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IbtnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IbtnNew.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IbtnNew.IconChar = FontAwesome.Sharp.IconChar.Plus;
@@ -187,6 +189,7 @@
             // 
             // cboTypeClient
             // 
+            this.cboTypeClient.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboTypeClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTypeClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboTypeClient.FormattingEnabled = true;
@@ -283,6 +286,7 @@
             // 
             // cboCityJ
             // 
+            this.cboCityJ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboCityJ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCityJ.FormattingEnabled = true;
             this.cboCityJ.Location = new System.Drawing.Point(402, 136);
@@ -293,6 +297,7 @@
             // cboDptoJ
             // 
             this.cboDptoJ.BackColor = System.Drawing.SystemColors.Window;
+            this.cboDptoJ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboDptoJ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDptoJ.FormattingEnabled = true;
             this.cboDptoJ.Location = new System.Drawing.Point(122, 136);
@@ -389,6 +394,7 @@
             // 
             // cboLestruct
             // 
+            this.cboLestruct.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboLestruct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLestruct.FormattingEnabled = true;
             this.cboLestruct.Items.AddRange(new object[] {
@@ -547,6 +553,7 @@
             // 
             // cboCityN
             // 
+            this.cboCityN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboCityN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCityN.FormattingEnabled = true;
             this.cboCityN.Location = new System.Drawing.Point(92, 114);
@@ -556,6 +563,7 @@
             // 
             // cboDptoN
             // 
+            this.cboDptoN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboDptoN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDptoN.FormattingEnabled = true;
             this.cboDptoN.Location = new System.Drawing.Point(92, 92);
@@ -699,7 +707,6 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.IbtnRefresh);
-            this.panel2.Controls.Add(this.BtnReadAll);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.txtSearch);
             this.panel2.Controls.Add(this.DgvClient);
@@ -709,16 +716,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(982, 338);
             this.panel2.TabIndex = 2;
-            // 
-            // BtnReadAll
-            // 
-            this.BtnReadAll.Location = new System.Drawing.Point(383, 32);
-            this.BtnReadAll.Name = "BtnReadAll";
-            this.BtnReadAll.Size = new System.Drawing.Size(75, 20);
-            this.BtnReadAll.TabIndex = 28;
-            this.BtnReadAll.Text = "Refrescar";
-            this.BtnReadAll.UseVisualStyleBackColor = true;
-            this.BtnReadAll.Click += new System.EventHandler(this.BtnReadAll_Click_1);
             // 
             // label14
             // 
@@ -754,14 +751,14 @@
             this.DgvClient.Location = new System.Drawing.Point(15, 58);
             this.DgvClient.Name = "DgvClient";
             this.DgvClient.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DgvClient.Size = new System.Drawing.Size(954, 267);
             this.DgvClient.TabIndex = 0;
             this.DgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
@@ -799,16 +796,16 @@
             // 
             // IbtnRefresh
             // 
+            this.IbtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IbtnRefresh.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.IbtnRefresh.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.IbtnRefresh.IconChar = FontAwesome.Sharp.IconChar.Sync;
             this.IbtnRefresh.IconColor = System.Drawing.Color.Black;
             this.IbtnRefresh.IconSize = 16;
-            this.IbtnRefresh.Location = new System.Drawing.Point(478, 28);
+            this.IbtnRefresh.Location = new System.Drawing.Point(383, 30);
             this.IbtnRefresh.Name = "IbtnRefresh";
             this.IbtnRefresh.Rotation = 0D;
             this.IbtnRefresh.Size = new System.Drawing.Size(75, 23);
             this.IbtnRefresh.TabIndex = 29;
-            this.IbtnRefresh.Text = "iconButton1";
             this.IbtnRefresh.UseVisualStyleBackColor = true;
             this.IbtnRefresh.Click += new System.EventHandler(this.IbtnRefresh_Click);
             // 
@@ -866,7 +863,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button BtnReadAll;
         private System.Windows.Forms.GroupBox gpNatural;
         private System.Windows.Forms.GroupBox gpJuridic;
         private System.Windows.Forms.Panel panel3;

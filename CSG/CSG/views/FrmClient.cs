@@ -27,11 +27,6 @@ namespace CSG.views
             InitializeComponent();
         }
 
-        private void BtnReadAll_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void FrmClient_Load(object sender, EventArgs e)
         {
             txtId.Focus();
@@ -39,7 +34,7 @@ namespace CSG.views
             cboTypeClient.SelectedIndex = 0;
             //gpNatural.Visible = false;
             LoadCboDpts();
-            ConstructTable();
+            //ConstructTable();
         }
         private void ConstructTable()
         {
@@ -51,6 +46,7 @@ namespace CSG.views
         {
             foreach (var c in clients)
             {
+                Console.WriteLine("lista(tipo): " + c.Client_type);
                 if (c.Client_type.Equals('j'))
                 {
                     row = dtc.NewRow();
@@ -267,7 +263,7 @@ namespace CSG.views
                     {
                         //creamos objeto
                         Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-                            txtAddresN.Text, "predeterminado", cboCityN.Text, cboDptoN.Text, txtTel.Text,
+                            txtAddresN.Text, cboCityN.Text, cboDptoN.Text, txtTel.Text,
                             txtEmailN.Text, 'n');
                         CleanFieldsN();
                         clientLog.Create(client);
@@ -280,23 +276,39 @@ namespace CSG.views
                 //cambiamos el ícono y texto a 'Guardar'
                 this.IbtnCreate.IconChar = FontAwesome.Sharp.IconChar.Save;
                 this.IbtnCreate.Text = "Guardar";
-                //Habilitamos los controles
-                txtNit.ReadOnly = true;
-                txtRut.ReadOnly = false;
-                txtTradename.ReadOnly = false;
-                cboLestruct.Enabled = true;
-                txtRlegal.ReadOnly = false;
-                txtAdmin.ReadOnly = false;
-                txtTel1.ReadOnly = false;
-                txtFax.ReadOnly = false;
-                txtPostal.ReadOnly = false;
-                txtWebsite.ReadOnly = false;
-                cboDptoJ.Enabled = true;
-                cboCityJ.Enabled = true;
-                txtAddresJ.ReadOnly = false;
-                txtLocationJ.ReadOnly = false;
-                txtEmailJ.ReadOnly = false;
-                txtTel2.ReadOnly = false;
+                if (cboTypeClient.SelectedIndex.Equals(0))
+                {
+                    //Habilitamos los controles de jurídico
+                    txtNit.ReadOnly = true;
+                    txtRut.ReadOnly = false;
+                    txtTradename.ReadOnly = false;
+                    cboLestruct.Enabled = true;
+                    txtRlegal.ReadOnly = false;
+                    txtAdmin.ReadOnly = false;
+                    txtTel1.ReadOnly = false;
+                    txtFax.ReadOnly = false;
+                    txtPostal.ReadOnly = false;
+                    txtWebsite.ReadOnly = false;
+                    cboDptoJ.Enabled = true;
+                    cboCityJ.Enabled = true;
+                    txtAddresJ.ReadOnly = false;
+                    txtLocationJ.ReadOnly = false;
+                    txtEmailJ.ReadOnly = false;
+                    txtTel2.ReadOnly = false;
+                }
+                else if (cboTypeClient.SelectedIndex.Equals(1))
+                {
+                    //Habilitamos los controles de natural
+                    txtId.ReadOnly = true;
+                    txtName.ReadOnly = false;
+                    txtLastname1.ReadOnly = false;
+                    txtLastname2.ReadOnly = false;
+                    cboDptoN.Enabled = true;
+                    cboCityN.Enabled = true;
+                    txtAddresN.ReadOnly = false;
+                    txtTel.ReadOnly = false;
+                    txtEmailN.ReadOnly = false;
+                }
             }
             else if (IbtnCreate.Text.Equals("Guardar"))
             {
@@ -305,56 +317,37 @@ namespace CSG.views
                     //validamos los datos de Empresa
                     if (DataValidateJuridic())
                     {
-                        //creamos el objeto
+                        //creamos el objeto jurídico
                         Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
                             cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
                             txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
                             txtFax.Text, cboLestruct.Text, 'j');
                         CleanFieldsJ();
                         clientLog.Update(client);
-                        BtnReadAll_Click(sender, e);
+                        IbtnRefresh_Click(sender, e);
                         //cambiamos botones
                         IbtnCreate.Text = "Crear";
                         IbtnDelete.Enabled = false;
                     }
                 }
-                
-                
-                
+                else if (cboTypeClient.SelectedIndex.Equals(1))
+                {
+                    if (DataValidateNatural())
+                    {
+                        //creamos objeto natural
+                        Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
+                            txtAddresN.Text, cboCityN.Text, cboDptoN.Text, txtTel.Text,
+                            txtEmailN.Text, 'n');
+                        CleanFieldsN();
+                        clientLog.Update(client);
+                        IbtnRefresh_Click(sender, e);
+                        //cambiamos botones
+                        IbtnCreate.Text = "Crear";
+                        IbtnDelete.Enabled = false;
+                    }
+                }
+                LoadCboDpts();
             }
-
-
-
-            //if (txtId.Text.Equals(""))
-            //{
-            //    MessageBox.Show("El Id es obligatorio");
-            //    txtId.Focus();
-            //}
-            //else
-            //{
-            //    //validamos el tipo de accion del boton
-            //    if (IbtnCreate.Text.Equals("Crear"))
-            //    {
-            //        //Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-            //        //txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
-            //        //CleanFields();
-            //        //clientLog.Create(client);
-            //        //BtnReadAll_Click(sender, e);
-            //    }
-            //    else if (IbtnCreate.Text.Equals("Guardar"))
-            //    {
-            //        ////Guardamos
-            //        //Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-            //        // txtAddress.Text, txtLocation.Text, txtCity.Text, txtDepartment.Text, txtTel1.Text, txtTel2.Text, txtEmail.Text);
-            //        //CleanFields();
-            //        //clientLog.Update(client);
-            //        //BtnReadAll_Click(sender, e);
-            //        ////cambiamos botones
-            //        //btnCreate.Text = "Crear";
-            //        //BtnDelete.Enabled = false;
-            //    }
-
-            //}
         }
 
         private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -407,13 +400,24 @@ namespace CSG.views
                     txtLocationJ.Text = client.Client_location;
                     txtEmailJ.Text = client.Client_email;
                     txtTel2.Text = client.Client_tel2;
-
                 }
                 //Si tipo N->mostramos el formulario de cliente natural
                 else if (client.Client_type.Equals('n'))
                 {
+                    //Inhabilitamos los controles
+                    txtId.ReadOnly = true;
+                    txtName.ReadOnly = true;
+                    txtLastname1.ReadOnly = true;
+                    txtLastname2.ReadOnly = true;
+                    cboDptoN.Enabled = false;
+                    cboCityN.Enabled = false;
+                    txtAddresN.ReadOnly = true;
+                    txtTel.ReadOnly = true;
+                    txtEmailN.ReadOnly = true;
+                    //Cambios el tipo a natural.
                     cboTypeClient.SelectedIndex = 1;
                     gpNatural.BringToFront();
+                    //Cargamos la informacion
                     txtId.Text = client.Client_id;
                     txtName.Text = client.Client_name;
                     txtLastname1.Text = client.Client_lastname1;
@@ -567,8 +571,13 @@ namespace CSG.views
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            DgvClient.DataSource = clientLog.Read_all_like(txtSearch.Text);
-            CreateHeaders();
+            //Limpiamos las rows
+            dtc = new DataTable();
+            CreateDataTable();
+            Console.WriteLine("Busca por: " + txtSearch.Text);
+            List<Client> clients = clientLog.Read_all_like(txtSearch.Text);
+            Console.WriteLine("Cantidad: " + clients.Count);
+            LoadDataTable(clients);
         }
 
         //Metodos de interfaz
@@ -645,7 +654,7 @@ namespace CSG.views
                     //Limpiamos campos
                     CleanFieldsN();
                     //Actualizamos tabla
-                    BtnReadAll_Click(sender, e);
+                    IbtnRefresh_Click(sender, e);
                 }
             }
         }

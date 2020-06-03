@@ -36,14 +36,13 @@ namespace CSG.model
         }
 
         //Constructor Cliente Natural
-        public Client(string client_id, string client_name, string client_lastname1, string client_lastname2, string client_address, string client_location, string client_city, string client_department, string client_tel1, string client_email, char client_type)
+        public Client(string client_id, string client_name, string client_lastname1, string client_lastname2, string client_address, string client_city, string client_department, string client_tel1, string client_email, char client_type)
         {
             Client_id = client_id;
             Client_name = client_name;
             Client_lastname1 = client_lastname1;
             Client_lastname2 = client_lastname2;
             Client_address = client_address;
-            Client_location = client_location;
             Client_city = client_city;
             Client_department = client_department;
             Client_tel1 = client_tel1;
