@@ -263,7 +263,7 @@ namespace CSG.views
             dto = new DataTable();
             //creamos el Datable
             CreateDataTable();
-
+            
             //Consulta todas (no tiene en cuenta fechas)
             if (ChbAll.Checked)
             {

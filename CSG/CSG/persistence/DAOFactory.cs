@@ -13,6 +13,7 @@ namespace CSG.persistence
         private static readonly ICotization_refactionFKDAO cotization_RefactionFKDAO = new Cotization_refactionFKDAO();
         private static readonly ICotization_serviceFKDAO cotization_ServiceFKDAO = new Cotization_serviceFKDAO();
         private static readonly ICotizationDAO cotizationDAO = new CotizationDAO();
+        private static readonly IDashboardDAO dashboardDAO = new DashboardDAO();
         private static readonly IDepartmentDAO departmentDAO = new DepartmentDAO();
         private static readonly IMunicipalityDAO municipalityDAO = new MunicipalityDAO();
         private static readonly IOrder_articleFKDAO order_ArticleFKDAO = new Order_articleFKDAO();
@@ -42,6 +43,10 @@ namespace CSG.persistence
         public static ICotizationDAO GetCotizationDAO()
         {
             return cotizationDAO;
+        }
+        public static IDashboardDAO GetDashboardDAO()
+        {
+            return dashboardDAO;
         }
         public static IDepartmentDAO GetDepartmentDAO()
         {

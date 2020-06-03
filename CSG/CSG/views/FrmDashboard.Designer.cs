@@ -46,6 +46,7 @@
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.PlLogo = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.PlTop = new System.Windows.Forms.Panel();
             this.IpbUser = new FontAwesome.Sharp.IconPictureBox();
@@ -55,15 +56,14 @@
             this.lblUserRol = new System.Windows.Forms.Label();
             this.LblNameMain = new System.Windows.Forms.Label();
             this.PlChildForm = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Plmain.SuspendLayout();
             this.PlMaintenaceSubmenu.SuspendLayout();
             this.PlOrdersSubmenu.SuspendLayout();
             this.PlLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IpbUser)).BeginInit();
             this.PnlUserDates.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Plmain
@@ -348,6 +348,16 @@
             this.PlLogo.Size = new System.Drawing.Size(265, 79);
             this.PlLogo.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::CSG.Properties.Resources.logo_prueba_edit;
+            this.pictureBox1.Location = new System.Drawing.Point(75, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(82, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -449,16 +459,6 @@
             this.PlChildForm.Size = new System.Drawing.Size(982, 646);
             this.PlChildForm.TabIndex = 2;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CSG.Properties.Resources.logo_prueba_edit;
-            this.pictureBox1.Location = new System.Drawing.Point(75, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(82, 43);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // FrmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -474,18 +474,19 @@
             this.Name = "FrmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Control de Servicios y Garantías";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmDashboard_Load);
             this.Plmain.ResumeLayout(false);
             this.PlMaintenaceSubmenu.ResumeLayout(false);
             this.PlOrdersSubmenu.ResumeLayout(false);
             this.PlLogo.ResumeLayout(false);
             this.PlLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.PlTop.ResumeLayout(false);
             this.PlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IpbUser)).EndInit();
             this.PnlUserDates.ResumeLayout(false);
             this.PnlUserDates.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

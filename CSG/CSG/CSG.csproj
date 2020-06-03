@@ -47,6 +47,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,10 +95,12 @@
     <Compile Include="persistence\Cotization_refactionFKDAO.cs" />
     <Compile Include="persistence\Cotization_serviceFKDAO.cs" />
     <Compile Include="persistence\DAOFactory.cs" />
+    <Compile Include="persistence\DashboardDAO.cs" />
     <Compile Include="persistence\Database.cs" />
     <Compile Include="persistence\DepartmentDAO.cs" />
     <Compile Include="persistence\ICotization_refactionFKDAO.cs" />
     <Compile Include="persistence\ICotization_serviceFKDAO.cs" />
+    <Compile Include="persistence\IDashboardDAO.cs" />
     <Compile Include="persistence\IDepartmentDAO.cs" />
     <Compile Include="persistence\IMunicipalityDAO.cs" />
     <Compile Include="persistence\ITaxDAO.cs" />
