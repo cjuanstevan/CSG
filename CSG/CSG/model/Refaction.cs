@@ -12,6 +12,7 @@ namespace CSG.model
         private string _refaction_description;
         private decimal _refaction_unit_price;
 
+
         public Refaction()
         {
 

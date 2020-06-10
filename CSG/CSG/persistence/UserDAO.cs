@@ -33,7 +33,7 @@ namespace CSG.persistence
                 dataReader = command.ExecuteReader();
                 if (dataReader.Read())
                 {
-                    UserCache.UserUseToken = dataReader.GetChar(8);
+                    UserCache.UserUseToken = dataReader.GetChar(11);
                     Console.WriteLine("Usa token: " + UserCache.UserUseToken);
                     if (rsa.GetMd5Hash(rsa.DecryptStringFromBytes_Aes(cipherpass, Key, IV)).Equals(dataReader.GetString(4)) &&
                         UserCache.UserUseToken.Equals('N'))
@@ -43,10 +43,10 @@ namespace CSG.persistence
                         UserCache.UserCode = dataReader.GetString(0);
                         UserCache.UserDefinition = dataReader.GetString(1);
                         UserCache.UserAccount = dataReader.GetString(2);
-                        UserCache.UserPass = dataReader.GetString(4);
                         UserCache.UserEmail = dataReader.GetString(3);
+                        UserCache.UserPass = dataReader.GetString(4);
                         UserCache.UserRol = dataReader.GetString(6);
-                        UserCache.UserRolDefinition = dataReader.GetString(10);
+                        UserCache.UserRolDefinition = dataReader.GetString(13);
                         return true;
                     }
                     //SI utiliza token esta en 'S'
@@ -58,10 +58,10 @@ namespace CSG.persistence
                         UserCache.UserCode = dataReader.GetString(0);
                         UserCache.UserDefinition = dataReader.GetString(1);
                         UserCache.UserAccount = dataReader.GetString(2);
-                        UserCache.UserPass = dataReader.GetString(4);
                         UserCache.UserEmail = dataReader.GetString(3);
+                        UserCache.UserPass = dataReader.GetString(4);
                         UserCache.UserRol = dataReader.GetString(6);
-                        UserCache.UserRolDefinition = dataReader.GetString(10);
+                        UserCache.UserRolDefinition = dataReader.GetString(13);
                         return true;
                     }
                 }

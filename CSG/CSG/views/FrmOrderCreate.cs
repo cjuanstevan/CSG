@@ -21,17 +21,63 @@ namespace CSG.views
         private readonly ClientLog clientLog = new ClientLog();
         private readonly CotizationLog cotizationLog = new CotizationLog();
         private readonly OrderArticleLog orderArticleLog = new OrderArticleLog();
+        private readonly CategoryLog categoryLog = new CategoryLog();
         //Objetos
-        Article article;
+        //Article article;
 
         //Arreglos
         readonly string[] PrOrder = { "RL", "GL", "RF", "GF", "SD" };
         //readonly string[] TyOrder = { "Reparación Local" };
+        private DataTable dtoa = new DataTable();
+        private DataColumn column;
+        private DataRow row;
         public FrmOrderCreate()
         {
             InitializeComponent();
         }
 
+        //Evento Load del formulario
+        private void FrmOrderCreate_Load(object sender, EventArgs e)
+        {
+            //estado predeterminado de los controles
+            cboType.SelectedIndex = 0;
+            cboWarranty.SelectedIndex = 1;
+            dtpDateReception.CustomFormat = ("yyyy-MM-dd HH:mm:ss");
+            LoadCboCategories();
+            CreateDataTable();
+            timer1.Start();
+
+            //PERMISOS DE USUARIO
+            //Si el usuario es Recepcionista
+            if (UserCache.UserRol.Equals(Roles.REC))
+            {
+
+            }
+            //Si el usuario es técnico
+            if (UserCache.UserRol.Equals(Roles.TEC))
+            {
+
+            }
+            //Si el usuario es jefe técnico
+            if (UserCache.UserRol.Equals(Roles.JTE))
+            {
+
+            }
+            //Si el usuario es administrador
+            if (UserCache.UserRol.Equals(Roles.ADM))
+            {
+
+            }
+        }
+        private void LoadCboCategories()
+        {
+            cboCategories.Items.Clear();
+            List<Category> categories = categoryLog.Read_all();
+            foreach (var c in categories)
+            {
+                cboCategories.Items.Add(c.Category_name);
+            }
+        }
         private void BtnClient_Click(object sender, EventArgs e)
         {
             CdoClient cdoClient = new CdoClient();
@@ -64,27 +110,20 @@ namespace CSG.views
             }
         }
 
-        private void BtnReadArticle_Click(object sender, EventArgs e)
-        {
-            CdoArticle cdoArticle = new CdoArticle();
-            cdoArticle.com = this;
-            cdoArticle.ShowDialog();
-        }
-
         private void TxtArticleCod_TextChanged(object sender, EventArgs e)
         {
             txtArticleDesc.Clear();
-            txtArticleModel.Clear();
-            txtArticleSerial.Clear();
-            txtArticleWarranty.Clear();
+            //txtArticleModel.Clear();
+            //txtArticleSerial.Clear();
+            //txtArticleWarranty.Clear();
             bool request = articleLog.Read_once_exist(txtArticleCod.Text);
             if (request)
             {
-                article = articleLog.Read_once(txtArticleCod.Text);
+                Article article = articleLog.Read_once(txtArticleCod.Text);
                 txtArticleDesc.Text = article.Article_description;
-                txtArticleModel.Text = article.Article_model;
-                txtArticleSerial.Text = article.Article_serial;
-                txtArticleWarranty.Text = article.Article_warranty.ToString();
+                //txtArticleModel.Text = article.Article_model;
+                //txtArticleSerial.Text = article.Article_serial;
+                //txtArticleWarranty.Text = article.Article_warranty.ToString();
             }
         }
 
@@ -168,36 +207,7 @@ namespace CSG.views
             txtArticleCod.Text = code;
         }
 
-        private void FrmOrderCreate_Load(object sender, EventArgs e)
-        {
-            //estado predeterminado de los controles
-            cboType.SelectedIndex = 0;
-            cboWarranty.SelectedIndex = 1;
-            dtpDateReception.CustomFormat = ("yyyy-MM-dd HH:mm:ss");
-            timer1.Start();
-
-            //PERMISOS DE USUARIO
-            //Si el usuario es Recepcionista
-            if (UserCache.UserRol.Equals(Roles.REC))
-            {
-                
-            }
-            //Si el usuario es técnico
-            if (UserCache.UserRol.Equals(Roles.TEC))
-            {
-
-            }
-            //Si el usuario es jefe técnico
-            if (UserCache.UserRol.Equals(Roles.JTE))
-            {
-
-            }
-            //Si el usuario es administrador
-            if (UserCache.UserRol.Equals(Roles.ADM))
-            {
-                
-            }
-        }
+        
 
         private void CboType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -206,11 +216,13 @@ namespace CSG.views
 
         private void CboWarranty_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //SI
             if (cboWarranty.SelectedIndex.Equals(0))
             {
                 txtInvoice.Enabled = true;
                 dtpSaleDate.Enabled = true;
             }
+            //NO
             else if (cboWarranty.SelectedIndex.Equals(1))
             {
                 txtInvoice.Enabled = false;
@@ -220,9 +232,7 @@ namespace CSG.views
 
         private void BtnReadTechnician_Click(object sender, EventArgs e)
         {
-            CdoTechnician cdoTechnician = new CdoTechnician();
-            cdoTechnician.com = this;
-            cdoTechnician.ShowDialog();
+           
         }
 
         public void TechnicianText(string id)
@@ -248,11 +258,9 @@ namespace CSG.views
             txtTechnicianId.Clear();
         }
 
-        private void Button5_Click(object sender, EventArgs e)
-        {
-            ResetControls(sender, e);
-        }
+       
 
+        //Evento del botón "Crear"
         private void IbtnCreate_Click(object sender, EventArgs e)
         {
             //DateTime localDate = DateTime.Now;
@@ -260,7 +268,7 @@ namespace CSG.views
             order.Order_number = txtNumber.Text;
             //DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
             order.Order_reception_date = DateTime.Parse(dtpDateReception.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-            order.Order_end_date = dtpDateReception.Value;
+            //order.Order_end_date = dtpDateReception.Value;
             order.Order_type = cboType.Text;
             //MessageBox.Show("Seleccionó " + cboWarranty.SelectedItem.ToString());
             order.Order_invoice = txtInvoice.Text;
@@ -268,8 +276,8 @@ namespace CSG.views
             {
                 order.Order_sale_date = dtpSaleDate.Value;
             }
-            //order.Order_state = "RECEPCIÓN";
-            //order.Order_comentarys = "";
+            //order.Order_state -> Se envia desde DAO
+            //order.Order_comentarys = ""; -> Por definir funcionalidad
             order.Order_report_client = txtReportClient.Text;
             //Técnico
             Technician t = technicianLog.Read_once(txtTechnicianId.Text);
@@ -288,16 +296,115 @@ namespace CSG.views
             Cotization cn = cotizationLog.Read_once(cotization.Cotization_id);
             //MessageBox.Show("Cotizacion: " + cn.Cotization_id);
             order.Cotization = cn;
+            //Capturamos el usuario que creará la orden
+            order.Create_by = UserCache.UserAccount;
+            //Capturamos el momento de la creacion
+            order.Create_date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             //Creación de orden
             orderLog.Create(order);
             //Creamos el order_article para que asigne el artículo sobre el cual se va a operar
-            Order_articleFK order_articleFK = new Order_articleFK
+            //En una orden van n articulos, estos se definen en la tabla
+            for (int i = 0; i < dtoa.Rows.Count; i++)
             {
-                Order = order,
-                Article = article
+                Order_articleFK order_articleFK = new Order_articleFK
+                {
+                    Order_number = order.Order_number,
+                    Article_code = dtoa.Rows[i][0].ToString(),
+                    Model = dtoa.Rows[i][2].ToString(),
+                    Especification = dtoa.Rows[i][3].ToString(),
+                    Serial = dtoa.Rows[i][4].ToString()
+                };
+                orderArticleLog.Create(order_articleFK);
+            }
+            //ResetControls(sender, e);
+        }
+
+
+        private void IbtnClient_Click(object sender, EventArgs e)
+        {
+            CdoClient cdoClient = new CdoClient();
+            cdoClient.com = this;
+            cdoClient.ShowDialog();
+        }
+
+        private void IbtnArticle_Click(object sender, EventArgs e)
+        {
+            CdoArticle cdoArticle = new CdoArticle();
+            cdoArticle.com = this;
+            cdoArticle.ShowDialog();
+        }
+
+        private void IbtnTechnician_Click(object sender, EventArgs e)
+        {
+            CdoTechnician cdoTechnician = new CdoTechnician();
+            cdoTechnician.com = this;
+            cdoTechnician.ShowDialog();
+        }
+        private void CreateDataTable()
+        {
+            //Columna 1->ID
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "CÓDIGO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = true
             };
-            orderArticleLog.Create(order_articleFK);
-            ResetControls(sender, e);
+            dtoa.Columns.Add(column);
+            // Columna 2->Cliente
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "DESCRIPCIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dtoa.Columns.Add(column);
+            // Columna 3->CIUDAD O MUNICIPIO
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "MODELO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dtoa.Columns.Add(column);
+            // Columna 4->departamento
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "ESPECIFICACIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dtoa.Columns.Add(column);
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "SERIAL",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dtoa.Columns.Add(column);
+            DgvOa.DataSource = dtoa;
+        }
+
+        private void IbtnAddArticle_Click(object sender, EventArgs e)
+        {
+            //Consultamos el articulo
+            Article article = articleLog.Read_once(txtArticleCod.Text);
+            row = dtoa.NewRow();
+            row[0] = article.Article_code;
+            row[1] = article.Article_description;
+            row[2] = txtArticleModel.Text;
+            row[3] = txtArticleEsp.Text;
+            row[4] = txtArticleSerial.Text;
+            dtoa.Rows.Add(row);
         }
     }
 }

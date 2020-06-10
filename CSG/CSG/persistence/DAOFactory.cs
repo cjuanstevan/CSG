@@ -9,6 +9,7 @@ namespace CSG.persistence
     class DAOFactory
     {
         private static readonly IArticleDAO articleDAO = new ArticleDAO();
+        private static readonly ICategoryDAO categoryDAO = new CategoryDAO();
         private static readonly IClientDAO clientDAO = new ClientDAO();
         private static readonly ICotization_refactionFKDAO cotization_RefactionFKDAO = new Cotization_refactionFKDAO();
         private static readonly ICotization_serviceFKDAO cotization_ServiceFKDAO = new Cotization_serviceFKDAO();
@@ -27,6 +28,10 @@ namespace CSG.persistence
         public static IArticleDAO GetArticleDAO()
         {
             return articleDAO;
+        }
+        public static ICategoryDAO GetCategoryDAO()
+        {
+            return categoryDAO;
         }
         public static IClientDAO GetClientDAO()
         {

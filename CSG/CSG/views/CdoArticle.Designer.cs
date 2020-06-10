@@ -60,12 +60,21 @@
             // 
             this.DgvArticle.AllowUserToAddRows = false;
             this.DgvArticle.AllowUserToDeleteRows = false;
+            this.DgvArticle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgvArticle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvArticle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvArticle.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvArticle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvArticle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DgvArticle.ColumnHeadersHeight = 40;
+            this.DgvArticle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgvArticle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DgvArticle.Location = new System.Drawing.Point(15, 50);
+            this.DgvArticle.MultiSelect = false;
             this.DgvArticle.Name = "DgvArticle";
             this.DgvArticle.ReadOnly = true;
+            this.DgvArticle.RowHeadersVisible = false;
             this.DgvArticle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvArticle.Size = new System.Drawing.Size(615, 243);
             this.DgvArticle.TabIndex = 1;
@@ -78,6 +87,7 @@
             this.txtSearch.Size = new System.Drawing.Size(268, 20);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
             // 
             // panel1
             // 

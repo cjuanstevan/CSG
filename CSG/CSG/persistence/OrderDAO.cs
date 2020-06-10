@@ -25,7 +25,7 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Order_Create(?,?,?,?,?,?,?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Order_Create(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("@Number", OdbcType.VarChar, 50).Value = order.Order_number;
                 command.Parameters.Add("@ReceptionDate", OdbcType.DateTime).Value = order.Order_reception_date;
@@ -45,7 +45,10 @@ namespace CSG.persistence
                 command.Parameters.Add("@ReportClient", OdbcType.VarChar, 1000).Value = order.Order_report_client;
                 command.Parameters.Add("@Technician", OdbcType.VarChar, 50).Value = order.Technician.Technician_id;
                 command.Parameters.Add("@Client", OdbcType.VarChar, 50).Value = order.Client.Client_id;
-                command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id; //"CT-RL5";
+                command.Parameters.Add("@Cotization", OdbcType.VarChar, 50).Value = order.Cotization.Cotization_id;
+                //Add
+                command.Parameters.Add("@CreateBy", OdbcType.VarChar, 50).Value = order.Create_by; 
+                command.Parameters.Add("@CreateDate", OdbcType.DateTime).Value = order.Create_date;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Orden creada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

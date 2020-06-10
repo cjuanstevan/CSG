@@ -23,12 +23,16 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Order_articleFK_Create(?,?)}"
+                    CommandText = "{call csg.Order_articleFK_Create(?,?,?,?,?)}"
                 };
-                command.Parameters.Add("Order", OdbcType.VarChar, 50).Value = order_articleFK.Order.Order_number;
-                command.Parameters.Add("Article", OdbcType.VarChar, 50).Value = order_articleFK.Article.Article_code;
+                command.Parameters.Add("Order", OdbcType.VarChar, 50).Value = order_articleFK.Order_number;
+                command.Parameters.Add("Article", OdbcType.VarChar, 50).Value = order_articleFK.Article_code;
+                //Agregar 3 campos por si es tanque o hidro
+                command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = order_articleFK.Model;
+                command.Parameters.Add("Esp", OdbcType.VarChar, 50).Value = order_articleFK.Especification;
+                command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = order_articleFK.Serial;
                 command.ExecuteNonQuery();
-                Console.WriteLine("CREATE-> order: " + order_articleFK.Order.Order_number + " | article: " + order_articleFK.Article.Article_code);
+                Console.WriteLine("CREATE-> order: " + order_articleFK.Order_number + " | article: " + order_articleFK.Article_code);
                 
             }
             catch (Exception ex)
@@ -80,25 +84,18 @@ namespace CSG.persistence
                     CommandText = "{call csg.Order_articleFK_ReadArticlesOfOrder(?)}"
                 };
                 command.Parameters.Add("OrderNumber", OdbcType.VarChar, 50).Value = order_number;
-                IOrderDAO orderDAO = new OrderDAO();
-                IArticleDAO articleDAO = new ArticleDAO();
-                //verificamos que exista la orden
-                if (orderDAO.Read_once_exist(order_number))
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    //consultamos el objeto Order                    
-                    Order order = orderDAO.Read_once(order_number);
-                    //ejecutamos la lectura del DataReader
-                    dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
+                    Order_articleFK order_ArticleFK = new Order_articleFK
                     {
-                        Order_articleFK order_ArticleFK = new Order_articleFK
-                        {
-                            Order = order
-                        };
-                        Article article = articleDAO.Read_once(dataReader.GetString(0));
-                        order_ArticleFK.Article = article;
-                        order_Articles.Add(order_ArticleFK);
-                    }
+                        Order_number = order_number,
+                        Article_code = dataReader.GetString(0),
+                        Model = dataReader.GetString(1),
+                        Especification = dataReader.GetString(2),
+                        Serial = dataReader.GetString(3)
+                    };
+                    order_Articles.Add(order_ArticleFK);
                 }
             }
             catch (Exception ex)

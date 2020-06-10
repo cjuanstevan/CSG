@@ -28,6 +28,10 @@ namespace CSG.model
         private string _client_fax;
         private string _client_lstructure;
         private char _client_type;
+        private string _create_by;
+        private DateTime _create_date;
+        private string _update_by;
+        private DateTime _update_date;
 
 
         public Client()
@@ -36,7 +40,10 @@ namespace CSG.model
         }
 
         //Constructor Cliente Natural
-        public Client(string client_id, string client_name, string client_lastname1, string client_lastname2, string client_address, string client_city, string client_department, string client_tel1, string client_email, char client_type)
+        public Client(string client_id, string client_name, string client_lastname1, string client_lastname2, 
+            string client_address, string client_city, string client_department, string client_tel1, 
+            string client_email, char client_type, string create_by,DateTime create_date, string update_by, 
+            DateTime update_date)
         {
             Client_id = client_id;
             Client_name = client_name;
@@ -48,10 +55,20 @@ namespace CSG.model
             Client_tel1 = client_tel1;
             Client_email = client_email;
             Client_type = client_type;
+            Create_by = create_by;
+            Create_date = create_date;
+            Update_by = update_by;
+            Update_date = update_date;
         }
 
+
+
         //Constructor Cliente Jurídico
-        public Client(string client_id, string client_name, string client_address, string client_location, string client_city, string client_department, string client_tel1, string client_tel2, string client_email, string client_rut, string client_rlegal, string client_adm, string client_website, string client_postal, string client_fax, string client_lstructure, char client_type)
+        public Client(string client_id, string client_name, string client_address, string client_location, 
+            string client_city, string client_department, string client_tel1, string client_tel2, string client_email,
+            string client_rut, string client_rlegal, string client_adm, string client_website, string client_postal,
+            string client_fax, string client_lstructure, char client_type, string create_by, DateTime create_date, 
+            string update_by, DateTime update_date)
         {
             Client_id = client_id;
             Client_name = client_name;
@@ -70,7 +87,12 @@ namespace CSG.model
             Client_fax = client_fax;
             Client_lstructure = client_lstructure;
             Client_type = client_type;
+            Create_by = create_by;
+            Create_date = create_date;
+            Update_by = update_by;
+            Update_date = update_date;
         }
+
 
         public string Client_id { get => _client_id; set => _client_id = value; }
         public string Client_name { get => _client_name; set => _client_name = value; }
@@ -91,9 +113,9 @@ namespace CSG.model
         public string Client_fax { get => _client_fax; set => _client_fax = value; }
         public string Client_lstructure { get => _client_lstructure; set => _client_lstructure = value; }
         public char Client_type { get => _client_type; set => _client_type = value; }
-        
-
-
-
+        public string Create_by { get => _create_by; set => _create_by = value; }
+        public DateTime Create_date { get => _create_date; set => _create_date = value; }
+        public string Update_by { get => _update_by; set => _update_by = value; }
+        public DateTime Update_date { get => _update_date; set => _update_date = value; }
     }
 }

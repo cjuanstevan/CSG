@@ -84,14 +84,14 @@
             // 
             this.txtuser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.txtuser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtuser.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtuser.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtuser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtuser.ForeColor = System.Drawing.Color.DimGray;
             this.txtuser.Location = new System.Drawing.Point(345, 122);
             this.txtuser.Name = "txtuser";
             this.txtuser.Size = new System.Drawing.Size(400, 20);
             this.txtuser.TabIndex = 1;
-            this.txtuser.Text = "JUAN";
+            this.txtuser.Text = "juan";
             this.txtuser.Enter += new System.EventHandler(this.Txtuser_Enter);
             this.txtuser.Leave += new System.EventHandler(this.Txtuser_Leave);
             // 

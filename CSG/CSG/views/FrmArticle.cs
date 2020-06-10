@@ -15,6 +15,7 @@ namespace CSG.views
     public partial class FrmArticle : Form
     {
         private readonly ArticleLog articleLog = new ArticleLog();
+        private readonly CategoryLog categoryLog = new CategoryLog();
         public FrmArticle()
         {
             InitializeComponent();
@@ -23,6 +24,12 @@ namespace CSG.views
         private void FrmArticle_Load(object sender, EventArgs e)
         {
             txtCode.Focus();
+            //carga de combobox
+            List<Category> categories = categoryLog.Read_all();
+            foreach (var c in categories)
+            {
+                cboCategory.Items.Add(c.Category_name);
+            }
         }
 
         private void BtnCreate_Click(object sender, EventArgs e)
@@ -36,16 +43,24 @@ namespace CSG.views
             {
                 if (btnCreate.Text.Equals("Crear"))
                 {
-                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text, txtSerial.Text, ushort.Parse(nudWarranty.Value.ToString()));
+                    //Category category = categoryLog.Read_once(byte.Parse((cboCategory.SelectedIndex + 1).ToString()));
+                    //Console.WriteLine("Categoria: " + category.Category_name);
+                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text,txtEsp.Text,
+                        txtSerial.Text, int.Parse(nudWarranty.Value.ToString()),category:Convert.ToByte(cboCategory.SelectedIndex + 1), 
+                        "prede",DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), 
+                        "", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                     CleanFields();
                     txtCode.Focus();
                     articleLog.Create(article);
-                    BtnReadAll_Click(sender, e);
+                    //BtnReadAll_Click(sender, e);
                 }
                 else if (btnCreate.Text.Equals("Guardar"))
                 {
+                    Category category = categoryLog.Read_once(byte.Parse((cboCategory.SelectedIndex + 1).ToString()));
                     //Guardamos
-                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text, txtSerial.Text, ushort.Parse(nudWarranty.Value.ToString()));
+                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text, txtEsp.Text, 
+                        txtSerial.Text, int.Parse(nudWarranty.Value.ToString()), category: Convert.ToByte(cboCategory.SelectedIndex + 1),
+                        "prede", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "", DateTime.Now);
                     CleanFields();
                     //cambiamos botones
                     txtCode.ReadOnly = false;
@@ -168,5 +183,7 @@ namespace CSG.views
                 }
             }
         }
+
+        
     }
 }

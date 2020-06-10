@@ -39,26 +39,38 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.DgvClient);
             this.panel1.Controls.Add(this.txtSearch);
-            this.panel1.Location = new System.Drawing.Point(22, 43);
+            this.panel1.Location = new System.Drawing.Point(12, 43);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(650, 317);
+            this.panel1.Size = new System.Drawing.Size(975, 358);
             this.panel1.TabIndex = 0;
             // 
             // DgvClient
             // 
             this.DgvClient.AllowUserToAddRows = false;
             this.DgvClient.AllowUserToDeleteRows = false;
+            this.DgvClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgvClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvClient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvClient.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvClient.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DgvClient.ColumnHeadersHeight = 40;
+            this.DgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgvClient.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DgvClient.Location = new System.Drawing.Point(15, 50);
+            this.DgvClient.MultiSelect = false;
             this.DgvClient.Name = "DgvClient";
             this.DgvClient.ReadOnly = true;
+            this.DgvClient.RowHeadersVisible = false;
             this.DgvClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvClient.Size = new System.Drawing.Size(615, 243);
+            this.DgvClient.Size = new System.Drawing.Size(940, 292);
             this.DgvClient.TabIndex = 1;
             this.DgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
             // 
@@ -69,6 +81,7 @@
             this.txtSearch.Size = new System.Drawing.Size(268, 20);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
             // 
             // label1
             // 
@@ -82,7 +95,7 @@
             // LblCreateClient
             // 
             this.LblCreateClient.AutoSize = true;
-            this.LblCreateClient.Location = new System.Drawing.Point(19, 9);
+            this.LblCreateClient.Location = new System.Drawing.Point(25, 9);
             this.LblCreateClient.Name = "LblCreateClient";
             this.LblCreateClient.Size = new System.Drawing.Size(66, 13);
             this.LblCreateClient.TabIndex = 4;
@@ -94,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 374);
+            this.ClientSize = new System.Drawing.Size(999, 413);
             this.Controls.Add(this.LblCreateClient);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -106,6 +119,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.CdoClient_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CdoClient_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvClient)).EndInit();

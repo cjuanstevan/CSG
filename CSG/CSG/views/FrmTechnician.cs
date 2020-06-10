@@ -32,17 +32,17 @@ namespace CSG.views
                 //validamos el tipo de accion del boton
                 if (btnCreate.Text.Equals("Crear"))
                 {
-                    Technician technician = new Technician(txtId.Text, txtName.Text, txtContact.Text, txtAlias.Text, txtTelephone.Text, txtPosition.Text);
+                    //Technician technician = new Technician(txtId.Text, txtName.Text, txtContact.Text, txtAlias.Text, txtTelephone.Text, txtPosition.Text);
                     CleanFields();
-                    technicianLog.Create(technician);
+                    //technicianLog.Create(technician);
                     BtnReadAll_Click(sender, e);
                 }
                 else if (btnCreate.Text.Equals("Guardar"))
                 {
                     //Guardamos
-                    Technician technician = new Technician(txtId.Text, txtName.Text, txtContact.Text, txtAlias.Text, txtTelephone.Text, txtPosition.Text);
+                    //Technician technician = new Technician(txtId.Text, txtName.Text, txtContact.Text, txtAlias.Text, txtTelephone.Text, txtPosition.Text);
                     CleanFields();
-                    technicianLog.Update(technician);
+                    //technicianLog.Update(technician);
                     BtnReadAll_Click(sender, e);
                     //cambiamos botones
                     btnCreate.Text = "Crear";

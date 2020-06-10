@@ -157,7 +157,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetString(3),
+                        Service_cost = dataReader.GetDecimal(3),
                         Service_type = dataReader.GetChar(4)
                     };
                     services.Add(service);
@@ -195,7 +195,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetString(3),
+                        Service_cost = dataReader.GetDecimal(3),
                         Service_type = dataReader.GetChar(4)
                     };
                     services.Add(service);
@@ -233,7 +233,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetString(3),
+                        Service_cost = dataReader.GetDecimal(3),
                         Service_type = dataReader.GetChar(4)
                     };
                 }

@@ -30,13 +30,19 @@ namespace CSG.persistence
                     {
                         Connection = Database.GetConn(),
                         CommandType = CommandType.StoredProcedure,
-                        CommandText = "{call csg.Article_Create(?,?,?,?,?)}"
+                        CommandText = "{call csg.Article_Create(?,?,?,?,?,?,?)}"
                     };
                     command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = a.Article_code;
                     command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = a.Article_description;
                     command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = a.Article_model;
                     command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = a.Article_serial;
-                    command.Parameters.Add("Warranty", OdbcType.SmallInt).Value = a.Article_warranty;
+                    command.Parameters.Add("Warranty", OdbcType.Int).Value = a.Article_warranty;
+                    //add
+                    command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = a.Create_by;
+                    command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = a.Create_date;
+                    //command.Parameters.Add("UpdateBy", OdbcType.DateTime).Value = null;
+                    //command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = null;
+
                     if (command.ExecuteNonQuery() > 0)
                     {
                         //registro quién se creó
@@ -79,14 +85,18 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Article_Create(?,?,?,?,?)}"
+                    CommandText = "{call csg.Article_Create(?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = article.Article_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = article.Article_description;
                 command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = article.Article_model;
+                command.Parameters.Add("Esp", OdbcType.VarChar, 50).Value = article.Article_esp;
                 command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = article.Article_serial;
-                command.Parameters.Add("Warranty", OdbcType.SmallInt).Value = article.Article_warranty;
-                
+                command.Parameters.Add("Warranty", OdbcType.Int).Value = article.Article_warranty;
+                command.Parameters.Add("Category", OdbcType.TinyInt).Value = article.Category;
+                //add
+                command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = article.Create_by;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = article.Create_date;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Artículo creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -99,7 +109,7 @@ namespace CSG.persistence
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Excepción controlada en ArticleDAO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Excepción controlada en ArticleDAOOOOOO->Create: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -157,10 +167,13 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        Article_model = dataReader.GetString(2),
-                        Article_serial = dataReader.GetString(3),
-                        Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
+                        Article_warranty = dataReader.GetInt32(5),
+                        Category = dataReader.GetByte(6)
                     };
+                    //CategoryDAO categoryDAO = new CategoryDAO();
+                    //Category category = new Category();
+                    //category = categoryDAO.Read_once(dataReader.GetByte(6));
+                    //article.Category = category;
                     articles.Add(article);
                 }
             }
@@ -195,9 +208,11 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        Article_model = dataReader.GetString(2),
-                        Article_serial = dataReader.GetString(3),
-                        Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
+                        Article_warranty = dataReader.GetInt32(5),
+                        Category = dataReader.GetByte(6)
+                        //Article_model = dataReader.GetString(2),
+                        //Article_serial = dataReader.GetString(3),
+                        //Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
                     };
                     articles.Add(article);
                 }
@@ -234,9 +249,15 @@ namespace CSG.persistence
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
                         Article_model = dataReader.GetString(2),
-                        Article_serial = dataReader.GetString(3),
-                        Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
+                        //(3) ESPECIFICACION
+                        Article_serial = dataReader.GetString(4),
+                        Article_warranty = dataReader.GetInt32(5),
+                        Category=dataReader.GetByte(6)
                     };
+                    //CategoryDAO categoryDAO = new CategoryDAO();
+                    //Category category = new Category();
+                    //category = categoryDAO.Read_once(dataReader.GetByte(6));
+                    //article.Category = category;
                 }
                 else
                 {

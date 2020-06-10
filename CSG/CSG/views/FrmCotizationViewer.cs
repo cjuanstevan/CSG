@@ -23,11 +23,17 @@ namespace CSG.views
         private readonly ServiceLog serviceLog = new ServiceLog();
         private readonly CotizationRefactionLog cotizationRefactionLog = new CotizationRefactionLog();
         private readonly RefactionLog refactionLog = new RefactionLog();
-        //Vars
+        //tabla articulos
+        DataTable dta = new DataTable();
+        //Tabla servicios y repuestos
         DataTable dtsr = new DataTable();
         DataColumn column;
         DataRow row;
         Order order;
+
+       
+        
+
         public FrmCotizationViewer()
         {
             InitializeComponent();
@@ -36,6 +42,7 @@ namespace CSG.views
         private void FrmCotizationViewer_Load(object sender, EventArgs e)
         {
             //Console.WriteLine("Orden: " + Order.Order_number_st);
+            //order = orderLog.Read_once(Order.Order_number_st);
             order = orderLog.Read_once(Order.Order_number_st);
             txtCotizationId.Text = order.Cotization.Cotization_id;
             txtOrderType.Text = order.Order_type;
@@ -54,10 +61,13 @@ namespace CSG.views
             txtClientTel2.Text = order.Client.Client_tel2;
             txtClientEmail.Text = order.Client.Client_email;
             //Agregamos el equipo
-            Article article = articleLog.Read_once(orderArticleLog.Read_code_article_of_order(Order.Order_number_st));
-            txtArticleCode.Text = article.Article_code;
-            txtArticleDescription.Text = article.Article_description;
-            CreateDataTable();
+            //Article article = articleLog.Read_once(orderArticleLog.Read_code_article_of_order(Order.Order_number_st));
+            //txtArticleCode.Text = article.Article_code;
+            //txtArticleDescription.Text = article.Article_description;
+            CreateDataTables();
+            //Agregamos los articulos
+            AddArticles();
+
             //Agregamos los servicios
             AddServices();
             //Agregamos los repuesto
@@ -77,6 +87,23 @@ namespace CSG.views
             lblTotal.Text = cotization.Cotization_total.ToString("C2");
         }
 
+        private void AddArticles()
+        {
+            List<Order_articleFK> order_ArticleFKs = orderArticleLog.Read_ArticlesOfOrder(Order.Order_number_st);
+            foreach (var oa in order_ArticleFKs)
+            {
+                Article article = articleLog.Read_once(oa.Article_code);
+                //Console.WriteLine("Articulos de orden: " + oa.Article_code);
+                row = dta.NewRow();
+                row[0] = oa.Article_code;
+                row[1] = article.Article_description;
+                row[2] = oa.Model;
+                row[3] = oa.Especification;
+                row[4] = oa.Serial;
+                dta.Rows.Add(row);
+            }
+        }
+
         private void AddServices()
         {
             List<Cotization_serviceFK> cotization_ServiceFKs = cotizationServiceLog.Read_ServicesOfCotization(txtCotizationId.Text);
@@ -89,8 +116,8 @@ namespace CSG.views
                 row[1] = service.Service_code;
                 row[2] = service.Service_activity;
                 row[3] = Int32.Parse("1");
-                row[4] = Decimal.Parse(service.Service_cost).ToString("C2");
-                row[5] = Decimal.Parse(service.Service_cost).ToString("C2");
+                row[4] = service.Service_cost.ToString("C2");
+                row[5] = service.Service_cost.ToString("C2");
                 dtsr.Rows.Add(row);
             }
         }
@@ -112,8 +139,63 @@ namespace CSG.views
             }
         }
 
-        private void CreateDataTable()
+        private void CreateDataTables()
         {
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "CODIGO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = true
+            };
+            dta.Columns.Add(column);
+            // Creamos la segunda columna y la agregamos al DataTable.
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "DESCRIPCIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            // Creamos la tercera columna y la agregamos al DataTable.
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "MODELO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            // Creamos la cuarta columna y la agregamos al DataTable.
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "ESPECIFICACIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            // Creamos la quinta columna y la agregamos al DataTable.
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "SERIAL",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            DgvArticles.DataSource = dta;
+
+
+
+
+
             /*******************SERVICES Y REFACTIONS*************************/
             //Creamos la primer columna y la agregamos al DataTable.
             column = new DataColumn
@@ -132,7 +214,7 @@ namespace CSG.views
                 ColumnName = "CÓDIGO",
                 AutoIncrement = false,
                 ReadOnly = true,
-                Unique = true
+                Unique = false
             };
             dtsr.Columns.Add(column);
             // Creamos la tercera columna y la agregamos al DataTable.
@@ -182,6 +264,9 @@ namespace CSG.views
         private void BtnSaveSendMail_Click(object sender, EventArgs e)
         {
             SendMail();
+            //Estado cambia a Esperando respuesta
+
+            //Cambio el estado de los botones
         }
         private void SendMail()
         {

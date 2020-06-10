@@ -37,7 +37,7 @@ namespace CSG.views
                 //validamos el tipo de accion del boton
                 if (btnCreate.Text.Equals("Crear"))
                 {
-                    Service service = new Service(txtCode.Text, txtActivity.Text, txtDuration.Text, txtCost.Text, char.Parse(txtType.Text));
+                    Service service = new Service(txtCode.Text, txtActivity.Text, txtDuration.Text, Convert.ToDecimal(txtCost.Text), char.Parse(txtType.Text));
                     CleanFields();
                     txtCode.Focus();
                     serviceLog.Create(service);
@@ -46,7 +46,7 @@ namespace CSG.views
                 else if (btnCreate.Text.Equals("Guardar"))
                 {
                     //Guardamos
-                    Service service = new Service(txtCode.Text, txtActivity.Text, txtDuration.Text, txtCost.Text, char.Parse(txtType.Text));
+                    Service service = new Service(txtCode.Text, txtActivity.Text, txtDuration.Text, Convert.ToDecimal(txtCost.Text), char.Parse(txtType.Text));
                     CleanFields();
                     txtCode.ReadOnly = false;
                     txtCode.Focus();

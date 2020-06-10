@@ -75,7 +75,9 @@ namespace CSG.views
                         Article_description = DgvVisor.Rows[i].Cells[1].Value.ToString(),
                         Article_model = DgvVisor.Rows[i].Cells[2].Value.ToString(),
                         Article_serial = DgvVisor.Rows[i].Cells[3].Value.ToString(),
-                        Article_warranty = ushort.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString())
+                        Article_warranty = int.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString()),
+                        Create_by = "Bulkload",
+                        Create_date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                     };
                     articles.Add(a);
                 }
@@ -145,7 +147,7 @@ namespace CSG.views
                         Service_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Service_activity = DgvVisor.Rows[i].Cells[1].Value.ToString(),
                         Service_duration = DgvVisor.Rows[i].Cells[2].Value.ToString(),
-                        Service_cost = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Service_cost = Convert.ToDecimal(DgvVisor.Rows[i].Cells[3].Value.ToString()),
                         Service_type = char.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString())
                     };
                     services.Add(s);
@@ -169,7 +171,9 @@ namespace CSG.views
                         Technician_contact = DgvVisor.Rows[i].Cells[2].Value.ToString(),
                         Technician_alias = DgvVisor.Rows[i].Cells[3].Value.ToString(),
                         Technician_telephone = DgvVisor.Rows[i].Cells[4].Value.ToString(),
-                        Technician_position = DgvVisor.Rows[i].Cells[5].Value.ToString()
+                        Technician_position = DgvVisor.Rows[i].Cells[5].Value.ToString(),
+                        Create_by = "Bulkload",
+                        Create_date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                     };
                     technicians.Add(t);
                 }

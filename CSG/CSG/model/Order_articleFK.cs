@@ -8,21 +8,31 @@ namespace CSG.model
 {
     class Order_articleFK
     {
-        private Order _order;
-        private Article _article;
+        private string _order_number;
+        private string _article_code;
+        private string _model;
+        private string _especification;
+        private string _serial;
 
         public Order_articleFK()
         {
 
         }
 
-        public Order_articleFK(Order order, Article article)
+        public Order_articleFK(string order_number, string article_code, string model, 
+            string especification, string serial)
         {
-            Order = order;
-            Article = article;
+            Order_number = order_number;
+            Article_code = article_code;
+            Model = model;
+            Especification = especification;
+            Serial = serial;
         }
 
-        internal Order Order { get => _order; set => _order = value; }
-        internal Article Article { get => _article; set => _article = value; }
+        public string Order_number { get => _order_number; set => _order_number = value; }
+        public string Article_code { get => _article_code; set => _article_code = value; }
+        public string Model { get => _model; set => _model = value; }
+        public string Especification { get => _especification; set => _especification = value; }
+        public string Serial { get => _serial; set => _serial = value; }
     }
 }

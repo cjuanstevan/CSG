@@ -68,7 +68,7 @@ namespace CSG.views
                     //    dto.Rows.Add(row);
                     //}
                     //si el estado es revision
-                    if (o.Order_state.Equals("Revisión"))
+                    if (o.Order_state.Equals("Cotizada"))
                     {
                         row = dto.NewRow();
                         row[0] = o.Order_number;
@@ -120,7 +120,7 @@ namespace CSG.views
                         dto.Rows.Add(row);
                     }
                     //si el estado es revision
-                    else if (o.Order_state.Equals("Revisión"))
+                    else if (o.Order_state.Equals("Cotizada"))
                     {
                         row = dto.NewRow();
                         row[0] = o.Order_number;

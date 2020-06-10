@@ -31,7 +31,7 @@ namespace CSG.persistence
                     {
                         Connection = Database.GetConn(),
                         CommandType = CommandType.StoredProcedure,
-                        CommandText = "{call csg.Technician_Create(?,?,?,?,?,?)}"
+                        CommandText = "{call csg.Technician_Create(?,?,?,?,?,?,?,?)}"
                     };
                     command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = t.Technician_id;
                     command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = t.Technician_name;
@@ -39,6 +39,9 @@ namespace CSG.persistence
                     command.Parameters.Add("Alias", OdbcType.VarChar, 50).Value = t.Technician_alias;
                     command.Parameters.Add("Telephone", OdbcType.VarChar, 50).Value = t.Technician_telephone;
                     command.Parameters.Add("Position", OdbcType.VarChar, 50).Value = t.Technician_position;
+                    //add
+                    command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = t.Create_by;
+                    command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = t.Create_date;
                     if (command.ExecuteNonQuery() > 0)
                     {
                         //registro quién se creó

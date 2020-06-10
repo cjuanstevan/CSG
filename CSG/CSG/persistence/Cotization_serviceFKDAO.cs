@@ -23,10 +23,15 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Cotization_serviceFK_Create(?,?)}"
+                    CommandText = "{call csg.Cotization_serviceFK_Create(?,?,?,?,?)}"
                 };
                 command.Parameters.Add("CotizationId", OdbcType.VarChar, 50).Value = cotization_serviceFK.Cotization_id;
                 command.Parameters.Add("ServiceCode", OdbcType.VarChar, 50).Value = cotization_serviceFK.Service_code;
+                //Adds
+                command.Parameters.Add("ActionOf", OdbcType.VarChar, 50).Value = cotization_serviceFK.Actionof;
+                command.Parameters.Add("Quantity", OdbcType.TinyInt).Value = cotization_serviceFK.Service_quantity;
+                command.Parameters.Add("Amount", OdbcType.Decimal).Value = cotization_serviceFK.Service_amount;
+
                 command.ExecuteNonQuery();
                 Console.WriteLine("CREATE-> cotization: " + cotization_serviceFK.Cotization_id + " | service: " + cotization_serviceFK.Service_code);
 

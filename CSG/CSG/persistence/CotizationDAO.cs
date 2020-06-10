@@ -23,11 +23,11 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Cotization_Create(?,?,?,?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Cotization_Create(?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = cotization.Cotization_id;
-                command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = null;
-                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
+                //command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = null;
+                //command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = null;
                 command.Parameters.Add("Quantity", OdbcType.SmallInt).Value = cotization.Cotization_quantity;
                 command.Parameters.Add("Comentarys", OdbcType.VarChar, 1000).Value = cotization.Cotization_comentarys;
                 command.Parameters.Add("Subtotal", OdbcType.Decimal).Value = cotization.Cotization_subtotal;
@@ -36,11 +36,13 @@ namespace CSG.persistence
                 command.Parameters.Add("Total", OdbcType.Decimal).Value = cotization.Cotization_total;
                 if (command.ExecuteNonQuery() > 0)
                 {
-                    MessageBox.Show("Cotización creada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Console.WriteLine("Cotización creada exitosamente");
+                    //MessageBox.Show("Cotización creada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("No se ha creado la cotización", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Console.WriteLine("No se ha creado la cotización");
+                    //MessageBox.Show("No se ha creado la cotización", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -104,7 +106,7 @@ namespace CSG.persistence
                         Cotization_id = dataReader.GetString(0),
                         Cotization_generation_date = dataReader.GetDateTime(1),
                         Cotization_expiration_date = dataReader.GetDateTime(2),
-                        Cotization_quantity = uint.Parse(dataReader.GetInt32(3).ToString()),
+                        Cotization_quantity = dataReader.GetByte(3),
                         Cotization_comentarys = dataReader.GetString(4),
                         Cotization_subtotal = dataReader.GetDecimal(5),
                         Cotization_discount = dataReader.GetDecimal(6),
@@ -150,7 +152,7 @@ namespace CSG.persistence
                         Cotization_id = dataReader.GetString(0),
                         //Cotization_generation_date = dataReader.GetDateTime(1),
                         //Cotization_expiration_date = dataReader.GetDateTime(2),
-                        Cotization_quantity = uint.Parse(dataReader.GetInt32(3).ToString()),
+                        Cotization_quantity = dataReader.GetByte(3),
                         Cotization_comentarys = dataReader.GetString(4),
                         Cotization_subtotal = dataReader.GetDecimal(5),
                         Cotization_discount = dataReader.GetDecimal(6),
@@ -216,7 +218,7 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Cotization_Update(?,?,?,?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Cotization_Update(?,?,?,?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = cotization.Cotization_id;
                 command.Parameters.Add("GenerationDate", OdbcType.DateTime).Value = cotization.Cotization_generation_date;
@@ -227,6 +229,9 @@ namespace CSG.persistence
                 command.Parameters.Add("Discount", OdbcType.Decimal).Value = cotization.Cotization_discount;
                 command.Parameters.Add("Iva", OdbcType.Decimal).Value = cotization.Cotization_iva;
                 command.Parameters.Add("Total", OdbcType.Decimal).Value = cotization.Cotization_total;
+                //Add
+                command.Parameters.Add("UpdateBy", OdbcType.VarChar, 50).Value = cotization.Update_by;
+                command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = cotization.Update_date;
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Cotización actualizada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
