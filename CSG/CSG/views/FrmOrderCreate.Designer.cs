@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.IbtnCreate = new FontAwesome.Sharp.IconButton();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.dtpDateReception = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.cboType = new System.Windows.Forms.ComboBox();
@@ -57,21 +56,21 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.IbtnAddArticle = new FontAwesome.Sharp.IconButton();
+            this.DgvOa = new System.Windows.Forms.DataGridView();
             this.cboCategories = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtArticleEsp = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblEsp = new System.Windows.Forms.Label();
             this.IbtnArticle = new FontAwesome.Sharp.IconButton();
             this.dtpSaleDate = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
             this.txtInvoice = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.cboWarranty = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblSerial = new System.Windows.Forms.Label();
             this.txtArticleSerial = new System.Windows.Forms.TextBox();
             this.txtArticleModel = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblModel = new System.Windows.Forms.Label();
             this.txtArticleDesc = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtArticleCod = new System.Windows.Forms.TextBox();
@@ -85,23 +84,28 @@
             this.txtClientId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.DgvOa = new System.Windows.Forms.DataGridView();
-            this.IbtnAddArticle = new FontAwesome.Sharp.IconButton();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblMsgArticle = new System.Windows.Forms.Label();
+            this.linkEmptyDatatable = new System.Windows.Forms.LinkLabel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvOa)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.dateTimePicker2);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.dtpDateReception);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cboType);
@@ -154,47 +158,24 @@
             this.IbtnCreate.UseVisualStyleBackColor = true;
             this.IbtnCreate.Click += new System.EventHandler(this.IbtnCreate_Click);
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(474, 40);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(477, 21);
-            this.dateTimePicker2.TabIndex = 13;
-            this.dateTimePicker2.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(330, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(106, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Fecha de entrega";
-            this.label8.Visible = false;
-            // 
             // dtpDateReception
             // 
-            this.dtpDateReception.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDateReception.Enabled = false;
             this.dtpDateReception.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateReception.Location = new System.Drawing.Point(475, 12);
+            this.dtpDateReception.Location = new System.Drawing.Point(578, 13);
+            this.dtpDateReception.Margin = new System.Windows.Forms.Padding(0);
             this.dtpDateReception.Name = "dtpDateReception";
-            this.dtpDateReception.Size = new System.Drawing.Size(477, 21);
+            this.dtpDateReception.Size = new System.Drawing.Size(130, 21);
             this.dtpDateReception.TabIndex = 11;
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(330, 16);
+            this.label7.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(470, 16);
+            this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 13);
+            this.label7.Size = new System.Drawing.Size(128, 14);
             this.label7.TabIndex = 10;
             this.label7.Text = "Fecha de recepción";
             // 
@@ -209,7 +190,8 @@
             "Reparación foránea",
             "Garantía foránea",
             "Solicitud de devolución"});
-            this.cboType.Location = new System.Drawing.Point(79, 13);
+            this.cboType.Location = new System.Drawing.Point(47, 13);
+            this.cboType.Margin = new System.Windows.Forms.Padding(0);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(174, 21);
             this.cboType.TabIndex = 9;
@@ -218,27 +200,30 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(14, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(33, 14);
             this.label6.TabIndex = 8;
             this.label6.Text = "Tipo";
             // 
             // txtNumber
             // 
             this.txtNumber.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtNumber.Location = new System.Drawing.Point(79, 38);
+            this.txtNumber.Location = new System.Drawing.Point(290, 13);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.ReadOnly = true;
-            this.txtNumber.Size = new System.Drawing.Size(174, 21);
+            this.txtNumber.Size = new System.Drawing.Size(153, 21);
             this.txtNumber.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 41);
+            this.label5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(249, 16);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.Size = new System.Drawing.Size(46, 14);
             this.label5.TabIndex = 6;
             this.label5.Text = "Orden";
             // 
@@ -404,7 +389,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 151);
+            this.label3.Location = new System.Drawing.Point(26, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 3;
@@ -415,46 +400,86 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.linkEmptyDatatable);
+            this.panel3.Controls.Add(this.lblMsgArticle);
             this.panel3.Controls.Add(this.IbtnAddArticle);
             this.panel3.Controls.Add(this.DgvOa);
             this.panel3.Controls.Add(this.cboCategories);
             this.panel3.Controls.Add(this.label22);
             this.panel3.Controls.Add(this.txtArticleEsp);
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.lblEsp);
             this.panel3.Controls.Add(this.IbtnArticle);
-            this.panel3.Controls.Add(this.dtpSaleDate);
-            this.panel3.Controls.Add(this.label18);
-            this.panel3.Controls.Add(this.txtInvoice);
-            this.panel3.Controls.Add(this.label17);
-            this.panel3.Controls.Add(this.cboWarranty);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.lblSerial);
             this.panel3.Controls.Add(this.txtArticleSerial);
             this.panel3.Controls.Add(this.txtArticleModel);
-            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.lblModel);
             this.panel3.Controls.Add(this.txtArticleDesc);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.txtArticleCod);
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Location = new System.Drawing.Point(17, 157);
+            this.panel3.Location = new System.Drawing.Point(17, 113);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(953, 217);
+            this.panel3.Size = new System.Drawing.Size(953, 204);
             this.panel3.TabIndex = 2;
+            // 
+            // IbtnAddArticle
+            // 
+            this.IbtnAddArticle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnAddArticle.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.IbtnAddArticle.IconColor = System.Drawing.Color.Black;
+            this.IbtnAddArticle.IconSize = 16;
+            this.IbtnAddArticle.Location = new System.Drawing.Point(17, 57);
+            this.IbtnAddArticle.Name = "IbtnAddArticle";
+            this.IbtnAddArticle.Rotation = 0D;
+            this.IbtnAddArticle.Size = new System.Drawing.Size(28, 22);
+            this.IbtnAddArticle.TabIndex = 1;
+            this.IbtnAddArticle.UseVisualStyleBackColor = true;
+            this.IbtnAddArticle.Click += new System.EventHandler(this.IbtnAddArticle_Click);
+            // 
+            // DgvOa
+            // 
+            this.DgvOa.AllowUserToAddRows = false;
+            this.DgvOa.AllowUserToDeleteRows = false;
+            this.DgvOa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DgvOa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvOa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.DgvOa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DgvOa.ColumnHeadersHeight = 20;
+            this.DgvOa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvOa.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvOa.Location = new System.Drawing.Point(17, 85);
+            this.DgvOa.MultiSelect = false;
+            this.DgvOa.Name = "DgvOa";
+            this.DgvOa.ReadOnly = true;
+            this.DgvOa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvOa.Size = new System.Drawing.Size(916, 108);
+            this.DgvOa.TabIndex = 22;
+            this.DgvOa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvOa_CellClick);
+            this.DgvOa.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DgvOa_CellPainting);
             // 
             // cboCategories
             // 
             this.cboCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCategories.FormattingEnabled = true;
-            this.cboCategories.Location = new System.Drawing.Point(75, 35);
+            this.cboCategories.Location = new System.Drawing.Point(61, 31);
             this.cboCategories.Name = "cboCategories";
-            this.cboCategories.Size = new System.Drawing.Size(132, 21);
+            this.cboCategories.Size = new System.Drawing.Size(155, 21);
             this.cboCategories.TabIndex = 21;
+            this.cboCategories.SelectedIndexChanged += new System.EventHandler(this.CboCategories_SelectedIndexChanged);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 38);
+            this.label22.Location = new System.Drawing.Point(15, 34);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(31, 13);
             this.label22.TabIndex = 20;
@@ -462,21 +487,23 @@
             // 
             // txtArticleEsp
             // 
-            this.txtArticleEsp.Location = new System.Drawing.Point(534, 36);
+            this.txtArticleEsp.Location = new System.Drawing.Point(534, 32);
             this.txtArticleEsp.Name = "txtArticleEsp";
             this.txtArticleEsp.Size = new System.Drawing.Size(125, 21);
             this.txtArticleEsp.TabIndex = 19;
+            this.txtArticleEsp.Visible = false;
             // 
-            // label1
+            // lblEsp
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblEsp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(442, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Especificación";
+            this.lblEsp.AutoSize = true;
+            this.lblEsp.Location = new System.Drawing.Point(442, 35);
+            this.lblEsp.Name = "lblEsp";
+            this.lblEsp.Size = new System.Drawing.Size(86, 13);
+            this.lblEsp.TabIndex = 18;
+            this.lblEsp.Text = "Especificación";
+            this.lblEsp.Visible = false;
             // 
             // IbtnArticle
             // 
@@ -496,18 +523,17 @@
             // 
             // dtpSaleDate
             // 
-            this.dtpSaleDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpSaleDate.Enabled = false;
-            this.dtpSaleDate.Location = new System.Drawing.Point(352, 188);
+            this.dtpSaleDate.Location = new System.Drawing.Point(343, 10);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(0);
             this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.Size = new System.Drawing.Size(582, 21);
+            this.dtpSaleDate.Size = new System.Drawing.Size(324, 21);
             this.dtpSaleDate.TabIndex = 14;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(349, 172);
+            this.label18.Location = new System.Drawing.Point(249, 13);
+            this.label18.Margin = new System.Windows.Forms.Padding(0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(94, 13);
             this.label18.TabIndex = 13;
@@ -515,78 +541,61 @@
             // 
             // txtInvoice
             // 
-            this.txtInvoice.Enabled = false;
-            this.txtInvoice.Location = new System.Drawing.Point(125, 188);
+            this.txtInvoice.Location = new System.Drawing.Point(71, 10);
+            this.txtInvoice.Margin = new System.Windows.Forms.Padding(0);
             this.txtInvoice.Name = "txtInvoice";
-            this.txtInvoice.Size = new System.Drawing.Size(205, 21);
+            this.txtInvoice.Size = new System.Drawing.Size(159, 21);
             this.txtInvoice.TabIndex = 12;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(122, 173);
+            this.label17.Location = new System.Drawing.Point(14, 10);
+            this.label17.Margin = new System.Windows.Forms.Padding(0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(66, 13);
             this.label17.TabIndex = 11;
             this.label17.Text = "Folio fiscal";
             // 
-            // cboWarranty
+            // lblSerial
             // 
-            this.cboWarranty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboWarranty.FormattingEnabled = true;
-            this.cboWarranty.Items.AddRange(new object[] {
-            "Sí",
-            "No"});
-            this.cboWarranty.Location = new System.Drawing.Point(17, 187);
-            this.cboWarranty.Name = "cboWarranty";
-            this.cboWarranty.Size = new System.Drawing.Size(82, 21);
-            this.cboWarranty.TabIndex = 10;
-            this.cboWarranty.SelectedIndexChanged += new System.EventHandler(this.CboWarranty_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(14, 173);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(98, 13);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Aplica garantía?";
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblSerial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(665, 39);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(40, 13);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "Serial";
+            this.lblSerial.AutoSize = true;
+            this.lblSerial.Location = new System.Drawing.Point(665, 35);
+            this.lblSerial.Name = "lblSerial";
+            this.lblSerial.Size = new System.Drawing.Size(40, 13);
+            this.lblSerial.TabIndex = 6;
+            this.lblSerial.Text = "Serial";
+            this.lblSerial.Visible = false;
             // 
             // txtArticleSerial
             // 
-            this.txtArticleSerial.Location = new System.Drawing.Point(711, 36);
+            this.txtArticleSerial.Location = new System.Drawing.Point(711, 32);
             this.txtArticleSerial.Name = "txtArticleSerial";
             this.txtArticleSerial.Size = new System.Drawing.Size(222, 21);
             this.txtArticleSerial.TabIndex = 7;
+            this.txtArticleSerial.Visible = false;
             // 
             // txtArticleModel
             // 
-            this.txtArticleModel.Location = new System.Drawing.Point(303, 36);
+            this.txtArticleModel.Location = new System.Drawing.Point(303, 32);
             this.txtArticleModel.Name = "txtArticleModel";
             this.txtArticleModel.Size = new System.Drawing.Size(119, 21);
             this.txtArticleModel.TabIndex = 5;
+            this.txtArticleModel.Visible = false;
             // 
-            // label13
+            // lblModel
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(229, 39);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 13);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "Modelo";
+            this.lblModel.AutoSize = true;
+            this.lblModel.Location = new System.Drawing.Point(234, 35);
+            this.lblModel.Name = "lblModel";
+            this.lblModel.Size = new System.Drawing.Size(47, 13);
+            this.lblModel.TabIndex = 4;
+            this.lblModel.Text = "Modelo";
+            this.lblModel.Visible = false;
             // 
             // txtArticleDesc
             // 
@@ -603,7 +612,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(224, 12);
+            this.label12.Location = new System.Drawing.Point(229, 11);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 2;
@@ -611,11 +620,14 @@
             // 
             // txtArticleCod
             // 
-            this.txtArticleCod.Location = new System.Drawing.Point(76, 8);
+            this.txtArticleCod.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtArticleCod.Location = new System.Drawing.Point(61, 8);
             this.txtArticleCod.Name = "txtArticleCod";
-            this.txtArticleCod.Size = new System.Drawing.Size(113, 21);
-            this.txtArticleCod.TabIndex = 1;
+            this.txtArticleCod.Size = new System.Drawing.Size(128, 21);
+            this.txtArticleCod.TabIndex = 0;
             this.txtArticleCod.TextChanged += new System.EventHandler(this.TxtArticleCod_TextChanged);
+            this.txtArticleCod.Enter += new System.EventHandler(this.TxtArticleCod_Enter);
+            this.txtArticleCod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtArticleCod_KeyDown);
             // 
             // label11
             // 
@@ -631,7 +643,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 72);
+            this.label2.Location = new System.Drawing.Point(26, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
@@ -648,9 +660,9 @@
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.txtClientId);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(18, 79);
+            this.panel2.Location = new System.Drawing.Point(18, 52);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(952, 69);
+            this.panel2.Size = new System.Drawing.Size(952, 46);
             this.panel2.TabIndex = 0;
             // 
             // IbtnClient
@@ -661,11 +673,12 @@
             this.IbtnClient.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.IbtnClient.IconColor = System.Drawing.Color.Black;
             this.IbtnClient.IconSize = 15;
-            this.IbtnClient.Location = new System.Drawing.Point(194, 11);
+            this.IbtnClient.Location = new System.Drawing.Point(194, 9);
             this.IbtnClient.Name = "IbtnClient";
             this.IbtnClient.Rotation = 0D;
             this.IbtnClient.Size = new System.Drawing.Size(21, 21);
-            this.IbtnClient.TabIndex = 8;
+            this.IbtnClient.TabIndex = 1000;
+            this.IbtnClient.TabStop = false;
             this.IbtnClient.UseVisualStyleBackColor = true;
             this.IbtnClient.Click += new System.EventHandler(this.IbtnClient_Click);
             // 
@@ -681,18 +694,19 @@
             // 
             this.txtClientName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtClientName.Location = new System.Drawing.Point(289, 11);
+            this.txtClientName.Location = new System.Drawing.Point(302, 10);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
-            this.txtClientName.Size = new System.Drawing.Size(643, 21);
-            this.txtClientName.TabIndex = 3;
+            this.txtClientName.Size = new System.Drawing.Size(630, 21);
+            this.txtClientName.TabIndex = 1000;
+            this.txtClientName.TabStop = false;
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(223, 15);
+            this.label10.Location = new System.Drawing.Point(249, 13);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(52, 13);
             this.label10.TabIndex = 2;
@@ -700,59 +714,76 @@
             // 
             // txtClientId
             // 
-            this.txtClientId.Location = new System.Drawing.Point(75, 12);
+            this.txtClientId.Location = new System.Drawing.Point(60, 10);
             this.txtClientId.Name = "txtClientId";
-            this.txtClientId.Size = new System.Drawing.Size(113, 21);
-            this.txtClientId.TabIndex = 1;
+            this.txtClientId.Size = new System.Drawing.Size(128, 21);
+            this.txtClientId.TabIndex = 0;
             this.txtClientId.TextChanged += new System.EventHandler(this.TxtClientId_TextChanged);
+            this.txtClientId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClientId_KeyDown);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 15);
+            this.label9.Location = new System.Drawing.Point(10, 13);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.Size = new System.Drawing.Size(46, 13);
             this.label9.TabIndex = 0;
-            this.label9.Text = "Identidad";
+            this.label9.Text = "ID/NIT";
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // DgvOa
+            // errorProvider1
             // 
-            this.DgvOa.AllowUserToAddRows = false;
-            this.DgvOa.AllowUserToDeleteRows = false;
-            this.DgvOa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // lblMsgArticle
+            // 
+            this.lblMsgArticle.AutoSize = true;
+            this.lblMsgArticle.Location = new System.Drawing.Point(62, 57);
+            this.lblMsgArticle.Name = "lblMsgArticle";
+            this.lblMsgArticle.Size = new System.Drawing.Size(48, 13);
+            this.lblMsgArticle.TabIndex = 24;
+            this.lblMsgArticle.Text = "label25";
+            // 
+            // linkEmptyDatatable
+            // 
+            this.linkEmptyDatatable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkEmptyDatatable.AutoSize = true;
+            this.linkEmptyDatatable.Location = new System.Drawing.Point(891, 69);
+            this.linkEmptyDatatable.Name = "linkEmptyDatatable";
+            this.linkEmptyDatatable.Size = new System.Drawing.Size(42, 13);
+            this.linkEmptyDatatable.TabIndex = 25;
+            this.linkEmptyDatatable.TabStop = true;
+            this.linkEmptyDatatable.Text = "Vaciar";
+            this.linkEmptyDatatable.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkEmptyDatatable_LinkClicked);
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DgvOa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvOa.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgvOa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.DgvOa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.DgvOa.ColumnHeadersHeight = 20;
-            this.DgvOa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.DgvOa.Location = new System.Drawing.Point(17, 85);
-            this.DgvOa.MultiSelect = false;
-            this.DgvOa.Name = "DgvOa";
-            this.DgvOa.ReadOnly = true;
-            this.DgvOa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvOa.Size = new System.Drawing.Size(916, 84);
-            this.DgvOa.TabIndex = 22;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.dtpSaleDate);
+            this.panel6.Controls.Add(this.label17);
+            this.panel6.Controls.Add(this.txtInvoice);
+            this.panel6.Controls.Add(this.label18);
+            this.panel6.Location = new System.Drawing.Point(18, 326);
+            this.panel6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(952, 48);
+            this.panel6.TabIndex = 15;
             // 
-            // IbtnAddArticle
+            // label1
             // 
-            this.IbtnAddArticle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.IbtnAddArticle.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.IbtnAddArticle.IconColor = System.Drawing.Color.Black;
-            this.IbtnAddArticle.IconSize = 16;
-            this.IbtnAddArticle.Location = new System.Drawing.Point(17, 57);
-            this.IbtnAddArticle.Name = "IbtnAddArticle";
-            this.IbtnAddArticle.Rotation = 0D;
-            this.IbtnAddArticle.Size = new System.Drawing.Size(28, 22);
-            this.IbtnAddArticle.TabIndex = 23;
-            this.IbtnAddArticle.UseVisualStyleBackColor = true;
-            this.IbtnAddArticle.Click += new System.EventHandler(this.IbtnAddArticle_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 320);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Solo garantías";
             // 
             // FrmOrderCreate
             // 
@@ -771,9 +802,12 @@
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvOa)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvOa)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -791,8 +825,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dtpDateReception;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtClientName;
@@ -800,20 +832,18 @@
         private System.Windows.Forms.TextBox txtClientId;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtArticleModel;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblModel;
         private System.Windows.Forms.TextBox txtArticleDesc;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtArticleCod;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtArticleSerial;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblSerial;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtReportClient;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtInvoice;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cboWarranty;
         private System.Windows.Forms.DateTimePicker dtpSaleDate;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label19;
@@ -833,10 +863,15 @@
         private FontAwesome.Sharp.IconButton IbtnArticle;
         private FontAwesome.Sharp.IconButton IbtnTechnician;
         private System.Windows.Forms.TextBox txtArticleEsp;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEsp;
         private System.Windows.Forms.ComboBox cboCategories;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.DataGridView DgvOa;
         private FontAwesome.Sharp.IconButton IbtnAddArticle;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblMsgArticle;
+        private System.Windows.Forms.LinkLabel linkEmptyDatatable;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -119,7 +119,7 @@ namespace CSG.views
                         row["ACCIONES"] = "COTIZAR";
                         dto.Rows.Add(row);
                     }
-                    //si el estado es revision
+                    //si el estado es cotizada
                     else if (o.Order_state.Equals("Cotizada"))
                     {
                         row = dto.NewRow();
@@ -130,6 +130,19 @@ namespace CSG.views
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
                         row["ACCIONES"] = "VER";
+                        dto.Rows.Add(row);
+                    }
+                    //si el estado es En espera
+                    else if (o.Order_state.Equals("En espera"))
+                    {
+                        row = dto.NewRow();
+                        row[0] = o.Order_number;
+                        row[1] = o.Order_reception_date;
+                        row[2] = o.Order_type;
+                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[4] = o.Technician.Technician_name;
+                        row[5] = o.Order_state;
+                        row["ACCIONES"] = "CANCELAR o ACEPTAR";
                         dto.Rows.Add(row);
                     }
                 }
@@ -242,6 +255,8 @@ namespace CSG.views
                         //Abrimos el form FrmCotizationViewer
                         FrmCotizationViewer frmCotizationViewer = new FrmCotizationViewer();
                         frmCotizationViewer.ShowDialog();
+                        frmCotizationViewer.FormClosed += Cerrar;
+                        //FrmOrderRead_Load(sender, e);
                     }
                     else if (DgvOrders.CurrentCell.Value.Equals("COTIZAR"))
                     {
@@ -255,6 +270,12 @@ namespace CSG.views
                 }
             }
             
+        }
+
+        private void Cerrar(object sender, FormClosedEventArgs e)
+        {
+            Console.WriteLine("Evento: " + e.CloseReason);
+            MessageBox.Show("HOlaaa");
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -461,5 +482,49 @@ namespace CSG.views
             }
             return collection;
         }
+
+        private void DgvOrders_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            //pintaDos(sender, e);
+        }
+        //private void pintaUno(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+        //    if (e.RowIndex < 0)
+        //        return;
+
+        //    //I supposed your button column is at index 0
+        //    if (e.ColumnIndex == 6)
+        //    {
+        //        e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+        //        var w = Properties.Resources.delete.Width;
+        //        var h = Properties.Resources.delete.Height;
+        //        var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+        //        var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+        //        e.Graphics.DrawImage(Properties.Resources.delete, new Rectangle(x, y, w, h));
+        //        e.Handled = true;
+        //    }
+        //}
+        //private void pintaDos(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+        //    if (e.RowIndex < 0)
+        //        return;
+
+        //    //I supposed your button column is at index 0
+        //    if (e.ColumnIndex == 6)
+        //    {
+        //        Console.WriteLine(DgvOrders.CurrentCell.Value);
+        //        e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+        //        var w = Properties.Resources.ok.Width;
+        //        var h = Properties.Resources.ok.Height;
+        //        var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+        //        var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+        //        e.Graphics.DrawImage(Properties.Resources.ok, new Rectangle(x, y, w, h));
+        //        e.Handled = true;
+        //    }
+        //}
     }
 }

@@ -30,6 +30,10 @@ namespace CSG.logic
         {
             DAOFactory.GetCotizationDAO().Update(cotization);
         }
+        public void UpdateExpirationDate(string id, DateTime expiration_date)
+        {
+            DAOFactory.GetCotizationDAO().UpdateExpirationDate(id, expiration_date);
+        }
         public void Delete(string id)
         {
             DAOFactory.GetCotizationDAO().Delete(id);

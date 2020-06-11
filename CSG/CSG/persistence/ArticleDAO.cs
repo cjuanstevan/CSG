@@ -248,11 +248,11 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        Article_model = dataReader.GetString(2),
+                        //(2) MODEL
                         //(3) ESPECIFICACION
-                        Article_serial = dataReader.GetString(4),
+                        //(4) SERIAL
                         Article_warranty = dataReader.GetInt32(5),
-                        Category=dataReader.GetByte(6)
+                        Category = dataReader.GetByte(6)
                     };
                     //CategoryDAO categoryDAO = new CategoryDAO();
                     //Category category = new Category();

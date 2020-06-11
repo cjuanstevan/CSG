@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 using CSG.model;
 
 namespace CSG.persistence
@@ -150,8 +151,8 @@ namespace CSG.persistence
                     cotization = new Cotization
                     {
                         Cotization_id = dataReader.GetString(0),
-                        //Cotization_generation_date = dataReader.GetDateTime(1),
-                        //Cotization_expiration_date = dataReader.GetDateTime(2),
+                        Cotization_generation_date = dataReader.GetDateTime(1),
+                        Cotization_expiration_date = dataReader.GetDateTime(2),
                         Cotization_quantity = dataReader.GetByte(3),
                         Cotization_comentarys = dataReader.GetString(4),
                         Cotization_subtotal = dataReader.GetDecimal(5),
@@ -232,6 +233,42 @@ namespace CSG.persistence
                 //Add
                 command.Parameters.Add("UpdateBy", OdbcType.VarChar, 50).Value = cotization.Update_by;
                 command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = cotization.Update_date;
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Cotización actualizada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha actualizado la cotización", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en CotizationDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+        }
+
+        public void UpdateExpirationDate(string id, DateTime expiration_date)
+        {
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Cotization_UpdateExpirationDate(?,?,?,?)}"
+                };
+                command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = id;
+                command.Parameters.Add("ExpirationDate", OdbcType.DateTime).Value = expiration_date;
+                
+                //Add
+                command.Parameters.Add("UpdateBy", OdbcType.VarChar, 50).Value = UserCache.UserAccount;
+                command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Cotización actualizada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -48,6 +48,8 @@ namespace CSG.views
             txtOrderType.Text = order.Order_type;
             txtOrderNumber.Text = order.Order_number;
             txtOrderState.Text = order.Order_state;
+            //Console.WriteLine("Cot_")
+            dtpGeneration.Value = order.Cotization.Cotization_generation_date;
             //Agregamos el cliente
             txtClientId.Text = order.Client.Client_id;
             txtClientName.Text = order.Client.Client_name;
@@ -260,19 +262,44 @@ namespace CSG.views
             DgvSr.DataSource = dtsr;
 
         }
-
+        private void UpdateOrderState()
+        {
+            orderLog.UpdateState(txtOrderNumber.Text, "En espera");
+        }
+        private void UpdateCotization()
+        {
+            cotizationLog.UpdateExpirationDate(txtCotizationId.Text, 
+                DateTime.Parse(dtpExpiration.Value.ToString("yyyy-MM-dd HH:mm:ss")));
+        }
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            DateValidate();
+        }
         private void BtnSaveSendMail_Click(object sender, EventArgs e)
         {
-            SendMail();
-            //Estado cambia a Esperando respuesta
-
-            //Cambio el estado de los botones
+            
+        }
+        private bool DateValidate()
+        {
+            //Console.WriteLine("Dia del año local: " + DateTime.Now.DayOfYear);
+            //Console.WriteLine("Dia del año expiration: " + dtpExpiration.Value.DayOfYear);
+            if (dtpExpiration.Value.DayOfYear >= DateTime.Now.DayOfYear)
+            {
+                //MessageBox.Show("", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar una fecha válida o mayor a la presente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
         }
         private void SendMail()
         {
             MailMessage message = new MailMessage();
             message.From = new MailAddress("cprueba369@gmail.com");
-            message.To.Add("cjuanstevan@gmail.com");
+            //message.To.Add("cjuanstevan@gmail.com");
+            message.To.Add(txtClientEmail.Text);
             message.Subject = "Cotización orden " + txtOrderNumber.Text;
             message.SubjectEncoding = Encoding.UTF8;
             message.Bcc.Add("juan-0192@hotmail.com");
@@ -381,6 +408,22 @@ namespace CSG.views
             catch (Exception ex)
             {
                 MessageBox.Show("Excepcioón en SendMail(): " + ex.Message);
+            }
+        }
+
+        private void IbtnSaveSend_Click(object sender, EventArgs e)
+        {
+            //Validamos que ingrese una fecha de expiración de la cotizacion
+            //mayor o igual a presente
+            if (DateValidate())
+            {
+                //Actualizamos la fecha de expiracion de la cotizacion
+                UpdateCotization();
+                //Enviamos el correo
+                SendMail();
+                //Estado cambia a Esperando respuesta
+                UpdateOrderState();
+                //Cambio el estado de los botones
             }
         }
     }

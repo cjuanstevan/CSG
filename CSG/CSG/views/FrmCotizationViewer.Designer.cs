@@ -45,7 +45,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnSaveSendMail = new System.Windows.Forms.Button();
             this.BtnUpdate = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnC = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dtpExpiration = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
@@ -84,6 +84,9 @@
             this.txtClientId = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DgvArticles = new System.Windows.Forms.DataGridView();
+            this.IbtnEdit = new FontAwesome.Sharp.IconButton();
+            this.IbtnSave = new FontAwesome.Sharp.IconButton();
+            this.IbtnSaveSend = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -245,15 +248,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtComentarys.Location = new System.Drawing.Point(19, 607);
             this.txtComentarys.Name = "txtComentarys";
+            this.txtComentarys.ReadOnly = true;
             this.txtComentarys.Size = new System.Drawing.Size(634, 111);
             this.txtComentarys.TabIndex = 1;
             this.txtComentarys.Text = "";
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.IbtnSaveSend);
+            this.panel2.Controls.Add(this.IbtnSave);
+            this.panel2.Controls.Add(this.IbtnEdit);
             this.panel2.Controls.Add(this.BtnSaveSendMail);
             this.panel2.Controls.Add(this.BtnUpdate);
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnC);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 745);
             this.panel2.Name = "panel2";
@@ -278,15 +285,16 @@
             this.BtnUpdate.TabIndex = 1;
             this.BtnUpdate.Text = "Guardar";
             this.BtnUpdate.UseVisualStyleBackColor = true;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
-            // button3
+            // btnC
             // 
-            this.button3.Location = new System.Drawing.Point(692, 15);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Atrás";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnC.Location = new System.Drawing.Point(692, 15);
+            this.btnC.Name = "btnC";
+            this.btnC.Size = new System.Drawing.Size(75, 23);
+            this.btnC.TabIndex = 0;
+            this.btnC.Text = "Atrás";
+            this.btnC.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -309,7 +317,7 @@
             this.groupBox4.Size = new System.Drawing.Size(954, 74);
             this.groupBox4.TabIndex = 98;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Información de la cotización";
+            this.groupBox4.Text = "Información general";
             // 
             // dtpExpiration
             // 
@@ -359,9 +367,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(626, 27);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(102, 13);
+            this.label15.Size = new System.Drawing.Size(108, 13);
             this.label15.TabIndex = 22;
-            this.label15.Text = "Fecha de recepción";
+            this.label15.Text = "Fecha de generación";
             // 
             // label2
             // 
@@ -661,6 +669,55 @@
             this.DgvArticles.Size = new System.Drawing.Size(941, 120);
             this.DgvArticles.TabIndex = 1;
             // 
+            // IbtnEdit
+            // 
+            this.IbtnEdit.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnEdit.IconChar = FontAwesome.Sharp.IconChar.Edit;
+            this.IbtnEdit.IconColor = System.Drawing.Color.Black;
+            this.IbtnEdit.IconSize = 16;
+            this.IbtnEdit.Location = new System.Drawing.Point(385, 14);
+            this.IbtnEdit.Name = "IbtnEdit";
+            this.IbtnEdit.Rotation = 0D;
+            this.IbtnEdit.Size = new System.Drawing.Size(75, 23);
+            this.IbtnEdit.TabIndex = 3;
+            this.IbtnEdit.Text = "Editar";
+            this.IbtnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IbtnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IbtnEdit.UseVisualStyleBackColor = true;
+            // 
+            // IbtnSave
+            // 
+            this.IbtnSave.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnSave.IconChar = FontAwesome.Sharp.IconChar.Save;
+            this.IbtnSave.IconColor = System.Drawing.Color.Black;
+            this.IbtnSave.IconSize = 16;
+            this.IbtnSave.Location = new System.Drawing.Point(466, 15);
+            this.IbtnSave.Name = "IbtnSave";
+            this.IbtnSave.Rotation = 0D;
+            this.IbtnSave.Size = new System.Drawing.Size(75, 23);
+            this.IbtnSave.TabIndex = 4;
+            this.IbtnSave.Text = "Guardar";
+            this.IbtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IbtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IbtnSave.UseVisualStyleBackColor = true;
+            // 
+            // IbtnSaveSend
+            // 
+            this.IbtnSaveSend.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnSaveSend.IconChar = FontAwesome.Sharp.IconChar.Envelope;
+            this.IbtnSaveSend.IconColor = System.Drawing.Color.Black;
+            this.IbtnSaveSend.IconSize = 16;
+            this.IbtnSaveSend.Location = new System.Drawing.Point(547, 15);
+            this.IbtnSaveSend.Name = "IbtnSaveSend";
+            this.IbtnSaveSend.Rotation = 0D;
+            this.IbtnSaveSend.Size = new System.Drawing.Size(124, 23);
+            this.IbtnSaveSend.TabIndex = 5;
+            this.IbtnSaveSend.Text = "Guardar y enviar";
+            this.IbtnSaveSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IbtnSaveSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IbtnSaveSend.UseVisualStyleBackColor = true;
+            this.IbtnSaveSend.Click += new System.EventHandler(this.IbtnSaveSend_Click);
+            // 
             // FrmCotizationViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,6 +727,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCotizationViewer";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmCotizationViewer";
             this.Load += new System.EventHandler(this.FrmCotizationViewer_Load);
@@ -698,7 +756,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button BtnSaveSendMail;
         private System.Windows.Forms.Button BtnUpdate;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnC;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DateTimePicker dtpGeneration;
         private System.Windows.Forms.Label label15;
@@ -748,5 +806,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView DgvArticles;
+        private FontAwesome.Sharp.IconButton IbtnSaveSend;
+        private FontAwesome.Sharp.IconButton IbtnSave;
+        private FontAwesome.Sharp.IconButton IbtnEdit;
     }
 }

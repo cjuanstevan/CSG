@@ -181,6 +181,7 @@
             this.DgvOrders.Size = new System.Drawing.Size(903, 617);
             this.DgvOrders.TabIndex = 4;
             this.DgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvOrders_CellClick);
+            this.DgvOrders.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DgvOrders_CellPainting);
             // 
             // BtnSearch
             // 
