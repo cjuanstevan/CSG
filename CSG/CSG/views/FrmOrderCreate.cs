@@ -390,10 +390,17 @@ namespace CSG.views
                     orderArticleLog.Create(order_articleFK);
                 }
                 //ResetControls(sender, e);
+                //Enviamos al caché la variable numero de orden
+                Order.Order_number_st = order.Order_number;
+                ViewReportOrderCreate();
             }
         }
 
-
+        private void ViewReportOrderCreate()
+        {
+            RptOrderCreate rpt = new RptOrderCreate();
+            rpt.ShowDialog();
+        }
         private void IbtnClient_Click(object sender, EventArgs e)
         {
             CdoClient cdoClient = new CdoClient();

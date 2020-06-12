@@ -41,9 +41,32 @@ namespace CSG.views
 
         private void FrmCotizationViewer_Load(object sender, EventArgs e)
         {
-            //Console.WriteLine("Orden: " + Order.Order_number_st);
-            //order = orderLog.Read_once(Order.Order_number_st);
             order = orderLog.Read_once(Order.Order_number_st);
+            //Si la orden es "en espera"D
+            if (order.Order_state.Equals("En espera"))
+            {
+                //Bloqueamos botones guardar y guardar & enviar
+                IbtnSave.Enabled = false;
+                IbtnSaveSend.Enabled = false;
+                //Visibilidad false botones anteriores
+                IbtnSave.Visible = false;
+                IbtnSaveSend.Visible = false;
+                //Movemos los botones a la posicion deseada
+                IbtnFacturar.Location = new Point(845, 21);
+                IbtnCancel.Location = new Point(764, 21);
+                IbtnEdit.Location = new Point(685, 21);
+            }
+            else if (order.Order_state.Equals("Cotizada"))
+            {
+                //Ocultamos los botones del if
+                IbtnFacturar.Visible = false;
+                IbtnCancel.Visible = false;
+                IbtnEdit.Visible = false;
+            }
+            else if(order.Order_state.Equals("Cancelada") || order.Order_state.Equals("Facturada"))
+            {
+                panel2.Visible = false;
+            }      
             txtCotizationId.Text = order.Cotization.Cotization_id;
             txtOrderType.Text = order.Order_type;
             txtOrderNumber.Text = order.Order_number;
@@ -273,11 +296,7 @@ namespace CSG.views
         }
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            DateValidate();
-        }
-        private void BtnSaveSendMail_Click(object sender, EventArgs e)
-        {
-            
+            //DateValidate();
         }
         private bool DateValidate()
         {
@@ -424,6 +443,31 @@ namespace CSG.views
                 //Estado cambia a Esperando respuesta
                 UpdateOrderState();
                 //Cambio el estado de los botones
+            }
+        }
+
+        private void IbtnCancel_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Abre msgCancel");
+            MsgOrderCancel cancel = new MsgOrderCancel();
+            cancel.ShowDialog();
+            if (cancel.DialogResult.Equals(DialogResult.Yes))
+            {
+                Console.WriteLine("Cancela la order");
+                //Se cancela la orden
+                orderLog.UpdateState(Order.Order_number_st, "Cancelada");
+            }
+        }
+
+        private void IbtnFacturar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Está seguro de facturar la orden "
+                + Order.Order_number_st + " y generar el documento?", "Cuadro de diálogo",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result.Equals(DialogResult.Yes))
+            {
+                //Cambiamos estado de orden a Facturada
+                orderLog.UpdateState(Order.Order_number_st, "Facturada");
             }
         }
     }

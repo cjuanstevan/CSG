@@ -24,6 +24,7 @@ namespace CSG.persistence
         bool Read_once_exist(string number);//ok
         uint Read_count();
         void Update(Order order);//ok
+        void UpdateComentarys(string number, string comentarys);
         void UpdateState(string number, string state);
         void Delete(string number);//ok
         List<Order> Read_all_like(string search);

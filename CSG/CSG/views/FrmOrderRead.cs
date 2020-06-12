@@ -133,7 +133,9 @@ namespace CSG.views
                         dto.Rows.Add(row);
                     }
                     //si el estado es En espera
-                    else if (o.Order_state.Equals("En espera"))
+                    else if (o.Order_state.Equals("En espera") 
+                        || o.Order_state.Equals("Cancelada") 
+                        || o.Order_state.Equals("Facturada"))
                     {
                         row = dto.NewRow();
                         row[0] = o.Order_number;
@@ -142,7 +144,7 @@ namespace CSG.views
                         row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
-                        row["ACCIONES"] = "CANCELAR o ACEPTAR";
+                        row["ACCIONES"] = "VER";
                         dto.Rows.Add(row);
                     }
                 }

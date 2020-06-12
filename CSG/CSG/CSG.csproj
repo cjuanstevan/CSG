@@ -146,6 +146,8 @@
     <Compile Include="PruebaEncriptar.Designer.cs">
       <DependentUpon>PruebaEncriptar.cs</DependentUpon>
     </Compile>
+    <Compile Include="report\MasterReportServer.cs" />
+    <Compile Include="report\SystemSupportReport.cs" />
     <Compile Include="validator\ValidateTextbox.cs" />
     <Compile Include="views\CdoArticle.cs">
       <SubType>Form</SubType>
@@ -281,11 +283,23 @@
     <Compile Include="views\MsgLogout.Designer.cs">
       <DependentUpon>MsgLogout.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\MsgOrderCancel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\MsgOrderCancel.Designer.cs">
+      <DependentUpon>MsgOrderCancel.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\Resol.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="views\Resol.Designer.cs">
       <DependentUpon>Resol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\RptOrderCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\RptOrderCreate.Designer.cs">
+      <DependentUpon>RptOrderCreate.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -366,8 +380,14 @@
     <EmbeddedResource Include="views\MsgLogout.resx">
       <DependentUpon>MsgLogout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\MsgOrderCancel.resx">
+      <DependentUpon>MsgOrderCancel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\Resol.resx">
       <DependentUpon>Resol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\RptOrderCreate.resx">
+      <DependentUpon>RptOrderCreate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -449,5 +469,6 @@
   <ItemGroup>
     <None Include="Resources\quit.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

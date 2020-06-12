@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 using CSG.model;
 
 namespace CSG.persistence
@@ -552,6 +553,41 @@ namespace CSG.persistence
             catch (Exception ex)
             {
                 MessageBox.Show("Excepción controlada en OrderDAO->Update: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+        }
+
+        public void UpdateComentarys(string number, string comentarys)
+        {
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_UpdateComentarys(?,?,?,?)}"
+                };
+                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = number;
+                command.Parameters.Add("Comentarys", OdbcType.VarChar, 1000).Value = comentarys;
+                command.Parameters.Add("UpdateBy", OdbcType.VarChar, 50).Value = UserCache.UserAccount;
+                command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    Console.WriteLine("Orden actualizada comentarios");
+                    //MessageBox.Show("Orden actualizada exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha actualizado la orden", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->UpdateState: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

@@ -77,7 +77,10 @@ namespace CSG.logic
         {
             DAOFactory.GetOrderDAO().UpdateState(number, state);
         }
-
+        public void UpdateComentarys(string number, string comentarys)
+        {
+            DAOFactory.GetOrderDAO().UpdateComentarys(number, comentarys);
+        }
         public void Delete(string number)
         {
             DAOFactory.GetOrderDAO().Delete(number);
