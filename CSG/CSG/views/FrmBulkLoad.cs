@@ -98,15 +98,13 @@ namespace CSG.views
                     {
                         Client_id = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Client_name = DgvVisor.Rows[i].Cells[1].Value.ToString(),
-                        Client_lastname1 = DgvVisor.Rows[i].Cells[2].Value.ToString(),
-                        Client_lastname2 = DgvVisor.Rows[i].Cells[3].Value.ToString(),
-                        Client_address = DgvVisor.Rows[i].Cells[4].Value.ToString(),
-                        Client_location = DgvVisor.Rows[i].Cells[5].Value.ToString(),
-                        Client_city = DgvVisor.Rows[i].Cells[6].Value.ToString(),
-                        Client_department = DgvVisor.Rows[i].Cells[7].Value.ToString(),
-                        Client_tel1 = DgvVisor.Rows[i].Cells[8].Value.ToString(),
-                        Client_tel2 = DgvVisor.Rows[i].Cells[9].Value.ToString(),
-                        Client_email = DgvVisor.Rows[i].Cells[10].Value.ToString()
+                        Client_address = DgvVisor.Rows[i].Cells[2].Value.ToString(),
+                        Client_location = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Client_city = DgvVisor.Rows[i].Cells[4].Value.ToString(),
+                        Client_department = DgvVisor.Rows[i].Cells[5].Value.ToString(),
+                        Client_tel1 = DgvVisor.Rows[i].Cells[6].Value.ToString(),
+                        Client_tel2 = DgvVisor.Rows[i].Cells[7].Value.ToString(),
+                        Client_email = DgvVisor.Rows[i].Cells[8].Value.ToString(),
                     };
                     clients.Add(c);
                 }

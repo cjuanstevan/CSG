@@ -20,11 +20,12 @@ namespace CSG.views
         private readonly ClientLog clientLog = new ClientLog();
         private readonly DepartmentLog departmentLog = new DepartmentLog();
         private readonly MunicipalityLog municipalityLog = new MunicipalityLog();
+        private readonly OrderLog orderLog = new OrderLog();
         //Tabla
         private DataTable dtc = new DataTable();
         private DataColumn column;
         private DataRow row;
-        //
+        //Estado en memoria del botón create
         private string stateButtonJ = "Crear";
         private string stateButtonN = "Crear";
         public FrmClient()
@@ -35,11 +36,8 @@ namespace CSG.views
         private void FrmClient_Load(object sender, EventArgs e)
         {
             txtId.Focus();
-            //BtnReadAll_Click(sender, e);
             cboTypeClient.SelectedIndex = 0;
-            //gpNatural.Visible = false;
             LoadCboDpts();
-            //ConstructTable();
         }
         private void ConstructTable()
         {
@@ -70,7 +68,7 @@ namespace CSG.views
                 {
                     row = dtc.NewRow();
                     row[0] = c.Client_id;
-                    row[1] = c.Client_name + " " + c.Client_lastname1 + " " + c.Client_lastname2;
+                    row[1] = c.Client_name;
                     row[2] = c.Client_city;
                     row[3] = c.Client_department;
                     row[4] = c.Client_address;
@@ -107,17 +105,31 @@ namespace CSG.views
             
         }
         //Muestra un mensaje de 3 segundos en el formulario
-        private void MsgRequest(string msg)
+        private void MsgSuccesfull(string msg)
         {
             if (lblMsg.Visible == false)
             {
                 lblMsg.Visible = true;
                 IpbCloseMsg.Visible = true;
+                lblMsg.Image = Properties.Resources.ok;
+                lblMsg.BackColor = Color.Green;
+                IpbCloseMsg.BackColor = Color.Green;
                 timerMsg.Start();
                 lblMsg.Text = "        " + msg;
             }
-            //lblMsg.Visible = true;
-            
+        }
+        private void MsgError(string msg)
+        {
+            if (lblMsg.Visible == false)
+            {
+                lblMsg.Visible = true;
+                IpbCloseMsg.Visible = true;
+                lblMsg.Image = Properties.Resources.error_equis;
+                lblMsg.BackColor = Color.Red;
+                IpbCloseMsg.BackColor = Color.Red;
+                timerMsg.Start();
+                lblMsg.Text = "        " + msg;
+            }
         }
         //Valida los campos obligatorios de juridico
         private bool DataValidateJuridic()
@@ -230,14 +242,14 @@ namespace CSG.views
                 errorProvider1.SetError(txtName, "Campo obligatorio");
                 return false;
             }
-            errorProvider1.Clear();
-            if (txtLastname1.Text.Equals(""))
-            {
-                //MsgWarning("Ingrese el primero apellido");
-                txtLastname1.Focus();
-                errorProvider1.SetError(txtLastname1, "Campo obligatorio");
-                return false;
-            }
+            //errorProvider1.Clear();
+            //if (txtLastname1.Text.Equals(""))
+            //{
+            //    //MsgWarning("Ingrese el primero apellido");
+            //    txtLastname1.Focus();
+            //    errorProvider1.SetError(txtLastname1, "Campo obligatorio");
+            //    return false;
+            //}
             errorProvider1.Clear();
             if (cboDptoN.Text.Equals(""))
             {
@@ -282,6 +294,8 @@ namespace CSG.views
             return true;
         }
 
+        
+
         //Evento del botón IbtnCreate
         private void IbtnCreate_Click(object sender, EventArgs e)
         {
@@ -294,18 +308,34 @@ namespace CSG.views
                     //validamos los campos de juridico
                     if (DataValidateJuridic())
                     {
-                        //creamos el objeto para jurídico
-                        Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
-                            cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
-                            txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
-                            txtFax.Text, cboLestruct.Text, 'j', UserCache.UserAccount,
-                            DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "", 
-                            DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                        CleanFieldsJ();
-                        LoadCboDpts();
-                        clientLog.Create(client);
-                        MsgRequest("Se ha creado el cliente exitosamente.");
-                        IbtnRefresh_Click(sender, e);
+                        //Validamos que el correo electrónico este escrito en el formato correcto
+                        if (ValidateTextbox.IsValidEmail(txtEmailJ.Text))
+                        {
+                            //Validamos que el correo no lo tenga otro cliente
+                            if (!clientLog.EqualMailings(txtEmailJ.Text))
+                            {
+                                //creamos el objeto para jurídico
+                                Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
+                                    cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
+                                    txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
+                                    txtFax.Text, cboLestruct.Text, 'j');
+                                CleanFieldsJ();
+                                LoadCboDpts();
+                                clientLog.Create(client);
+                                MsgSuccesfull("Se ha creado el cliente exitosamente.");
+                            }
+                            else
+                            {
+                                MsgError("El correo electrónico " + txtEmailJ.Text + " está asociado a otro cliente");
+                            }
+                            
+                        }
+                        else
+                        {
+                            //Está mal escrito
+                            MsgError("Verifique la dirección de correo electrónico.");
+                            errorProvider1.SetError(txtEmailJ, "ejemplo@dominio.extension (ejemplo@gmail.com)");
+                        }
                     }
                 }
                 //Si tipo natural
@@ -313,15 +343,27 @@ namespace CSG.views
                 {
                     if (DataValidateNatural())
                     {
-                        //creamos objeto
-                        Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-                            txtAddresN.Text, cboCityN.Text, cboDptoN.Text, txtTel.Text,
-                            txtEmailN.Text, 'n', UserCache.UserAccount, DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                        CleanFieldsN();
-                        LoadCboDpts();
-                        clientLog.Create(client);
-                        MsgRequest("Se ha creado el cliente exitosamente.");
-                        IbtnRefresh_Click(sender, e);
+                        if (ValidateTextbox.IsValidEmail(txtEmailN.Text))
+                        {
+                            if (!clientLog.EqualMailings(txtEmailN.Text))
+                            {
+                                Client client = new Client(txtId.Text, txtName.Text, txtAddresN.Text, cboCityN.Text,
+                                    cboDptoN.Text, txtTel.Text, txtEmailN.Text, 'n');
+                                CleanFieldsN();
+                                LoadCboDpts();
+                                clientLog.Create(client);
+                                MsgSuccesfull("Se ha creado el cliente exitosamente.");
+                            }
+                            else
+                            {
+                                MsgError("El correo electrónico " + txtEmailN.Text + " está asociado a otro cliente");
+                            }
+                        }
+                        else
+                        {
+                            MsgError("Verifique la dirección de correo electrónico.");
+                            errorProvider1.SetError(txtEmailN, "ejemplo@dominio.extension (ejemplo@gmail.com)");
+                        }
                     }
                 }
                 
@@ -336,128 +378,126 @@ namespace CSG.views
                     //Estado interno del boton Crear
                     stateButtonJ = "Guardar";
                     //Habilitamos los controles de jurídico
-                    txtNit.ReadOnly = true;
-                    txtRut.ReadOnly = false;
-                    txtTradename.ReadOnly = false;
-                    cboLestruct.Enabled = true;
-                    txtRlegal.ReadOnly = false;
-                    txtAdmin.ReadOnly = false;
-                    txtTel1.ReadOnly = false;
-                    txtFax.ReadOnly = false;
-                    txtPostal.ReadOnly = false;
-                    txtWebsite.ReadOnly = false;
-                    cboDptoJ.Enabled = true;
-                    cboCityJ.Enabled = true;
-                    txtAddresJ.ReadOnly = false;
-                    txtLocationJ.ReadOnly = false;
-                    txtEmailJ.ReadOnly = false;
-                    txtTel2.ReadOnly = false;
+                    ActiveFieldsClientJ();
+                    
                 }
                 else if (cboTypeClient.SelectedIndex.Equals(1))
                 {
                     //Estado interno del boton Crear
                     stateButtonN = "Guardar";
                     //Habilitamos los controles de natural
-                    txtId.ReadOnly = true;
-                    txtName.ReadOnly = false;
-                    txtLastname1.ReadOnly = false;
-                    txtLastname2.ReadOnly = false;
-                    cboDptoN.Enabled = true;
-                    cboCityN.Enabled = true;
-                    txtAddresN.ReadOnly = false;
-                    txtTel.ReadOnly = false;
-                    txtEmailN.ReadOnly = false;
+                    ActiveFieldsClientN();
                 }
             }
             else if (IbtnCreate.Text.Equals("Guardar"))
             {
-                Console.WriteLine("El boton vale Guardar");
                 if (cboTypeClient.SelectedIndex.Equals(0))
                 {
-                    Console.WriteLine("El combo esta en juridico");
                     //validamos los datos de Empresa
-                    bool req = DataValidateJuridic();
-                    Console.WriteLine("Req: " + req);
-                    if (req)
+                    if (DataValidateJuridic())
                     {
-                        //creamos el objeto jurídico
-                        /*
-                         string client_id, string client_name, string client_lastname1, string client_lastname2,
-            string client_address, string client_city, string client_department, string client_tel1,
-            string client_email, string update_by, DateTime update_date
-                         
-                         */
-                        Console.WriteLine("Se valido la informacion para actuaalizar.");
-                        Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
-                            cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
-                            txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
-                            txtFax.Text, cboLestruct.Text, 'j', "",
-                            DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), UserCache.UserAccount,
-                            DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                        CleanFieldsJ();
-                        LoadCboDpts();
-                        clientLog.Update(client);
-                        MsgRequest("Se ha actualizado el cliente.");
-                        IbtnRefresh_Click(sender, e);
-                        //cambiamos botones
-                        IbtnCreate.Text = "Crear";
-                        //Estado interno del boton Crear
-                        stateButtonJ = "Crear";
+                        if (ValidateTextbox.IsValidEmail(txtEmailJ.Text))
+                        {
+                            if (!clientLog.EqualMailings(txtEmailJ.Text))
+                            {
+                                Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
+                                cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
+                                txtRut.Text, txtRlegal.Text, txtAdmin.Text, txtWebsite.Text, txtPostal.Text,
+                                txtFax.Text, cboLestruct.Text, 'j');
+                                CleanFieldsJ();
+                                LoadCboDpts();
+                                clientLog.Update(client);
+                                MsgSuccesfull("Se ha actualizado el cliente.");
+                                //cambiamos botones
+                                IbtnCreate.Text = "Crear";
+                                //Estado interno del boton Crear
+                                stateButtonJ = "Crear";
+                            }
+                            else
+                            {
+                                MsgError("El correo electrónico " + txtEmailJ.Text + " está asociado a otro cliente");
+                            }
+                        }
+                        else
+                        {
+                            MsgError("Verifique la dirección de correo electrónico.");
+                            errorProvider1.SetError(txtEmailJ, "ejemplo@dominio.extension (ejemplo@gmail.com)");
+                        }
+                        
 
                     }
                 }
                 else if (cboTypeClient.SelectedIndex.Equals(1))
                 {
-
                     if (DataValidateNatural())
                     {
-                        //creamos objeto natural
-                        Client client = new Client(txtId.Text, txtName.Text, txtLastname1.Text, txtLastname2.Text,
-                            txtAddresN.Text, cboCityN.Text, cboDptoN.Text, txtTel.Text,
-                            txtEmailN.Text, 'n', "", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), UserCache.UserAccount, DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                        CleanFieldsN();
-                        LoadCboDpts();
-                        clientLog.Update(client);
-                        MsgRequest("Se ha actualizado el cliente.");
-                        IbtnRefresh_Click(sender, e);
-                        //cambiamos botones
-                        IbtnCreate.Text = "Crear";
-                        //Estado interno del boton Crear
-                        stateButtonN = "Crear";
+                        if (ValidateTextbox.IsValidEmail(txtEmailN.Text))
+                        {
+                            if (!clientLog.EqualMailings(txtEmailN.Text))
+                            {
+                                Client client = new Client(txtId.Text, txtName.Text, txtAddresN.Text, cboCityN.Text,
+                                    cboDptoN.Text, txtTel.Text, txtEmailN.Text, 'n');
+                                CleanFieldsN();
+                                LoadCboDpts();
+                                clientLog.Update(client);
+                                MsgSuccesfull("Se ha actualizado el cliente.");
+                                IbtnRefresh_Click(sender, e);
+                                //cambiamos botones
+                                IbtnCreate.Text = "Crear";
+                                //Estado interno del boton Crear
+                                stateButtonN = "Crear";
+                            }
+                            else
+                            {
+                                MsgError("El correo electrónico " + txtEmailN.Text + " está asociado a otro cliente");
+                            }
+                        }
+                        else
+                        {
+                            MsgError("Verifique la dirección de correo electrónico.");
+                            errorProvider1.SetError(txtEmailN, "ejemplo@dominio.extension (ejemplo@gmail.com)");
+                        }
                     }
                 }
-                //LoadCboDpts();
             }
-            //LoadCboDpts();
         }
         
         private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-
                 if (DgvClient.CurrentCell.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonCell")
                 {
-                    Console.WriteLine("Eliminar "+ DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    DialogResult dr = MessageBox.Show("¿Esta seguro de eliminar el cliente " +
+                    if (orderLog.ClientOrders(DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString()) == 0)
+                    {
+                        DialogResult dr = MessageBox.Show("¿Está seguro de eliminar el cliente " +
                         Environment.NewLine +
                         DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString() + " | " +
                         DgvClient.Rows[e.RowIndex].Cells[1].Value.ToString() + "?", "Mensaje",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        //Eliminamos
-                        clientLog.Delete(DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        //habilita botones
-                        IbtnCreate.Text = "Crear";
-                        //Limpiamos campos
-                        CleanFieldsN();
-                        CleanFieldsJ();
-                        //Cargamos los deptos
-                        LoadCboDpts();
-                        //Actualizamos tabla
-                        IbtnRefresh_Click(sender, e);
+                        if (dr == DialogResult.Yes)
+                        {
+                            //Eliminamos
+                            clientLog.Delete(DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            //habilita botones
+                            IbtnCreate.Text = "Crear";
+                            //Limpiamos campos
+                            CleanFieldsN();
+                            CleanFieldsJ();
+                            //Cargamos los deptos
+                            LoadCboDpts();
+                            //Actualizamos tabla
+                            IbtnRefresh_Click(sender, e);
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show(DgvClient, "El cliente no se puede eliminar porque tiene órdenes a su nombre",
+                            "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    //Console.WriteLine("Eliminar "+ DgvClient.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    
                 }
                 else
                 {
@@ -474,22 +514,7 @@ namespace CSG.views
                         //Estado interno del boton Crear
                         stateButtonJ = "Editar";
                         //Inhabilitamos controles para ver la informacion solamente
-                        txtNit.ReadOnly = true;
-                        txtRut.ReadOnly = true;
-                        txtTradename.ReadOnly = true;
-                        cboLestruct.Enabled = false;
-                        txtRlegal.ReadOnly = true;
-                        txtAdmin.ReadOnly = true;
-                        txtTel1.ReadOnly = true;
-                        txtFax.ReadOnly = true;
-                        txtPostal.ReadOnly = true;
-                        txtWebsite.ReadOnly = true;
-                        cboDptoJ.Enabled = false;
-                        cboCityJ.Enabled = false;
-                        txtAddresJ.ReadOnly = true;
-                        txtLocationJ.ReadOnly = true;
-                        txtEmailJ.ReadOnly = true;
-                        txtTel2.ReadOnly = true;
+                        InactiveFieldsClientJ();
                         //Cambiamos el tipo a jurídico
                         cboTypeClient.SelectedIndex = 0;
                         gpJuridic.BringToFront();
@@ -513,26 +538,15 @@ namespace CSG.views
                     //Si tipo N->mostramos el formulario de cliente natural
                     else if (client.Client_type.Equals('n'))
                     {
-                        //
                         stateButtonN = "Editar";
                         //Inhabilitamos los controles
-                        txtId.ReadOnly = true;
-                        txtName.ReadOnly = true;
-                        txtLastname1.ReadOnly = true;
-                        txtLastname2.ReadOnly = true;
-                        cboDptoN.Enabled = false;
-                        cboCityN.Enabled = false;
-                        txtAddresN.ReadOnly = true;
-                        txtTel.ReadOnly = true;
-                        txtEmailN.ReadOnly = true;
+                        InactiveFieldsClientN();
                         //Cambios el tipo a natural.
                         cboTypeClient.SelectedIndex = 1;
                         gpNatural.BringToFront();
-                        //Cargamos la informacion
+                        //Cargamos la informacion en los campos
                         txtId.Text = client.Client_id;
                         txtName.Text = client.Client_name;
-                        txtLastname1.Text = client.Client_lastname1;
-                        txtLastname2.Text = client.Client_lastname2;
                         cboDptoN.Text = client.Client_department;
                         cboCityN.Text = client.Client_city;
                         txtAddresN.Text = client.Client_address;
@@ -541,9 +555,10 @@ namespace CSG.views
                         txtId.ReadOnly = true;
                     }
                 }
+                errorProvider1.Clear();
             }
         }
-
+        //EVENTO-> Cuando campo txtId pierde el foco
         private void TxtId_Leave(object sender, EventArgs e)
         {
             if (!txtId.Text.Equals("") && stateButtonN.Equals("Crear"))
@@ -551,7 +566,8 @@ namespace CSG.views
                 bool response = clientLog.Read_once_exist(txtId.Text);
                 if (response)
                 {
-                    DialogResult dr = MessageBox.Show("El cliente que intenta crear ya existe. ¿Desea cargar la información en el formulario?", "Mensaje",
+                    DialogResult dr = MessageBox.Show("El cliente que intenta crear ya existe. " +
+                        "¿Desea cargar la información en el formulario?", "Mensaje",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
@@ -564,12 +580,8 @@ namespace CSG.views
                         //Llenamos los campos.
                         txtId.Text = client.Client_id;
                         txtName.Text = client.Client_name;
-                        txtLastname1.Text = client.Client_lastname1;
-                        txtLastname2.Text = client.Client_lastname2;
-                        //txtAddress.Text = client.Client_address;
                         txtLocationJ.Text = client.Client_location;
                         txtAddresN.Text = client.Client_city;
-                        //txtDepartment.Text = client.Client_department;
                         txtTel.Text = client.Client_tel1;
                         txtTel1.Text = client.Client_tel2;
                         txtEmailN.Text = client.Client_email;
@@ -626,8 +638,6 @@ namespace CSG.views
         {
             txtId.Clear();
             txtName.Clear();
-            txtLastname1.Clear();
-            txtLastname2.Clear();
             cboDptoN.Items.Clear();
             cboCityN.Items.Clear();
             txtAddresN.Clear();
@@ -660,6 +670,66 @@ namespace CSG.views
             txtTel2.Clear();
             txtNit.Focus();
             txtNit.ReadOnly = false;
+        }
+
+        private void ActiveFieldsClientN()
+        {
+            txtId.ReadOnly = false;
+            txtName.ReadOnly = false;
+            cboDptoN.Enabled = true;
+            cboCityN.Enabled = true;
+            txtAddresN.ReadOnly = false;
+            txtTel.ReadOnly = false;
+            txtEmailN.ReadOnly = false;
+        }
+        private void InactiveFieldsClientN()
+        {
+            txtId.ReadOnly = true;
+            txtName.ReadOnly = true;
+            cboDptoN.Enabled = false;
+            cboCityN.Enabled = false;
+            txtAddresN.ReadOnly = true;
+            txtTel.ReadOnly = true;
+            txtEmailN.ReadOnly = true;
+        }
+
+        private void ActiveFieldsClientJ()
+        {
+            txtNit.ReadOnly = true;
+            txtRut.ReadOnly = false;
+            txtTradename.ReadOnly = false;
+            cboLestruct.Enabled = true;
+            txtRlegal.ReadOnly = false;
+            txtAdmin.ReadOnly = false;
+            txtTel1.ReadOnly = false;
+            txtFax.ReadOnly = false;
+            txtPostal.ReadOnly = false;
+            txtWebsite.ReadOnly = false;
+            cboDptoJ.Enabled = true;
+            cboCityJ.Enabled = true;
+            txtAddresJ.ReadOnly = false;
+            txtLocationJ.ReadOnly = false;
+            txtEmailJ.ReadOnly = false;
+            txtTel2.ReadOnly = false;
+        }
+        private void InactiveFieldsClientJ()
+        {
+            txtNit.ReadOnly = true;
+            txtRut.ReadOnly = true;
+            txtTradename.ReadOnly = true;
+            cboLestruct.Enabled = false;
+            txtRlegal.ReadOnly = true;
+            txtAdmin.ReadOnly = true;
+            txtTel1.ReadOnly = true;
+            txtFax.ReadOnly = true;
+            txtPostal.ReadOnly = true;
+            txtWebsite.ReadOnly = true;
+            cboDptoJ.Enabled = false;
+            cboCityJ.Enabled = false;
+            txtAddresJ.ReadOnly = true;
+            txtLocationJ.ReadOnly = true;
+            txtEmailJ.ReadOnly = true;
+            txtTel2.ReadOnly = true;
         }
 
         
@@ -695,22 +765,7 @@ namespace CSG.views
             LoadDataTable(clients);
         }
 
-        //Metodos de interfaz
-        private void CreateHeaders()
-        {
-            DgvClient.Columns[0].HeaderText = "Identidad";
-            DgvClient.Columns[1].HeaderText = "Nombres";
-            DgvClient.Columns[2].HeaderText = "P. apellido";
-            DgvClient.Columns[3].HeaderText = "S. apellido";
-            DgvClient.Columns[4].HeaderText = "Dirección";
-            DgvClient.Columns[5].HeaderText = "Barrio";
-            DgvClient.Columns[6].HeaderText = "Ciudad";
-            DgvClient.Columns[7].HeaderText = "Departamento";
-            DgvClient.Columns[8].HeaderText = "Teléfono 1";
-            DgvClient.Columns[9].HeaderText = "Teléfono 2";
-            DgvClient.Columns[10].HeaderText = "Correo";
-        }
-
+        /***********************************MÉTODOS DE INTERFAZ*******************************/
         private void BtnNew_Click(object sender, EventArgs e)
         {
             IbtnNew.Enabled = false;
@@ -719,12 +774,7 @@ namespace CSG.views
             txtId.ReadOnly = false;
             txtId.Focus();
         }
-
-        private void BtnReadAll_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
+        //EVENTO-> Index de combo cboType cambia
         private void CboTypeClient_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboTypeClient.SelectedIndex.Equals(0))
@@ -744,36 +794,26 @@ namespace CSG.views
 
         private void IbtnNew_Click(object sender, EventArgs e)
         {
+            if (cboTypeClient.SelectedIndex == 0)
+            {
+                ActiveFieldsClientJ();
+                txtNit.ReadOnly = false;
+                txtNit.Focus();
+                CleanFieldsJ();
+            }
+            else if (cboTypeClient.SelectedIndex == 1)
+            {
+                ActiveFieldsClientN();
+                txtId.ReadOnly = false;
+                txtId.Focus();
+                CleanFieldsN();
+            }
             IbtnNew.Enabled = false;
+            this.IbtnCreate.IconChar = FontAwesome.Sharp.IconChar.UserCheck;
             IbtnCreate.Text = "Crear";
-            CleanFieldsN();
-            txtId.ReadOnly = false;
-            txtId.Focus();
             errorProvider1.Clear();
+            LoadCboDpts();
         }
-
-        
-
-        //private void IbtnDelete_Click(object sender, EventArgs e)
-        //{
-        //    if (txtId.Text != "")
-        //    {
-        //        DialogResult dr = MessageBox.Show("¿Esta seguro de eliminar el cliente " + Environment.NewLine
-        //            + txtId.Text + "?", "Mensaje",
-        //                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        //        if (dr == DialogResult.Yes)
-        //        {
-        //            //Eliminamos
-        //            clientLog.Delete(txtId.Text);
-        //            //habilita botones
-        //            IbtnCreate.Text = "Crear";
-        //            //Limpiamos campos
-        //            CleanFieldsN();
-        //            //Actualizamos tabla
-        //            IbtnRefresh_Click(sender, e);
-        //        }
-        //    }
-        //}
 
         private void CboDptoJ_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -940,43 +980,45 @@ namespace CSG.views
         }
         private void TxtLastname1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidateTextbox.LetterSpace(e);
-            if (e.Handled.Equals(true))
-            {
-                errorProvider1.SetError(txtLastname1, "Sólo permite letras con espacios");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
+            //ValidateTextbox.LetterSpace(e);
+            //if (e.Handled.Equals(true))
+            //{
+            //    errorProvider1.SetError(txtLastname1, "Sólo permite letras con espacios");
+            //}
+            //else
+            //{
+            //    errorProvider1.Clear();
+            //}
         }
 
         private void TxtLastname2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidateTextbox.LetterSpace(e);
-            if (e.Handled.Equals(true))
-            {
-                errorProvider1.SetError(txtLastname2, "Sólo permite letras con espacios");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
+            //ValidateTextbox.LetterSpace(e);
+            //if (e.Handled.Equals(true))
+            //{
+            //    errorProvider1.SetError(txtLastname2, "Sólo permite letras con espacios");
+            //}
+            //else
+            //{
+            //    errorProvider1.Clear();
+            //}
         }
         private void TxtEmailN_TextChanged(object sender, EventArgs e)
         {
-            if (txtAddresN.Text!="")
+            if (txtEmailN.Text!="")
             {
                 if (ValidateTextbox.IsValidEmail(txtEmailN.Text))
                 {
-                    //MsgWarning("Correcto");
                     errorProvider1.Clear();
                 }
                 else
                 {
-                    //MsgWarning("Incorrecto");
                     errorProvider1.SetError(txtEmailN, "ejemplo@dominio.extension (ejemplo@gmail.com)");
                 }
+            }
+            else
+            {
+                errorProvider1.Clear();
             }
         }
         int cont = 0;
@@ -1004,9 +1046,25 @@ namespace CSG.views
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void TxtEmailJ_TextChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Boton J: " + stateButtonJ + " | Boton N: " + stateButtonN);
+            if (txtEmailJ.Text != "")
+            {
+                if (ValidateTextbox.IsValidEmail(txtEmailJ.Text))
+                {
+                    //MsgWarning("Correcto");
+                    errorProvider1.Clear();
+                }
+                else
+                {
+                    //MsgWarning("Incorrecto");
+                    errorProvider1.SetError(txtEmailJ, "ejemplo@dominio.extension (ejemplo@gmail.com)");
+                }
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
         }
     }
 }

@@ -41,6 +41,7 @@ namespace CSG.views
             chartClients2.Series[0].Points.AddY(int.Parse(data[0]));
             chartClients2.Series[1].Points.AddY(int.Parse(data[1]));
             //chartClients2.Series[1].Points.AddY(int.Parse(data[1]));
+            chartOrderRec.Series[0].Points.AddY(27);
         }
     }
 }

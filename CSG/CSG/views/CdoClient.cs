@@ -94,7 +94,7 @@ namespace CSG.views
                 {
                     row = dtc.NewRow();
                     row[0] = c.Client_id;
-                    row[1] = c.Client_name + " " + c.Client_lastname1 + " " + c.Client_lastname2;
+                    row[1] = c.Client_name;
                     row[2] = c.Client_city;
                     row[3] = c.Client_department;
                     row[4] = c.Client_address;

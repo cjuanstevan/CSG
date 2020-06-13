@@ -74,7 +74,7 @@ namespace CSG.views
                         row[0] = o.Order_number;
                         row[1] = o.Order_reception_date;
                         row[2] = o.Order_type;
-                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[3] = o.Client.Client_name;
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
                         row["ACCIONES"] = "VER";
@@ -113,7 +113,7 @@ namespace CSG.views
                         row[0] = o.Order_number;
                         row[1] = o.Order_reception_date;
                         row[2] = o.Order_type;
-                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[3] = o.Client.Client_name;
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
                         row["ACCIONES"] = "COTIZAR";
@@ -126,7 +126,7 @@ namespace CSG.views
                         row[0] = o.Order_number;
                         row[1] = o.Order_reception_date;
                         row[2] = o.Order_type;
-                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[3] = o.Client.Client_name;
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
                         row["ACCIONES"] = "VER";
@@ -141,7 +141,7 @@ namespace CSG.views
                         row[0] = o.Order_number;
                         row[1] = o.Order_reception_date;
                         row[2] = o.Order_type;
-                        row[3] = o.Client.Client_name + " " + o.Client.Client_lastname1 + " " + o.Client.Client_lastname2;
+                        row[3] = o.Client.Client_name;
                         row[4] = o.Technician.Technician_name;
                         row[5] = o.Order_state;
                         row["ACCIONES"] = "VER";

@@ -76,8 +76,8 @@ namespace CSG.views
             //Agregamos el cliente
             txtClientId.Text = order.Client.Client_id;
             txtClientName.Text = order.Client.Client_name;
-            txtClientL1.Text = order.Client.Client_lastname1;
-            txtClientL2.Text = order.Client.Client_lastname2;
+            //txtClientL1.Text = order.Client.Client_lastname1;
+            //txtClientL2.Text = order.Client.Client_lastname2;
             txtClientAddress.Text = order.Client.Client_address;
             txtClientLocation.Text = order.Client.Client_location;
             txtClientCity.Text = order.Client.Client_city;

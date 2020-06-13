@@ -18,5 +18,6 @@ namespace CSG.persistence
         bool Read_once_exist(string id);//ok
         void Update(Client client);//ok
         void Delete(string id);//ok
+        bool EqualMailings(string client_email);
     }
 }

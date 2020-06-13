@@ -10,6 +10,7 @@ namespace CSG.persistence
 {
     interface IOrderDAO
     {
+        int ClientOrders(string client_id);
         void Create(Order order);//ok
         ArrayList Read_all_numbers();//ok
         List<Order> Read_all();//ok

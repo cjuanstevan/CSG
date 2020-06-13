@@ -98,7 +98,7 @@ namespace CSG.views
             {
                 LblClientIdMsj.Text = "";
                 Client client = clientLog.Read_once(txtClientId.Text);
-                txtClientName.Text = client.Client_name + " " + client.Client_lastname1 + " " + client.Client_lastname2;
+                txtClientName.Text = client.Client_name;
             }
             else
             {

@@ -11,6 +11,10 @@ namespace CSG.logic
 {
     class OrderLog
     {
+        public int ClientOrders(string client_id)
+        {
+            return DAOFactory.GetOrderDAO().ClientOrders(client_id);
+        }
         public void Create(Order order)
         {
             DAOFactory.GetOrderDAO().Create(order);

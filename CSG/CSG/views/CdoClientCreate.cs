@@ -29,8 +29,8 @@ namespace CSG.views
                 {
                     Client_id = txtId.Text,
                     Client_name = txtName.Text,
-                    Client_lastname1 = txtLastname1.Text,
-                    Client_lastname2 = txtLastname2.Text,
+                    //Client_lastname1 = txtLastname1.Text,
+                    //Client_lastname2 = txtLastname2.Text,
                     Client_address = txtAddress.Text,
                     Client_city = txtCity.Text,
                     Client_department = txtDepartment.Text,
