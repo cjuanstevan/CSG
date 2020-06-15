@@ -55,7 +55,7 @@ namespace CSG.views
                         Article article = new Article(txtCode.Text, txtDescription.Text,
                         Convert.ToInt32(nudWarranty.Value), Convert.ToByte(cboCategory.SelectedIndex + 1));
                         articleLog.Create(article);
-                        //DialogResult = DialogResult.Yes;
+                        DialogResult = DialogResult.Yes;
                         this.Close();
                     }
                     else
@@ -72,7 +72,7 @@ namespace CSG.views
                     Article article = new Article(txtCode.Text, txtDescription.Text,
                         Convert.ToInt32(nudWarranty.Value), Convert.ToByte(cboCategory.SelectedIndex + 1));
                     articleLog.Update(article);
-                    //DialogResult = DialogResult.Yes;
+                    DialogResult = DialogResult.Yes;
                     this.Close();
                 }
             }
@@ -130,11 +130,6 @@ namespace CSG.views
             {
                 cboCategory.Items.Add(c.Category_name);
             }
-        }
-
-        private void FrmArticleFields_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            DialogResult = DialogResult.Yes;
         }
     }
 }

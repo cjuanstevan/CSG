@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMsg = new System.Windows.Forms.Label();
+            this.IbtnDo = new FontAwesome.Sharp.IconButton();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,10 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.IbtnDo = new FontAwesome.Sharp.IconButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblMsg = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWarranty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -67,6 +67,39 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(547, 245);
             this.panel1.TabIndex = 0;
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Location = new System.Drawing.Point(163, 173);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblMsg.TabIndex = 47;
+            // 
+            // IbtnDo
+            // 
+            this.IbtnDo.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnDo.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.IbtnDo.IconColor = System.Drawing.Color.Black;
+            this.IbtnDo.IconSize = 16;
+            this.IbtnDo.Location = new System.Drawing.Point(163, 195);
+            this.IbtnDo.Name = "IbtnDo";
+            this.IbtnDo.Rotation = 0D;
+            this.IbtnDo.Size = new System.Drawing.Size(339, 35);
+            this.IbtnDo.TabIndex = 46;
+            this.IbtnDo.Text = "CREAR";
+            this.IbtnDo.UseVisualStyleBackColor = true;
+            this.IbtnDo.Click += new System.EventHandler(this.IbtnDo_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(50, 13);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(122, 16);
+            this.lblTitle.TabIndex = 45;
+            this.lblTitle.Text = "CREAR ARTÍCULO";
             // 
             // cboCategory
             // 
@@ -150,44 +183,10 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "Código";
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(50, 13);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(122, 16);
-            this.lblTitle.TabIndex = 45;
-            this.lblTitle.Text = "CREAR ARTÍCULO";
-            // 
-            // IbtnDo
-            // 
-            this.IbtnDo.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.IbtnDo.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.IbtnDo.IconColor = System.Drawing.Color.Black;
-            this.IbtnDo.IconSize = 16;
-            this.IbtnDo.Location = new System.Drawing.Point(163, 195);
-            this.IbtnDo.Name = "IbtnDo";
-            this.IbtnDo.Rotation = 0D;
-            this.IbtnDo.Size = new System.Drawing.Size(339, 35);
-            this.IbtnDo.TabIndex = 46;
-            this.IbtnDo.Text = "CREAR";
-            this.IbtnDo.UseVisualStyleBackColor = true;
-            this.IbtnDo.Click += new System.EventHandler(this.IbtnDo_Click);
-            // 
             // errorProvider1
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            // 
-            // lblMsg
-            // 
-            this.lblMsg.AutoSize = true;
-            this.lblMsg.Location = new System.Drawing.Point(163, 173);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(26, 13);
-            this.lblMsg.TabIndex = 47;
-            this.lblMsg.Text = "msg";
             // 
             // FrmArticleFields
             // 
@@ -201,7 +200,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmArticleFields";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmArticleFields_FormClosed);
             this.Load += new System.EventHandler(this.FrmArticleFields_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

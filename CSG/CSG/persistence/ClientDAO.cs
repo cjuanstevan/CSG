@@ -174,7 +174,7 @@ namespace CSG.persistence
             }
         }
 
-        public bool EqualMailings(string client_email)
+        public bool EqualMailings(string client_email, string client_id)
         {
             try
             {
@@ -189,19 +189,21 @@ namespace CSG.persistence
                 dataReader = command.ExecuteReader();
                 if (dataReader.Read())
                 {
-                    if (dataReader.GetInt32(0) > 0)
+                    //Si correo existe y codigo igual->permite crear o guardar
+                    if (dataReader.GetInt32(0) > 0 && dataReader.GetString(1).Equals(client_id))
                     {
                         return true;
                     }
-                    else
+                    //si correo existe y código diferente->no permite crear ni guardar
+                    else if (dataReader.GetInt32(0) > 0 && !dataReader.GetString(1).Equals(client_id))
                     {
                         return false;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                //else
+                //{
+                //    return true;
+                //}
             }
             catch (Exception ex)
             {
@@ -213,6 +215,7 @@ namespace CSG.persistence
             {
                 Database.Disconnect();
             }
+            return true;
         }
 
         public List<Client> Read_all()

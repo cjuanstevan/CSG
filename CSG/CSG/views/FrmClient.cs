@@ -48,6 +48,7 @@ namespace CSG.views
         //Método que carga una lista de clientes en los rows de DataTable y los agrega a la GridView
         private void LoadDataTable(List<Client> clients)
         {
+            Cursor.Current = Cursors.WaitCursor;
             foreach (var c in clients)
             {
                 //Console.WriteLine("lista(tipo): " + c.Client_type);
@@ -312,7 +313,7 @@ namespace CSG.views
                         if (ValidateTextbox.IsValidEmail(txtEmailJ.Text))
                         {
                             //Validamos que el correo no lo tenga otro cliente
-                            if (!clientLog.EqualMailings(txtEmailJ.Text))
+                            if (clientLog.EqualMailings(txtEmailJ.Text, txtNit.Text))
                             {
                                 //creamos el objeto para jurídico
                                 Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
@@ -323,6 +324,7 @@ namespace CSG.views
                                 LoadCboDpts();
                                 clientLog.Create(client);
                                 MsgSuccesfull("Se ha creado el cliente exitosamente.");
+                                IbtnRefresh_Click(sender, e);
                             }
                             else
                             {
@@ -345,7 +347,7 @@ namespace CSG.views
                     {
                         if (ValidateTextbox.IsValidEmail(txtEmailN.Text))
                         {
-                            if (!clientLog.EqualMailings(txtEmailN.Text))
+                            if (clientLog.EqualMailings(txtEmailN.Text, txtId.Text))
                             {
                                 Client client = new Client(txtId.Text, txtName.Text, txtAddresN.Text, cboCityN.Text,
                                     cboDptoN.Text, txtTel.Text, txtEmailN.Text, 'n');
@@ -353,6 +355,7 @@ namespace CSG.views
                                 LoadCboDpts();
                                 clientLog.Create(client);
                                 MsgSuccesfull("Se ha creado el cliente exitosamente.");
+                                IbtnRefresh_Click(sender, e);
                             }
                             else
                             {
@@ -398,7 +401,7 @@ namespace CSG.views
                     {
                         if (ValidateTextbox.IsValidEmail(txtEmailJ.Text))
                         {
-                            if (!clientLog.EqualMailings(txtEmailJ.Text))
+                            if (clientLog.EqualMailings(txtEmailJ.Text, txtNit.Text))
                             {
                                 Client client = new Client(txtNit.Text, txtTradename.Text, txtAddresJ.Text, txtLocationJ.Text,
                                 cboCityJ.Text, cboDptoJ.Text, txtTel1.Text, txtTel2.Text, txtEmailJ.Text,
@@ -408,6 +411,7 @@ namespace CSG.views
                                 LoadCboDpts();
                                 clientLog.Update(client);
                                 MsgSuccesfull("Se ha actualizado el cliente.");
+                                IbtnRefresh_Click(sender, e);
                                 //cambiamos botones
                                 IbtnCreate.Text = "Crear";
                                 //Estado interno del boton Crear
@@ -433,7 +437,7 @@ namespace CSG.views
                     {
                         if (ValidateTextbox.IsValidEmail(txtEmailN.Text))
                         {
-                            if (!clientLog.EqualMailings(txtEmailN.Text))
+                            if (clientLog.EqualMailings(txtEmailN.Text, txtId.Text))
                             {
                                 Client client = new Client(txtId.Text, txtName.Text, txtAddresN.Text, cboCityN.Text,
                                     cboDptoN.Text, txtTel.Text, txtEmailN.Text, 'n');

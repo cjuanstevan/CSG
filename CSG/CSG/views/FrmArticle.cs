@@ -45,6 +45,7 @@ namespace CSG.views
             dta = new DataTable();
             DgvArticle.Columns.Clear();
             CreateDataTable();
+            Cursor.Current = Cursors.WaitCursor;
             foreach (var a in articles)
             {
                 row = dta.NewRow();

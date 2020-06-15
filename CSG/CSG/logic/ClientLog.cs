@@ -45,9 +45,9 @@ namespace CSG.logic
         {
             DAOFactory.GetClientDAO().Delete(id);
         }
-        public bool EqualMailings(string client_email)
+        public bool EqualMailings(string client_email, string client_id)
         {
-            return DAOFactory.GetClientDAO().EqualMailings(client_email);
+            return DAOFactory.GetClientDAO().EqualMailings(client_email, client_id);
         }
     }
 }
