@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 using CSG.model;
 
 namespace CSG.persistence
@@ -34,8 +35,8 @@ namespace CSG.persistence
                     };
                     command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = a.Article_code;
                     command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = a.Article_description;
-                    command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = a.Article_model;
-                    command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = a.Article_serial;
+                    //command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = a.Article_model;
+                    //command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = a.Article_serial;
                     command.Parameters.Add("Warranty", OdbcType.Int).Value = a.Article_warranty;
                     //add
                     command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = a.Create_by;
@@ -85,18 +86,15 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Article_Create(?,?,?,?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Article_Create(?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = article.Article_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = article.Article_description;
-                command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = article.Article_model;
-                command.Parameters.Add("Esp", OdbcType.VarChar, 50).Value = article.Article_esp;
-                command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = article.Article_serial;
                 command.Parameters.Add("Warranty", OdbcType.Int).Value = article.Article_warranty;
                 command.Parameters.Add("Category", OdbcType.TinyInt).Value = article.Category;
                 //add
-                command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = article.Create_by;
-                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = article.Create_date;
+                command.Parameters.Add("CreateBy", OdbcType.VarChar).Value = UserCache.UserCode;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Artículo creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -167,8 +165,8 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        Article_warranty = dataReader.GetInt32(5),
-                        Category = dataReader.GetByte(6)
+                        Article_warranty = dataReader.GetInt32(2),
+                        Category = dataReader.GetByte(3)
                     };
                     //CategoryDAO categoryDAO = new CategoryDAO();
                     //Category category = new Category();
@@ -208,11 +206,8 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        Article_warranty = dataReader.GetInt32(5),
-                        Category = dataReader.GetByte(6)
-                        //Article_model = dataReader.GetString(2),
-                        //Article_serial = dataReader.GetString(3),
-                        //Article_warranty = ushort.Parse(dataReader.GetInt32(4).ToString())
+                        Article_warranty = dataReader.GetInt32(2),
+                        Category = dataReader.GetByte(3)
                     };
                     articles.Add(article);
                 }
@@ -248,20 +243,15 @@ namespace CSG.persistence
                     {
                         Article_code = dataReader.GetString(0),
                         Article_description = dataReader.GetString(1),
-                        //(2) MODEL
-                        //(3) ESPECIFICACION
-                        //(4) SERIAL
-                        Article_warranty = dataReader.GetInt32(5),
-                        Category = dataReader.GetByte(6)
+                        Article_warranty = dataReader.GetInt32(2),
+                        Category = dataReader.GetByte(3)
                     };
-                    //CategoryDAO categoryDAO = new CategoryDAO();
-                    //Category category = new Category();
-                    //category = categoryDAO.Read_once(dataReader.GetByte(6));
-                    //article.Category = category;
-                }
-                else
-                {
-                    article = null;
+                    //agregamos los datos de creación
+                    article.Create_by = dataReader.GetString(4);
+                    article.Create_date = dataReader.GetDateTime(5);
+                    //Agregamos los campos de actualización
+                    article.Update_by = dataReader.GetString(6);
+                    article.Update_date = dataReader.GetDateTime(7);
                 }
             }
             catch (Exception ex)
@@ -314,13 +304,15 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Article_Update(?,?,?,?,?)}"
+                    CommandText = "{call csg.Article_Update(?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = article.Article_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = article.Article_description;
-                command.Parameters.Add("Model", OdbcType.VarChar, 50).Value = article.Article_model;
-                command.Parameters.Add("Serial", OdbcType.VarChar, 50).Value = article.Article_serial;
-                command.Parameters.Add("Warranty", OdbcType.SmallInt).Value = article.Article_warranty;
+                command.Parameters.Add("Warranty", OdbcType.Int).Value = article.Article_warranty;
+                command.Parameters.Add("Category", OdbcType.TinyInt).Value = article.Category;
+                //add
+                command.Parameters.Add("UpdateBy", OdbcType.VarChar).Value = UserCache.UserCode;
+                command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 if (command.ExecuteNonQuery() > 0)
                 {

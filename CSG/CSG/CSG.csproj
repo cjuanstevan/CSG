@@ -185,6 +185,18 @@
     <Compile Include="views\FrmArticle.Designer.cs">
       <DependentUpon>FrmArticle.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\FrmArticleFields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmArticleFields.Designer.cs">
+      <DependentUpon>FrmArticleFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\FrmArticleViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\FrmArticleViewer.Designer.cs">
+      <DependentUpon>FrmArticleViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\FrmBulkLoad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +344,12 @@
     <EmbeddedResource Include="views\FrmArticle.resx">
       <DependentUpon>FrmArticle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmArticleFields.resx">
+      <DependentUpon>FrmArticleFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\FrmArticleViewer.resx">
+      <DependentUpon>FrmArticleViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\FrmBulkLoad.resx">
       <DependentUpon>FrmBulkLoad.cs</DependentUpon>
     </EmbeddedResource>
@@ -469,6 +487,11 @@
   <ItemGroup>
     <None Include="Resources\quit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

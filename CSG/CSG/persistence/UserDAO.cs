@@ -34,11 +34,11 @@ namespace CSG.persistence
                 if (dataReader.Read())
                 {
                     UserCache.UserUseToken = dataReader.GetChar(11);
-                    Console.WriteLine("Usa token: " + UserCache.UserUseToken);
+                    //Console.WriteLine("Usa token: " + UserCache.UserUseToken);
                     if (rsa.GetMd5Hash(rsa.DecryptStringFromBytes_Aes(cipherpass, Key, IV)).Equals(dataReader.GetString(4)) &&
                         UserCache.UserUseToken.Equals('N'))
                     {
-                        Console.WriteLine("Entra con password");
+                        //Console.WriteLine("Entra con password");
                         //Almacenar la variables de sesión
                         UserCache.UserCode = dataReader.GetString(0);
                         UserCache.UserDefinition = dataReader.GetString(1);
@@ -53,7 +53,7 @@ namespace CSG.persistence
                     else if (rsa.DecryptStringFromBytes_Aes(cipherpass, Key, IV).Equals(dataReader.GetString(5)) &&
                         UserCache.UserUseToken.Equals('S'))
                     {
-                        Console.WriteLine("Entra con token");
+                        //Console.WriteLine("Entra con token");
                         //Almacenar la variables de sesión
                         UserCache.UserCode = dataReader.GetString(0);
                         UserCache.UserDefinition = dataReader.GetString(1);
@@ -225,12 +225,12 @@ namespace CSG.persistence
                 {
                     //return true;
                     UserCache.UserPass = rsa.GetMd5Hash(rsa.DecryptStringFromBytes_Aes(cipherpass, Key, IV));
-                    Console.WriteLine("Actualizó password a " + UserCache.UserPass);
+                    //Console.WriteLine("Actualizó password a " + UserCache.UserPass);
                 }
                 else
                 {
                     //return false;
-                    Console.WriteLine("NO actualizó password");
+                    //Console.WriteLine("NO actualizó password");
                 }
             }
             catch (Exception)

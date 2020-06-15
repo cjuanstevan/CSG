@@ -10,6 +10,10 @@ namespace CSG.logic
 {
     class OrderArticleLog
     {
+        public bool ArticlesOrders(string article_code)
+        {
+            return DAOFactory.GetOrder_ArticleFKDAO().ArticlesOrders(article_code);
+        }
         public void Create(Order_articleFK order_articleFK)
         {
             DAOFactory.GetOrder_ArticleFKDAO().Create(order_articleFK);

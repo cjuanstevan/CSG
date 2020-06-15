@@ -17,6 +17,7 @@ namespace CSG.persistence
         OdbcCommand command;
         OdbcDataReader dataReader;
 
+        //Consulta la cantidad de órdenes que tiene el cliente
         public int ClientOrders(string client_id)
         {
             try
@@ -50,7 +51,7 @@ namespace CSG.persistence
                 Database.Disconnect();
             }
         }
-
+        //Crea un cliente
         public void Create(Order order)
         {
             try
@@ -103,7 +104,7 @@ namespace CSG.persistence
                 Database.Disconnect();
             }
         }
-
+        //Elimina un cliente
         public void Delete(string number)
         {
             try

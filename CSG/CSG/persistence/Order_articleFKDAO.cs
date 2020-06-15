@@ -14,6 +14,43 @@ namespace CSG.persistence
     {
         OdbcCommand command;
         OdbcDataReader dataReader;
+        
+        //Devuelve true si articulo se utliza en una orden
+        public bool ArticlesOrders(string article_code)
+        {
+            bool request = true;
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand()
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_articleFK_ArticlesOrders(?)}"
+                };
+                command.Parameters.Add("@ArticleCode", OdbcType.VarChar, 50).Value = article_code;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    if (dataReader.GetInt32(0) > 0)
+                    {
+                        request = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en Order_articleFKDAO->ArticlesOrders: " + ex.Message, 
+                    "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return request;
+        }
+
         public void Create(Order_articleFK order_articleFK)
         {
             try

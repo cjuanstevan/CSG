@@ -73,8 +73,8 @@ namespace CSG.views
                     {
                         Article_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Article_description = DgvVisor.Rows[i].Cells[1].Value.ToString(),
-                        Article_model = DgvVisor.Rows[i].Cells[2].Value.ToString(),
-                        Article_serial = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        //Article_model = DgvVisor.Rows[i].Cells[2].Value.ToString(),
+                        //Article_serial = DgvVisor.Rows[i].Cells[3].Value.ToString(),
                         Article_warranty = int.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString()),
                         Create_by = "Bulkload",
                         Create_date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))

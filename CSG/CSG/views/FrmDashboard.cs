@@ -75,6 +75,7 @@ namespace CSG.views
             //BtnOrders_Click(sender, e);
             //BtnOrderCreate_Click(sender, e);
             BtnIndex_Click(sender, e);
+            Console.WriteLine("Formulario activo: " + activeForm.Name);
         }
 
         private void LoadUserData()
@@ -138,18 +139,30 @@ namespace CSG.views
 
         private void BtnOrderCreate_Click(object sender, EventArgs e)
         {
-            LblNameMain.Text = "CREAR ORDEN";
-            BtnOrderCreate.BackColor = Color.FromArgb(127, 127, 127);
-            BtnOrderRead.BackColor = Color.FromArgb(111, 111, 109);
-            OpenChildForm(new FrmOrderCreate());
+            
+            if (!activeForm.Name.Equals("FrmOrderCreate"))
+            {
+                LblNameMain.Text = "CREAR ORDEN";
+                BtnOrderCreate.BackColor = Color.FromArgb(127, 127, 127);
+                BtnOrderRead.BackColor = Color.FromArgb(111, 111, 109);
+                Console.WriteLine("Vengo de " + activeForm.Name);
+                OpenChildForm(new FrmOrderCreate());
+                Console.WriteLine("Formulario activo: " + activeForm.Name);
+            }
         }
         
         private void BtnOrderRead_Click(object sender, EventArgs e)
         {
-            LblNameMain.Text = "CONSULTAR ORDEN";
-            BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
-            BtnOrderRead.BackColor = Color.FromArgb(127, 127, 127);
-            OpenChildForm(new FrmOrderRead());
+            
+            if (!activeForm.Name.Equals("FrmOrderRead"))
+            {
+                LblNameMain.Text = "CONSULTAR ORDEN";
+                BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
+                BtnOrderRead.BackColor = Color.FromArgb(127, 127, 127);
+                Console.WriteLine("Vengo de " + activeForm.Name);
+                OpenChildForm(new FrmOrderRead());
+                Console.WriteLine("Formulario activo: " + activeForm.Name);
+            }
         }
 
         private void BtnMaintenance_Click(object sender, EventArgs e)

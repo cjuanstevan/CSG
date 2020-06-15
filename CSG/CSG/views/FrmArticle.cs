@@ -16,6 +16,12 @@ namespace CSG.views
     {
         private readonly ArticleLog articleLog = new ArticleLog();
         private readonly CategoryLog categoryLog = new CategoryLog();
+        private readonly OrderArticleLog orderArticleLog = new OrderArticleLog();
+
+        //Tabla
+        private DataTable dta = new DataTable();
+        private DataColumn column;
+        private DataRow row;
         public FrmArticle()
         {
             InitializeComponent();
@@ -23,167 +29,185 @@ namespace CSG.views
 
         private void FrmArticle_Load(object sender, EventArgs e)
         {
-            txtCode.Focus();
-            //carga de combobox
-            List<Category> categories = categoryLog.Read_all();
-            foreach (var c in categories)
-            {
-                cboCategory.Items.Add(c.Category_name);
-            }
+            CreateDataTable();
         }
 
-        private void BtnCreate_Click(object sender, EventArgs e)
-        {
-            if (txtCode.Text.Equals(""))
-            {
-                txtCode.Focus();
-                MessageBox.Show("El código del artículo es obligatorio", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                if (btnCreate.Text.Equals("Crear"))
-                {
-                    //Category category = categoryLog.Read_once(byte.Parse((cboCategory.SelectedIndex + 1).ToString()));
-                    //Console.WriteLine("Categoria: " + category.Category_name);
-                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text,txtEsp.Text,
-                        txtSerial.Text, int.Parse(nudWarranty.Value.ToString()),category:Convert.ToByte(cboCategory.SelectedIndex + 1), 
-                        "prede",DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), 
-                        "", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                    CleanFields();
-                    txtCode.Focus();
-                    articleLog.Create(article);
-                    //BtnReadAll_Click(sender, e);
-                }
-                else if (btnCreate.Text.Equals("Guardar"))
-                {
-                    Category category = categoryLog.Read_once(byte.Parse((cboCategory.SelectedIndex + 1).ToString()));
-                    //Guardamos
-                    Article article = new Article(txtCode.Text, txtDescription.Text, txtModel.Text, txtEsp.Text, 
-                        txtSerial.Text, int.Parse(nudWarranty.Value.ToString()), category: Convert.ToByte(cboCategory.SelectedIndex + 1),
-                        "prede", DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "", DateTime.Now);
-                    CleanFields();
-                    //cambiamos botones
-                    txtCode.ReadOnly = false;
-                    txtCode.Focus();
-                    btnNew.Enabled = false;
-                    btnCreate.Text = "Crear";
-                    BtnDelete.Enabled = false;
-                    articleLog.Update(article);
-                    BtnReadAll_Click(sender, e);
-                    
-                }
-            }
-        }
         private void BtnReadAll_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
-            //txtSearch.Focus();
-            DgvArticle.DataSource = articleLog.ReadAll();
-            CreateHeaders();
-        }
+            List<Article> articles = articleLog.ReadAll();
+            LoadRowsDataTable(articles:articles);
 
-        private void DgvArticle_CellClick(object sender, DataGridViewCellEventArgs e)
+        }
+        
+        private void LoadRowsDataTable(List<Article> articles)
         {
-            //Console.WriteLine("Fila: " + e.RowIndex);
-            if (e.RowIndex >= 0)
+            dta = new DataTable();
+            DgvArticle.Columns.Clear();
+            CreateDataTable();
+            foreach (var a in articles)
             {
-                txtCode.ReadOnly = true;
-                btnCreate.Text = "Guardar";
-                BtnDelete.Enabled = true;
-                btnNew.Enabled = true;
-                txtCode.Text = DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtDescription.Text = DgvArticle.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtModel.Text = DgvArticle.Rows[e.RowIndex].Cells[2].Value.ToString();
-                txtSerial.Text = DgvArticle.Rows[e.RowIndex].Cells[3].Value.ToString();
-                nudWarranty.Value = decimal.Parse(DgvArticle.Rows[e.RowIndex].Cells[4].Value.ToString());
+                row = dta.NewRow();
+                row[0] = a.Article_code;
+                row[1] = a.Article_description;
+                row[2] = a.Article_warranty;
+                Category c = categoryLog.Read_once(a.Category);
+                row[3] = c.Category_name;
+                dta.Rows.Add(row);
+            }
+            label14.Text = "LISTADO DE ARTÍCULOS(" + articles.Count + ")";
+            if (DgvArticle.Columns.Count <= 4)
+            {
+                //Ver
+                DataGridViewImageColumn imageView = new DataGridViewImageColumn
+                {
+                    Image = Properties.Resources.view,
+                    Name = "view",
+                    HeaderText = "VER"
+                };
+                DgvArticle.Columns.Add(imageView);
+
+                //Editar
+                DataGridViewImageColumn imageEdit = new DataGridViewImageColumn
+                {
+                    Image = Properties.Resources.edit,
+                    Name = "edit",
+                    HeaderText = "EDITAR"
+                };
+                DgvArticle.Columns.Add(imageEdit);
+                //Editar
+                DataGridViewImageColumn imageDelete = new DataGridViewImageColumn
+                {
+                    Image = Properties.Resources.delete,
+                    Name = "delete",
+                    HeaderText = "ELIMINAR"
+                };
+                DgvArticle.Columns.Add(imageDelete);
             }
         }
 
-        private void BtnNew_Click(object sender, EventArgs e)
+        //Crea las columnas del DataTable
+        private void CreateDataTable()
         {
-            btnNew.Enabled = false;
-            btnCreate.Text = "Crear";
-            BtnDelete.Enabled = false;
-            CleanFields();
-            txtCode.ReadOnly = false;
-            txtCode.Focus();
+            //Columna 1->codigo
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "CÓDIGO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = true
+            };
+            dta.Columns.Add(column);
+            // Columna 2->descripcion
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "DESCRIPCIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            // Columna 3->garantía
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.Int32"),
+                ColumnName = "GARANTÍA(AÑOS)",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            // Columna 4->categoría
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "CATEGORÍA",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dta.Columns.Add(column);
+            DgvArticle.DataSource = dta;
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private void DgvArticle_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (txtCode.Text != "")
+            if (e.RowIndex >= 0)
             {
-                DialogResult dr = MessageBox.Show("¿Desea eliminar el artículo?" + Environment.NewLine
-                    + "Código: " + txtCode.Text + " | Descripción: " + txtDescription.Text, "Mensaje",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+                //Ver
+                if (DgvArticle.CurrentCell.ColumnIndex == 4)
                 {
-                    string code = txtCode.Text;
-                    //Limpiamos campos
-                    CleanFields();
-                    //habilita botones
-                    txtCode.ReadOnly = false;
-                    txtCode.Focus();
-                    btnNew.Enabled = false;
-                    BtnDelete.Enabled = false;
-                    btnCreate.Text = "Crear";
-                    //Eliminamos
-                    articleLog.Delete(code);
-                    //Actualizamos tabla
-                    BtnReadAll_Click(sender, e);
+                    //Enviamos el codigo del articuloa la variable static de la clase Article
+                    Article._code_static = DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    //Instanciamos y abrimos el formulario de ver
+                    FrmArticleViewer articleViewer = new FrmArticleViewer();
+                    articleViewer.ShowDialog();
+                    if (articleViewer.DialogResult.Equals(DialogResult.Yes))
+                    {
+                        Article._code_static = "";
+                    }
+                }
+                //Editar
+                else if (DgvArticle.CurrentCell.ColumnIndex == 5)
+                {
+                    //Enviamos el codigo del articuloa la variable static de la clase Article
+                    Article._code_static = DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    //Instanciamos y abrimos el formulario de editar
+                    FrmArticleFields articleFields = new FrmArticleFields();
+                    articleFields.ShowDialog();
+                    if (articleFields.DialogResult.Equals(DialogResult.Yes))
+                    {
+                        Article._code_static = "";
+                        BtnReadAll_Click(sender, e);
+                    }
+
+                }
+                //Eliminar
+                else if (DgvArticle.CurrentCell.ColumnIndex == 6)
+                {
+                    if (orderArticleLog.ArticlesOrders(DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString()))
+                    {
+                        DialogResult dr = MessageBox.Show("¿Desea eliminar el artículo?" +
+                        Environment.NewLine + Environment.NewLine +
+                          "Código: " + DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString() +
+                          Environment.NewLine +
+                          "Descripción: " + DgvArticle.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                          "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            //Eliminamos
+                            articleLog.Delete(DgvArticle.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            //Actualizamos tabla
+                            BtnReadAll_Click(null, e);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El artículo no se puede eliminar porque es utilizado en varias órdenes");
+                    }
                 }
             }
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            DgvArticle.DataSource = articleLog.Read_all_like(txtSearch.Text);
-            CreateHeaders();
+            List<Article> articles = persistence.DAOFactory.GetArticleDAO().Read_all_like(txtSearch.Text);
+            LoadRowsDataTable(articles);
         }
 
         //métodos de interfaz
-        private void CleanFields()
+        private void IbtnNew_Click(object sender, EventArgs e)
         {
-            txtCode.Clear();
-            txtDescription.Clear();
-            txtModel.Clear();
-            txtSerial.Clear();
-            nudWarranty.Value = 0;
-        }
-
-        private void CreateHeaders()
-        {
-            DgvArticle.Columns[0].HeaderText = "CÓDIGO";
-            DgvArticle.Columns[1].HeaderText = "DESCRIPCIÓN";
-            DgvArticle.Columns[2].HeaderText = "MODELO";
-            DgvArticle.Columns[3].HeaderText = "SERIAL";
-            DgvArticle.Columns[4].HeaderText = "GARANTÍA (AÑOS)";
-        }
-
-        private void TxtCode_Leave(object sender, EventArgs e)
-        {
-            if (!txtCode.Text.Equals(""))
+            FrmArticleFields articleFields = new FrmArticleFields();
+            articleFields.ShowDialog();
+            //articleFields.FormClosed += ArticleFields_FormClosed;
+            if (articleFields.DialogResult.Equals(DialogResult.Yes))
             {
-                bool response = articleLog.Read_once_exist(txtCode.Text);
-                if (response)
-                {
-                    DialogResult dr = MessageBox.Show("El artículo que intenta crear ya existe. ¿Desea cargar la información en el formulario?", "Mensaje",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        Article article = articleLog.Read_once(txtCode.Text);
-                        txtCode.Enabled = false;
-                        btnCreate.Text = "Guardar";
-                        txtCode.Text = article.Article_code;
-                        txtDescription.Text = article.Article_description;
-                        txtModel.Text = article.Article_model;
-                        txtSerial.Text = article.Article_serial;
-                        nudWarranty.Value = article.Article_warranty;
-                    }
-                }
+                Article._code_static = "";
+                BtnReadAll_Click(sender, e);
             }
         }
-
-        
     }
 }
