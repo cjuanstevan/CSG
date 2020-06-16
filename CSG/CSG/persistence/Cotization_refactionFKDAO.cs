@@ -29,7 +29,7 @@ namespace CSG.persistence
                 command.Parameters.Add("RefactionCode", OdbcType.VarChar, 50).Value = cotization_refactionFK.Refaction_code;
                 command.Parameters.Add("ReplacementOf", OdbcType.VarChar, 50).Value = cotization_refactionFK.Replacementof;
                 command.Parameters.Add("Quantity", OdbcType.TinyInt).Value = cotization_refactionFK.Refaction_quantity;
-                command.Parameters.Add("Amount", OdbcType.Decimal).Value = cotization_refactionFK.Refaction_amount;
+                command.Parameters.Add("Amount", OdbcType.VarChar, 14).Value = cotization_refactionFK.Refaction_amount;
                 command.ExecuteNonQuery();
                 Console.WriteLine("CREATE-> cotization: " + cotization_refactionFK.Cotization_id + " | refaction: " + cotization_refactionFK.Refaction_code);
 
@@ -95,7 +95,7 @@ namespace CSG.persistence
                         Cotization_id = cotization_id,
                         Refaction_code = dataReader.GetString(0),
                         Refaction_quantity = dataReader.GetByte(1),
-                        Refaction_amount = dataReader.GetDecimal(2)
+                        Refaction_amount = dataReader.GetString(2)
                     };
                     //Refaction refaction = refactionDAO.Read_once(dataReader.GetString(0));
                     //cotization_RefactionFK.Refaction = refaction;

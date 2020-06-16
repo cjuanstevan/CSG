@@ -268,6 +268,10 @@ namespace CSG.views
                         //Abrimos el form FrmCotizationCreate
                         FrmCotizationCreate frmCotizationCreate = new FrmCotizationCreate();
                         frmCotizationCreate.ShowDialog();
+                        if (frmCotizationCreate.DialogResult.Equals(DialogResult.Yes))
+                        {
+                            BtnSearch_Click(null, e);
+                        }
                     }
                 }
             }

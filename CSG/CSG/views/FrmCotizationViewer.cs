@@ -106,10 +106,10 @@ namespace CSG.views
             comentarys += "Técnico: " + Environment.NewLine + cotization.Cotization_comentarys;
             txtComentarys.Text = cotization.Cotization_comentarys;
             //Cargamos subtotal, descuento, iva y total
-            lblSubtotal.Text = cotization.Cotization_subtotal.ToString("C2");
-            lblDiscount.Text = cotization.Cotization_discount.ToString("C2");
-            lblIva.Text = cotization.Cotization_iva.ToString("C2");
-            lblTotal.Text = cotization.Cotization_total.ToString("C2");
+            lblSubtotal.Text = cotization.Cotization_subtotal;
+            lblDiscount.Text = cotization.Cotization_discount;
+            lblIva.Text = cotization.Cotization_iva;
+            lblTotal.Text = cotization.Cotization_total;
         }
 
         private void AddArticles()
@@ -158,8 +158,8 @@ namespace CSG.views
                 row[1] = refaction.Refaction_code;
                 row[2] = refaction.Refaction_description;
                 row[3] = cr.Refaction_quantity;
-                row[4] = refaction.Refaction_unit_price.ToString("C2");
-                row[5] = cr.Refaction_amount.ToString("C2");
+                row[4] = refaction.Refaction_unit_price;
+                row[5] = cr.Refaction_amount;
                 dtsr.Rows.Add(row);
             }
         }

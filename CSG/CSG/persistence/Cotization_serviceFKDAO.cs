@@ -30,7 +30,7 @@ namespace CSG.persistence
                 //Adds
                 command.Parameters.Add("ActionOf", OdbcType.VarChar, 50).Value = cotization_serviceFK.Actionof;
                 command.Parameters.Add("Quantity", OdbcType.TinyInt).Value = cotization_serviceFK.Service_quantity;
-                command.Parameters.Add("Amount", OdbcType.Decimal).Value = cotization_serviceFK.Service_amount;
+                command.Parameters.Add("Amount", OdbcType.VarChar, 14).Value = cotization_serviceFK.Service_amount;
 
                 command.ExecuteNonQuery();
                 Console.WriteLine("CREATE-> cotization: " + cotization_serviceFK.Cotization_id + " | service: " + cotization_serviceFK.Service_code);

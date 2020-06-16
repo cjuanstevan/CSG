@@ -12,13 +12,14 @@ namespace CSG.model
         private string _service_code;
         private string _actionof;
         private byte _service_quantity;
-        private decimal _service_amount;
+        private string _service_amount;
 
         public Cotization_serviceFK()
         {
 
         }
-        public Cotization_serviceFK(string cotization_id, string service_code, string actionof, byte service_quantity, decimal service_amount)
+        public Cotization_serviceFK(string cotization_id, string service_code, string actionof, 
+            byte service_quantity, string service_amount)
         {
             Cotization_id = cotization_id;
             Service_code = service_code;
@@ -31,7 +32,7 @@ namespace CSG.model
         public string Service_code { get => _service_code; set => _service_code = value; }
         public string Actionof { get => _actionof; set => _actionof = value; }
         public byte Service_quantity { get => _service_quantity; set => _service_quantity = value; }
-        public decimal Service_amount { get => _service_amount; set => _service_amount = value; }
+        public string Service_amount { get => _service_amount; set => _service_amount = value; }
         
     }
 }

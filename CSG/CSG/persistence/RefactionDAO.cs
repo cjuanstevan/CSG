@@ -83,7 +83,7 @@ namespace CSG.persistence
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = refaction.Refaction_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = refaction.Refaction_description;
-                command.Parameters.Add("UnitPrice", OdbcType.Decimal).Value = refaction.Refaction_unit_price;
+                command.Parameters.Add("UnitPrice", OdbcType.VarChar, 14).Value = refaction.Refaction_unit_price;
                 command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
                 command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
@@ -155,7 +155,7 @@ namespace CSG.persistence
                     {
                         Refaction_code = dataReader.GetString(0),
                         Refaction_description = dataReader.GetString(1),
-                        Refaction_unit_price = dataReader.GetDecimal(2)
+                        Refaction_unit_price = dataReader.GetString(2)
                     };
                     refactions.Add(refaction);
                 }
@@ -191,7 +191,7 @@ namespace CSG.persistence
                     {
                         Refaction_code = dataReader.GetString(0),
                         Refaction_description = dataReader.GetString(1),
-                        Refaction_unit_price = dataReader.GetDecimal(2)
+                        Refaction_unit_price = dataReader.GetString(2)
                     };
                     refactions.Add(refaction);
                 }
@@ -227,7 +227,7 @@ namespace CSG.persistence
                     {
                         Refaction_code = dataReader.GetString(0),
                         Refaction_description = dataReader.GetString(1),
-                        Refaction_unit_price = dataReader.GetDecimal(2)
+                        Refaction_unit_price = dataReader.GetString(2)
                     };
                 }
                 else
@@ -289,7 +289,7 @@ namespace CSG.persistence
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = refaction.Refaction_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = refaction.Refaction_description;
-                command.Parameters.Add("UnitPrice", OdbcType.Decimal).Value = refaction.Refaction_unit_price;
+                command.Parameters.Add("UnitPrice", OdbcType.VarChar, 14).Value = refaction.Refaction_unit_price;
 
                 command.Parameters.Add("@UpdateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
                 command.Parameters.Add("@UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));

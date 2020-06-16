@@ -124,7 +124,7 @@ namespace CSG.views
                     {
                         Refaction_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Refaction_description = DgvVisor.Rows[i].Cells[1].Value.ToString(),
-                        Refaction_unit_price = decimal.Parse(DgvVisor.Rows[i].Cells[2].Value.ToString())
+                        Refaction_unit_price = DgvVisor.Rows[i].Cells[2].Value.ToString()
                     };
                     refactions.Add(r);
                 }

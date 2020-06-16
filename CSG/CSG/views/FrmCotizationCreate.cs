@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace CSG.views
 {
@@ -220,7 +221,7 @@ namespace CSG.views
                     row = dtr.NewRow();
                     row[0] = refaction.Refaction_code;
                     row[1] = refaction.Refaction_description;
-                    row[2] = refaction.Refaction_unit_price.ToString("C2");
+                    row[2] = refaction.Refaction_unit_price;
                     dtr.Rows.Add(row);
                 }
                 else
@@ -458,6 +459,7 @@ namespace CSG.views
 
         private void IbtnUpdate_Click(object sender, EventArgs e)
         {
+            CultureInfo culture = new CultureInfo("en-US");
             if (ValidateData())
             {
                 DateTime localDate = DateTime.Now;
@@ -471,13 +473,11 @@ namespace CSG.views
                 //Capturamos los comentarios técnicos
                 cotization.Cotization_comentarys = txtComentarys.Text;
                 //Calculamos el subtotal
-                Decimal subtotal = 0.00m;
+                Decimal Dsubtotal = 0m;
                 //Obtenemos la suma de los servicios
                 for (int i = 0; i < dts.Rows.Count; i++)
                 {
                     Service service = serviceLog.Read_once(dts.Rows[i][0].ToString());
-                    //Console.WriteLine("Costo: " + service.Service_cost);
-
                     //Creamos cotization_service (DETALLES)
                     Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
                     {
@@ -485,17 +485,24 @@ namespace CSG.views
                         Service_code = service.Service_code,
                         Actionof = dts.Rows[i][2].ToString(),
                         Service_quantity = Convert.ToByte(dts.Rows[i][3].ToString()),
-                        Service_amount = 0.00m//service.Service_cost * Convert.ToByte(dts.Rows[i][3])
                     };
+                    //Capturamos el costo en string
+                    string strCost = service.Service_cost;
+                    //Lo convertimos a decimal
+                    decimal decCost = decimal.Parse(strCost, culture);
+                    //Lo multiplicamos por la cantidad
+                    decimal decAmount = decCost * cotization_ServiceFK.Service_quantity;
+                    //Lo agregamos al objeto en formato string
+                    cotization_ServiceFK.Service_amount = decAmount.ToString().Replace(',', '.');
+                    //Lo sumamos en el subtotal
+                    Dsubtotal += decAmount;
+                    //Creamos el objeto cotization service
                     cotizationServiceLog.Create(cotization_ServiceFK);
-                    subtotal += cotization_ServiceFK.Service_amount;
                 }
                 //Obtenemos la suma de los repuestos
                 for (int i = 0; i < dtr.Rows.Count; i++)
                 {
                     Refaction refaction = refactionLog.Read_once(dtr.Rows[i][0].ToString());
-                    //Console.WriteLine("Costo: " + refaction.Refaction_unit_price);
-
                     //Creamos cotization_refaction (DETALLES)
                     Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
                     {
@@ -503,25 +510,35 @@ namespace CSG.views
                         Refaction_code = refaction.Refaction_code,
                         Replacementof = dtr.Rows[i][2].ToString(),
                         Refaction_quantity = Convert.ToByte(dtr.Rows[i][3].ToString()),
-                        Refaction_amount = Convert.ToDecimal(refaction.Refaction_unit_price * Convert.ToByte(dtr.Rows[i][3].ToString()))
                     };
+                    //Capturamos el precio unitario en string
+                    string strPrice = refaction.Refaction_unit_price;
+                    //Lo convertimos a decimal
+                    decimal decPrice = decimal.Parse(strPrice, culture);
+                    //Lo multiplicamos por la cantidad
+                    decimal decAmountr = decPrice * cotization_RefactionFK.Refaction_quantity;
+                    //Lo agregamos al objeto en formato string
+                    cotization_RefactionFK.Refaction_amount = decAmountr.ToString().Replace(',', '.');
+                    //Lo sumamos en el subtotal
+                    Dsubtotal += decAmountr;
+                    //Creamos el objeto cotization refaction
                     cotizationRefactionLog.Create(cotization_RefactionFK);
-                    subtotal += cotization_RefactionFK.Refaction_amount;
+                    //subtotal += Decimal.Parse(cotization_RefactionFK.Refaction_amount);
                 }
-                cotization.Cotization_subtotal = subtotal;
-                Console.WriteLine("Subtotal: " + subtotal);
+                Console.WriteLine("Subtotal decimal: " + Dsubtotal);
+                Console.WriteLine("Subtotal string: " + Dsubtotal.ToString().Replace(',', '.'));
+                cotization.Cotization_subtotal = Dsubtotal.ToString().Replace(',', '.');
                 //Definimos el descuento->preguntar a EVANS si maneja descuento
-                cotization.Cotization_discount = 0;
-                //DEfinimos el IVA->por ahora se hará con el 19%. pero se debe tener en cuenta el IVA
-                //de cada servicio y respuesto.
+                cotization.Cotization_discount = "0";
+                //DEfinimos el IVA del subtotal->por ahora se hará con el 19%. pero se debe tener en cuenta el IVA
+                //Consultamos el iva codigo 19
                 decimal im = taxLog.Read_once_value("19");
                 //Calculamos el IVA
-                decimal iva = subtotal * im;
-                cotization.Cotization_iva = iva;
-                Console.WriteLine("IVA: " + iva);
-                decimal total = subtotal + iva;
-                cotization.Cotization_total = total;
-                Console.WriteLine("Total: " + total);
+                decimal iva = Dsubtotal * im;
+                //Agregamos el string del iva al objeto cotization
+                cotization.Cotization_iva = iva.ToString().Replace(',', '.');
+                decimal total = Dsubtotal + iva;
+                cotization.Cotization_total = total.ToString().Replace(',', '.');
                 //Agregamos el usuario que la actualizará
                 cotization.Update_by = UserCache.UserAccount;
                 //Agregamos la fecha de actualizacion

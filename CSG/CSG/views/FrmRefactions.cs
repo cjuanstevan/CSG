@@ -172,13 +172,7 @@ namespace CSG.views
             {
                 if (ValidateFields())
                 {
-                    value = txtUnitPrice.Text;
-                    style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
-                    provider = new CultureInfo("fr-FR");
-
-                    number = Decimal.Parse(value, style, provider);
-                    Console.WriteLine("'{0}' converted to {1}.", value, number);
-                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, number);
+                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, txtUnitPrice.Text);
                     CleanFields();
                     refactionLog.Create(refaction);
                     IbtnRefresh_Click(null, e);
@@ -190,13 +184,7 @@ namespace CSG.views
                 if (ValidateFields())
                 {
                     //Guardamos
-                    value = txtUnitPrice.Text;
-                    style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
-                    provider = new CultureInfo("fr-FR");
-
-                    number = Decimal.Parse(value, style, provider);
-                    Console.WriteLine("'{0}' converted to {1}.", value, number);
-                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, number);
+                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, txtUnitPrice.Text);
                     CleanFields();
                     refactionLog.Update(refaction);
                     IbtnRefresh_Click(null, e);
