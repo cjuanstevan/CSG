@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSG.model;
+using CSG.cache;
 
 namespace CSG.persistence
 {
@@ -78,11 +79,13 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Refaction_Create(?,?,?)}"
+                    CommandText = "{call csg.Refaction_Create(?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = refaction.Refaction_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = refaction.Refaction_description;
                 command.Parameters.Add("UnitPrice", OdbcType.Decimal).Value = refaction.Refaction_unit_price;
+                command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Repuesto creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -282,11 +285,14 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Refaction_Update(?,?,?)}"
+                    CommandText = "{call csg.Refaction_Update(?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = refaction.Refaction_code;
                 command.Parameters.Add("Description", OdbcType.VarChar, 50).Value = refaction.Refaction_description;
                 command.Parameters.Add("UnitPrice", OdbcType.Decimal).Value = refaction.Refaction_unit_price;
+
+                command.Parameters.Add("@UpdateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("@UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Repuesto actualizado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

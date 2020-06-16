@@ -230,6 +230,7 @@
             this.Opacity = 0.97D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLogin";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLogin_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmLogin_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

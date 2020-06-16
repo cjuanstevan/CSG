@@ -11,6 +11,7 @@ namespace CSG.persistence
     {
         void Create(Cotization_refactionFK cotization_refactionFK);//ok
         List<Cotization_refactionFK> Read_RefactionsOfCotization(string cotization_id);//ok
+        bool RefactionsCotizations(string article_code);
         void Delete(string id, string code);//ok
     }
 }

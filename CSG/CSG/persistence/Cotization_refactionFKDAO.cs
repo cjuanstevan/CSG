@@ -115,5 +115,40 @@ namespace CSG.persistence
             }
             return cotization_Refactions;
         }
+
+        public bool RefactionsCotizations(string refaction_code)
+        {
+            bool request = true;
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand()
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Cotization_refactionFK_RefactionsCotization(?)}"
+                };
+                command.Parameters.Add("@RefactionCode", OdbcType.VarChar, 50).Value = refaction_code;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    if (dataReader.GetInt32(0) > 0)
+                    {
+                        request = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en Cotization_refactionFKDAO->RefactionsCotizations: " 
+                    + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return request;
+        }
     }
 }

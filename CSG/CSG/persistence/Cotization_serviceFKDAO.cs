@@ -110,5 +110,40 @@ namespace CSG.persistence
             }
             return cotization_Services;
         }
+
+        public bool ServicesCotizations(string service_code)
+        {
+            bool request = true;
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand()
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Cotization_serviceFK_ServicesCotization(?)}"
+                };
+                command.Parameters.Add("@ServiceCode", OdbcType.VarChar, 50).Value = service_code;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    if (dataReader.GetInt32(0) > 0)
+                    {
+                        request = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en Cotization_serviceFKDAO->ServicesCotizations: "
+                    + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return request;
+        }
     }
 }

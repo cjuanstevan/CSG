@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 using CSG.model;
 
 namespace CSG.persistence
@@ -80,13 +81,15 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Service_Create(?,?,?,?,?)}"
+                    CommandText = "{call csg.Service_Create(?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = service.Service_code;
                 command.Parameters.Add("Activity", OdbcType.VarChar, 50).Value = service.Service_activity;
                 command.Parameters.Add("Duration", OdbcType.VarChar, 50).Value = service.Service_duration;
                 command.Parameters.Add("Cost", OdbcType.VarChar, 50).Value = service.Service_cost;
                 command.Parameters.Add("Type", OdbcType.Char, 1).Value = service.Service_type;
+                command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Servicio creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -157,7 +160,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetDecimal(3),
+                        Service_cost = dataReader.GetString(3),
                         Service_type = dataReader.GetChar(4)
                     };
                     services.Add(service);
@@ -195,7 +198,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetDecimal(3),
+                        Service_cost = dataReader.GetString(3),
                         Service_type = dataReader.GetChar(4)
                     };
                     services.Add(service);
@@ -233,7 +236,7 @@ namespace CSG.persistence
                         Service_code = dataReader.GetString(0),
                         Service_activity = dataReader.GetString(1),
                         Service_duration = dataReader.GetString(2),
-                        Service_cost = dataReader.GetDecimal(3),
+                        Service_cost = dataReader.GetString(3),
                         Service_type = dataReader.GetChar(4)
                     };
                 }
@@ -292,13 +295,15 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Service_Update(?,?,?,?,?)}"
+                    CommandText = "{call csg.Service_Update(?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = service.Service_code;
                 command.Parameters.Add("Activity", OdbcType.VarChar, 50).Value = service.Service_activity;
                 command.Parameters.Add("Duration", OdbcType.VarChar, 50).Value = service.Service_duration;
                 command.Parameters.Add("Cost", OdbcType.VarChar, 50).Value = service.Service_cost;
                 command.Parameters.Add("Type", OdbcType.Char, 1).Value = service.Service_type;
+                command.Parameters.Add("UpdateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("UpdateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Servicio actualizado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

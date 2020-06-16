@@ -9,12 +9,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.validator;
+using System.Globalization;
 
 namespace CSG.views
 {
     public partial class FrmRefactions : Form
     {
         private readonly RefactionLog refactionLog = new RefactionLog();
+        private readonly CotizationRefactionLog cotizationRefactionLog = new CotizationRefactionLog();
+        //Tabla
+        private DataTable dtr = new DataTable();
+        private DataColumn column;
+        private DataRow row;
+
+        //DEcimal
+        string value;
+        decimal number;
+        NumberStyles style;
+        CultureInfo provider;
         public FrmRefactions()
         {
             InitializeComponent();
@@ -36,12 +49,17 @@ namespace CSG.views
                         //Desactivamos los campos ineditables.
                         txtCode.Enabled = false;
                         //Cambiamos el tipo de accion del boton
-                        btnCreate.Text = "Guardar";
+                        IbtnCreate.Text = "Guardar";
                         //Llenamos los campos.
                         txtCode.Text = refaction.Refaction_code;
                         txtDesc.Text = refaction.Refaction_description;
                         txtUnitPrice.Text = refaction.Refaction_unit_price.ToString();
                         txtObs.Text = "";
+                    }
+                    else
+                    {
+                        txtCode.Clear();
+                        txtCode.Focus();
                     }
                 }
             }
@@ -49,33 +67,7 @@ namespace CSG.views
 
         private void BtnCreate_Click(object sender, EventArgs e)
         {
-            if (txtCode.Text.Equals(""))
-            {
-                MessageBox.Show("El código es obligatorio");
-                txtCode.Focus();
-            }
-            else
-            {
-                //validamos el tipo de accion del boton
-                if (btnCreate.Text.Equals("Crear"))
-                {
-                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, decimal.Parse(txtUnitPrice.Text));
-                    CleanFields();
-                    refactionLog.Create(refaction);
-                    BtnReadAll_Click(sender, e);
-                }
-                else if (btnCreate.Text.Equals("Guardar"))
-                {
-                    //Guardamos
-                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, decimal.Parse(txtUnitPrice.Text));
-                    CleanFields();
-                    refactionLog.Update(refaction);
-                    BtnReadAll_Click(sender, e);
-                    //cambiamos botones
-                    btnCreate.Text = "Crear";
-                    BtnDelete.Enabled = false;
-                }
-            }
+            
         }
 
         private void CleanFields()
@@ -90,9 +82,8 @@ namespace CSG.views
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            btnNew.Enabled = false;
-            btnCreate.Text = "Crear";
-            BtnDelete.Enabled = false;
+            IbtnNew.Enabled = false;
+            IbtnCreate.Text = "Crear";
             CleanFields();
             txtCode.ReadOnly = false;
             txtCode.Focus();
@@ -109,8 +100,7 @@ namespace CSG.views
                     //Eliminamos
                     refactionLog.Delete(txtCode.Text);
                     //habilita botones
-                    BtnDelete.Enabled = false;
-                    btnCreate.Text = "Crear";
+                    IbtnCreate.Text = "Crear";
                     //Limpiamos campos
                     CleanFields();
                     //Actualizamos tabla
@@ -121,35 +111,277 @@ namespace CSG.views
 
         private void BtnReadAll_Click(object sender, EventArgs e)
         {
-            DgvRefaction.DataSource = refactionLog.ReadAll();
-            CreateHeaders();
+            //DgvRefaction.DataSource = refactionLog.ReadAll();
+            //CreateHeaders();
         }
-
-        private void DgvRefaction_CellClick(object sender, DataGridViewCellEventArgs e)
+        //Crea la estructura de la tabla en memoria
+        private void CreateDataTable()
         {
-            if (e.RowIndex >= 0)
+            //Columna 1->codigo
+            column = new DataColumn
             {
-                txtCode.ReadOnly = true;
-                btnCreate.Text = "Guardar";
-                BtnDelete.Enabled = true;
-                btnNew.Enabled = true;
-                txtCode.Text = DgvRefaction.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtDesc.Text = DgvRefaction.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtUnitPrice.Text = DgvRefaction.Rows[e.RowIndex].Cells[2].Value.ToString();
-            }
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "CÓDIGO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = true
+            };
+            dtr.Columns.Add(column);
+            // Columna 2->descripcion
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "DESCRIPCIÓN",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false
+            };
+            dtr.Columns.Add(column);
+            // Columna 3->precio unitario
+            column = new DataColumn
+            {
+                DataType = System.Type.GetType("System.String"),
+                ColumnName = "PRECIO UNITARIO",
+                AutoIncrement = false,
+                ReadOnly = true,
+                Unique = false,
+            };
+            dtr.Columns.Add(column);
+            DgvRefaction.DataSource = dtr;
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            DgvRefaction.DataSource = refactionLog.Read_all_like(txtSearch.Text);
-            CreateHeaders();
+            List<Refaction> refactions = refactionLog.Read_all_like(txtSearch.Text);
+            LoadRowsDataTable(refactions);
+            //DgvRefaction.DataSource = refactionLog.Read_all_like(txtSearch.Text);
+            //CreateHeaders();
         }
 
-        private void CreateHeaders()
+        //private void CreateHeaders()
+        //{
+        //    DgvRefaction.Columns[0].HeaderText = "Código";
+        //    DgvRefaction.Columns[1].HeaderText = "Descripción";
+        //    DgvRefaction.Columns[2].HeaderText = "Precio Unitario";
+        //}
+
+        private void IbtnCreate_Click(object sender, EventArgs e)
         {
-            DgvRefaction.Columns[0].HeaderText = "Código";
-            DgvRefaction.Columns[1].HeaderText = "Descripción";
-            DgvRefaction.Columns[2].HeaderText = "Precio Unitario";
+            if (IbtnCreate.Text.Equals("Crear"))
+            {
+                if (ValidateFields())
+                {
+                    value = txtUnitPrice.Text;
+                    style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
+                    provider = new CultureInfo("fr-FR");
+
+                    number = Decimal.Parse(value, style, provider);
+                    Console.WriteLine("'{0}' converted to {1}.", value, number);
+                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, number);
+                    CleanFields();
+                    refactionLog.Create(refaction);
+                    IbtnRefresh_Click(null, e);
+                    IbtnNew.Enabled = false;
+                }
+            }
+            else if (IbtnCreate.Text.Equals("Guardar"))
+            {
+                if (ValidateFields())
+                {
+                    //Guardamos
+                    value = txtUnitPrice.Text;
+                    style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
+                    provider = new CultureInfo("fr-FR");
+
+                    number = Decimal.Parse(value, style, provider);
+                    Console.WriteLine("'{0}' converted to {1}.", value, number);
+                    Refaction refaction = new Refaction(txtCode.Text, txtDesc.Text, number);
+                    CleanFields();
+                    refactionLog.Update(refaction);
+                    IbtnRefresh_Click(null, e);
+                    //cambiamos botones
+                    txtCode.Enabled = true;
+                    txtCode.Focus();
+                    IbtnCreate.Text = "Crear";
+                    IbtnNew.Enabled = false;
+                }
+            }
+
+        }
+
+        private bool ValidateFields()
+        {
+            errorProvider1.Clear();
+            if (string.IsNullOrEmpty(txtCode.Text))
+            {
+                txtCode.Focus();
+                errorProvider1.SetError(txtCode, "Campo obligatorio");
+                return false;
+            }
+            errorProvider1.Clear();
+            if (string.IsNullOrEmpty(txtDesc.Text))
+            {
+                txtDesc.Focus();
+                errorProvider1.SetError(txtDesc, "Campo obligatorio");
+                return false;
+            }
+            errorProvider1.Clear();
+            if (string.IsNullOrEmpty(txtUnitPrice.Text))
+            {
+                txtUnitPrice.Focus();
+                errorProvider1.SetError(txtUnitPrice, "Campo obligatorio");
+                return false;
+            }
+            errorProvider1.Clear();
+            return true;
+        }
+
+        private void TxtCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateTextbox.LetterAndNumericNoSpace(e);
+            if (e.Handled.Equals(true))
+            {
+                errorProvider1.SetError(txtCode, "Sólo letras y números sin espacios");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void TxtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //ValidateTextbox.NumericNoSpace(e);
+            //if (e.Handled.Equals(true))
+            //{
+            //    errorProvider1.SetError(txtUnitPrice, "Sólo números sin espacios");
+            //}
+            //else
+            //{
+            //    errorProvider1.Clear();
+            //}
+        }
+
+        private void TxtUnitPrice_Enter(object sender, EventArgs e)
+        {
+            //TextBox tb = (TextBox)sender;
+            //tb.Text = Convert.ToString(tb.Tag);
+        }
+
+        private void TxtUnitPrice_Leave(object sender, EventArgs e)
+        {
+            //TextBox tb = (TextBox)sender;
+            //decimal numero = default(decimal);
+            //bool bln = decimal.TryParse(tb.Text, out numero);
+            //if ((!(bln)))
+            //{
+            //    // No es un valor decimal válido; limpiamos el control.
+            //    tb.Clear();
+            //    return;
+            //}
+
+            //// En la propiedad Tag guardamos el valor con todos los decimales.
+            ////
+            //tb.Tag = numero;
+
+            //// Y acto seguido formateamos el valor
+            //// a monetario con dos decimales.
+            ////
+            //tb.Text = string.Format("{0:C2}", numero);
+        }
+
+        private void FrmRefactions_Load(object sender, EventArgs e)
+        {
+            txtCode.Focus();
+            CreateDataTable();
+        }
+
+        private void IbtnRefresh_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            List<Refaction> refactions = refactionLog.ReadAll();
+            LoadRowsDataTable(refactions);
+        }
+        private void LoadRowsDataTable(List<Refaction> refactions)
+        {
+            dtr = new DataTable();
+            DgvRefaction.Columns.Clear();
+            CreateDataTable();
+            Cursor.Current = Cursors.WaitCursor;
+            foreach (var r in refactions)
+            {
+                row = dtr.NewRow();
+                row[0] = r.Refaction_code;
+                row[1] = r.Refaction_description;
+                row[2] = r.Refaction_unit_price;
+                dtr.Rows.Add(row);                 
+            }
+            //Editar
+            DataGridViewImageColumn imageEdit = new DataGridViewImageColumn
+            {
+                Image = Properties.Resources.edit,
+                Name = "edit",
+                HeaderText = "EDITAR"
+            };
+            DgvRefaction.Columns.Add(imageEdit);
+            //Eliminar
+            DataGridViewImageColumn imageDelete = new DataGridViewImageColumn
+            {
+                Image = Properties.Resources.delete,
+                Name = "delete",
+                HeaderText = "ELIMINAR"
+            };
+            DgvRefaction.Columns.Add(imageDelete);
+        }
+
+        private void IbtnNew_Click(object sender, EventArgs e)
+        {
+            IbtnNew.Enabled = false;
+            IbtnCreate.Text = "Crear";
+            CleanFields();
+            txtCode.Enabled = true;
+            txtCode.Focus();
+        }
+
+        private void DgvRefaction_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (DgvRefaction.CurrentCell.ColumnIndex == 3)
+                {
+                    //Bloqueamos controles
+                    IbtnNew.Enabled = true;
+                    txtCode.Enabled = false;
+                    IbtnCreate.Text = "Guardar";
+                    txtCode.Text = DgvRefaction.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    txtDesc.Text = DgvRefaction.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    txtUnitPrice.Text = DgvRefaction.Rows[e.RowIndex].Cells[2].Value.ToString();
+                }
+                else if (DgvRefaction.CurrentCell.ColumnIndex == 4)
+                {
+                    if (cotizationRefactionLog.RefactionsCotizations(DgvRefaction.Rows[e.RowIndex].Cells[0].Value.ToString()))
+                    {
+                        DialogResult dr = MessageBox.Show("¿Desea eliminar el repuesto?" +
+                             Environment.NewLine + Environment.NewLine +
+                               "Código: " + DgvRefaction.Rows[e.RowIndex].Cells[0].Value.ToString() +
+                               Environment.NewLine +
+                               "Descripción: " + DgvRefaction.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                               "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            //Eliminamos
+                            refactionLog.Delete(DgvRefaction.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            //Actualizamos tabla
+                            IbtnRefresh_Click(null, e);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El repuesto no se puede eliminar porque es utilizado en una o mas" +
+                            " cotizaciones");
+                    }
+                }
+            }
         }
     }
 }

@@ -9,8 +9,9 @@ namespace CSG.validator
     {
         //1-Solo letras con espacios (Nombres, etc)
         //2-Solo letras sin espacios (NIT)
-        //3-Solo números sin espacion
-
+        //3-Solo números con espacios 1 2 3 4 5
+        //4-Solo números sin espacios 12345
+        //5-Numero y letras sin espacios abc12345
 
         //1
         public static void LetterSpace(KeyPressEventArgs key)
@@ -49,6 +50,7 @@ namespace CSG.validator
                 key.Handled = true;
             }
         }
+        //3
         public static void NumericSpace(KeyPressEventArgs key)
         {
             if (char.IsDigit(key.KeyChar))
@@ -68,9 +70,27 @@ namespace CSG.validator
                 key.Handled = true;
             }
         }
+        //4
         public static void NumericNoSpace(KeyPressEventArgs key)
         {
             if (char.IsDigit(key.KeyChar))
+            {
+                key.Handled = false;
+            }
+            else if (char.IsControl(key.KeyChar))
+            {
+                key.Handled = false;
+            }
+            else
+            {
+                key.Handled = true;
+            }
+        }
+
+        //5
+        public static void LetterAndNumericNoSpace(KeyPressEventArgs key)
+        {
+            if (char.IsLetterOrDigit(key.KeyChar))
             {
                 key.Handled = false;
             }

@@ -19,5 +19,10 @@ namespace CSG.logic
         {
             return DAOFactory.GetCotization_RefactionFKDAO().Read_RefactionsOfCotization(cotization_id);
         }
+
+        public bool RefactionsCotizations(string refaction_code)
+        {
+            return DAOFactory.GetCotization_RefactionFKDAO().RefactionsCotizations(refaction_code);
+        }
     }
 }

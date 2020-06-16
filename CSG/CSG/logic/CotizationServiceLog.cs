@@ -20,7 +20,10 @@ namespace CSG.logic
             return DAOFactory.GetCotization_ServiceFKDAO().Read_ServicesOfCotization(cotization_id);
         }
 
-
+        public bool ServicesCotizations(string service_code)
+        {
+            return DAOFactory.GetCotization_ServiceFKDAO().ServicesCotizations(service_code);
+        }
 
 
     }

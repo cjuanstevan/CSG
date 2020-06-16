@@ -145,7 +145,7 @@ namespace CSG.views
                         Service_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Service_activity = DgvVisor.Rows[i].Cells[1].Value.ToString(),
                         Service_duration = DgvVisor.Rows[i].Cells[2].Value.ToString(),
-                        Service_cost = Convert.ToDecimal(DgvVisor.Rows[i].Cells[3].Value.ToString()),
+                        Service_cost = DgvVisor.Rows[i].Cells[3].Value.ToString(),
                         Service_type = char.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString())
                     };
                     services.Add(s);

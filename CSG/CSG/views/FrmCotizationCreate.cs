@@ -166,7 +166,7 @@ namespace CSG.views
                     row[0] = service.Service_code;
                     row[1] = service.Service_activity;
                     row[2] = service.Service_duration;
-                    row[3] = service.Service_cost.ToString("C2");
+                    row[3] = service.Service_cost;
                     row[4] = service.Service_type;
                     dts.Rows.Add(row);
                 }
@@ -456,7 +456,7 @@ namespace CSG.views
                         Service_code = service.Service_code,
                         Actionof = dts.Rows[i][2].ToString(),
                         Service_quantity = Convert.ToByte(dts.Rows[i][3].ToString()),
-                        Service_amount = service.Service_cost * Convert.ToByte(dts.Rows[i][3].ToString())
+                        Service_amount = 0.00m//service.Service_cost * Convert.ToByte(dts.Rows[i][3])
                     };
                     cotizationServiceLog.Create(cotization_ServiceFK);
                     subtotal += cotization_ServiceFK.Service_amount;
@@ -474,7 +474,7 @@ namespace CSG.views
                         Refaction_code = refaction.Refaction_code,
                         Replacementof = dtr.Rows[i][2].ToString(),
                         Refaction_quantity = Convert.ToByte(dtr.Rows[i][3].ToString()),
-                        Refaction_amount = refaction.Refaction_unit_price * Convert.ToByte(dtr.Rows[i][3].ToString())
+                        Refaction_amount = Convert.ToDecimal(refaction.Refaction_unit_price * Convert.ToByte(dtr.Rows[i][3].ToString()))
                     };
                     cotizationRefactionLog.Create(cotization_RefactionFK);
                     subtotal += cotization_RefactionFK.Refaction_amount;

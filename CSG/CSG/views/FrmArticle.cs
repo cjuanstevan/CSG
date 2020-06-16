@@ -37,7 +37,6 @@ namespace CSG.views
             txtSearch.Clear();
             List<Article> articles = articleLog.ReadAll();
             LoadRowsDataTable(articles:articles);
-
         }
         
         private void LoadRowsDataTable(List<Article> articles)
@@ -76,7 +75,7 @@ namespace CSG.views
                     HeaderText = "EDITAR"
                 };
                 DgvArticle.Columns.Add(imageEdit);
-                //Editar
+                //Eliminar
                 DataGridViewImageColumn imageDelete = new DataGridViewImageColumn
                 {
                     Image = Properties.Resources.delete,

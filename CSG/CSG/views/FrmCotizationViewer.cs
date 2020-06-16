@@ -141,8 +141,8 @@ namespace CSG.views
                 row[1] = service.Service_code;
                 row[2] = service.Service_activity;
                 row[3] = Int32.Parse("1");
-                row[4] = service.Service_cost.ToString("C2");
-                row[5] = service.Service_cost.ToString("C2");
+                row[4] = service.Service_cost;
+                row[5] = service.Service_cost;
                 dtsr.Rows.Add(row);
             }
         }
