@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSG.cache;
 using CSG.model;
 
 namespace CSG.persistence
@@ -84,7 +85,7 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Technician_Create(?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Technician_Create(?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = technician.Technician_id;
                 command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = technician.Technician_name;
@@ -92,6 +93,9 @@ namespace CSG.persistence
                 command.Parameters.Add("Alias", OdbcType.VarChar, 50).Value = technician.Technician_alias;
                 command.Parameters.Add("Telephone", OdbcType.VarChar, 50).Value = technician.Technician_telephone;
                 command.Parameters.Add("Position", OdbcType.VarChar, 50).Value = technician.Technician_position;
+                command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Técnico creado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -306,7 +310,7 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.Technician_Update(?,?,?,?,?,?)}"
+                    CommandText = "{call csg.Technician_Update(?,?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Id", OdbcType.VarChar, 50).Value = technician.Technician_id;
                 command.Parameters.Add("Name", OdbcType.VarChar, 50).Value = technician.Technician_name;
@@ -314,6 +318,8 @@ namespace CSG.persistence
                 command.Parameters.Add("Alias", OdbcType.VarChar, 50).Value = technician.Technician_alias;
                 command.Parameters.Add("Telephone", OdbcType.VarChar, 50).Value = technician.Technician_telephone;
                 command.Parameters.Add("Position", OdbcType.VarChar, 50).Value = technician.Technician_position;
+                command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = UserCache.UserCode;
+                command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Técnico actualizado exitosamente", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

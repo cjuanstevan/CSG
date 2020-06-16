@@ -136,8 +136,8 @@ namespace CSG.views
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
-            DgvService.DataSource = serviceLog.Read_all_like(txtSearch.Text);
-            CreateHeaders();
+            List<Service> services = serviceLog.Read_all_like(txtSearch.Text);
+            LoadRowsDataTable(services: services);
         }
 
         private void IBtnCreate_Click(object sender, EventArgs e)
@@ -146,11 +146,20 @@ namespace CSG.views
             {
                 if (ValidateFields())
                 {
-                    Service service = new Service(txtCode.Text, txtActivity.Text, nupDuration.Value.ToString(),
-                    txtCost.Text, char.Parse(cboType.Text));
-                    CleanFields();
-                    serviceLog.Create(service);
-                    IbtnRefresh_Click(null, e);
+                    if (!serviceLog.Read_once_exist(txtCode.Text))
+                    {
+                        Service service = new Service(txtCode.Text, txtActivity.Text, nupDuration.Value.ToString(),
+                        txtCost.Text, char.Parse(cboType.Text));
+                        CleanFields();
+                        serviceLog.Create(service);
+                        IbtnRefresh_Click(null, e);
+                    }
+                    else
+                    {
+                        MessageBox.Show("El servicio ya existe en el sistema", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
 
             }

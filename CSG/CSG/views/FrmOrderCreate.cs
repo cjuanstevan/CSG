@@ -264,15 +264,18 @@ namespace CSG.views
 
         private void ResetControls(object sender, EventArgs e)
         {
-            cboType.SelectedIndex = 0;
             txtNumber.Clear();
+            Order.Order_number_st = "";
+            cboType.SelectedIndex = 0;
             CboType_SelectedIndexChanged(sender, e);
             txtClientId.Clear();
             txtArticleCod.Clear();
-            //cboWarranty.SelectedIndex = 1;
+            //reseteamos la tabla
+            EmptyDatatable();
             txtInvoice.Clear();
             txtReportClient.Clear();
             txtTechnicianId.Clear();
+            txtClientId.Focus();
         }
 
        private bool ValidateFields()
@@ -389,10 +392,12 @@ namespace CSG.views
                     };
                     orderArticleLog.Create(order_articleFK);
                 }
-                //ResetControls(sender, e);
+                
                 //Enviamos al caché la variable numero de orden
                 Order.Order_number_st = order.Order_number;
                 ViewReportOrderCreate();
+                ResetControls(sender, e);
+
             }
         }
 

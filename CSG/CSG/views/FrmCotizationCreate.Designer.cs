@@ -32,9 +32,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtComentarys = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.BtnUpdate = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.IbtnUpdate = new FontAwesome.Sharp.IconButton();
+            this.IbtnBack = new FontAwesome.Sharp.IconButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.IbtnSearchService = new FontAwesome.Sharp.IconButton();
@@ -133,42 +132,47 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button5);
-            this.panel2.Controls.Add(this.BtnUpdate);
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.IbtnUpdate);
+            this.panel2.Controls.Add(this.IbtnBack);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 745);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(980, 74);
             this.panel2.TabIndex = 31;
             // 
-            // button5
+            // IbtnUpdate
             // 
-            this.button5.Location = new System.Drawing.Point(880, 15);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.IbtnUpdate.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnUpdate.IconChar = FontAwesome.Sharp.IconChar.Save;
+            this.IbtnUpdate.IconColor = System.Drawing.Color.Black;
+            this.IbtnUpdate.IconSize = 20;
+            this.IbtnUpdate.Location = new System.Drawing.Point(880, 24);
+            this.IbtnUpdate.Name = "IbtnUpdate";
+            this.IbtnUpdate.Rotation = 0D;
+            this.IbtnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.IbtnUpdate.TabIndex = 4;
+            this.IbtnUpdate.Text = "Guardar";
+            this.IbtnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IbtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IbtnUpdate.UseVisualStyleBackColor = true;
+            this.IbtnUpdate.Click += new System.EventHandler(this.IbtnUpdate_Click);
             // 
-            // BtnUpdate
+            // IbtnBack
             // 
-            this.BtnUpdate.Location = new System.Drawing.Point(799, 15);
-            this.BtnUpdate.Name = "BtnUpdate";
-            this.BtnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.BtnUpdate.TabIndex = 1;
-            this.BtnUpdate.Text = "Guardar";
-            this.BtnUpdate.UseVisualStyleBackColor = true;
-            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(718, 15);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Atrás";
-            this.button3.UseVisualStyleBackColor = true;
+            this.IbtnBack.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.IbtnBack.IconChar = FontAwesome.Sharp.IconChar.AngleDoubleLeft;
+            this.IbtnBack.IconColor = System.Drawing.Color.Black;
+            this.IbtnBack.IconSize = 20;
+            this.IbtnBack.Location = new System.Drawing.Point(796, 24);
+            this.IbtnBack.Name = "IbtnBack";
+            this.IbtnBack.Rotation = 0D;
+            this.IbtnBack.Size = new System.Drawing.Size(75, 23);
+            this.IbtnBack.TabIndex = 3;
+            this.IbtnBack.Text = "Atrás";
+            this.IbtnBack.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IbtnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IbtnBack.UseVisualStyleBackColor = true;
+            this.IbtnBack.Click += new System.EventHandler(this.IbtnBack_Click);
             // 
             // tabControl1
             // 
@@ -717,9 +721,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button BtnUpdate;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView DgvRefactions;
         private System.Windows.Forms.Button BtnAddService;
         private System.Windows.Forms.TextBox txtServiceCode;
@@ -744,5 +745,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown NupQR;
         private System.Windows.Forms.ComboBox cboArticles2;
+        private FontAwesome.Sharp.IconButton IbtnBack;
+        private FontAwesome.Sharp.IconButton IbtnUpdate;
     }
 }

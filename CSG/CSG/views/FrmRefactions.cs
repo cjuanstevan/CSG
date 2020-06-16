@@ -50,6 +50,7 @@ namespace CSG.views
                         txtCode.Enabled = false;
                         //Cambiamos el tipo de accion del boton
                         IbtnCreate.Text = "Guardar";
+                        IbtnNew.Enabled = true;
                         //Llenamos los campos.
                         txtCode.Text = refaction.Refaction_code;
                         txtDesc.Text = refaction.Refaction_description;

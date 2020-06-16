@@ -426,15 +426,44 @@ namespace CSG.views
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private bool ValidateData()
+        {
+            //bool request = true;
+            //Validamos que haya agregado servicios
+            if (dts.Rows.Count.Equals(0))
+            {
+                //request = false;
+                MessageBox.Show("Agregue servicios");
+                return false;
+            }
+            //Validamos que haya agregado repuestos
+            if (dtr.Rows.Count.Equals(0))
+            {
+                //request = false;
+                MessageBox.Show("Agregue repuestos");
+                return false;
+            }
+            //Validamos que haya agregado comentarios técnicos
+            if (txtComentarys.Text.Length.Equals(0))
+            {
+                //request = false;
+                MessageBox.Show("Agregue comentarios");
+                return false;
+            }
+            return true;
+        }
+
+        private void IbtnUpdate_Click(object sender, EventArgs e)
+        {
             if (ValidateData())
             {
                 DateTime localDate = DateTime.Now;
-                //Console.WriteLine(localDate);
-                //Console.WriteLine(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
                 Cotization cotization = new Cotization();
                 cotization.Cotization_id = order.Cotization.Cotization_id;
                 cotization.Cotization_generation_date = DateTime.Parse(localDate.ToString("yyyy-MM-dd HH:mm:ss"));
-                //cotization.Cotization_expiration_date = null;
                 //Calculamos la cantidad de servicios y repuestos
                 byte quantity = 0;
                 quantity = Convert.ToByte(dts.Rows.Count + dtr.Rows.Count);
@@ -448,7 +477,7 @@ namespace CSG.views
                 {
                     Service service = serviceLog.Read_once(dts.Rows[i][0].ToString());
                     //Console.WriteLine("Costo: " + service.Service_cost);
-                    
+
                     //Creamos cotization_service (DETALLES)
                     Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
                     {
@@ -466,7 +495,7 @@ namespace CSG.views
                 {
                     Refaction refaction = refactionLog.Read_once(dtr.Rows[i][0].ToString());
                     //Console.WriteLine("Costo: " + refaction.Refaction_unit_price);
-                    
+
                     //Creamos cotization_refaction (DETALLES)
                     Cotization_refactionFK cotization_RefactionFK = new Cotization_refactionFK
                     {
@@ -501,36 +530,15 @@ namespace CSG.views
                 cotizationLog.Update(cotization);
                 //Cambiamos el estado de la orden
                 orderLog.UpdateState(order.Order_number, "Cotizada");
+                DialogResult = DialogResult.Yes;
+                this.Close();
             }
         }
 
-        private bool ValidateData()
+        private void IbtnBack_Click(object sender, EventArgs e)
         {
-            //bool request = true;
-            //Validamos que haya agregado servicios
-            if (dts.Rows.Count.Equals(0))
-            {
-                //request = false;
-                MessageBox.Show("Agregue servicios");
-                return false;
-            }
-            //Validamos que haya agregado repuestos
-            if (dtr.Rows.Count.Equals(0))
-            {
-                //request = false;
-                MessageBox.Show("Agregue repuestos");
-                return false;
-            }
-            //Validamos que haya agregado comentarios técnicos
-            if (txtComentarys.Text.Length.Equals(0))
-            {
-                //request = false;
-                MessageBox.Show("Agregue comentarios");
-                return false;
-            }
-            return true;
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
-
-        
     }
 }

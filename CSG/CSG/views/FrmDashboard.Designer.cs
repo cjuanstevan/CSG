@@ -89,6 +89,7 @@
             this.BtnLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BtnLogout.FlatAppearance.BorderSize = 0;
             this.BtnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogout.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
             this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,6 +123,7 @@
             this.BtnTechnicians.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnTechnicians.FlatAppearance.BorderSize = 0;
             this.BtnTechnicians.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTechnicians.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnTechnicians.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnTechnicians.Location = new System.Drawing.Point(0, 204);
             this.BtnTechnicians.Name = "BtnTechnicians";
@@ -139,6 +141,7 @@
             this.BtnServices.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnServices.FlatAppearance.BorderSize = 0;
             this.BtnServices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnServices.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnServices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnServices.Location = new System.Drawing.Point(0, 153);
             this.BtnServices.Name = "BtnServices";
@@ -156,6 +159,7 @@
             this.BtnRefactions.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnRefactions.FlatAppearance.BorderSize = 0;
             this.BtnRefactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRefactions.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRefactions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnRefactions.Location = new System.Drawing.Point(0, 102);
             this.BtnRefactions.Name = "BtnRefactions";
@@ -173,6 +177,7 @@
             this.BtnArticles.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnArticles.FlatAppearance.BorderSize = 0;
             this.BtnArticles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnArticles.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnArticles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnArticles.Location = new System.Drawing.Point(0, 51);
             this.BtnArticles.Name = "BtnArticles";
@@ -190,6 +195,7 @@
             this.BtnClients.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnClients.FlatAppearance.BorderSize = 0;
             this.BtnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClients.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnClients.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnClients.Location = new System.Drawing.Point(0, 0);
             this.BtnClients.Name = "BtnClients";
@@ -207,6 +213,7 @@
             this.BtnMaintenance.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnMaintenance.FlatAppearance.BorderSize = 0;
             this.BtnMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMaintenance.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
             this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -239,6 +246,7 @@
             this.BtnInvoices.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnInvoices.FlatAppearance.BorderSize = 0;
             this.BtnInvoices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInvoices.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnInvoices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnInvoices.Location = new System.Drawing.Point(0, 153);
             this.BtnInvoices.Name = "BtnInvoices";
@@ -255,6 +263,7 @@
             this.BtnReports.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnReports.FlatAppearance.BorderSize = 0;
             this.BtnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReports.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnReports.Location = new System.Drawing.Point(0, 102);
             this.BtnReports.Name = "BtnReports";
@@ -271,6 +280,7 @@
             this.BtnOrderRead.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnOrderRead.FlatAppearance.BorderSize = 0;
             this.BtnOrderRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrderRead.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnOrderRead.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnOrderRead.Location = new System.Drawing.Point(0, 51);
             this.BtnOrderRead.Name = "BtnOrderRead";
@@ -288,6 +298,7 @@
             this.BtnOrderCreate.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnOrderCreate.FlatAppearance.BorderSize = 0;
             this.BtnOrderCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrderCreate.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnOrderCreate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnOrderCreate.Location = new System.Drawing.Point(0, 0);
             this.BtnOrderCreate.Name = "BtnOrderCreate";
@@ -305,6 +316,7 @@
             this.BtnOrders.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnOrders.FlatAppearance.BorderSize = 0;
             this.BtnOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrders.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnOrders.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnOrders.Image = global::CSG.Properties.Resources.orders;
             this.BtnOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -324,6 +336,7 @@
             this.BtnIndex.Dock = System.Windows.Forms.DockStyle.Top;
             this.BtnIndex.FlatAppearance.BorderSize = 0;
             this.BtnIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnIndex.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnIndex.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnIndex.Image = global::CSG.Properties.Resources.dashboard;
             this.BtnIndex.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -361,11 +374,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.LightGray;
-            this.label4.Location = new System.Drawing.Point(23, 52);
+            this.label4.Location = new System.Drawing.Point(12, 52);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(213, 17);
+            this.label4.Size = new System.Drawing.Size(235, 21);
             this.label4.TabIndex = 2;
             this.label4.Text = "Control de Servicios y Garantías";
             // 
@@ -410,6 +423,7 @@
             // linkBtnEdit
             // 
             this.linkBtnEdit.AutoSize = true;
+            this.linkBtnEdit.LinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.linkBtnEdit.Location = new System.Drawing.Point(158, 52);
             this.linkBtnEdit.Name = "linkBtnEdit";
             this.linkBtnEdit.Size = new System.Drawing.Size(49, 18);

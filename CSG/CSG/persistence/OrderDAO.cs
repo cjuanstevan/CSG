@@ -554,6 +554,40 @@ namespace CSG.persistence
             return response;
         }
 
+        public int TechnicianOrders(string technician_id)
+        {
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand()
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_TechnicianOrders(?)}",
+                };
+                command.Parameters.Add("TehcnicianId", OdbcType.VarChar, 50).Value = technician_id;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    return dataReader.GetInt32(0);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->ClientOrders: " + ex.Message, "Excepción",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+        }
+
         public void Update(Order order)
         {
             try
