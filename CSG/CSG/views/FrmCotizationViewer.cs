@@ -71,13 +71,10 @@ namespace CSG.views
             txtOrderType.Text = order.Order_type;
             txtOrderNumber.Text = order.Order_number;
             txtOrderState.Text = order.Order_state;
-            //Console.WriteLine("Cot_")
             dtpGeneration.Value = order.Cotization.Cotization_generation_date;
             //Agregamos el cliente
             txtClientId.Text = order.Client.Client_id;
             txtClientName.Text = order.Client.Client_name;
-            //txtClientL1.Text = order.Client.Client_lastname1;
-            //txtClientL2.Text = order.Client.Client_lastname2;
             txtClientAddress.Text = order.Client.Client_address;
             txtClientLocation.Text = order.Client.Client_location;
             txtClientCity.Text = order.Client.Client_city;
@@ -140,9 +137,9 @@ namespace CSG.views
                 row[0] = "Servicio";
                 row[1] = service.Service_code;
                 row[2] = service.Service_activity;
-                row[3] = Int32.Parse("1");
+                row[3] = cs.Service_quantity;
                 row[4] = service.Service_cost;
-                row[5] = service.Service_cost;
+                row[5] = cs.Service_amount;
                 dtsr.Rows.Add(row);
             }
         }
@@ -313,7 +310,7 @@ namespace CSG.views
                 return false;
             }
         }
-        private void SendMail()
+        private bool SendMail()
         {
             MailMessage message = new MailMessage();
             message.From = new MailAddress("cprueba369@gmail.com");
@@ -422,11 +419,12 @@ namespace CSG.views
             try
             {
                 client.Send(message);
-                MessageBox.Show("Mensaje enviado");
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Excepcioón en SendMail(): " + ex.Message);
+                return false;
             }
         }
 
@@ -436,13 +434,18 @@ namespace CSG.views
             //mayor o igual a presente
             if (DateValidate())
             {
-                //Actualizamos la fecha de expiracion de la cotizacion
-                UpdateCotization();
+                Cursor.Current = Cursors.WaitCursor;
                 //Enviamos el correo
-                SendMail();
-                //Estado cambia a Esperando respuesta
-                UpdateOrderState();
-                //Cambio el estado de los botones
+                if (SendMail())
+                {
+                    //Actualizamos la fecha de expiracion de la cotizacion
+                    UpdateCotization();
+                    //Estado cambia a Esperando respuesta
+                    UpdateOrderState();
+                    DialogResult = DialogResult.Yes;
+                    this.Close();
+                }
+
             }
         }
 
@@ -456,6 +459,8 @@ namespace CSG.views
                 Console.WriteLine("Cancela la order");
                 //Se cancela la orden
                 orderLog.UpdateState(Order.Order_number_st, "Cancelada");
+                DialogResult = DialogResult.Yes;
+                this.Close();
             }
         }
 
@@ -468,6 +473,8 @@ namespace CSG.views
             {
                 //Cambiamos estado de orden a Facturada
                 orderLog.UpdateState(Order.Order_number_st, "Facturada");
+                DialogResult = DialogResult.Yes;
+                this.Close();
             }
         }
     }

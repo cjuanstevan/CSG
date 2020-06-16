@@ -330,6 +330,7 @@
             this.IbtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IbtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.IbtnSave.UseVisualStyleBackColor = true;
+            this.IbtnSave.Visible = false;
             // 
             // IbtnFacturar
             // 
@@ -634,6 +635,7 @@
             this.label9.Size = new System.Drawing.Size(56, 13);
             this.label9.TabIndex = 12;
             this.label9.Text = "S. apellido";
+            this.label9.Visible = false;
             // 
             // txtClientL2
             // 
@@ -642,6 +644,7 @@
             this.txtClientL2.ReadOnly = true;
             this.txtClientL2.Size = new System.Drawing.Size(193, 20);
             this.txtClientL2.TabIndex = 13;
+            this.txtClientL2.Visible = false;
             // 
             // label8
             // 
@@ -651,6 +654,7 @@
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 10;
             this.label8.Text = "P. apellido";
+            this.label8.Visible = false;
             // 
             // txtClientL1
             // 
@@ -659,6 +663,7 @@
             this.txtClientL1.ReadOnly = true;
             this.txtClientL1.Size = new System.Drawing.Size(193, 20);
             this.txtClientL1.TabIndex = 11;
+            this.txtClientL1.Visible = false;
             // 
             // label6
             // 
@@ -682,9 +687,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(30, 22);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 13);
+            this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 2;
-            this.label13.Text = "Identificación";
+            this.label13.Text = "ID/NIT";
             // 
             // txtClientId
             // 

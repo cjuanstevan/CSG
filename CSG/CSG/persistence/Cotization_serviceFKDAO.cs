@@ -95,7 +95,9 @@ namespace CSG.persistence
                     Cotization_serviceFK cotization_ServiceFK = new Cotization_serviceFK
                     {
                         Cotization_id = cotization_id,
-                        Service_code= dataReader.GetString(0)
+                        Service_code= dataReader.GetString(0),
+                        Service_quantity = dataReader.GetByte(1),
+                        Service_amount = dataReader.GetString(2)
                     };
                     cotization_Services.Add(cotization_ServiceFK);
                 }                

@@ -325,6 +325,7 @@ namespace CSG.views
                                 clientLog.Create(client);
                                 MsgSuccesfull("Se ha creado el cliente exitosamente.");
                                 IbtnRefresh_Click(sender, e);
+                                IbtnNew_Click(null, e);
                             }
                             else
                             {
@@ -356,6 +357,7 @@ namespace CSG.views
                                 clientLog.Create(client);
                                 MsgSuccesfull("Se ha creado el cliente exitosamente.");
                                 IbtnRefresh_Click(sender, e);
+                                IbtnNew_Click(null, e);
                             }
                             else
                             {
@@ -416,6 +418,7 @@ namespace CSG.views
                                 IbtnCreate.Text = "Crear";
                                 //Estado interno del boton Crear
                                 stateButtonJ = "Crear";
+                                IbtnNew_Click(null, e);
                             }
                             else
                             {
@@ -450,6 +453,7 @@ namespace CSG.views
                                 IbtnCreate.Text = "Crear";
                                 //Estado interno del boton Crear
                                 stateButtonN = "Crear";
+                                IbtnNew_Click(null, e);
                             }
                             else
                             {
@@ -492,6 +496,7 @@ namespace CSG.views
                             LoadCboDpts();
                             //Actualizamos tabla
                             IbtnRefresh_Click(sender, e);
+                            IbtnNew_Click(null, e);
                         }
                     }
                     else

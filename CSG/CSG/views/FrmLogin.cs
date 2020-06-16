@@ -32,6 +32,7 @@ namespace CSG.views
         {
             if (txtuser.Text.Equals("USUARIO"))
             {
+                txtuser.CharacterCasing = CharacterCasing.Normal;
                 txtuser.Clear();
                 txtuser.ForeColor = Color.LightGray;
             }
@@ -42,6 +43,7 @@ namespace CSG.views
             if (txtuser.Text.Equals(""))
             {
                 txtuser.Text = "USUARIO";
+                txtuser.CharacterCasing = CharacterCasing.Upper;
                 txtuser.ForeColor = Color.DimGray;
             }
         }

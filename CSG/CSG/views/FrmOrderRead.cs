@@ -257,8 +257,11 @@ namespace CSG.views
                         //Abrimos el form FrmCotizationViewer
                         FrmCotizationViewer frmCotizationViewer = new FrmCotizationViewer();
                         frmCotizationViewer.ShowDialog();
-                        frmCotizationViewer.FormClosed += Cerrar;
-                        //FrmOrderRead_Load(sender, e);
+                        if (frmCotizationViewer.DialogResult.Equals(DialogResult.Yes))
+                        {
+                            BtnSearch_Click(null, e);
+                        }
+
                     }
                     else if (DgvOrders.CurrentCell.Value.Equals("COTIZAR"))
                     {
