@@ -145,10 +145,16 @@ namespace CSG.views
                         Service_code = DgvVisor.Rows[i].Cells[0].Value.ToString(),
                         Service_activity = DgvVisor.Rows[i].Cells[1].Value.ToString(),
                         Service_duration = DgvVisor.Rows[i].Cells[2].Value.ToString(),
-                        Service_cost = DgvVisor.Rows[i].Cells[3].Value.ToString(),
+                        Service_cost = decimal.Round(decimal.Parse(DgvVisor.Rows[i].Cells[3].Value.ToString()), 2).ToString().Replace(',', '.'),
                         Service_type = char.Parse(DgvVisor.Rows[i].Cells[4].Value.ToString())
                     };
                     services.Add(s);
+                    Console.WriteLine(
+                        //"Codigo: " + "(" + s.Service_code.Length + ")" + s.Service_code +
+                        //"  | Activity: " + "(" + s.Service_activity.Length + ")" + s.Service_activity +
+                        //" | Duration: " + s.Service_duration + "(" + s.Service_duration.Length + ")" +
+                        " | Cost: " + "(" + s.Service_cost.Length + ")" + s.Service_cost +
+                        " | Type: " + "(" + s.Service_type.ToString().Length + ")" + s.Service_type);
                 }
                 //Enviamos a la logica para que haga cada uno de los insert
                 txtResult.Text = bulkLoadLog.BulkLoadService(services);

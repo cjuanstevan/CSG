@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -232,14 +233,14 @@ namespace CSG.views
                     txtCode.Text = DgvService.Rows[e.RowIndex].Cells[0].Value.ToString();
                     txtActivity.Text = DgvService.Rows[e.RowIndex].Cells[1].Value.ToString();
                     nupDuration.Value = Decimal.Parse(DgvService.Rows[e.RowIndex].Cells[3].Value.ToString());
-                    txtCost.Text = DgvService.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    txtCost.Text = DgvService.Rows[e.RowIndex].Cells[2].Value.ToString().Replace(',', '.');
                     cboType.Text = DgvService.Rows[e.RowIndex].Cells[4].Value.ToString();
                 }
                 else if (DgvService.CurrentCell.ColumnIndex == 6)
                 {
                     if (cotizationServiceLog.ServicesCotizations(DgvService.Rows[e.RowIndex].Cells[0].Value.ToString()))
                     {
-                    Console.WriteLine("Preguntamos");
+                        Console.WriteLine("Preguntamos");
                         DialogResult dr = MessageBox.Show("¿Desea eliminar el servicio?" +
                             Environment.NewLine + Environment.NewLine +
                               "Código: " + DgvService.Rows[e.RowIndex].Cells[0].Value.ToString() +
@@ -294,7 +295,7 @@ namespace CSG.views
             // Columna 3->garantía
             column = new DataColumn
             {
-                DataType = System.Type.GetType("System.String"),
+                DataType = System.Type.GetType("System.Decimal"),
                 ColumnName = "COSTO",
                 AutoIncrement = false,
                 ReadOnly = true,
@@ -325,6 +326,8 @@ namespace CSG.views
         }
         private void LoadRowsDataTable(List<Service> services)
         {
+            //cultura
+            CultureInfo culture = new CultureInfo("en-US");
             dts = new DataTable();
             DgvService.Columns.Clear();
             CreateDataTable();
@@ -334,30 +337,32 @@ namespace CSG.views
                 row = dts.NewRow();
                 row[0] = s.Service_code;
                 row[1] = s.Service_activity;
-                row[2] = s.Service_cost;
+                decimal decCost = decimal.Parse(s.Service_cost, culture);
+                row[2] = decCost;
                 row[3] = s.Service_duration;
                 row[4] = s.Service_type;
                 dts.Rows.Add(row);
             }
             //label14.Text = "LISTADO DE ARTÍCULOS(" + articles.Count + ")";
-
-
-            //Editar
-            DataGridViewImageColumn imageEdit = new DataGridViewImageColumn
+            if (DgvService.Columns.Count <= 5)
             {
-                Image = Properties.Resources.edit,
-                Name = "edit",
-                HeaderText = "EDITAR"
-            };
-            DgvService.Columns.Add(imageEdit);
-            //Eliminar
-            DataGridViewImageColumn imageDelete = new DataGridViewImageColumn
-            {
-                Image = Properties.Resources.delete,
-                Name = "delete",
-                HeaderText = "ELIMINAR"
-            };
-            DgvService.Columns.Add(imageDelete);
+                //Editar
+                DataGridViewImageColumn imageEdit = new DataGridViewImageColumn
+                {
+                    Image = Properties.Resources.edit,
+                    Name = "edit",
+                    HeaderText = "EDITAR"
+                };
+                DgvService.Columns.Add(imageEdit);
+                //Eliminar
+                DataGridViewImageColumn imageDelete = new DataGridViewImageColumn
+                {
+                    Image = Properties.Resources.delete,
+                    Name = "delete",
+                    HeaderText = "ELIMINAR"
+                };
+                DgvService.Columns.Add(imageDelete);
+            }
         }
 
         private void IbtnNew_Click(object sender, EventArgs e)

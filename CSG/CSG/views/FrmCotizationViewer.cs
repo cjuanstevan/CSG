@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.Globalization;
 
 namespace CSG.views
 {
     public partial class FrmCotizationViewer : Form
     {
+        //cultura
+        CultureInfo culture = new CultureInfo("en-US");
         private readonly OrderLog orderLog = new OrderLog();
         private readonly CotizationLog cotizationLog = new CotizationLog();
         private readonly OrderArticleLog orderArticleLog = new OrderArticleLog();
@@ -52,7 +55,7 @@ namespace CSG.views
                 IbtnSave.Visible = false;
                 IbtnSaveSend.Visible = false;
                 //Movemos los botones a la posicion deseada
-                IbtnFacturar.Location = new Point(845, 21);
+                IbtnFacturar.Location = new Point(816, 21);
                 IbtnCancel.Location = new Point(764, 21);
                 IbtnEdit.Location = new Point(685, 21);
             }
@@ -103,27 +106,21 @@ namespace CSG.views
             comentarys += "Técnico: " + Environment.NewLine + cotization.Cotization_comentarys;
             txtComentarys.Text = cotization.Cotization_comentarys;
             //Cargamos subtotal, descuento, iva y total
-            lblSubtotal.Text = cotization.Cotization_subtotal;
-            lblDiscount.Text = cotization.Cotization_discount;
-            lblIva.Text = cotization.Cotization_iva;
-            lblTotal.Text = cotization.Cotization_total;
+            lblSubtotal.Text = decimal.Parse(cotization.Cotization_subtotal, culture).ToString("C2");
+            lblDiscount.Text = decimal.Parse(cotization.Cotization_discount, culture).ToString("C2");
+            lblIva.Text = decimal.Parse(cotization.Cotization_iva, culture).ToString("C2");
+            lblTotal.Text = decimal.Parse(cotization.Cotization_total, culture).ToString("C2");
         }
 
         private void AddArticles()
         {
-            List<Order_articleFK> order_ArticleFKs = orderArticleLog.Read_ArticlesOfOrder(Order.Order_number_st);
-            foreach (var oa in order_ArticleFKs)
-            {
-                Article article = articleLog.Read_once(oa.Article_code);
-                //Console.WriteLine("Articulos de orden: " + oa.Article_code);
-                row = dta.NewRow();
-                row[0] = oa.Article_code;
-                row[1] = article.Article_description;
-                row[2] = oa.Model;
-                row[3] = oa.Especification;
-                row[4] = oa.Serial;
-                dta.Rows.Add(row);
-            }
+            Order_articleFK oa = orderArticleLog.Read_ArticleOfOrder(Order.Order_number_st);
+            Article article = articleLog.Read_once(oa.Article_code);
+            txtArticleCode.Text = oa.Article_code;
+            txtArticleDesc.Text = article.Article_description;
+            txtArticleModel.Text = oa.Model;
+            txtArticleEsp.Text = oa.Especification;
+            txtArticleSerial.Text = oa.Serial;
         }
 
         private void AddServices()
@@ -138,8 +135,8 @@ namespace CSG.views
                 row[1] = service.Service_code;
                 row[2] = service.Service_activity;
                 row[3] = cs.Service_quantity;
-                row[4] = service.Service_cost;
-                row[5] = cs.Service_amount;
+                row[4] = decimal.Parse(service.Service_cost, culture).ToString("C2");
+                row[5] = decimal.Parse(cs.Service_amount, culture).ToString("C2");
                 dtsr.Rows.Add(row);
             }
         }
@@ -155,69 +152,14 @@ namespace CSG.views
                 row[1] = refaction.Refaction_code;
                 row[2] = refaction.Refaction_description;
                 row[3] = cr.Refaction_quantity;
-                row[4] = refaction.Refaction_unit_price;
-                row[5] = cr.Refaction_amount;
+                row[4] = decimal.Parse(refaction.Refaction_unit_price, culture).ToString("C2");
+                row[5] = decimal.Parse(cr.Refaction_amount, culture).ToString("C2");
                 dtsr.Rows.Add(row);
             }
         }
 
         private void CreateDataTables()
         {
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "CODIGO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = true
-            };
-            dta.Columns.Add(column);
-            // Creamos la segunda columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "DESCRIPCIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dta.Columns.Add(column);
-            // Creamos la tercera columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "MODELO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dta.Columns.Add(column);
-            // Creamos la cuarta columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "ESPECIFICACIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dta.Columns.Add(column);
-            // Creamos la quinta columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "SERIAL",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dta.Columns.Add(column);
-            DgvArticles.DataSource = dta;
-
-
-
-
-
             /*******************SERVICES Y REFACTIONS*************************/
             //Creamos la primer columna y la agregamos al DataTable.
             column = new DataColumn
@@ -312,13 +254,9 @@ namespace CSG.views
         }
         private bool SendMail()
         {
-            MailMessage message = new MailMessage();
-            message.From = new MailAddress("cprueba369@gmail.com");
-            //message.To.Add("cjuanstevan@gmail.com");
-            message.To.Add(txtClientEmail.Text);
-            message.Subject = "Cotización orden " + txtOrderNumber.Text;
-            message.SubjectEncoding = Encoding.UTF8;
-            message.Bcc.Add("juan-0192@hotmail.com");
+            CultureInfo culture = new CultureInfo("en-US");
+            string to = txtClientEmail.Text;
+            string subject = "Cotización orden " + txtOrderNumber.Text;
             string html = "<html>" +
             "<head></head>" +
             "<body style='color: #000;'>" +
@@ -341,17 +279,17 @@ namespace CSG.views
             "<td>" + txtCotizationId.Text + "</td>" +
             "</tr>" +
             "<tr>" +
-            "<td>ID CLIENTE</td>" +
+            "<td>CC/NIT</td>" +
             "<td>" + txtClientId.Text + "</td>" +
             "</tr>" +
             "<tr>" +
-            "<td>VÁLIDO HASTA</td>" +
-            "<td>2020-12-31</td>" +
+            "<td>VÁLIDA POR</td>" +
+            "<td>30 días</td>" +
             "</tr>" +
             "</table>" +
             "</td></tr>" +
-            "<tr>"+
-            "<td colspan='2'"+
+            "<tr>" +
+            "<td colspan='2'" +
             "</table><br>" +
             "<label>Cra. 27 No. 18 - 50</label><br>" +
             "<label>Sucursal principal: Bogotá - Cundinamarca</label><br>" +
@@ -360,7 +298,6 @@ namespace CSG.views
             "<label>Sitio web: https://www.evans.com.co</label><br><br>" +
             "<h3><b>CLIENTE</b></h3>" +
             "<label>" + order.Client.Client_name + "</label><br>" +
-            "<label>[nombre de la empresa]<br>" +
             "<label>" + order.Client.Client_address + "<br>" +
             "<label>" + order.Client.Client_city + "</label><br>" +
             "<label>" + order.Client.Client_tel1 + " - " + order.Client.Client_tel2 + "<br><br>" +
@@ -383,14 +320,14 @@ namespace CSG.views
                     "</td><td>" + DgvSr.Rows[i].Cells[4].Value.ToString() +
                     "</td><td>" + DgvSr.Rows[i].Cells[5].Value.ToString() + "</td></tr>";
             }
-            html += "<tr><td></td><td></td><td></td><td></td><td></td></tr>" +
+            html += "<tr><td></td><td></td><td></td><td></td><td></td></tr>"+
             "<tr><td colspan='3' rowspan='4'>" + txtComentarys.Text + "</td><td>SUBTOTAL</td><td>" + lblSubtotal.Text + "</td></tr>" +
             "<tr><td>DESCUENTO</td><td>" + lblDiscount.Text + "</td></tr>" +
             "<tr><td>IVA</td><td>" + lblIva.Text + "</td></tr>" +
             "<tr><td>TOTAL</td><td>" + lblTotal.Text + "</td></tr></table><br><br>" +
             "</td>" +
-            "</tr></table><br>";
-            html += "<table style='width:auto;margin-right: auto;margin-left: 0px;'>" +
+            "</tr></table><br>" +
+            "<table style='width:auto;margin-right: auto;margin-left: 0px;'>" +
             "<tr>" +
             "<td rowspan='4'><img src='https://www.evans.com.co/wp-content/uploads/2019/01/evans.png' title='logo'/></td>" +
             "<td>Control de Servicio y Garantías</td>" +
@@ -404,22 +341,22 @@ namespace CSG.views
             "<tr>" +
             "<td>(0571) + 7520573 Ext.103.</td>" +
             "</tr>" +
-            "</table>"+
+            "</table>" +
             "</body>" +
             "</html>";
-            message.Body = html;
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
 
-            SmtpClient client = new SmtpClient();
-            client.Credentials= new System.Net.NetworkCredential("cprueba369@gmail.com", "administrador");
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.Host = "smtp.gmail.com";
             try
             {
-                client.Send(message);
-                return true;
+                var mailServe = new mailservices.SystemSupportMail();
+                if (mailServe.SendEmailCotization(to:to,subject:subject, html:html))
+                {
+                    //Console.WriteLine("Paso validacion");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {

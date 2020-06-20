@@ -78,5 +78,32 @@ namespace CSG.mailservices
                 smtpClient.Dispose();
             }
         }
+
+        public bool SendEmailCotization(string to, string subject, string html)
+        {
+            MailMessage mailMessage = new MailMessage();
+            try
+            {
+                mailMessage.From = new MailAddress(SenderMail);
+                mailMessage.To.Add(to);
+                mailMessage.Subject = subject;
+                mailMessage.SubjectEncoding = UTF8;
+                mailMessage.IsBodyHtml = IsBodyHtml;
+                mailMessage.Body = html;
+                mailMessage.Priority = MailPriority.Normal;
+                smtpClient.Send(mailMessage);
+                Console.WriteLine("Envio");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                mailMessage.Dispose();
+                smtpClient.Dispose();
+            }
+        }
     }
 }

@@ -32,13 +32,15 @@ namespace CSG.persistence
                     {
                         Connection = Database.GetConn(),
                         CommandType = CommandType.StoredProcedure,
-                        CommandText = "{call csg.Service_Create(?,?,?,?,?)}"
+                        CommandText = "{call csg.Service_Create(?,?,?,?,?,?,?)}"
                     };
                     command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = s.Service_code;
-                    command.Parameters.Add("Activity", OdbcType.VarChar, 50).Value = s.Service_activity;
+                    command.Parameters.Add("Activity", OdbcType.VarChar, 300).Value = s.Service_activity;
                     command.Parameters.Add("Duration", OdbcType.VarChar, 50).Value = s.Service_duration;
                     command.Parameters.Add("Cost", OdbcType.VarChar, 50).Value = s.Service_cost;
                     command.Parameters.Add("Type", OdbcType.Char, 1).Value = s.Service_type;
+                    command.Parameters.Add("CreateBy", OdbcType.VarChar, 50).Value = "bulkload";
+                    command.Parameters.Add("CreateDate", OdbcType.DateTime).Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     if (command.ExecuteNonQuery() > 0)
                     {
                         //registro quién se creó
@@ -57,9 +59,23 @@ namespace CSG.persistence
                     //command.Dispose();
                 }
             }
-            catch (Exception ex)
+            catch (OdbcException e)
             {
-                MessageBox.Show("Excepción controlada en ServiceDAO->BulkLoad: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessages = "";
+
+                for (int i = 0; i < e.Errors.Count; i++)
+                {
+                    errorMessages += "Index #" + i + "\n" +
+                                     "Message: " + e.Errors[i].Message + "\n" +
+                                     "NativeError: " + e.Errors[i].NativeError.ToString() + "\n" +
+                                     "Source: " + e.Errors[i].Source + "\n" +
+                                     "SQL: " + e.Errors[i].SQLState + "\n";
+                }
+                Console.WriteLine("An exception occurred. Please contact your system administrator." + Environment.NewLine +
+                    errorMessages);
+                //Console.WriteLine("*******************************************************" + Environment.NewLine +
+                //    "" + ex.StackTrace);
+                //MessageBox.Show("Excepción controlada en ServiceDAO->BulkLoad: " + ex.StackTrace, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -84,7 +100,7 @@ namespace CSG.persistence
                     CommandText = "{call csg.Service_Create(?,?,?,?,?,?,?)}"
                 };
                 command.Parameters.Add("Code", OdbcType.VarChar, 50).Value = service.Service_code;
-                command.Parameters.Add("Activity", OdbcType.VarChar, 50).Value = service.Service_activity;
+                command.Parameters.Add("Activity", OdbcType.VarChar, 300).Value = service.Service_activity;
                 command.Parameters.Add("Duration", OdbcType.VarChar, 50).Value = service.Service_duration;
                 command.Parameters.Add("Cost", OdbcType.VarChar, 50).Value = service.Service_cost;
                 command.Parameters.Add("Type", OdbcType.Char, 1).Value = service.Service_type;

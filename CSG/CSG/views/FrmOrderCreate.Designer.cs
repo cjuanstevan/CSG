@@ -29,8 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.dtpSaleDate = new System.Windows.Forms.DateTimePicker();
+            this.txtInvoice = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.IbtnCreate = new FontAwesome.Sharp.IconButton();
             this.dtpDateReception = new System.Windows.Forms.DateTimePicker();
@@ -52,21 +56,14 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtTechnicianId = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.txtReportClient = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.IbtnAddArticle = new FontAwesome.Sharp.IconButton();
-            this.DgvOa = new System.Windows.Forms.DataGridView();
+            this.lblMsgArticle = new System.Windows.Forms.Label();
             this.cboCategories = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtArticleEsp = new System.Windows.Forms.TextBox();
             this.lblEsp = new System.Windows.Forms.Label();
             this.IbtnArticle = new FontAwesome.Sharp.IconButton();
-            this.dtpSaleDate = new System.Windows.Forms.DateTimePicker();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtInvoice = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.lblSerial = new System.Windows.Forms.Label();
             this.txtArticleSerial = new System.Windows.Forms.TextBox();
             this.txtArticleModel = new System.Windows.Forms.TextBox();
@@ -85,24 +82,27 @@
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblMsgArticle = new System.Windows.Forms.Label();
-            this.linkEmptyDatatable = new System.Windows.Forms.LinkLabel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.txtReportClient = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvOa)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
@@ -125,6 +125,55 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(982, 646);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 201);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Solo garantías";
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.dtpSaleDate);
+            this.panel6.Controls.Add(this.txtInvoice);
+            this.panel6.Controls.Add(this.label18);
+            this.panel6.Location = new System.Drawing.Point(18, 207);
+            this.panel6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(952, 48);
+            this.panel6.TabIndex = 15;
+            // 
+            // dtpSaleDate
+            // 
+            this.dtpSaleDate.Location = new System.Drawing.Point(343, 10);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(0);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.Size = new System.Drawing.Size(324, 21);
+            this.dtpSaleDate.TabIndex = 14;
+            // 
+            // txtInvoice
+            // 
+            this.txtInvoice.Location = new System.Drawing.Point(60, 10);
+            this.txtInvoice.Margin = new System.Windows.Forms.Padding(0);
+            this.txtInvoice.Name = "txtInvoice";
+            this.txtInvoice.Size = new System.Drawing.Size(170, 21);
+            this.txtInvoice.TabIndex = 12;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(249, 13);
+            this.label18.Margin = new System.Windows.Forms.Padding(0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(94, 13);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "Fecha de venta";
             // 
             // panel5
             // 
@@ -230,11 +279,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 377);
+            this.label4.Location = new System.Drawing.Point(25, 455);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(130, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Detalles";
+            this.label4.Text = "Asignación de técnico";
             // 
             // panel4
             // 
@@ -252,11 +301,9 @@
             this.panel4.Controls.Add(this.label20);
             this.panel4.Controls.Add(this.txtTechnicianId);
             this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.txtReportClient);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Location = new System.Drawing.Point(17, 384);
+            this.panel4.Location = new System.Drawing.Point(18, 462);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(953, 199);
+            this.panel4.Size = new System.Drawing.Size(953, 121);
             this.panel4.TabIndex = 4;
             // 
             // IbtnTechnician
@@ -267,7 +314,7 @@
             this.IbtnTechnician.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.IbtnTechnician.IconColor = System.Drawing.Color.Black;
             this.IbtnTechnician.IconSize = 15;
-            this.IbtnTechnician.Location = new System.Drawing.Point(186, 120);
+            this.IbtnTechnician.Location = new System.Drawing.Point(186, 29);
             this.IbtnTechnician.Name = "IbtnTechnician";
             this.IbtnTechnician.Rotation = 0D;
             this.IbtnTechnician.Size = new System.Drawing.Size(21, 21);
@@ -277,7 +324,7 @@
             // 
             // txtTechnicianTelephone
             // 
-            this.txtTechnicianTelephone.Location = new System.Drawing.Point(448, 119);
+            this.txtTechnicianTelephone.Location = new System.Drawing.Point(448, 28);
             this.txtTechnicianTelephone.Name = "txtTechnicianTelephone";
             this.txtTechnicianTelephone.ReadOnly = true;
             this.txtTechnicianTelephone.Size = new System.Drawing.Size(147, 21);
@@ -286,7 +333,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(445, 106);
+            this.label24.Location = new System.Drawing.Point(445, 15);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(55, 13);
             this.label24.TabIndex = 14;
@@ -294,7 +341,7 @@
             // 
             // txtTechnicianContact
             // 
-            this.txtTechnicianContact.Location = new System.Drawing.Point(14, 161);
+            this.txtTechnicianContact.Location = new System.Drawing.Point(14, 70);
             this.txtTechnicianContact.Name = "txtTechnicianContact";
             this.txtTechnicianContact.ReadOnly = true;
             this.txtTechnicianContact.Size = new System.Drawing.Size(193, 21);
@@ -303,7 +350,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(11, 146);
+            this.label23.Location = new System.Drawing.Point(11, 55);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(58, 13);
             this.label23.TabIndex = 12;
@@ -313,7 +360,7 @@
             // 
             this.txtTechnicianAlias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTechnicianAlias.Location = new System.Drawing.Point(227, 161);
+            this.txtTechnicianAlias.Location = new System.Drawing.Point(227, 70);
             this.txtTechnicianAlias.Name = "txtTechnicianAlias";
             this.txtTechnicianAlias.ReadOnly = true;
             this.txtTechnicianAlias.Size = new System.Drawing.Size(707, 21);
@@ -322,7 +369,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(225, 147);
+            this.label21.Location = new System.Drawing.Point(225, 56);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(57, 13);
             this.label21.TabIndex = 10;
@@ -330,7 +377,7 @@
             // 
             // txtTechnicianName
             // 
-            this.txtTechnicianName.Location = new System.Drawing.Point(227, 120);
+            this.txtTechnicianName.Location = new System.Drawing.Point(227, 29);
             this.txtTechnicianName.Name = "txtTechnicianName";
             this.txtTechnicianName.ReadOnly = true;
             this.txtTechnicianName.Size = new System.Drawing.Size(205, 21);
@@ -341,7 +388,7 @@
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(225, 106);
+            this.label20.Location = new System.Drawing.Point(225, 15);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(52, 13);
             this.label20.TabIndex = 4;
@@ -349,7 +396,7 @@
             // 
             // txtTechnicianId
             // 
-            this.txtTechnicianId.Location = new System.Drawing.Point(14, 119);
+            this.txtTechnicianId.Location = new System.Drawing.Point(14, 28);
             this.txtTechnicianId.Name = "txtTechnicianId";
             this.txtTechnicianId.Size = new System.Drawing.Size(166, 21);
             this.txtTechnicianId.TabIndex = 3;
@@ -358,38 +405,16 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(11, 106);
+            this.label19.Location = new System.Drawing.Point(11, 15);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(99, 13);
+            this.label19.Size = new System.Drawing.Size(83, 13);
             this.label19.TabIndex = 2;
-            this.label19.Text = "Ténico asignado";
-            // 
-            // txtReportClient
-            // 
-            this.txtReportClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReportClient.Location = new System.Drawing.Point(14, 28);
-            this.txtReportClient.MaxLength = 1000;
-            this.txtReportClient.Multiline = true;
-            this.txtReportClient.Name = "txtReportClient";
-            this.txtReportClient.Size = new System.Drawing.Size(920, 70);
-            this.txtReportClient.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 12);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(114, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Reporte del cliente";
+            this.label19.Text = "Identificación";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 105);
+            this.label3.Location = new System.Drawing.Point(24, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 3;
@@ -400,10 +425,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.linkEmptyDatatable);
             this.panel3.Controls.Add(this.lblMsgArticle);
-            this.panel3.Controls.Add(this.IbtnAddArticle);
-            this.panel3.Controls.Add(this.DgvOa);
             this.panel3.Controls.Add(this.cboCategories);
             this.panel3.Controls.Add(this.label22);
             this.panel3.Controls.Add(this.txtArticleEsp);
@@ -419,51 +441,17 @@
             this.panel3.Controls.Add(this.label11);
             this.panel3.Location = new System.Drawing.Point(17, 113);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(953, 204);
+            this.panel3.Size = new System.Drawing.Size(953, 82);
             this.panel3.TabIndex = 2;
             // 
-            // IbtnAddArticle
+            // lblMsgArticle
             // 
-            this.IbtnAddArticle.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.IbtnAddArticle.IconChar = FontAwesome.Sharp.IconChar.Plus;
-            this.IbtnAddArticle.IconColor = System.Drawing.Color.Black;
-            this.IbtnAddArticle.IconSize = 16;
-            this.IbtnAddArticle.Location = new System.Drawing.Point(17, 57);
-            this.IbtnAddArticle.Name = "IbtnAddArticle";
-            this.IbtnAddArticle.Rotation = 0D;
-            this.IbtnAddArticle.Size = new System.Drawing.Size(28, 22);
-            this.IbtnAddArticle.TabIndex = 1;
-            this.IbtnAddArticle.UseVisualStyleBackColor = true;
-            this.IbtnAddArticle.Click += new System.EventHandler(this.IbtnAddArticle_Click);
-            // 
-            // DgvOa
-            // 
-            this.DgvOa.AllowUserToAddRows = false;
-            this.DgvOa.AllowUserToDeleteRows = false;
-            this.DgvOa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DgvOa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvOa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.DgvOa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.DgvOa.ColumnHeadersHeight = 20;
-            this.DgvOa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvOa.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvOa.Location = new System.Drawing.Point(17, 85);
-            this.DgvOa.MultiSelect = false;
-            this.DgvOa.Name = "DgvOa";
-            this.DgvOa.ReadOnly = true;
-            this.DgvOa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvOa.Size = new System.Drawing.Size(916, 108);
-            this.DgvOa.TabIndex = 22;
-            this.DgvOa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvOa_CellClick);
-            this.DgvOa.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DgvOa_CellPainting);
+            this.lblMsgArticle.AutoSize = true;
+            this.lblMsgArticle.Location = new System.Drawing.Point(58, 55);
+            this.lblMsgArticle.Name = "lblMsgArticle";
+            this.lblMsgArticle.Size = new System.Drawing.Size(48, 13);
+            this.lblMsgArticle.TabIndex = 24;
+            this.lblMsgArticle.Text = "label25";
             // 
             // cboCategories
             // 
@@ -520,42 +508,6 @@
             this.IbtnArticle.TabIndex = 17;
             this.IbtnArticle.UseVisualStyleBackColor = true;
             this.IbtnArticle.Click += new System.EventHandler(this.IbtnArticle_Click);
-            // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.Location = new System.Drawing.Point(343, 10);
-            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(0);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.Size = new System.Drawing.Size(324, 21);
-            this.dtpSaleDate.TabIndex = 14;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(249, 13);
-            this.label18.Margin = new System.Windows.Forms.Padding(0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(94, 13);
-            this.label18.TabIndex = 13;
-            this.label18.Text = "Fecha de venta";
-            // 
-            // txtInvoice
-            // 
-            this.txtInvoice.Location = new System.Drawing.Point(71, 10);
-            this.txtInvoice.Margin = new System.Windows.Forms.Padding(0);
-            this.txtInvoice.Name = "txtInvoice";
-            this.txtInvoice.Size = new System.Drawing.Size(159, 21);
-            this.txtInvoice.TabIndex = 12;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(14, 10);
-            this.label17.Margin = new System.Windows.Forms.Padding(0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(66, 13);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Folio fiscal";
             // 
             // lblSerial
             // 
@@ -643,7 +595,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 45);
+            this.label2.Location = new System.Drawing.Point(25, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
@@ -740,50 +692,45 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
-            // lblMsgArticle
+            // label8
             // 
-            this.lblMsgArticle.AutoSize = true;
-            this.lblMsgArticle.Location = new System.Drawing.Point(62, 57);
-            this.lblMsgArticle.Name = "lblMsgArticle";
-            this.lblMsgArticle.Size = new System.Drawing.Size(48, 13);
-            this.lblMsgArticle.TabIndex = 24;
-            this.lblMsgArticle.Text = "label25";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(29, 221);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Factura";
             // 
-            // linkEmptyDatatable
+            // panel7
             // 
-            this.linkEmptyDatatable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkEmptyDatatable.AutoSize = true;
-            this.linkEmptyDatatable.Location = new System.Drawing.Point(891, 69);
-            this.linkEmptyDatatable.Name = "linkEmptyDatatable";
-            this.linkEmptyDatatable.Size = new System.Drawing.Size(42, 13);
-            this.linkEmptyDatatable.TabIndex = 25;
-            this.linkEmptyDatatable.TabStop = true;
-            this.linkEmptyDatatable.Text = "Vaciar";
-            this.linkEmptyDatatable.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkEmptyDatatable_LinkClicked);
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.dtpSaleDate);
-            this.panel6.Controls.Add(this.label17);
-            this.panel6.Controls.Add(this.txtInvoice);
-            this.panel6.Controls.Add(this.label18);
-            this.panel6.Location = new System.Drawing.Point(18, 326);
-            this.panel6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(952, 48);
-            this.panel6.TabIndex = 15;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.txtReportClient);
+            this.panel7.Location = new System.Drawing.Point(18, 268);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(953, 181);
+            this.panel7.TabIndex = 17;
             // 
-            // label1
+            // txtReportClient
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 320);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Solo garantías";
+            this.txtReportClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtReportClient.Location = new System.Drawing.Point(14, 19);
+            this.txtReportClient.MaxLength = 1000;
+            this.txtReportClient.Multiline = true;
+            this.txtReportClient.Name = "txtReportClient";
+            this.txtReportClient.Size = new System.Drawing.Size(920, 149);
+            this.txtReportClient.TabIndex = 1;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(30, 263);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(114, 13);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Reporte del cliente";
             // 
             // FrmOrderCreate
             // 
@@ -797,17 +744,18 @@
             this.Load += new System.EventHandler(this.FrmOrderCreate_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvOa)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -839,11 +787,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtArticleSerial;
         private System.Windows.Forms.Label lblSerial;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtReportClient;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtInvoice;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.DateTimePicker dtpSaleDate;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label19;
@@ -866,12 +811,13 @@
         private System.Windows.Forms.Label lblEsp;
         private System.Windows.Forms.ComboBox cboCategories;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.DataGridView DgvOa;
-        private FontAwesome.Sharp.IconButton IbtnAddArticle;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label lblMsgArticle;
-        private System.Windows.Forms.LinkLabel linkEmptyDatatable;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.TextBox txtReportClient;
+        private System.Windows.Forms.Label label13;
     }
 }

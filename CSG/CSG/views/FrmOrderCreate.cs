@@ -287,13 +287,6 @@ namespace CSG.views
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (DgvOa.Rows.Count == 0)
-            {
-                txtArticleCod.Focus();
-                MessageBox.Show("Busque y agregue el equipo a la tabla", "Aviso", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
             //Siginifica que es una garantía
             if (cboType.SelectedIndex % 2 == 1)
             {
@@ -380,18 +373,18 @@ namespace CSG.views
                 orderLog.Create(order);
                 //Creamos el order_article para que asigne el artículo sobre el cual se va a operar
                 //En una orden van n articulos, estos se definen en la tabla
-                for (int i = 0; i < dtoa.Rows.Count; i++)
-                {
+                //for (int i = 0; i < dtoa.Rows.Count; i++)
+                //{
                     Order_articleFK order_articleFK = new Order_articleFK
                     {
                         Order_number = order.Order_number,
-                        Article_code = dtoa.Rows[i][0].ToString(),
-                        Model = dtoa.Rows[i][2].ToString(),
-                        Especification = dtoa.Rows[i][3].ToString(),
-                        Serial = dtoa.Rows[i][4].ToString()
+                        Article_code = txtArticleCod.Text,
+                        Model = txtArticleModel.Text,
+                        Especification = txtArticleEsp.Text,
+                        Serial = txtArticleSerial.Text
                     };
                     orderArticleLog.Create(order_articleFK);
-                }
+                //}
                 
                 //Enviamos al caché la variable numero de orden
                 Order.Order_number_st = order.Order_number;
@@ -428,142 +421,142 @@ namespace CSG.views
         }
         private void CreateDataTable()
         {
-            //Columna 1->ID
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "CÓDIGO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = true
-            };
-            dtoa.Columns.Add(column);
-            // Columna 2->Cliente
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "DESCRIPCIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 3->CIUDAD O MUNICIPIO
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "MODELO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 4->departamento
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "ESPECIFICACIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 5->Serial
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "SERIAL",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 6->Quitar.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = " ",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false,
-                Namespace = "ACCIONES"
-            };
-            dtoa.Columns.Add(column);
-            DgvOa.DataSource = dtoa;
-            DgvOa.Columns.RemoveAt(5);
+            ////Columna 1->ID
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = "CÓDIGO",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = true
+            //};
+            //dtoa.Columns.Add(column);
+            //// Columna 2->Cliente
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = "DESCRIPCIÓN",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = false
+            //};
+            //dtoa.Columns.Add(column);
+            //// Columna 3->CIUDAD O MUNICIPIO
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = "MODELO",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = false
+            //};
+            //dtoa.Columns.Add(column);
+            //// Columna 4->departamento
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = "ESPECIFICACIÓN",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = false
+            //};
+            //dtoa.Columns.Add(column);
+            //// Columna 5->Serial
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = "SERIAL",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = false
+            //};
+            //dtoa.Columns.Add(column);
+            //// Columna 6->Quitar.
+            //column = new DataColumn
+            //{
+            //    DataType = System.Type.GetType("System.String"),
+            //    ColumnName = " ",
+            //    AutoIncrement = false,
+            //    ReadOnly = true,
+            //    Unique = false,
+            //    Namespace = "ACCIONES"
+            //};
+            //dtoa.Columns.Add(column);
+            //DgvOa.DataSource = dtoa;
+            //DgvOa.Columns.RemoveAt(5);
         }
 
         private void IbtnAddArticle_Click(object sender, EventArgs e)
         {
-            if (!txtArticleCod.Text.Equals(""))
-            {
-                if (!txtArticleDesc.Text.Equals(""))
-                {
-                    //Validamos que no exista en el DataTable
-                    if (SearchCodeDatatable(dtoa,txtArticleCod.Text))
-                    {
-                        //Consultamos el articulo
-                        Article article = articleLog.Read_once(txtArticleCod.Text);
-                        row = dtoa.NewRow();
-                        row[0] = article.Article_code;
-                        row[1] = article.Article_description;
-                        row[2] = txtArticleModel.Text;
-                        row[3] = txtArticleEsp.Text;
-                        row[4] = txtArticleSerial.Text;
-                        row[5] = "";
-                        dtoa.Rows.Add(row);
-                        DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
-                        {
-                            DataPropertyName = " ",
-                            Text = "Ver",
-                            HeaderText = " ",
-                            FlatStyle = FlatStyle.Standard
-                        };
-                        //DgvOa.Columns.Add(new DataGridViewImageColumn()
-                        //{
-                        //    Image = Properties.Resources.quit,
-                        //    Name = "someName",
-                        //    HeaderText = "Some Text"
-                        //});
-                        DgvOa.Columns.Add(buttonColumn);
-                        DgvOa.Columns.RemoveAt(5);
-                        txtArticleCod.Clear();
-                        txtArticleCod.Focus();
-                    }
-                    else
-                    {
-                        lblMsgArticle.Text = "El artículo ya existe" + txtArticleCod.Text;
-                    }
-                }
-                else
-                {
-                    //MsgError(txtArticleCod, "El artículo no existe");
-                    lblMsgArticle.Text = "El artículo no existe";
-                }
+            //if (!txtArticleCod.Text.Equals(""))
+            //{
+            //    if (!txtArticleDesc.Text.Equals(""))
+            //    {
+            //        //Validamos que no exista en el DataTable
+            //        if (SearchCodeDatatable(dtoa,txtArticleCod.Text))
+            //        {
+            //            //Consultamos el articulo
+            //            Article article = articleLog.Read_once(txtArticleCod.Text);
+            //            row = dtoa.NewRow();
+            //            row[0] = article.Article_code;
+            //            row[1] = article.Article_description;
+            //            row[2] = txtArticleModel.Text;
+            //            row[3] = txtArticleEsp.Text;
+            //            row[4] = txtArticleSerial.Text;
+            //            row[5] = "";
+            //            dtoa.Rows.Add(row);
+            //            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+            //            {
+            //                DataPropertyName = " ",
+            //                Text = "Ver",
+            //                HeaderText = " ",
+            //                FlatStyle = FlatStyle.Standard
+            //            };
+            //            //DgvOa.Columns.Add(new DataGridViewImageColumn()
+            //            //{
+            //            //    Image = Properties.Resources.quit,
+            //            //    Name = "someName",
+            //            //    HeaderText = "Some Text"
+            //            //});
+            //            DgvOa.Columns.Add(buttonColumn);
+            //            DgvOa.Columns.RemoveAt(5);
+            //            txtArticleCod.Clear();
+            //            txtArticleCod.Focus();
+            //        }
+            //        else
+            //        {
+            //            lblMsgArticle.Text = "El artículo ya existe" + txtArticleCod.Text;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //MsgError(txtArticleCod, "El artículo no existe");
+            //        lblMsgArticle.Text = "El artículo no existe";
+            //    }
                 
-            }
-            else
-            {
-                //ingrese el codigo del articulo
-                //MsgError(txtArticleCod, "Ingrese el código del artículo");
-                lblMsgArticle.Text = "Ingrese el código del artículo";
-            }
+            //}
+            //else
+            //{
+            //    //ingrese el codigo del articulo
+            //    //MsgError(txtArticleCod, "Ingrese el código del artículo");
+            //    lblMsgArticle.Text = "Ingrese el código del artículo";
+            //}
             
         }
         
         private void DgvOa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Console.WriteLine("e.RowIndex=" + e.RowIndex);
-            if (e.RowIndex >= 0)
-            {
-                //Console.WriteLine(DgvOrders.CurrentCell.GetType());
-                if (DgvOa.CurrentCell.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonCell")
-                {
-                    //Console.WriteLine("DataGrid  | Quitamos a : " + DgvOa.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    //Console.WriteLine("DataTable | Quitamos a : " + dtoa.Rows[e.RowIndex][0].ToString());
-                    DeleteRowDatatable(dtoa, dtoa.Rows[e.RowIndex][0].ToString());
-                }
-            }
+            ////Console.WriteLine("e.RowIndex=" + e.RowIndex);
+            //if (e.RowIndex >= 0)
+            //{
+            //    //Console.WriteLine(DgvOrders.CurrentCell.GetType());
+            //    if (DgvOa.CurrentCell.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonCell")
+            //    {
+            //        //Console.WriteLine("DataGrid  | Quitamos a : " + DgvOa.Rows[e.RowIndex].Cells[0].Value.ToString());
+            //        //Console.WriteLine("DataTable | Quitamos a : " + dtoa.Rows[e.RowIndex][0].ToString());
+            //        DeleteRowDatatable(dtoa, dtoa.Rows[e.RowIndex][0].ToString());
+            //    }
+            //}
         }
 
         private bool SearchCodeDatatable(DataTable dt, string code)
@@ -606,10 +599,10 @@ namespace CSG.views
         private void DgvOa_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             //Redimensionamos el tamaño de Codigo y boton.
-            DgvOa.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            DgvOa.Columns[0].Width = 150;
-            DgvOa.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            DgvOa.Columns[5].Width = 50;
+            //DgvOa.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            //DgvOa.Columns[0].Width = 150;
+            //DgvOa.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            //DgvOa.Columns[5].Width = 50;
 
             if (e.RowIndex < 0)
                 return;
@@ -690,30 +683,30 @@ namespace CSG.views
 
         private void LinkEmptyDatatable_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (dtoa.Rows.Count == 0)
-            {
-                MessageBox.Show("No hay nada para borrar", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                //Si la tabla tiene mas de un registro 
-                if (dtoa.Rows.Count > 1)
-                {
-                    //Preguntamos antes de vaciarla
-                    DialogResult result = MessageBox.Show("¿Esta seguro de quitar todos los registros?", "Aviso",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    //Si YES entonces la vaciamos.
-                    if (result.Equals(DialogResult.Yes))
-                    {
-                        EmptyDatatable();
-                    }
-                }
-                else
-                {
-                    EmptyDatatable();
-                }
-            }
+            //if (dtoa.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("No hay nada para borrar", "Aviso",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
+            //else
+            //{
+            //    //Si la tabla tiene mas de un registro 
+            //    if (dtoa.Rows.Count > 1)
+            //    {
+            //        //Preguntamos antes de vaciarla
+            //        DialogResult result = MessageBox.Show("¿Esta seguro de quitar todos los registros?", "Aviso",
+            //            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //        //Si YES entonces la vaciamos.
+            //        if (result.Equals(DialogResult.Yes))
+            //        {
+            //            EmptyDatatable();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        EmptyDatatable();
+            //    }
+            //}
         }
     }
 }

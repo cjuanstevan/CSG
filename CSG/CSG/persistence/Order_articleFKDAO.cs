@@ -108,6 +108,44 @@ namespace CSG.persistence
             }
         }
 
+        public Order_articleFK Read_ArticleOfOrder(string order_number)
+        {
+            Order_articleFK order_ArticleFK = new Order_articleFK();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_articleFK_ReadArticlesOfOrder(?)}"
+                };
+                command.Parameters.Add("OrderNumber", OdbcType.VarChar, 50).Value = order_number;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    order_ArticleFK = new Order_articleFK
+                    {
+                        Order_number = order_number,
+                        Article_code = dataReader.GetString(0),
+                        Model = dataReader.GetString(1),
+                        Especification = dataReader.GetString(2),
+                        Serial = dataReader.GetString(3)
+                    };
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en Order_articleFKDAO->Read_ArticlesOfOrder: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return order_ArticleFK;
+        }
+
         public List<Order_articleFK> Read_ArticlesOfOrder(string order_number)
         {
             List<Order_articleFK> order_Articles = new List<Order_articleFK>();

@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cboType = new System.Windows.Forms.ComboBox();
             this.IBtnCreate = new FontAwesome.Sharp.IconButton();
@@ -51,14 +48,14 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.DgvService = new System.Windows.Forms.DataGridView();
             this.IbtnRefresh = new FontAwesome.Sharp.IconButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.DgvService = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupDuration)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvService)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -86,10 +83,12 @@
             // 
             // cboType
             // 
+            this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.FormattingEnabled = true;
             this.cboType.Items.AddRange(new object[] {
             "A",
-            "B"});
+            "B",
+            "C"});
             this.cboType.Location = new System.Drawing.Point(76, 129);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(56, 21);
@@ -255,16 +254,38 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.DgvService);
             this.panel2.Controls.Add(this.IbtnRefresh);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.txtSearch);
-            this.panel2.Controls.Add(this.DgvService);
             this.panel2.Controls.Add(this.label13);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 203);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(982, 443);
             this.panel2.TabIndex = 3;
+            // 
+            // DgvService
+            // 
+            this.DgvService.AllowUserToAddRows = false;
+            this.DgvService.AllowUserToDeleteRows = false;
+            this.DgvService.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DgvService.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvService.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvService.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DgvService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvService.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DgvService.Location = new System.Drawing.Point(11, 68);
+            this.DgvService.MultiSelect = false;
+            this.DgvService.Name = "DgvService";
+            this.DgvService.ReadOnly = true;
+            this.DgvService.RowHeadersVisible = false;
+            this.DgvService.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvService.Size = new System.Drawing.Size(958, 362);
+            this.DgvService.TabIndex = 30;
+            this.DgvService.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvService_CellContentClick);
             // 
             // IbtnRefresh
             // 
@@ -284,47 +305,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // DgvService
-            // 
-            this.DgvService.AllowUserToAddRows = false;
-            this.DgvService.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
-            this.DgvService.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvService.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DgvService.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvService.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgvService.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
-            this.DgvService.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.DgvService.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.DgvService.ColumnHeadersHeight = 40;
-            this.DgvService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.DgvService.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvService.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DgvService.Location = new System.Drawing.Point(12, 68);
-            this.DgvService.Name = "DgvService";
-            this.DgvService.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvService.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.DgvService.RowHeadersVisible = false;
-            this.DgvService.Size = new System.Drawing.Size(957, 362);
-            this.DgvService.TabIndex = 0;
-            this.DgvService.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvService_CellContentClick);
-            // 
             // FrmService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,8 +323,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nupDuration)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvService)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

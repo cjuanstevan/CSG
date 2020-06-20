@@ -25,6 +25,7 @@ namespace CSG.views
         private readonly CotizationServiceLog cotizationServiceLog = new CotizationServiceLog();
         private readonly CotizationRefactionLog cotizationRefactionLog = new CotizationRefactionLog();
         private readonly TaxLog taxLog = new TaxLog();
+        private readonly CategoryLog categoryLog = new CategoryLog();
 
         //Data Services
         //DataSet dataSet;
@@ -58,9 +59,16 @@ namespace CSG.views
             //Consultamos el código del equipo asignado a la orden en order_article
             string code = orderArticleLog.Read_code_article_of_order(order.Order_number);
             //Consultamos el artículo con el código de orden anterior
-            //Article article = articleLog.Read_once(code);
-            //txtArticleCode.Text = article.Article_code;
-            //txtArticleDescription.Text = article.Article_description;
+            Article article = articleLog.Read_once(code);
+            txtArticleCode.Text = article.Article_code;
+            txtArticleDescription.Text = article.Article_description;
+            Category category = categoryLog.Read_once(article.Category);
+            txtCategory.Text = category.Category_name;
+            //Consultamos en order article para traer el modelo->nro lote, especificacion y serial
+            Order_articleFK order_ArticleFK = orderArticleLog.Read_ArticleOfOrder(order_number);
+            txtArticleModel.Text = order_ArticleFK.Model;
+            txtArticleEsp.Text = order_ArticleFK.Especification;
+            txtArticleSerial.Text = order_ArticleFK.Serial;
             //Agregamos el campo report client
             txtReportClient.Text = order.Order_report_client;
             AutoCompleteService();
@@ -68,27 +76,27 @@ namespace CSG.views
             CreateDataTables();
             //Console.WriteLine("IVA: " + taxLog.Read_once_value("19"));
             //Cargamos los articulos asociados a la orden
-            LoadArticlesOfOrder();
+            //LoadArticlesOfOrder();
         }
         private void LoadArticlesOfOrder()
         {
-            List<Order_articleFK> order_Articles = orderArticleLog.Read_ArticlesOfOrder(Order.Order_number_st);
-            foreach (var oa in order_Articles)
-            {
-                Article article = articleLog.Read_once(oa.Article_code);
-                Console.WriteLine("Orden: " + oa.Order_number + " | Articulo: " + oa.Article_code);
-                row = dtoa.NewRow();
-                row[0] = article.Article_code;
-                row[1] = article.Article_description;
-                row[2] = oa.Model;
-                row[3] = oa.Especification;
-                row[4] = oa.Serial;
-                dtoa.Rows.Add(row);
-                //Agregamos al combo1
-                cboArticles1.Items.Add(article.Article_code);
-                //Agregamos al combo2
-                cboArticles2.Items.Add(article.Article_code);
-            }
+            //List<Order_articleFK> order_Articles = orderArticleLog.Read_ArticlesOfOrder(Order.Order_number_st);
+            //foreach (var oa in order_Articles)
+            //{
+            //    Article article = articleLog.Read_once(oa.Article_code);
+            //    Console.WriteLine("Orden: " + oa.Order_number + " | Articulo: " + oa.Article_code);
+            //    row = dtoa.NewRow();
+            //    row[0] = article.Article_code;
+            //    row[1] = article.Article_description;
+            //    row[2] = oa.Model;
+            //    row[3] = oa.Especification;
+            //    row[4] = oa.Serial;
+            //    dtoa.Rows.Add(row);
+            //    //Agregamos al combo1
+            //    cboArticles1.Items.Add(article.Article_code);
+            //    //Agregamos al combo2
+            //    cboArticles2.Items.Add(article.Article_code);
+            //}
            
         }
         private void AutoCompleteService()
@@ -134,14 +142,13 @@ namespace CSG.views
             {
                 Service service = serviceLog.Read_once(words[0]);
                 //Validar que no exista codigo en la tabla
-                if (SearchDtCode(dts, words[0] + cboArticles1.SelectedItem.ToString()))
+                if (SearchDtCode(dts, words[0]))
                 {
                     row = dts.NewRow();
                     row[0] = service.Service_code;
                     row[1] = service.Service_activity;
-                    row[2] = cboArticles1.SelectedItem.ToString();
-                    row[3] = Convert.ToInt32(nupQuantity.Value);
-                    row[4] = service.Service_type;
+                    row[2] = Convert.ToInt32(nupQuantity.Value);
+                    row[3] = service.Service_type;
                     dts.Rows.Add(row);
                 }
                 else
@@ -151,34 +158,6 @@ namespace CSG.views
             }
             txtServiceCode.Clear();
             txtServiceCode.Focus();
-        }
-        private void BtnAddService_Click(object sender, EventArgs e)
-        {            
-            string text = txtServiceCode.Text;
-            string[] words = text.Split(' ');
-            //Console.WriteLine(words[0]);
-            if (serviceLog.Read_once_exist(words[0]))
-            {
-                Service service = serviceLog.Read_once(words[0]);
-                //Validar que no exista codigo en la tabla
-                if (SearchDtCode(dts, words[0]))
-                {
-                    row = dts.NewRow();
-                    row[0] = service.Service_code;
-                    row[1] = service.Service_activity;
-                    row[2] = service.Service_duration;
-                    row[3] = service.Service_cost;
-                    row[4] = service.Service_type;
-                    dts.Rows.Add(row);
-                }
-                else
-                {
-                    MessageBox.Show("El servicio ya se agregó");
-                }
-            }
-            txtServiceCode.Clear();
-            txtServiceCode.Focus();
-            
         }
 
         private void IbtnAddRefaction_Click(object sender, EventArgs e)
@@ -191,13 +170,12 @@ namespace CSG.views
                 //Validar que no exista codigo en la tabla
                 //if (SearchDtCode(dtr, words[0]))
                 //{
-                if (SearchDtCode(dtr, words[0] + cboArticles2.SelectedItem.ToString()))
+                if (SearchDtCode(dtr, words[0]))
                 {
                     row = dtr.NewRow();
                     row[0] = refaction.Refaction_code;
                     row[1] = refaction.Refaction_description;
-                    row[2] = cboArticles2.SelectedItem.ToString();
-                    row[3] = Convert.ToInt32(NupQR.Value);
+                    row[2] = Convert.ToInt32(NupQR.Value);
                     dtr.Rows.Add(row);
                 }
                 else
@@ -208,89 +186,9 @@ namespace CSG.views
             txtRefactionCode.Clear();
             txtRefactionCode.Focus();
         }
-        private void BtnAddRefaction_Click(object sender, EventArgs e)
-        {
-            string text = txtRefactionCode.Text;
-            string[] words = text.Split(' ');
-            if (refactionLog.Read_once_exist(words[0]))
-            {
-                Refaction refaction = refactionLog.Read_once(words[0]);
-                //Validar que no exista codigo en la tabla
-                if (SearchDtCode(dtr, words[0]))
-                {
-                    row = dtr.NewRow();
-                    row[0] = refaction.Refaction_code;
-                    row[1] = refaction.Refaction_description;
-                    row[2] = refaction.Refaction_unit_price;
-                    dtr.Rows.Add(row);
-                }
-                else
-                {
-                    MessageBox.Show("El repuesto ya se agregó");
-                }
-                
-            }
-            txtRefactionCode.Clear();
-            txtRefactionCode.Focus();
-        }
-
 
         private void CreateDataTables()
         {
-            /*******************ORDER ARTICLES*************************/
-            //Columna 1->ID
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "CÓDIGO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = true
-            };
-            dtoa.Columns.Add(column);
-            // Columna 2->Cliente
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "DESCRIPCIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 3->CIUDAD O MUNICIPIO
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "MODELO",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            // Columna 4->departamento
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "ESPECIFICACIÓN",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "SERIAL",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtoa.Columns.Add(column);
-            DgvOa.DataSource = dtoa;
-
-
-
             /*******************SERVICES*************************/
             //Creamos la primer columna y la agregamos al DataTable.
             column = new DataColumn
@@ -307,16 +205,6 @@ namespace CSG.views
             {
                 DataType = System.Type.GetType("System.String"),
                 ColumnName = "ACTIVIDAD",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dts.Columns.Add(column);
-            // Creamos la tercera columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "SERVICIO DE",
                 AutoIncrement = false,
                 ReadOnly = true,
                 Unique = false
@@ -342,8 +230,6 @@ namespace CSG.views
                 Unique = false
             };
             dts.Columns.Add(column);
-            //dataSet = new DataSet();
-            //dataSet.Tables.Add(dts);
             DgvServices.DataSource = dts;
 
 
@@ -368,16 +254,6 @@ namespace CSG.views
                 Unique = false
             };
             dtr.Columns.Add(column);
-            // Creamos la tercera columna y la agregamos al DataTable.
-            column = new DataColumn
-            {
-                DataType = System.Type.GetType("System.String"),
-                ColumnName = "REPUESTO DE",
-                AutoIncrement = false,
-                ReadOnly = true,
-                Unique = false
-            };
-            dtr.Columns.Add(column);
             column = new DataColumn
             {
                 DataType = System.Type.GetType("System.String"),
@@ -387,15 +263,6 @@ namespace CSG.views
                 Unique = false
             };
             dtr.Columns.Add(column);
-            //column = new DataColumn
-            //{
-            //    DataType = System.Type.GetType("System.String"),
-            //    ColumnName = "DESCRIPCIÓN",
-            //    AutoIncrement = false,
-            //    ReadOnly = true,
-            //    Unique = false
-            //};
-            //dtr.Columns.Add(column);
             DgvRefactions.DataSource = dtr;
         }
 
@@ -416,7 +283,7 @@ namespace CSG.views
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 //Console.WriteLine(dt.Rows[i][0] + "==" + text);
-                if ((dt.Rows[i][0].ToString() + dt.Rows[i][2].ToString()).ToString().Equals(text))
+                if (dt.Rows[i][0].ToString().Equals(text))
                 {
                     request = false;
                     break;
@@ -483,8 +350,8 @@ namespace CSG.views
                     {
                         Cotization_id = order.Cotization.Cotization_id,
                         Service_code = service.Service_code,
-                        Actionof = dts.Rows[i][2].ToString(),
-                        Service_quantity = Convert.ToByte(dts.Rows[i][3].ToString()),
+                        Actionof = txtArticleCode.Text,
+                        Service_quantity = Convert.ToByte(dts.Rows[i][2].ToString()),
                     };
                     //Capturamos el costo en string
                     string strCost = service.Service_cost;
@@ -508,8 +375,8 @@ namespace CSG.views
                     {
                         Cotization_id = order.Cotization.Cotization_id,
                         Refaction_code = refaction.Refaction_code,
-                        Replacementof = dtr.Rows[i][2].ToString(),
-                        Refaction_quantity = Convert.ToByte(dtr.Rows[i][3].ToString()),
+                        Replacementof = txtArticleCode.Text,
+                        Refaction_quantity = Convert.ToByte(dtr.Rows[i][2].ToString()),
                     };
                     //Capturamos el precio unitario en string
                     string strPrice = refaction.Refaction_unit_price;
