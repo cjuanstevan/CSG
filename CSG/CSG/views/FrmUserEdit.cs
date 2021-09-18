@@ -42,8 +42,8 @@ namespace CSG.views
             txtusername.Text = UserCache.UserDefinition;
             txtuser.Text = UserCache.UserAccount;
             txtemail.Text = UserCache.UserEmail;
-            txtpass1.Text = UserCache.UserPass;
-            txtpass2.Text= UserCache.UserPass;
+            //txtpass1.Text = UserCache.UserPass;
+            //txtpass2.Text= UserCache.UserPass;
         }
 
         private void LinkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

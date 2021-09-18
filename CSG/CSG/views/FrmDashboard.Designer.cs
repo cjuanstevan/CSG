@@ -39,8 +39,7 @@
             this.BtnClients = new System.Windows.Forms.Button();
             this.BtnMaintenance = new System.Windows.Forms.Button();
             this.PlOrdersSubmenu = new System.Windows.Forms.Panel();
-            this.BtnInvoices = new System.Windows.Forms.Button();
-            this.BtnReports = new System.Windows.Forms.Button();
+            this.BtnDocsGenerator = new System.Windows.Forms.Button();
             this.BtnOrderRead = new System.Windows.Forms.Button();
             this.BtnOrderCreate = new System.Windows.Forms.Button();
             this.BtnOrders = new System.Windows.Forms.Button();
@@ -93,9 +92,9 @@
             this.BtnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnLogout.Image = global::CSG.Properties.Resources.logout;
             this.BtnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnLogout.Location = new System.Drawing.Point(0, 691);
+            this.BtnLogout.Location = new System.Drawing.Point(0, 669);
             this.BtnLogout.Name = "BtnLogout";
-            this.BtnLogout.Size = new System.Drawing.Size(265, 52);
+            this.BtnLogout.Size = new System.Drawing.Size(282, 52);
             this.BtnLogout.TabIndex = 8;
             this.BtnLogout.Text = "Cerrar sesión";
             this.BtnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -112,9 +111,9 @@
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnArticles);
             this.PlMaintenaceSubmenu.Controls.Add(this.BtnClients);
             this.PlMaintenaceSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 439);
+            this.PlMaintenaceSubmenu.Location = new System.Drawing.Point(0, 388);
             this.PlMaintenaceSubmenu.Name = "PlMaintenaceSubmenu";
-            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(265, 252);
+            this.PlMaintenaceSubmenu.Size = new System.Drawing.Size(282, 256);
             this.PlMaintenaceSubmenu.TabIndex = 6;
             // 
             // BtnTechnicians
@@ -128,7 +127,7 @@
             this.BtnTechnicians.Location = new System.Drawing.Point(0, 204);
             this.BtnTechnicians.Name = "BtnTechnicians";
             this.BtnTechnicians.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnTechnicians.Size = new System.Drawing.Size(265, 51);
+            this.BtnTechnicians.Size = new System.Drawing.Size(282, 51);
             this.BtnTechnicians.TabIndex = 4;
             this.BtnTechnicians.Text = "Técnicos";
             this.BtnTechnicians.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -146,7 +145,7 @@
             this.BtnServices.Location = new System.Drawing.Point(0, 153);
             this.BtnServices.Name = "BtnServices";
             this.BtnServices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnServices.Size = new System.Drawing.Size(265, 51);
+            this.BtnServices.Size = new System.Drawing.Size(282, 51);
             this.BtnServices.TabIndex = 3;
             this.BtnServices.Text = "Servicios";
             this.BtnServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -164,7 +163,7 @@
             this.BtnRefactions.Location = new System.Drawing.Point(0, 102);
             this.BtnRefactions.Name = "BtnRefactions";
             this.BtnRefactions.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnRefactions.Size = new System.Drawing.Size(265, 51);
+            this.BtnRefactions.Size = new System.Drawing.Size(282, 51);
             this.BtnRefactions.TabIndex = 2;
             this.BtnRefactions.Text = "Repuestos";
             this.BtnRefactions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -182,7 +181,7 @@
             this.BtnArticles.Location = new System.Drawing.Point(0, 51);
             this.BtnArticles.Name = "BtnArticles";
             this.BtnArticles.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnArticles.Size = new System.Drawing.Size(265, 51);
+            this.BtnArticles.Size = new System.Drawing.Size(282, 51);
             this.BtnArticles.TabIndex = 1;
             this.BtnArticles.Text = "Articulos";
             this.BtnArticles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -200,7 +199,7 @@
             this.BtnClients.Location = new System.Drawing.Point(0, 0);
             this.BtnClients.Name = "BtnClients";
             this.BtnClients.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnClients.Size = new System.Drawing.Size(265, 51);
+            this.BtnClients.Size = new System.Drawing.Size(282, 51);
             this.BtnClients.TabIndex = 0;
             this.BtnClients.Text = "Clientes";
             this.BtnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -217,9 +216,9 @@
             this.BtnMaintenance.ForeColor = System.Drawing.Color.Gainsboro;
             this.BtnMaintenance.Image = global::CSG.Properties.Resources.maintenance;
             this.BtnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMaintenance.Location = new System.Drawing.Point(0, 387);
+            this.BtnMaintenance.Location = new System.Drawing.Point(0, 336);
             this.BtnMaintenance.Name = "BtnMaintenance";
-            this.BtnMaintenance.Size = new System.Drawing.Size(265, 52);
+            this.BtnMaintenance.Size = new System.Drawing.Size(282, 52);
             this.BtnMaintenance.TabIndex = 5;
             this.BtnMaintenance.Text = "Mantenimiento";
             this.BtnMaintenance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -230,49 +229,32 @@
             // PlOrdersSubmenu
             // 
             this.PlOrdersSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(111)))), ((int)(((byte)(109)))));
-            this.PlOrdersSubmenu.Controls.Add(this.BtnInvoices);
-            this.PlOrdersSubmenu.Controls.Add(this.BtnReports);
+            this.PlOrdersSubmenu.Controls.Add(this.BtnDocsGenerator);
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderRead);
             this.PlOrdersSubmenu.Controls.Add(this.BtnOrderCreate);
             this.PlOrdersSubmenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlOrdersSubmenu.Location = new System.Drawing.Point(0, 183);
             this.PlOrdersSubmenu.Name = "PlOrdersSubmenu";
-            this.PlOrdersSubmenu.Size = new System.Drawing.Size(265, 204);
+            this.PlOrdersSubmenu.Size = new System.Drawing.Size(282, 153);
             this.PlOrdersSubmenu.TabIndex = 4;
             // 
-            // BtnInvoices
+            // BtnDocsGenerator
             // 
-            this.BtnInvoices.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnInvoices.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnInvoices.FlatAppearance.BorderSize = 0;
-            this.BtnInvoices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnInvoices.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnInvoices.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnInvoices.Location = new System.Drawing.Point(0, 153);
-            this.BtnInvoices.Name = "BtnInvoices";
-            this.BtnInvoices.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnInvoices.Size = new System.Drawing.Size(265, 51);
-            this.BtnInvoices.TabIndex = 3;
-            this.BtnInvoices.Text = "Generar factura";
-            this.BtnInvoices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnInvoices.UseVisualStyleBackColor = true;
-            // 
-            // BtnReports
-            // 
-            this.BtnReports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnReports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnReports.FlatAppearance.BorderSize = 0;
-            this.BtnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReports.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnReports.Location = new System.Drawing.Point(0, 102);
-            this.BtnReports.Name = "BtnReports";
-            this.BtnReports.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnReports.Size = new System.Drawing.Size(265, 51);
-            this.BtnReports.TabIndex = 2;
-            this.BtnReports.Text = "Reportes";
-            this.BtnReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnReports.UseVisualStyleBackColor = true;
+            this.BtnDocsGenerator.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnDocsGenerator.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnDocsGenerator.FlatAppearance.BorderSize = 0;
+            this.BtnDocsGenerator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDocsGenerator.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDocsGenerator.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BtnDocsGenerator.Location = new System.Drawing.Point(0, 102);
+            this.BtnDocsGenerator.Name = "BtnDocsGenerator";
+            this.BtnDocsGenerator.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
+            this.BtnDocsGenerator.Size = new System.Drawing.Size(282, 51);
+            this.BtnDocsGenerator.TabIndex = 3;
+            this.BtnDocsGenerator.Text = "Documentos";
+            this.BtnDocsGenerator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDocsGenerator.UseVisualStyleBackColor = true;
+            this.BtnDocsGenerator.Click += new System.EventHandler(this.BtnDocsGenerator_Click);
             // 
             // BtnOrderRead
             // 
@@ -285,7 +267,7 @@
             this.BtnOrderRead.Location = new System.Drawing.Point(0, 51);
             this.BtnOrderRead.Name = "BtnOrderRead";
             this.BtnOrderRead.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnOrderRead.Size = new System.Drawing.Size(265, 51);
+            this.BtnOrderRead.Size = new System.Drawing.Size(282, 51);
             this.BtnOrderRead.TabIndex = 1;
             this.BtnOrderRead.Text = "Consultar";
             this.BtnOrderRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -303,7 +285,7 @@
             this.BtnOrderCreate.Location = new System.Drawing.Point(0, 0);
             this.BtnOrderCreate.Name = "BtnOrderCreate";
             this.BtnOrderCreate.Padding = new System.Windows.Forms.Padding(31, 0, 0, 0);
-            this.BtnOrderCreate.Size = new System.Drawing.Size(265, 51);
+            this.BtnOrderCreate.Size = new System.Drawing.Size(282, 51);
             this.BtnOrderCreate.TabIndex = 0;
             this.BtnOrderCreate.Text = "Crear";
             this.BtnOrderCreate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -322,7 +304,7 @@
             this.BtnOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnOrders.Location = new System.Drawing.Point(0, 131);
             this.BtnOrders.Name = "BtnOrders";
-            this.BtnOrders.Size = new System.Drawing.Size(265, 52);
+            this.BtnOrders.Size = new System.Drawing.Size(282, 52);
             this.BtnOrders.TabIndex = 3;
             this.BtnOrders.Text = "Ordenes";
             this.BtnOrders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -342,7 +324,7 @@
             this.BtnIndex.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnIndex.Location = new System.Drawing.Point(0, 79);
             this.BtnIndex.Name = "BtnIndex";
-            this.BtnIndex.Size = new System.Drawing.Size(265, 52);
+            this.BtnIndex.Size = new System.Drawing.Size(282, 52);
             this.BtnIndex.TabIndex = 1;
             this.BtnIndex.Text = "Tablero";
             this.BtnIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -358,7 +340,7 @@
             this.PlLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PlLogo.Location = new System.Drawing.Point(0, 0);
             this.PlLogo.Name = "PlLogo";
-            this.PlLogo.Size = new System.Drawing.Size(265, 79);
+            this.PlLogo.Size = new System.Drawing.Size(282, 79);
             this.PlLogo.TabIndex = 0;
             // 
             // pictureBox1
@@ -511,8 +493,7 @@
         private System.Windows.Forms.Panel PlLogo;
         private System.Windows.Forms.Button BtnIndex;
         private System.Windows.Forms.Panel PlOrdersSubmenu;
-        private System.Windows.Forms.Button BtnInvoices;
-        private System.Windows.Forms.Button BtnReports;
+        private System.Windows.Forms.Button BtnDocsGenerator;
         private System.Windows.Forms.Button BtnOrderRead;
         private System.Windows.Forms.Button BtnOrderCreate;
         private System.Windows.Forms.Button BtnOrders;

@@ -81,18 +81,18 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtClientId = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtArticleDesc = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtArticleCode = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txtArticleSerial = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtArticleCategory = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.txtArticleEsp = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.txtArticleModel = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txtArticleCategory = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txtArticleSerial = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtArticleDesc = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtArticleCode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -299,6 +299,7 @@
             this.IbtnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IbtnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.IbtnEdit.UseVisualStyleBackColor = true;
+            this.IbtnEdit.Visible = false;
             // 
             // IbtnCancel
             // 
@@ -715,41 +716,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Equipo";
             // 
-            // label3
+            // label28
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(324, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 15);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Descripción";
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(627, 48);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(34, 15);
+            this.label28.TabIndex = 26;
+            this.label28.Text = "Serial";
             // 
-            // txtArticleDesc
+            // txtArticleSerial
             // 
-            this.txtArticleDesc.Enabled = false;
-            this.txtArticleDesc.Location = new System.Drawing.Point(400, 19);
-            this.txtArticleDesc.Name = "txtArticleDesc";
-            this.txtArticleDesc.ReadOnly = true;
-            this.txtArticleDesc.Size = new System.Drawing.Size(193, 22);
-            this.txtArticleDesc.TabIndex = 19;
+            this.txtArticleSerial.Enabled = false;
+            this.txtArticleSerial.Location = new System.Drawing.Point(711, 45);
+            this.txtArticleSerial.Name = "txtArticleSerial";
+            this.txtArticleSerial.ReadOnly = true;
+            this.txtArticleSerial.Size = new System.Drawing.Size(193, 22);
+            this.txtArticleSerial.TabIndex = 27;
             // 
-            // label4
+            // label27
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 15);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Código";
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(626, 25);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(54, 15);
+            this.label27.TabIndex = 24;
+            this.label27.Text = "Categoría";
             // 
-            // txtArticleCode
+            // txtArticleCategory
             // 
-            this.txtArticleCode.Enabled = false;
-            this.txtArticleCode.Location = new System.Drawing.Point(106, 19);
-            this.txtArticleCode.Name = "txtArticleCode";
-            this.txtArticleCode.ReadOnly = true;
-            this.txtArticleCode.Size = new System.Drawing.Size(193, 22);
-            this.txtArticleCode.TabIndex = 17;
+            this.txtArticleCategory.Enabled = false;
+            this.txtArticleCategory.Location = new System.Drawing.Point(711, 22);
+            this.txtArticleCategory.Name = "txtArticleCategory";
+            this.txtArticleCategory.ReadOnly = true;
+            this.txtArticleCategory.Size = new System.Drawing.Size(193, 22);
+            this.txtArticleCategory.TabIndex = 25;
             // 
             // label25
             // 
@@ -787,41 +788,41 @@
             this.txtArticleModel.Size = new System.Drawing.Size(193, 22);
             this.txtArticleModel.TabIndex = 21;
             // 
-            // label27
+            // label3
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(626, 25);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(54, 15);
-            this.label27.TabIndex = 24;
-            this.label27.Text = "Categoría";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(324, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 15);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Descripción";
             // 
-            // txtArticleCategory
+            // txtArticleDesc
             // 
-            this.txtArticleCategory.Enabled = false;
-            this.txtArticleCategory.Location = new System.Drawing.Point(711, 22);
-            this.txtArticleCategory.Name = "txtArticleCategory";
-            this.txtArticleCategory.ReadOnly = true;
-            this.txtArticleCategory.Size = new System.Drawing.Size(193, 22);
-            this.txtArticleCategory.TabIndex = 25;
+            this.txtArticleDesc.Enabled = false;
+            this.txtArticleDesc.Location = new System.Drawing.Point(400, 19);
+            this.txtArticleDesc.Name = "txtArticleDesc";
+            this.txtArticleDesc.ReadOnly = true;
+            this.txtArticleDesc.Size = new System.Drawing.Size(193, 22);
+            this.txtArticleDesc.TabIndex = 19;
             // 
-            // label28
+            // label4
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(627, 48);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(34, 15);
-            this.label28.TabIndex = 26;
-            this.label28.Text = "Serial";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 15);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Código";
             // 
-            // txtArticleSerial
+            // txtArticleCode
             // 
-            this.txtArticleSerial.Enabled = false;
-            this.txtArticleSerial.Location = new System.Drawing.Point(711, 45);
-            this.txtArticleSerial.Name = "txtArticleSerial";
-            this.txtArticleSerial.ReadOnly = true;
-            this.txtArticleSerial.Size = new System.Drawing.Size(193, 22);
-            this.txtArticleSerial.TabIndex = 27;
+            this.txtArticleCode.Enabled = false;
+            this.txtArticleCode.Location = new System.Drawing.Point(106, 19);
+            this.txtArticleCode.Name = "txtArticleCode";
+            this.txtArticleCode.ReadOnly = true;
+            this.txtArticleCode.Size = new System.Drawing.Size(193, 22);
+            this.txtArticleCode.TabIndex = 17;
             // 
             // FrmCotizationViewer
             // 

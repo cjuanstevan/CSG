@@ -179,12 +179,14 @@ namespace CSG.persistence
                 {
                     Connection = Database.GetConn(),
                     CommandType = CommandType.StoredProcedure,
-                    CommandText = "{call csg.User_Update(?,?,?,?)}"
+                    CommandText = "{call csg.User_Update(?,?,?,?,?)}"
                 };
                 command.Parameters.Add("UserDef", OdbcType.NVarChar, 50).Value = user.User_definition;
                 command.Parameters.Add("UserEmail", OdbcType.NVarChar, 50).Value = user.User_email;
                 command.Parameters.Add("UserPass", OdbcType.NVarChar, 200).Value = user.User_password;
                 command.Parameters.Add("UserCode", OdbcType.NVarChar, 20).Value = user.User_code;
+                command.Parameters.Add("UpdateBy", OdbcType.NVarChar, 50).Value = user.User_definition;
+
                 if (command.ExecuteNonQuery() > 0)
                 {
                     MessageBox.Show("Usuario actualizado");

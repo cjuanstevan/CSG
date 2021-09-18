@@ -75,7 +75,10 @@ namespace CSG.logic
         {
             return DAOFactory.GetOrderDAO().Read_once(number);
         }
-
+        public Order Read_once_reception_type(string number)
+        {
+            return DAOFactory.GetOrderDAO().Read_once_reception_type(number);
+        }
         public void Update(Order order)
         {
             DAOFactory.GetOrderDAO().Update(order);

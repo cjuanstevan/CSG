@@ -261,7 +261,7 @@
             this.DgvRefaction.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DgvRefaction.RowHeadersVisible = false;
             this.DgvRefaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvRefaction.Size = new System.Drawing.Size(956, 526);
+            this.DgvRefaction.Size = new System.Drawing.Size(957, 526);
             this.DgvRefaction.TabIndex = 0;
             this.DgvRefaction.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRefaction_CellContentClick);
             // 

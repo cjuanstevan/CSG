@@ -490,12 +490,12 @@ namespace CSG.persistence
                     {
                         Order_number = dataReader.GetString(0),
                         Order_reception_date = dataReader.GetDateTime(1),
-                        //Order_end_date = dataReader.GetDateTime(2),
+                        Order_end_date = dataReader.GetDateTime(2),
                         Order_type = dataReader.GetString(3),
                         Order_invoice = dataReader.GetString(4),
-                        //Order_sale_date = dataReader.GetDate(5),
+                        Order_sale_date = dataReader.GetDate(5),
                         Order_state = dataReader.GetString(6),
-                        //Order_comentarys = dataReader.GetString(7),
+                        Order_comentarys = dataReader.GetString(7),
                         Order_report_client = dataReader.GetString(8)
                     };
                     string t = dataReader.GetString(9);
@@ -552,6 +552,46 @@ namespace CSG.persistence
                 Database.Disconnect();
             }
             return response;
+        }
+
+        public Order Read_once_reception_type(string number)
+        {
+            Order order = new Order();
+            try
+            {
+                Database.Connect();
+                command = new OdbcCommand
+                {
+                    Connection = Database.GetConn(),
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "{call csg.Order_ReadOnceReceptionType(?)}"
+                };
+                command.Parameters.Add("Number", OdbcType.VarChar, 50).Value = number;
+                dataReader = command.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    order = new Order
+                    {
+                        Order_number = dataReader.GetString(0),
+                        Order_reception_date = dataReader.GetDateTime(1),
+                        Order_type = dataReader.GetString(2)
+                    };
+                    string c = dataReader.GetString(3);
+                    Database.Disconnect();
+                    IClientDAO clientDAO = new ClientDAO();
+                    Client client = clientDAO.Read_once(c);
+                    order.Client = client;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excepción controlada en OrderDAO->Read_once: " + ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Database.Disconnect();
+            }
+            return order;
         }
 
         public int TechnicianOrders(string technician_id)

@@ -22,18 +22,12 @@ namespace CSG.views
         {
             if (UserCache.UserUseToken.Equals('S'))
             {
-                Console.WriteLine("DASHBOARD/Ingresa con token");
                 FrmChangePassword changePassword = new FrmChangePassword();
                 changePassword.ShowDialog();
             }
-            //Posicionamos el form
-            //this.Location = new Point(-5, -5);
             //Cargamos datos de usuario
             LoadUserData();
-
-            //Preguntamos si viene de ingresar con token
             
-            Console.WriteLine("DASHBOARD/Contraseña de sesion: " + UserCache.UserPass);
             //PERMISOS DE USUARIO
             //Si el usuario es Recepcionista
             if (UserCache.UserRol.Equals(Roles.REC))
@@ -43,8 +37,7 @@ namespace CSG.views
                 //Ordenes
                 BtnOrders.Enabled = true;
                 BtnOrderRead.Enabled = true;
-                BtnReports.Enabled = false;
-                BtnInvoices.Enabled = false;
+                BtnDocsGenerator.Enabled = false;
                 //Mantenimiento
                 BtnMaintenance.Enabled = true;
                 BtnClients.Enabled = true;
@@ -145,6 +138,7 @@ namespace CSG.views
                 LblNameMain.Text = "CREAR ORDEN";
                 BtnOrderCreate.BackColor = Color.FromArgb(127, 127, 127);
                 BtnOrderRead.BackColor = Color.FromArgb(111, 111, 109);
+                BtnDocsGenerator.BackColor = Color.FromArgb(111, 111, 109);
                 Console.WriteLine("Vengo de " + activeForm.Name);
                 OpenChildForm(new FrmOrderCreate());
                 Console.WriteLine("Formulario activo: " + activeForm.Name);
@@ -159,12 +153,25 @@ namespace CSG.views
                 LblNameMain.Text = "CONSULTAR ORDEN";
                 BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
                 BtnOrderRead.BackColor = Color.FromArgb(127, 127, 127);
+                BtnDocsGenerator.BackColor = Color.FromArgb(111, 111, 109);
                 Console.WriteLine("Vengo de " + activeForm.Name);
                 OpenChildForm(new FrmOrderRead());
                 Console.WriteLine("Formulario activo: " + activeForm.Name);
             }
         }
-
+        private void BtnDocsGenerator_Click(object sender, EventArgs e)
+        {
+            if (!activeForm.Name.Equals("FrmDocsGenerator"))
+            {
+                LblNameMain.Text = "DOCUMENTOS";
+                BtnOrderCreate.BackColor = Color.FromArgb(111, 111, 109);
+                BtnOrderRead.BackColor = Color.FromArgb(111, 111, 109);
+                BtnDocsGenerator.BackColor = Color.FromArgb(127, 127, 127);
+                Console.WriteLine("Vengo de " + activeForm.Name);
+                OpenChildForm(new FrmDocsGenerator());
+                Console.WriteLine("Formulario activo: " + activeForm.Name);
+            }
+        }
         private void BtnMaintenance_Click(object sender, EventArgs e)
         {
             LblNameMain.Text = "MANTENIMIENTO";
@@ -267,6 +274,8 @@ namespace CSG.views
                 this.Close();
             }
         }
+
+        
 
 
         /*MsgLogout msgLogout = new MsgLogout();

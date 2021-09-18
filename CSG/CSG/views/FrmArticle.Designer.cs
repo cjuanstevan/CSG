@@ -89,7 +89,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvArticle.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DgvArticle.RowHeadersVisible = false;
-            this.DgvArticle.Size = new System.Drawing.Size(956, 706);
+            this.DgvArticle.Size = new System.Drawing.Size(956, 722);
             this.DgvArticle.TabIndex = 0;
             this.DgvArticle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvArticle_CellContentClick);
             // 

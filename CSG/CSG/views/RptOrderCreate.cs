@@ -24,6 +24,7 @@ namespace CSG.views
             {
                 var rpt = new report.SystemSupportReport();
                 RwOrderCreate.ReportSource = rpt.GetReportOrderCreate(Order.Order_number_st);
+                Order.Order_number_st = "";
             }
             else
             {

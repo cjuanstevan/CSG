@@ -149,6 +149,10 @@ namespace CSG.views
             };
             dtr.Columns.Add(column);
             DgvRefaction.DataSource = dtr;
+            //DgvRefactionB.DataSource = dtr;
+
+
+
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)

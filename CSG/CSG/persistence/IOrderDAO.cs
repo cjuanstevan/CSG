@@ -23,6 +23,7 @@ namespace CSG.persistence
         List<Order> Read_all_like_technician(string id);//ok
         List<Order> Read_all_like_technician_daterange(string id, DateTime DateI, DateTime DateF);//ok
         Order Read_once(string number);//ok
+        Order Read_once_reception_type(string number);
         bool Read_once_exist(string number);//ok
         uint Read_count();
         void Update(Order order);//ok
